@@ -1,4 +1,4 @@
-package eBook.EatBook.member.entity;
+package eBook.EatBook.domain.member.entity;
 
 import eBook.EatBook.global.baseEntity.BaseEntity;
 import jakarta.persistence.Column;
@@ -20,14 +20,18 @@ public class Member extends BaseEntity {
     @Column(unique = true)
     private String nickname;
 
+    @Column
     private String email;
 
+    @Column
     private String password;
 
+    @Column
     private String role;
 
+    @Column
     private String memberThumbnailImg;
 
+    @Column
     private boolean isSeller;
-
 }
