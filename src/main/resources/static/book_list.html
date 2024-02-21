@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>국내도서</title>
+</head>
+<body>
+<tr th:each="book, index : ${bookList}">
+    <td>
+        <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.title}"></a>
+    </td>
+</tr>
+</body>
+</html>
