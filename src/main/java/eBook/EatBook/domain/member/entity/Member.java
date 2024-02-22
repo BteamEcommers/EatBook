@@ -1,4 +1,4 @@
-package eBook.EatBook.member.entity;
+package eBook.EatBook.domain.member.entity;
 
 import eBook.EatBook.global.baseEntity.BaseEntity;
 import jakarta.persistence.Column;

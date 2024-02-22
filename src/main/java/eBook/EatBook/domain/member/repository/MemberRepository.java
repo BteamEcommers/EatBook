@@ -1,6 +1,6 @@
-package eBook.EatBook.member.repository;
+package eBook.EatBook.domain.member.repository;
 
-import eBook.EatBook.member.entity.Member;
+import eBook.EatBook.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

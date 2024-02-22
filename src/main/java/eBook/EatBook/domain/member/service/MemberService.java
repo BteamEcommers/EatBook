@@ -1,4 +1,4 @@
-package eBook.EatBook.member.service;
+package eBook.EatBook.domain.member.service;
 
 import org.springframework.stereotype.Service;
 
