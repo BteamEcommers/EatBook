@@ -30,8 +30,8 @@ public class MemberService {
         this.memberRepository.save(member);
     }
 
-    public Member findByEmail() {
-        Optional<Member> optionalMember = this.memberRepository.findByEmail();
+    public Member findByEmail(String email) {
+        Optional<Member> optionalMember = this.memberRepository.findMemberByEmail(email);
         if(optionalMember.isEmpty()){
             throw new RuntimeException();
         }

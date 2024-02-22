@@ -6,6 +6,7 @@ import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.global.email.service.EmailService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -41,7 +42,7 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String memberLogin(){
+    public String login(){
 
 
         return "/member/loginForm";
@@ -71,7 +72,7 @@ public class MemberController {
             return "/member/findPasswordForm";
         }
         // 이메일 맞는지 확인
-        Member member = this.memberService.findByEmail();
+        Member member = this.memberService.findByEmail(findUsernameForm.getEmail());
         if(member == null){
             return "/member/findPasswordForm";
         }
@@ -81,7 +82,6 @@ public class MemberController {
 
         return "/member/confirmCodeForm";
     }
-
     // 인증 위한 랜덤 코드 생성기 (대문자 알파벳 6자리)
     public String RandomCode(){
         StringBuilder randomCode = new StringBuilder();
