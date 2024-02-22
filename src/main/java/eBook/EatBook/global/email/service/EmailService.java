@@ -1,5 +1,7 @@
 package eBook.EatBook.global.email.service;
 
+import eBook.EatBook.global.email.entity.Email1;
+import eBook.EatBook.global.email.repository.EmailRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -7,10 +9,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class EmailService {
     private final JavaMailSender mailSender;
+    private final EmailRepository emailRepository;
 
     public void send(String to, String subject, String body) {
 
@@ -27,4 +33,25 @@ public class EmailService {
         }
 
     }
+    public void saveConfirmCode(String email, String confirmCode){
+        Email1 email1 = Email1.builder()
+                .toEmail(email)
+                .confirmCode(confirmCode)
+                .createDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
+                .build();
+
+        this.emailRepository.save(email1);
+    }
+
+
+    public Email1 findConfirmCode(String confirmCode){
+        Optional<Email1> optionalEmail = this.emailRepository.findByConfirmCode(confirmCode);
+        if(optionalEmail.isEmpty()){
+            return null;
+        }
+
+        return optionalEmail.get();
+    }
+
 }

@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+
 <h1>로그인</h1>
 <form th:action="@{/member/login}" method="post">
     <div th:if="${param.error}">
@@ -22,5 +16,3 @@
 </form>
 <a th:href="@{/member/findUsername}">아이디 찾기</a>
 <a th:href="@{/member/findPassword}">비밀번호 찾기</a>
-</body>
-</html>

@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class FindUsernameForm {
-    @NotEmpty(message = "이메일을 입력해주세요.")
-    private String toEmail;
+public class ConfirmCodeForm {
+    @NotEmpty(message = "확인번호를 입력해주세요")
+    private String confirmCode;
 }

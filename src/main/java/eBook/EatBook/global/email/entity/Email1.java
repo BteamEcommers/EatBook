@@ -13,10 +13,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Email extends BaseEntity {
-
+public class Email1 extends BaseEntity {
+    // 보내는 사람 이메일
     @Column
-    private String to;
+    private String toEmail;
 
     @Column
     private String confirmCode;

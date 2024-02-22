@@ -1,12 +1,13 @@
 package eBook.EatBook.domain.member.controller;
 
+import eBook.EatBook.domain.member.DTO.ConfirmCodeForm;
 import eBook.EatBook.domain.member.DTO.FindUsernameForm;
 import eBook.EatBook.domain.member.DTO.MemberForm;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
+import eBook.EatBook.global.email.entity.Email1;
 import eBook.EatBook.global.email.service.EmailService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -69,19 +70,43 @@ public class MemberController {
     @PostMapping("/sendConfirmCode")
     public String sendConfirmCode(@Valid FindUsernameForm findUsernameForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "/member/findPasswordForm";
+            return "/member/findUsernameForm";
         }
         // 이메일 맞는지 확인
-        Member member = this.memberService.findByEmail(findUsernameForm.getEmail());
+        Member member = this.memberService.findByEmail(findUsernameForm.getToEmail());
         if(member == null){
-            return "/member/findPasswordForm";
+            return "redirect:/member/findUsernameForm";
         }
         String confirmCode = this.RandomCode();
+        // 여기서 터짐
+        this.emailService.saveConfirmCode(findUsernameForm.getToEmail(),confirmCode);
+        //
+        this.emailService.send(findUsernameForm.getToEmail(),"[EatBook]아이디 확인을 위한 코드입니다.",String.format("코드 입력 \n [%s]", confirmCode));
 
-        this.emailService.send(findUsernameForm.getEmail(),"아이디 확인을 위한 코드입니다.",String.format("코드 입력 \n [%s]", confirmCode));
-
-        return "/member/confirmCodeForm";
+        return "redirect:/member/confirmCodeUsername";
     }
+    @GetMapping("/confirmCodeUsername")
+    public String confirmCodeUsername(){
+
+
+        return "/member/confirmCodeUsernameForm";
+    }
+
+    @PostMapping("/confirmCodeUsername")
+    public String confirmCodeUsername(@Valid ConfirmCodeForm confirmCodeForm, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "/member/confirmCodeUsernameForm";
+        }
+        Email1 email1 =  this.emailService.findConfirmCode(confirmCodeForm.getConfirmCode());
+        if(email1 == null){
+            return "/member/findUsernameForm";
+        }
+        Member member = this.memberService.findByEmail(email1.getToEmail());
+        this.emailService.send(member.getEmail(),"[EatBook] 아이디를 확인하세요",String.format("\n 아이디 : [%s]", member.getUsername()));
+
+        return "redirect:/";
+    }
+
     // 인증 위한 랜덤 코드 생성기 (대문자 알파벳 6자리)
     public String RandomCode(){
         StringBuilder randomCode = new StringBuilder();
@@ -95,4 +120,6 @@ public class MemberController {
 
         return randomCode.toString();
     }
+
+
 }
