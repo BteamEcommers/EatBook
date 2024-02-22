@@ -20,14 +20,18 @@ public class Member extends BaseEntity {
     @Column(unique = true)
     private String nickname;
 
+    @Column
     private String email;
 
+    @Column
     private String password;
 
+    @Column
     private String role;
 
+    @Column
     private String memberThumbnailImg;
 
+    @Column
     private boolean isSeller;
-
 }
