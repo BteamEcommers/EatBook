@@ -1,8 +1,9 @@
 package eBook.EatBook.book.entity;
 
 
+import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.global.baseEntity.BaseEntity;
-import eBook.EatBook.member.entity.Member;
+
 import jakarta.persistence.*;
 import jdk.jfr.Category;
 import lombok.AllArgsConstructor;
