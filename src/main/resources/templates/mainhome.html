@@ -178,13 +178,13 @@
                             <a class="nav-link me-4" href="#latest-blog">새로나온 eBook</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="/">로그인</a>
+                            <a class="nav-link me-4" sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="/">로그아웃</a>
+                            <a class="nav-link me-4" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="/">회원가입</a>
+                            <a class="nav-link me-4" th:href="@{/member/register}">회원가입</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">마이페이지</a>
