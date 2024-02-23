@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MemberForm {
+public class MemberRegisterForm {
     @NotEmpty(message = "유저이름은 필수항목입니다.")
     private String username;
 

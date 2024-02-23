@@ -1,7 +1,6 @@
 package eBook.EatBook.domain.member.service;
 
-import eBook.EatBook.domain.member.DTO.ChangePasswordForm;
-import eBook.EatBook.domain.member.DTO.MemberForm;
+import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +17,12 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public void register(MemberForm memberForm) {
+    public void register(MemberRegisterForm memberRegisterForm) {
         Member member = Member.builder()
-                .username(memberForm.getUsername())
-                .nickname(memberForm.getNickname())
-                .email(memberForm.getEmail())
-                .password(passwordEncoder.encode(memberForm.getPassword1()))
+                .username(memberRegisterForm.getUsername())
+                .nickname(memberRegisterForm.getNickname())
+                .email(memberRegisterForm.getEmail())
+                .password(passwordEncoder.encode(memberRegisterForm.getPassword1()))
                 .createDate(LocalDateTime.now())
                 .modifiedDate(LocalDateTime.now())
                 .role("customer")

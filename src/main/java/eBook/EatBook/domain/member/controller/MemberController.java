@@ -3,7 +3,7 @@ package eBook.EatBook.domain.member.controller;
 import eBook.EatBook.domain.member.DTO.ConfirmCodeForm;
 import eBook.EatBook.domain.member.DTO.FindPasswordForm;
 import eBook.EatBook.domain.member.DTO.FindUsernameForm;
-import eBook.EatBook.domain.member.DTO.MemberForm;
+import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.global.email.entity.Email1;
@@ -24,21 +24,21 @@ public class MemberController {
     private final EmailService emailService;
 
     @GetMapping("/register")
-    public String register(MemberForm memberForm) {
+    public String register(MemberRegisterForm memberRegisterForm) {
 
         return "/member/registerForm";
     }
 
     @PostMapping("/register")
-    public String register(@Valid MemberForm memberForm, BindingResult bindingResult) {
+    public String register(@Valid MemberRegisterForm memberRegisterForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/member/registerForm";
         }
-        if (!memberForm.getPassword1().equals(memberForm.getPassword2())) {
+        if (!memberRegisterForm.getPassword1().equals(memberRegisterForm.getPassword2())) {
             return "/member/registerForm";
         }
 
-        this.memberService.register(memberForm);
+        this.memberService.register(memberRegisterForm);
 
         return "redirect:/";
     }
