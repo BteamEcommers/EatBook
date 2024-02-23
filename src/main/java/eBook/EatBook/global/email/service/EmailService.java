@@ -1,5 +1,6 @@
 package eBook.EatBook.global.email.service;
 
+import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.global.email.entity.Email1;
 import eBook.EatBook.global.email.repository.EmailRepository;
 import jakarta.mail.MessagingException;
@@ -33,9 +34,9 @@ public class EmailService {
         }
 
     }
-    public void saveConfirmCode(String email, String confirmCode){
+    public void saveConfirmCode(Member member, String confirmCode){
         Email1 email1 = Email1.builder()
-                .toEmail(email)
+                .toMember(member)
                 .confirmCode(confirmCode)
                 .createDate(LocalDateTime.now())
                 .modifiedDate(LocalDateTime.now())
@@ -54,4 +55,7 @@ public class EmailService {
         return optionalEmail.get();
     }
 
+    public void delete(Email1 email1) {
+        this.emailRepository.delete(email1);
+    }
 }

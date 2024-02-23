@@ -1,7 +1,7 @@
 <h2>아이디 찾기</h2>
 <form th:action="@{/member/sendConfirmCode}" th:object="${findUsernameForm}" method="post">
     <label for="toEmail">회원 가입시 작성한 이메일 입력</label>
-    <input type="text" id="toEmail" name="toEmail">
+    <input type="email" id="toEmail" name="toEmail">
 
     <button type="submit">코드 발송</button>
 </form>

@@ -3,10 +3,13 @@ package eBook.EatBook.domain.member.entity;
 import eBook.EatBook.global.baseEntity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,6 +17,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member extends BaseEntity {
+
     @Column(unique = true)
     private String username;
 
@@ -34,4 +38,8 @@ public class Member extends BaseEntity {
 
     @Column
     private boolean isSeller;
+
+    // 판매자가 가진 책 리스트
+//    @OneToMany
+//    private List<book> bookList;
 }
