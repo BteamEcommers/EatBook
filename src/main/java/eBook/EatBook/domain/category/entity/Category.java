@@ -1,6 +1,6 @@
-package eBook.EatBook.category.entity;
+package eBook.EatBook.domain.category.entity;
 
-import eBook.EatBook.book.entity.Book;
+import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.global.baseEntity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,5 +24,8 @@ public class Category extends BaseEntity {
 
     @Column
     private String categoryName;
+
+    @Column
+    private String name;
 
 }

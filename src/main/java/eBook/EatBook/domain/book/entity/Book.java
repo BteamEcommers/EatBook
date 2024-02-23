@@ -1,11 +1,11 @@
-package eBook.EatBook.book.entity;
+package eBook.EatBook.domain.book.entity;
 
 
+import eBook.EatBook.domain.category.entity.Category;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.global.baseEntity.BaseEntity;
 
 import jakarta.persistence.*;
-import jdk.jfr.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,5 +43,12 @@ public class Book extends BaseEntity {
     private Integer sellCount;
     @Column
     private char ISBN;
+    @Column(length = 200)
+    private String subject;
+
+    @Column(columnDefinition = "TEXT")
+    private String content;
+
+    private String country;
 
 }

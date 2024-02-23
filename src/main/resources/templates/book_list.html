@@ -1,0 +1,19 @@
+<table class="table">
+    <thead class="table-dark">
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성일시</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book, loop : ${bookList}">
+        <td th:text="${loop.count}"></td>
+        <td>
+            <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.subject}"></a>
+        </td>
+        <td th:text="${#temporals.format(book.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
