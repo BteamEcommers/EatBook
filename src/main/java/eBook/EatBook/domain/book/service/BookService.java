@@ -25,27 +25,6 @@ public class BookService {
         return book.get();
     }
 
-    public List<Book> getBestSellerBooks() {
-        return this.bookRepository.findAll();
-    }
-
-    public List<Book> getDomesticBooks() {
-        return this.bookRepository.findByBook("국내");
-    }
-
-    public List<Book> getForeignBooks() {
-        return this.bookRepository.findAll();
-    }
-    public List<Book> getNewBooks() {
-        return this.bookRepository.findAll();
-    }
-    public List<Book> getRentalBooks() {
-        return this.bookRepository.findAll();
-    }
-    public List<Book> getFreeBooks() {
-        return this.bookRepository.findAll();
-    }
-
 
 
 

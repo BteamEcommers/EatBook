@@ -16,46 +16,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
-
 public class CategoryController {
-
-    private final BookService bookService;
-
-    @GetMapping("/book")
-    public String categoryBook(@RequestParam(value = "category", required=false) String category, Model model) {
-
-        // category 값이 null이면 기본 카테고리를 설정
-        if (category == null) {
-            category = "베스트셀러"; // 기본 카테고리 설정
-        }
-
-        try {
-            List<Book> bookList;
-            if ("베스트셀러".equals(category)) {
-                bookList = bookService.getBestSellerBooks();
-            } else if ("국내도서".equals(category)) {
-                bookList = bookService.getDomesticBooks();
-            } else if ("외국도서".equals(category)) {
-                bookList = bookService.getForeignBooks();
-            } else if ("신간도서".equals(category)) {
-                bookList = bookService.getNewBooks();
-            } else if ("도서대여".equals(category)) {
-                bookList = bookService.getRentalBooks();
-            } else if ("무료도서".equals(category)) {
-                bookList = bookService.getFreeBooks();
-            } else {
-                throw new IllegalArgumentException("Invalid category: " + category);
-            }
-            model.addAttribute("bookList", bookList);
-            model.addAttribute("category", category); // 카테고리 추가
-            return "category_books";
-        } catch (Exception e) {
-            // Handle the exception here
-            // For example, you can redirect to the error page
-            return "error"; // Assuming "error.html" is the name of the error page
-        }
+    @GetMapping("/books")
+    public String handleBooksRequest() {
+        // 책 카테고리 선택 페이지로 이동
+        return "books";
     }
 
-
+    @GetMapping("/books/category/{category}")
+    public String handleCategoryRequest(@PathVariable("category")String category ) {
+        // 각 카테고리에 해당하는 페이지로 이동
+        return category + "_books";
+    }
 }
+
+
+
