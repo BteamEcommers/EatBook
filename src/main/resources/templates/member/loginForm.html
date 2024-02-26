@@ -12,7 +12,8 @@
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 <main class="form-signin w-100 m-auto">
     <form th:action="@{/member/login}" method="post">
-        <svg width="250" height="60" xmlns="http://www.w3.org/2000/svg" version="1.0" preserveAspectRatio="xMidYMid meet">
+        <a th:href="@{/}">
+            <svg width="250" height="60" xmlns="http://www.w3.org/2000/svg" version="1.0" preserveAspectRatio="xMidYMid meet">
             <g>
                 <title>Eat Book</title>
                 <g transform="translate(0 500) scale(0.1 -0.1)" fill="#000000" id="svg_1" stroke="null">
@@ -27,6 +28,7 @@
                 </g>
             </g>
         </svg>
+        </a>
         <h1 class="h3 mb-3 fw-normal">로그인</h1>
         <div th:if="${param.error}" >
             <div class="py-1 bg-danger-subtle">
@@ -37,17 +39,16 @@
             <input type="text" id="username" name="username" class="form-control">
             <label for="username" class="floatingInput">아이디</label>
         </div>
-
         <div class="form-floating">
             <input type="password" id="password" name="password" class="form-control">
             <label for="password" class="floatingPassword">비밀번호</label>
         </div>
-
         <button type="submit" class="btn btn-primary w-100 py-2">로그인</button>
     </form>
     <br/>
     <a th:href="@{/member/findUsername}" class="btn btn-primary">아이디 찾기</a>
     <a th:href="@{/member/findPassword}" class="btn btn-primary">비밀번호 찾기</a>
+    <a th:href="@{/member/register}" class="my-2 btn btn-primary">회원가입</a>
 </main>
 </body>
 </html>

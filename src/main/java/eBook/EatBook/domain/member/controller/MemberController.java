@@ -61,7 +61,6 @@ public class MemberController {
     }
 
 
-
     @GetMapping("/register")
     public String register(MemberRegisterForm memberRegisterForm) {
 
@@ -74,11 +73,21 @@ public class MemberController {
             return "/member/registerForm";
         }
         if (!memberRegisterForm.getPassword1().equals(memberRegisterForm.getPassword2())) {
+            bindingResult.rejectValue("password2", "passwordInCorrect",
+                    "2개의 패스워드가 일치하지 않습니다.");
             return "/member/registerForm";
         }
-
-        this.memberService.register(memberRegisterForm);
-
+        try {
+            this.memberService.register(memberRegisterForm);
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
+            return "/member/registerForm";
+        } catch (Exception e) {
+            e.printStackTrace();
+            bindingResult.reject("signupFailed", e.getMessage());
+            return "/member/registerForm";
+        }
         return "redirect:/";
     }
 
@@ -186,7 +195,7 @@ public class MemberController {
         // 임시 비밀번호 발급
         String tempPassword = this.RandomCode();
         // 임시 비밀번호로 바꾸기
-        this.memberService.changePassword(member,tempPassword);
+        this.memberService.changePassword(member, tempPassword);
         // 임시 비밀번호 이메일 발송
         this.emailService.send(member.getEmail(), "[EatBook] 임시 비밀번호를 확인하세요", String.format("\n 임시 비밀번호 : [%s]", tempPassword));
         // 확인을 위한 이메일 객체 삭제
