@@ -149,7 +149,9 @@ public class MemberController {
         }
         Email1 email1 = this.emailService.findConfirmCode(confirmCodeForm.getConfirmCode());
         if (email1 == null) {
-            return "/member/findUsernameForm";
+            bindingResult.rejectValue("confirmCode", "confirmCodeInCorrect",
+                    "코드를 다시 입력해주세요.");
+            return "/member/confirmCodeUsernameForm";
         }
         Member member = email1.getToMember();
         this.emailService.send(member.getEmail(), "[EatBook] 아이디를 확인하세요", String.format("\n 아이디 : [%s]", member.getUsername()));
@@ -169,7 +171,9 @@ public class MemberController {
         Member memberByEmail = this.memberService.findByEmail(findPasswordForm.getToEmail());
 
         if (memberByUsername != memberByEmail) {
-            return "redirect:/member/findUsernameForm";
+            bindingResult.rejectValue("toEmail", "toEmailInCorrect",
+                    "아이디와 이메일이 일치하지 않습니다. 다시 입력해주세요.");
+            return "/member/findPasswordForm";
         }
         String confirmCode = this.RandomCode();
         this.emailService.saveConfirmCode(memberByUsername, confirmCode);
