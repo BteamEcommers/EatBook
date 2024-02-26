@@ -16,14 +16,13 @@
 //
 //    public String cartCreate(String member, String book, Integer total_price, Integer total_discount){
 //        Cart cart = Cart.builder()
-//                .member
-//                .book
-//                .total_price
-//                .total_discout
+//                .member(member)
+//                .book(book)
+//                .total_price(total_price)
+//                .total_discout(total_discount)
 //                .build();
 //
 //        this.cartRepository.save(cart);
-//        return "";
 //    }
 //
 //

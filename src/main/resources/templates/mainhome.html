@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <title>Eat Book</title>
     <meta charset="utf-8">
@@ -184,13 +184,13 @@
                             <a class="nav-link me-4" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" th:href="@{/member/register}">회원가입</a>
+                            <a class="nav-link me-4" sec:authorize="isAnonymous()" th:href="@{/member/register}">회원가입</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">마이페이지</a>
+                            <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" sec:authorize="isAuthenticated()">마이페이지</a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="about.html" class="dropdown-item">개인정보수정</a>
+                                    <a th:href="@{/member/modify}" class="dropdown-item">개인정보수정</a>
                                 </li>
                                 <li>
                                     <a href="blog.html" class="dropdown-item">구매내역</a>
