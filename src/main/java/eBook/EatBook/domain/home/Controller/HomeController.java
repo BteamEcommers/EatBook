@@ -16,7 +16,7 @@ public class HomeController {
     @GetMapping("/test")
     public String test() {
 
-        return "/member/modifyMemberForm";
+        return "test";
     }
 
 }
