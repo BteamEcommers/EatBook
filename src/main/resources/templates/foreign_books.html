@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foreign Books</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .rate {
+            background: url(https://aldo814.github.io/jobcloud/html/images/user/star_bg02.png) no-repeat;
+            width: 121px;
+            height: 20px;
+            position: relative;
+            cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+        }
+
+        .rate span {
+            position: absolute;
+            background: url(https://aldo814.github.io/jobcloud/html/images/user/star02.png);
+            width: auto;
+            height: 20px;
+            pointer-events: none; /* 이벤트를 통과시킴으로써 별점을 클릭할 수 있게 함 */
+        }
+    </style>
+</head>
+<body>
+<h1>Foreign Books</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+        <!-- 필요한 만큼의 테이블 헤더 열을 추가할 수 있습니다. -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Data 1</td>
+        <td>Data 2</td>
+        <!-- 필요한 만큼의 테이블 데이터 열을 추가할 수 있습니다. -->
+    </tr>
+    <!-- 수평선 추가 -->
+    <tr>
+        <td colspan="2"><hr></td>
+    </tr>
+    <!-- 수평선 추가를 통해 각 행 사이에 선이 보여집니다. -->
+    </tbody>
+</table>
+
+<!-- 캐러셀 추가 -->
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FIH7pg%2FbtqGH1ZgBXx%2Ft8KhtXCPoKDM1ZKljOv270%2Fimg.jpg" class="d-block w-100" alt="Foreign Book Cover">
+        </div>
+        <div class="carousel-item">
+            <img src="https://image.yes24.com/goods/102347474/XL" class="d-block w-100" alt="Foreign Book Cover">
+        </div>
+        <div class="carousel-item">
+            <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791140703210.jpg" class="d-block w-100" alt="Foreign Book Cover">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- 별점 추가 -->
+<div class="rate" onclick="setStarRating(event)">
+    <span id="starRating" style="width: 50%"></span>
+</div>
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 별점을 동적으로 변경하는 JavaScript 코드
+    function setStarRating(event) {
+        var starElement = document.getElementById("starRating");
+        var rect = event.target.getBoundingClientRect();
+        var offsetX = event.clientX - rect.left; // 마우스 클릭한 위치의 X 좌표
+        var percent = (offsetX / rect.width) * 100; // 클릭한 위치를 별점으로 변환
+        starElement.style.width = percent + "%";
+    }
+</script>
+</body>
+</html>
