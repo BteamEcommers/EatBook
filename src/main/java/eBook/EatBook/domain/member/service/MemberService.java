@@ -1,7 +1,6 @@
 package eBook.EatBook.domain.member.service;
 
 import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
-import eBook.EatBook.domain.member.DTO.MemberForm;
 import eBook.EatBook.domain.member.DTO.MemberModifyForm;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.repository.MemberRepository;
@@ -85,13 +84,6 @@ public class MemberService {
         return member.get();
     }
 
-    public Member findByUsername(String username) {
-        Optional<Member> member = this.memberRepository.findByUsername(username);
-        if(member.isEmpty()) {
-            throw new RuntimeException("존재하지 않는 사용자입니다.");
-        }
-        return member.get();
-    }
 
     // 패스워드 검증
     public BindingResult PasswordValidator(MemberModifyForm memberModifyForm, BindingResult bindingResult) {
