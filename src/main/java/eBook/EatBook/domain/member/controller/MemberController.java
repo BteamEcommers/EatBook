@@ -61,7 +61,6 @@ public class MemberController {
     }
 
 
-
     @GetMapping("/register")
     public String register(MemberRegisterForm memberRegisterForm) {
 
@@ -74,11 +73,21 @@ public class MemberController {
             return "/member/registerForm";
         }
         if (!memberRegisterForm.getPassword1().equals(memberRegisterForm.getPassword2())) {
+            bindingResult.rejectValue("password2", "passwordInCorrect",
+                    "2개의 패스워드가 일치하지 않습니다.");
             return "/member/registerForm";
         }
-
-        this.memberService.register(memberRegisterForm);
-
+        try {
+            this.memberService.register(memberRegisterForm);
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
+            return "/member/registerForm";
+        } catch (Exception e) {
+            e.printStackTrace();
+            bindingResult.reject("signupFailed", e.getMessage());
+            return "/member/registerForm";
+        }
         return "redirect:/";
     }
 
@@ -115,7 +124,9 @@ public class MemberController {
         // 이메일 맞는지 확인
         Member member = this.memberService.findByEmail(findUsernameForm.getToEmail());
         if (member == null) {
-            return "redirect:/member/findUsernameForm";
+            bindingResult.rejectValue("toEmail", "emailInCorrect",
+                    "이메일을 다시 입력해주세요.");
+            return "/member/findUsernameForm";
         }
         String confirmCode = this.RandomCode();
         this.emailService.saveConfirmCode(member, confirmCode);
@@ -138,7 +149,9 @@ public class MemberController {
         }
         Email1 email1 = this.emailService.findConfirmCode(confirmCodeForm.getConfirmCode());
         if (email1 == null) {
-            return "/member/findUsernameForm";
+            bindingResult.rejectValue("confirmCode", "confirmCodeInCorrect",
+                    "코드를 다시 입력해주세요.");
+            return "/member/confirmCodeUsernameForm";
         }
         Member member = email1.getToMember();
         this.emailService.send(member.getEmail(), "[EatBook] 아이디를 확인하세요", String.format("\n 아이디 : [%s]", member.getUsername()));
@@ -158,7 +171,9 @@ public class MemberController {
         Member memberByEmail = this.memberService.findByEmail(findPasswordForm.getToEmail());
 
         if (memberByUsername != memberByEmail) {
-            return "redirect:/member/findUsernameForm";
+            bindingResult.rejectValue("toEmail", "toEmailInCorrect",
+                    "아이디와 이메일이 일치하지 않습니다. 다시 입력해주세요.");
+            return "/member/findPasswordForm";
         }
         String confirmCode = this.RandomCode();
         this.emailService.saveConfirmCode(memberByUsername, confirmCode);
@@ -186,7 +201,7 @@ public class MemberController {
         // 임시 비밀번호 발급
         String tempPassword = this.RandomCode();
         // 임시 비밀번호로 바꾸기
-        this.memberService.changePassword(member,tempPassword);
+        this.memberService.changePassword(member, tempPassword);
         // 임시 비밀번호 이메일 발송
         this.emailService.send(member.getEmail(), "[EatBook] 임시 비밀번호를 확인하세요", String.format("\n 임시 비밀번호 : [%s]", tempPassword));
         // 확인을 위한 이메일 객체 삭제
