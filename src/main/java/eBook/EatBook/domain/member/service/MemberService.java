@@ -51,7 +51,7 @@ public class MemberService {
     public Member findByEmail(String email) {
         Optional<Member> optionalMember = this.memberRepository.findMemberByEmail(email);
         if (optionalMember.isEmpty()) {
-            throw new RuntimeException();
+            return null;
         }
 
         return optionalMember.get();

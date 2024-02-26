@@ -124,7 +124,9 @@ public class MemberController {
         // 이메일 맞는지 확인
         Member member = this.memberService.findByEmail(findUsernameForm.getToEmail());
         if (member == null) {
-            return "redirect:/member/findUsernameForm";
+            bindingResult.rejectValue("toEmail", "emailInCorrect",
+                    "이메일을 다시 입력해주세요.");
+            return "/member/findUsernameForm";
         }
         String confirmCode = this.RandomCode();
         this.emailService.saveConfirmCode(member, confirmCode);
