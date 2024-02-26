@@ -1,0 +1,7 @@
+.body {
+    display: flex;
+}
+.container {
+    max-width: 1920px;
+    justify-content: center;
+}
