@@ -3,6 +3,7 @@ package eBook.EatBook.domain.member.controller;
 import eBook.EatBook.domain.member.DTO.ConfirmCodeForm;
 import eBook.EatBook.domain.member.DTO.FindPasswordForm;
 import eBook.EatBook.domain.member.DTO.FindUsernameForm;
+import eBook.EatBook.domain.member.DTO.MemberModifyForm;
 import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
@@ -10,11 +11,17 @@ import eBook.EatBook.global.email.entity.Email1;
 import eBook.EatBook.global.email.service.EmailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+
+import java.io.IOException;
+import java.security.Principal;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -22,6 +29,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
     private final MemberService memberService;
     private final EmailService emailService;
+
+    @GetMapping("/modify")
+    public String modifyMember(MemberModifyForm memberModifyForm, Model model, Principal principal) {
+        Member member = this.memberService.findByUsername(principal.getName());
+        model.addAttribute("member", member);
+        return "/member/modifyMemberForm";
+    }
+
+    @PostMapping("/modify/{id}")
+    public String modifyMember(Model model, @Valid MemberModifyForm memberModifyForm, BindingResult bindingResult,
+                               @PathVariable(value = "id") Integer id) throws IOException {
+        Member modifyMember = this.memberService.findById(id);
+        model.addAttribute("member", modifyMember);
+
+        this.memberService.PasswordValidator(memberModifyForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "/member/modifyMemberForm";
+        }
+
+        try {
+            this.memberService.modify(memberModifyForm, modifyMember);
+        } catch (DataIntegrityViolationException e) {
+            bindingResult.reject("modifyFailed ", "이미 등록된 사용자입니다.");
+        } catch (Exception e) {
+            bindingResult.reject("modifyFailed ", e.getMessage());
+        }
+
+        return "redirect:/member/modify";
+    }
+
+
 
     @GetMapping("/register")
     public String register(MemberRegisterForm memberRegisterForm) {
