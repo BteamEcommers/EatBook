@@ -28,7 +28,7 @@ public class EmailService {
             mimeMessageHelper.setTo(to); // 메일 수신자
             mimeMessageHelper.setSubject(subject); // 메일 제목
             mimeMessageHelper.setText(body, true); // 메일 본문 내용, HTML 여부
-            mailSender.send(mimeMessage); // 메일방송
+            mailSender.send(mimeMessage); // 메일발송
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
