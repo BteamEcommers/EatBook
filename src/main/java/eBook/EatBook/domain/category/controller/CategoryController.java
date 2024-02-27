@@ -17,6 +17,7 @@ import java.util.List;
 
 @Controller
 public class CategoryController {
+    //여기도 나중에 @Requestmapping("/category")로 바꾸기
     @GetMapping("/books")
     public String handleBooksRequest() {
         // 책 카테고리 선택 페이지로 이동
