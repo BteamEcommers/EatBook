@@ -3,10 +3,12 @@ package eBook.EatBook.domain.apply.controller;
 import eBook.EatBook.domain.apply.DTO.ApplySellerForm;
 import eBook.EatBook.domain.apply.service.ApplyService;
 import eBook.EatBook.domain.member.entity.Member;
+import eBook.EatBook.domain.member.role.UserRole;
 import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.global.email.service.EmailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -48,6 +50,14 @@ public class ApplyController {
     public String applyGuide(){
 
         return "/apply/applyGuide";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/list")
+    public String applyList(){
+
+
+        return "/apply/applyList";
     }
 
 
