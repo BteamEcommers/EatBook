@@ -48,8 +48,16 @@
             <label for="sellerIntroduce" class="floatingInput">판매자 소개</label>
         </div>
         <div class="form-floating">
+            <input type="text" th:field="*{bankName}" class="form-control">
+            <label for="bankName" class="floatingInput">금융기관명</label>
+        </div>
+        <div class="form-floating">
             <input type="text" th:field="*{accountNumber}" class="form-control">
             <label for="accountNumber" class="floatingInput">계좌번호( - 빼고 적어주세요)</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" th:field="*{accountHolderName}" class="form-control">
+            <label for="accountHolderName" class="floatingInput">예금주</label>
         </div>
         <button type="submit" class="btn btn-primary w-100 py-2">판매자 신청하기</button>
     </form>

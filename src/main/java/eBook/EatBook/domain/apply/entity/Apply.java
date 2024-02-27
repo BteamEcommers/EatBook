@@ -24,7 +24,19 @@ public class Apply extends BaseEntity {
     @Column
     private String accountNumber;
 
+    // 은행이름
+    @Column
+    private String bankName;
+
+    // 예금주
+    @Column
+    private String accountHolderName;
+
     // 신청인
     @ManyToOne
     private Member applicant;
+
+    // 승인 여부
+    @Column
+    private boolean isConfirm;
 }

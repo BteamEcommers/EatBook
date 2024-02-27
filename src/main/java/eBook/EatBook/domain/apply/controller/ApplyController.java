@@ -4,6 +4,7 @@ import eBook.EatBook.domain.apply.DTO.ApplySellerForm;
 import eBook.EatBook.domain.apply.service.ApplyService;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
+import eBook.EatBook.global.email.service.EmailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +22,7 @@ import java.security.Principal;
 public class ApplyController {
     private final ApplyService applyService;
     private final MemberService memberService;
+    private final EmailService emailService;
 
 
     @PreAuthorize("isAuthenticated()")

@@ -7,6 +7,8 @@ import eBook.EatBook.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class ApplyService {
@@ -15,8 +17,12 @@ public class ApplyService {
     public void apply(ApplySellerForm applySellerForm, Member member) {
         Apply apply = Apply.builder()
                 .sellerIntroduce(applySellerForm.getSellerIntroduce())
+                .bankName(applySellerForm.getBankName())
                 .accountNumber(applySellerForm.getAccountNumber())
+                .accountHolderName(applySellerForm.getAccountHolderName())
                 .applicant(member)
+                .createDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
                 .build();
 
         this.applyRepository.save(apply);
