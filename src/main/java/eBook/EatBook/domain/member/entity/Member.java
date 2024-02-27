@@ -39,6 +39,9 @@ public class Member extends BaseEntity {
     @Column
     private boolean isSeller;
 
+    @Column
+    private String accountNumber;
+
     // 판매자가 가진 책 리스트
 //    @OneToMany
 //    private List<book> bookList;
