@@ -29,17 +29,17 @@ public class ApplyController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/seller")
-    public String applySeller(ApplySellerForm applySellerForm){
+    public String applySeller(ApplySellerForm applySellerForm) {
         return "/apply/applySellerForm";
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/seller")
-    public String applySeller(@Valid ApplySellerForm applySellerForm, BindingResult bindingResult, Principal principal){
-        if(bindingResult.hasErrors()){
+    public String applySeller(@Valid ApplySellerForm applySellerForm, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
             return "/apply/applySellerForm";
         }
-        Member member =  this.memberService.findByUsername(principal.getName());
+        Member member = this.memberService.findByUsername(principal.getName());
         this.applyService.apply(applySellerForm, member);
 
         return "redirect:/apply/guide";
@@ -47,14 +47,14 @@ public class ApplyController {
 
     // 안내 페이지
     @GetMapping("/guide")
-    public String applyGuide(){
+    public String applyGuide() {
 
         return "/apply/applyGuide";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/list")
-    public String applyList(){
+    public String applyList() {
 
 
         return "/apply/applyList";
