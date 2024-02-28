@@ -21,6 +21,7 @@
     <!-- script
     ================================================== -->
     <script src="/js/modernizr.js"></script>
+    <script src="/js/kakaoButton.js"></script>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
       tabindex="0">
@@ -236,6 +237,12 @@
                                 <li>
                                     <a href="contact.html" class="dropdown-item">정산 리스트</a>
                                 </li>
+                                <!-- admin 에게만 표시 -->
+                                <th:block sec:authorize="hasRole('ADMIN')">
+                                    <li>
+                                        <a th:href="@{/apply/list}" class="dropdown-item">판매자 신청 리스트</a>
+                                    </li>
+                                </th:block>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -380,6 +387,18 @@
                                 <li class="menu-item pb-2">
                                     <a href="#">자주 묻는 질문</a>
                                 </li>
+                                <li class="menu-item pb-2">
+                                    <a th:href="@{/apply/seller}">판매자 신청하기</a>
+                                </li>
+                                <div
+                                        id="kakao-talk-channel-chat-button"
+                                        data-channel-public-id="_xnuxbaG"
+                                        data-title="consult"
+                                        data-size="small"
+                                        data-color="mono"
+                                        data-shape="pc"
+                                        data-support-multiple-densities="true"
+                                ></div>
                             </ul>
                         </div>
                     </div>

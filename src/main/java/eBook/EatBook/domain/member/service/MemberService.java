@@ -98,6 +98,15 @@ public class MemberService {
         return bindingResult;
     }
 
+    //판매자 승인
+    public void approveSeller(Member member){
+        Member member1 = member.toBuilder()
+                .isSeller(true)
+                .build();
+
+        this.memberRepository.save(member1);
+    }
+
 
 
 }
