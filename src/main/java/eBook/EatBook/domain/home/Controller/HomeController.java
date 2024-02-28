@@ -16,7 +16,8 @@ public class HomeController {
     @GetMapping("/test")
     public String test() {
 
-        return "test";
+        return "/bookContent/pg84-images";
     }
+
 
 }

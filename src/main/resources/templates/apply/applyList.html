@@ -2,13 +2,8 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/css/apply/applyList.css">
 </head>
-<div layout:fragment="content">
+<div layout:fragment="content" class="container">
     <div class="main-container">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
         <div class="head-box">
             <h2>판매자 신청 리스트</h2>
         </div>
@@ -16,18 +11,22 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">아이디</th>
+                    <th scope="col">닉네임</th>
+                    <th scope="col">판매자 소개</th>
+                    <th scope="col">신청일</th>
+                    <th scope="col">승인</th>
+                    <th scope="col">거절</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                <tr th:if="${apply.isApprove == false}" th:each="apply : ${applyList}">
+                    <th scope="row">[[${apply.applicant.username}]]</th>
+                    <td>[[${apply.applicant.nickname}]]</td>
+                    <td class="sellerIntroduce">[[${apply.sellerIntroduce}]]</td>
+                    <td>[[${apply.createDate}]]</td>
+                    <td><a th:href="@{|/apply/approve/${apply.id}|}" class="btn btn-sm btn-success">승인</a></td>
+                    <td><a th:href="@{|/apply/refuse/${apply.id}|}" class="btn btn-sm btn-danger">거절</a></td>
                 </tr>
                 </tbody>
             </table>
