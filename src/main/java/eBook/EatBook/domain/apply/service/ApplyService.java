@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,5 +28,30 @@ public class ApplyService {
                 .build();
 
         this.applyRepository.save(apply);
+    }
+
+    public List<Apply> getApplyList() {
+
+        return this.applyRepository.findAll();
+    }
+
+    public void approve(Apply apply) {
+        Apply apply1 = apply.toBuilder()
+                .isApprove(true)
+                .build();
+
+        this.applyRepository.save(apply1);
+    }
+
+    public Apply getApply(Integer applyId) {
+        Optional<Apply> optionalApply = this.applyRepository.findById(applyId);
+        if(optionalApply.isEmpty()){
+            throw new RuntimeException();
+        }
+        return optionalApply.get();
+    }
+
+    public void delete(Integer applicantId) {
+        this.applyRepository.deleteById(applicantId);
     }
 }
