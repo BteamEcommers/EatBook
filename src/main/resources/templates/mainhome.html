@@ -370,7 +370,9 @@
                     <div class="swiper-slide">
                         <div class="product-card position-relative">
                             <div class="image-holder">
+                                <a href="http://localhost:8010/category/list#homeTabBest">
                                 <img style="width:310px; height:418px;" src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg" alt="product-item" class="img-fluid">
+                                </a>
                             </div>
                             <div class="cart-concern position-absolute">
                                 <div class="cart-button d-flex">
@@ -870,6 +872,12 @@
         </div>
     </div>
 </div>
+<script>
+    function redirectToBestCategory() {
+        // 이미지 클릭 시 원하는 카테고리 페이지로 이동
+        window.location.href = 'http://localhost:8010/category/list#homeTabBest';
+    }
+</script>
 <script src="js/jquery-1.11.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
