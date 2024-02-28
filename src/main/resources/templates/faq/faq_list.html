@@ -91,14 +91,15 @@
             </a>
             <div>
                 <a th:href="@{/faq/create}" class="btn btn-primary my-2">작성</a>
-                <div class="accordion" id="faqAccordion">
-                    <div class="accordion" id="accordionExample" th:each="faq : ${faqList}">
+                <div class="accordion" id="faqAccordion" th:each="faq : ${faqList}">
+                    <div class="accordion" id="accordionExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     <a th:text="${faq.title}"></a>
                                 </button>
+                                th:data-target="'#collapseExample' + ${post.id}"
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse"
                                  data-bs-parent="#accordionExample">
@@ -112,5 +113,15 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+
+            $('button[data-toggle="collapse"]').click(function () {
+                var targetCollapseId = $(this).data('target');
+
+                $(targetCollapseId).collapse('toggle');
+            });
+        });
+    </script>
 </div>
 </html>
