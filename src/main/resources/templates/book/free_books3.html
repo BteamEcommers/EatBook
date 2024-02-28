@@ -20,6 +20,7 @@
         }
 
         .Ere_bo_title {
+            font-weight: bold; /* 굵게 설정 */
             flex-grow: 0; /* 내용 크기에 맞춤 */
             margin-right: 10px; /* 제목과 수평선 사이 여백 추가 */
         }
@@ -91,9 +92,13 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-md-6 offset-md-1">
+        <div class="col-md-6 offset-md-2">
             <div class="horizontal-line-container">
-                <span class="Ere_bo_title">제목 테스트 </span>
+                <span class="Ere_bo_title">대여금고 </span>
+            </div>
+            <div style="margin-bottom: 20px;"></div> <!-- 강제로 줄 바꿈+한 칸 공백 -->
+            <div class="horizontal-line-container">
+                <div>김동섭 (지은이)현대지성2023-10-25</div>
             </div>
             <hr class="horizontal-line" style="width: 150%">
         </div>
@@ -103,13 +108,10 @@
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="https://image.aladin.co.kr/product/33370/4/cover500/e902532530_1.jpg" class="d-block w-100" alt="Slide 1">
+                        <img src="https://image.aladin.co.kr/product/33518/36/cover500/k942938653_1.jpg" class="d-block w-100" alt="Slide 1">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://image.aladin.co.kr/product/31092/38/cover500/0711282110_1.jpg" class="d-block w-100" alt="Slide 2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://image.aladin.co.kr/product/32892/38/cover500/8901276534_2.jpg" class="d-block w-100" alt="Slide 3">
+                        <img src="https://image.aladin.co.kr/product/33518/36/letslook/K942938653_b.jpg" class="d-block w-100" alt="Slide 2">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -125,7 +127,11 @@
         <div class="col-md-3">
             <div>
                 <div>판매가 10000원</div>
+                <div style="margin-bottom: 20px;"></div> <!-- 강제로 줄 바꿈+한 칸 공백 -->
                 <div>할인가 8000원</div>
+                <div style="margin-bottom: 20px;"></div> <!-- 강제로 줄 바꿈+한 칸 공백 -->
+                <div>수령 예상일</div>
+                <div>지금 주문하면 내일 도착</div>
             </div>
             <div style="margin-bottom: 20px;"></div> <!-- 강제로 줄 바꿈+한 칸 공백 -->
             <div class="rate" onclick="setStarRating(event)">
@@ -138,31 +144,30 @@
                 <button class="btn" onclick="toggleDropdown()">보관함</button>
                 <ul id="dropdownMenu" class="dropdown-menu">
                     <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="col-md-6 offset-md-1">
-    <hr class="horizontal-line" style="width: 150%"> <!-- 기존의 수평선 -->
+    <div class="col-md-6 offset-md-2">
+        <hr class="horizontal-line" style="width: 150%"> <!-- 기존의 수평선 -->
         <div>책 내용</div>
         <div style="margin-bottom: 20px;"></div> <!-- 강제로 줄 바꿈+한 칸 공백 -->
-        <div>역사언어학 분야 대한민국 최다 구독자를 보유한 언어 천재 유튜버 향문천이 들려주는 놀라운 한국어의 역사!
-            “한국어는 신라어의 후예일까?” “일본어는 백제어의 후예일까?” “과거로 돌아가면 말이 통할까?”
-            “조선 시대에는 외국어를 어떻게 공부했을까?” “韓은 어떻게 우리 민족의 자칭이 되었을까?”
-            “과거 외국인들은 우리나라를 어떻게 불렀을까?” “근대 시기 서양의 단어들은 어떻게 번역되었을까?”
-            한국어의 기원에서부터 근대 이후에 이르기까지, 미처 몰랐던 역사적 사실부터 흥미진진한 TMI까지, 한국어사의 크고 작은 순간들을 유쾌하고 거침없이 풀어낸 인문 교양서.</div>
-    <hr class="horizontal-line" style="width: 100%"> <!-- 새로운 수평선 추가, 길이 조정 -->
+        <div>국내에서 손꼽히는 언어학자가 영어 단어의 어원과 그에 얽힌 역사, 문학, 신화, 경제, 과학, 종교, 예술, 음식, 스포츠 등 다양한 히스토리를 1일 1페이지 1단어씩 365일 동안 소개하는 어원 인문학 교양서다. 365개의 단어는 저마다 구구절절한 사연을 품고 있다.
+            그 사연을 재미있게 읽고 나면 영어 단어가 절대 잊히지 않을 것이다. 그렇게 우리의 머릿속에는 영어 실력이 쌓이고 교양 지식도 쌓인다.
+
+            최근 영어 어원에 대한 대중의 관심이 높아지고 있지만, 대부분 해외 번역서들은 영미권 독자들에게만 익숙한 내용이라 국내 독자들에게는 다소 거리감이 있다.
+            이에 아쉬움을 느낀 저자는 독자들이 익숙하게 사용하면서도 지적 호기심을 불러일으킬 만한 단어를 엄선했다.
+
+            여러분도 이 책을 통해 인류가 만들어놓은 매혹적이고도 흥미진진한 세계로 즐거운 지식 여행을 떠나보자.
+        </div>
+        <hr class="horizontal-line" style="width: 150%"> <!-- 새로운 수평선 추가, 길이 조정 -->
         <div style="margin-bottom: 20px;"></div> <!-- 강제로 줄 바꿈+한 칸 공백 -->
         <div>책 저자</div>
         <div style="margin-bottom: 20px;"></div> <!-- 강제로 줄 바꿈+한 칸 공백 -->
         <div>책 부록</div>
+    </div>
 </div>
-</div>
-<div>책제목</div>
-<div style="margin-bottom: 20px;"></div> <!-- 강제로 줄 바꿈+한 칸 공백 -->
-<div>글쓴이</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
