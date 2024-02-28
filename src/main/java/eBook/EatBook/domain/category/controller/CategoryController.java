@@ -61,6 +61,40 @@ public class CategoryController {
         // 책 카테고리 선택 페이지로 이동
         return "book/best_books1";
     }
+    @GetMapping("/best2")
+    public String best2() {
+        // 책 카테고리 선택 페이지로 이동
+        return "book/best_books2";
+    }
+    @GetMapping("/best3")
+    public String best3() {
+        // 책 카테고리 선택 페이지로 이동
+        return "book/best_books3";
+    }
+    @GetMapping("/new1")
+    public String new1(){
+        return "book/new_books1";
+    }
+    @GetMapping("/new2")
+    public String new2(){
+        return "book/new_books2";
+    }
+    @GetMapping("/new3")
+    public String new3(){
+        return "book/new_books3";
+    }
+    @GetMapping("/free1")
+    public String free1(){
+        return "book/free_books1";
+    }
+    @GetMapping("/free2")
+    public String free2(){
+        return "book/free_books2";
+    }
+    @GetMapping("/free3")
+    public String free3(){
+        return "book/free_books3";
+    }
 
 
 }
