@@ -65,6 +65,14 @@ public class MemberService {
         return optionalMember.get();
     }
 
+    public Member getMember(String username) {
+        Optional<Member> member = this.memberRepository.findByUsername(username);
+        if (member.isEmpty()) {
+            return null;
+        }
+        return member.get();
+    }
+
     public void modify(MemberModifyForm memberModifyForm, Member modifyMember) throws IOException {
 
         Member member = modifyMember.toBuilder()
