@@ -18,6 +18,7 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoryController {
 
+
     private final CategoryService categoryService;
 
     @GetMapping("/list")
@@ -61,19 +62,7 @@ public class CategoryController {
         return "book/best_books1";
     }
 
-//    @GetMapping("/books/category/{category}")
-//    public String handleCategoryRequest(@PathVariable("category")String category ) {
-//        // 각 카테고리에 해당하는 페이지로 이동
-//        return category + "_books";
-//    }
 
-
-    @PostMapping("/category/foreign")
-    public String foreign(Model model, @RequestParam(value="content") String content) {
-        this.categoryService.foreign(content);
-        // TODO: 답변을 저장한다.
-        return "redirect:/category";
-    }
 }
 
 

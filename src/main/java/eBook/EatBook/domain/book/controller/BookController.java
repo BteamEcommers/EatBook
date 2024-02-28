@@ -18,7 +18,9 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-//@Requestmapping("/book)-추가하기
+
+@RequestMapping("/book")
+
 public class BookController {
 
     private final BookService bookService;
