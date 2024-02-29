@@ -11,18 +11,15 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
-    <link rel="stylesheet" type="text/css" href="/css/main/sidebars.css"/>
     <link rel="stylesheet" type="text/css" href="/css/main/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/main/base.css">
-    <link rel="stylesheet" type="text/css" href="/css/faq/faq.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <link rel="stylesheet"  type="text/css" href="/css/faq/faq.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap"
-          rel="stylesheet">
-    <!-- Boxicons CSS -->
-    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet"/>
-    <!-- script================================================== -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- script
+    ================================================== -->
     <script src="/js/kakaoButton.js"></script>
     <script src="/js/main/modernizr.js"></script>
 </head>
@@ -109,12 +106,8 @@
     <div class="search-popup-container">
 
         <form role="search" method="get" class="search-form" action="">
-            <input type="search" id="search-form" class="search-field" placeholder="검색어를 입력하세요" value="" name="s"/>
-            <button type="submit" class="search-submit">
-                <svg class="search">
-                    <use xlink:href="#search"></use>
-                </svg>
-            </button>
+            <input type="search" id="search-form" class="search-field" placeholder="검색어를 입력하세요" value="" name="s" />
+            <button type="submit" class="search-submit"><svg class="search"><use xlink:href="#search"></use></svg></button>
         </form>
 
         <h5 class="cat-list-title">카테고리 찾아보기</h5>
@@ -284,55 +277,152 @@
 </header>
 <main>
     <section class="main_content">
-        <th:block layout:fragment="content"></th:block>
-    </section>
-    <aside>
-        <div class="aside_items">
-            <div class="side-items">
-                <div class="sidebar-content">
-                    <div class="sidebar-title">
-                        <a style="color: white;">바로가기</a>
-                    </div>
-                    <ul class="lists">
-                        <li class="list">
-                            <a href="/" class="nav-link">
-                                <i class="bxgit bx-home-alt icon"></i>
-                                <span class="link">Home</span>
-                            </a>
+        <div class="faq-section">
+            <div class="left-side">
+                <div class="flex-shrink-0 p-3" style="width: 280px;">
+                    <a href="/"
+                       class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                        <span class="fs-5 fw-semibold">고객센터</span>
+                    </a>
+                    <ul class="list-unstyled ps-0">
+                        <li class="mb-1">
+                            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                                상품
+                            </button>
+                            <div class="collapse show" id="home-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">국내
+                                        eBook</a>
+                                    </li>
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">국외
+                                        eBook</a>
+                                    </li>
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">대여
+                                        eBook</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
-                        <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bxs-user icon"></i>
-                                <span class="link">내 정보</span>
-                            </a>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                                회원관련
+                            </button>
+                            <div class="collapse" id="dashboard-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">회원가입/탈퇴</a>
+                                    </li>
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">ID/PW
+                                        찾기</a>
+                                    </li>
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">회원정보변경</a>
+                                    </li>
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">쿠폰
+                                        발급</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
-                        <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bx-cart icon"></i>
-                                <span class="link">Cart</span>
-                            </a>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                                결제관련
+                            </button>
+                            <div class="collapse" id="orders-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">취소/환불</a>
+                                    </li>
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">결제내역</a>
+                                    </li>
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정산방법</a>
+                                    </li>
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">결제변경</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
-                        <li class="list">
-                            <a href="#" class="nav-link">
-                                <i class="bx bx-heart icon"></i>
-                                <span class="link">찜 목록</span>
-                            </a>
+                        <li class="border-top my-3"></li>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                                    data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                                1:1 문의
+                            </button>
+                            <div class="collapse" id="account-collapse">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">1:1
+                                        문의하기</a>
+                                    </li>
+                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">1:1
+                                        문의내역</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
-<!--                        <li class="list">-->
-<!--                            <a href="#" class="nav-link">-->
-<!--                                <i class="bx bx-log-in icon"></i>-->
-<!--                                <span class="link">Login</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li class="list">-->
-<!--                            <a href="#" class="nav-link">-->
-<!--                                <i class="bx bx-log-out icon"></i>-->
-<!--                                <span class="link">Logout</span>-->
-<!--                            </a>-->
-<!--                        </li>-->
                     </ul>
                 </div>
             </div>
+            <div class="container p-3">
+                <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                    <span class="fs-5 fw-semibold">FAQ 등록</span>
+                </a>
+                <th:block layout:fragment="content"></th:block>
+            </div>
+        </div>
+    </section>
+    <aside>
+        <div class="aside_items">
+            <ul style="list-style-type: none;">
+                <li class="nav-item">
+                    <div class="side-items">
+                        <p>바로가기 메뉴</p>
+                        <ul class="d-flex justify-content-space between list-unstyled">
+                            <li>
+                                <a href="#">
+                                    <svg class="user">
+                                        <use xlink:href="#user"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="cart.html">
+                                    <svg class="cart">
+                                        <use xlink:href="#cart"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="">
+                            <p>최근 본 싱픔</p>
+                            <div>
+                                <p>최근 본</p>
+                                <p>상품이</p>
+                                <p>없습니다.</p>
+                                <ul style="list-style-type: none;">
+                                    <li>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </aside>
 </main>

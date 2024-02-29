@@ -34,12 +34,13 @@ public class FaqController {
         model.addAttribute("faqList", faqList);
         return "/faq/faq_list";
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/create")
     public String createFaq(FaqCreateForm faqCreateForm) {
         return "/faq/faq_form";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public String createFaq(@Valid FaqCreateForm faqCreateForm, BindingResult bindingResult, Principal principal) {
         Member member = this.memberService.getMember(principal.getName());
@@ -50,51 +51,37 @@ public class FaqController {
         return "redirect:/faq/list";
     }
 
-
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/modify/{id}")
-    public String modifyFaq(@PathVariable("id") Integer id, FaqCreateForm faqCreateForm, Principal principal, Model model) {
+    public String modifyFaq(@PathVariable("id") Integer id, FaqCreateForm faqCreateForm, Model model) {
         Faq faq = this.faqService.getFaq(id);
         model.addAttribute("faq", faq);
-        if (!faq.getMember().getUsername().equals(principal.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
-        }
         faqCreateForm.setTitle(faq.getTitle());
         faqCreateForm.setContent(faq.getContent());
-        model.addAttribute("faq",faq);
-        return "/faq/faq_form";
+        return "/faq/faq_modifyForm";
     }
 
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/modify/{id}")
-    public String modifyFaq(@PathVariable("id") Integer id, Model model, Principal principal,
-                                @Valid FaqCreateForm faqCreateForm, BindingResult bindingResult) {
+    public String modifyFaq(@PathVariable("id") Integer id, Model model,
+                            @Valid FaqCreateForm faqCreateForm, BindingResult bindingResult,
+                            Principal principal) {
         Member member = this.memberService.getMember(principal.getName());
         if (bindingResult.hasErrors()) {
             model.addAttribute("member", member);
-            return "/faq/faq_form";
+            return "/faq/faq_modifyForm";
         }
         Faq faq = this.faqService.getFaq(id);
-        if (!faq.getMember().getUsername().equals(principal.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
-        }
         this.faqService.modify(faq, member, faqCreateForm.getTitle(), faqCreateForm.getContent());
-        return String.format("redirect:/faq/%s", id);
+        return "redirect:/faq/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/delete/{id}")
     public String deleteFaq(@PathVariable("id") Integer id, Principal principal) {
         Faq faq = this.faqService.getFaq(id);
         this.faqService.delete(faq);
         return "redirect:/faq/list";
-    }
-
-
-    @GetMapping("/detail/{id}")
-    public String detailFaq(Model model, @PathVariable(value = "id") Integer id) {
-        Faq faq = this.faqService.getFaq(id);
-        model.addAttribute("faq",faq);
-        return "/faq/faq_detail";
     }
 
 }

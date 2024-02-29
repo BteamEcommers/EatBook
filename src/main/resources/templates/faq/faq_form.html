@@ -1,16 +1,106 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
-    <h5 class="my-3 border-bottom pb-2">FAQ 등록</h5>
-    <form th:action="@{/faq/create}" method="post">
-        <div class="mb-3">
-            <label for="title" class="form-label">제목</label>
-            <input type="text" name="title" id="title" class="form-control">
+    <div class="faq-section">
+        <div class="left-side">
+            <div class="flex-shrink-0 p-3" style="width: 280px;">
+                <a href="/"
+                   class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                    <span class="fs-5 fw-semibold">고객센터</span>
+                </a>
+                <ul class="list-unstyled ps-0">
+                    <li class="mb-1">
+                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                            상품
+                        </button>
+                        <div class="collapse show" id="home-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">국내
+                                    eBook</a>
+                                </li>
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">국외
+                                    eBook</a>
+                                </li>
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">대여
+                                    eBook</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                            회원관련
+                        </button>
+                        <div class="collapse" id="dashboard-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">회원가입/탈퇴</a>
+                                </li>
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">ID/PW
+                                    찾기</a>
+                                </li>
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">회원정보변경</a>
+                                </li>
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">쿠폰
+                                    발급</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                            결제관련
+                        </button>
+                        <div class="collapse" id="orders-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">취소/환불</a>
+                                </li>
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">결제내역</a>
+                                </li>
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정산방법</a>
+                                </li>
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">결제변경</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="border-top my-3"></li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                            1:1 문의
+                        </button>
+                        <div class="collapse" id="account-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">1:1
+                                    문의하기</a>
+                                </li>
+                                <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">1:1
+                                    문의내역</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="content" class="form-label">내용</label>
-            <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+        <div class="container p-3">
+            <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold">FAQ 등록</span>
+            </a>
+            <form th:action="@{/faq/create}" method="post">
+                <div class="mb-3">
+                    <label for="title" class="form-label">제목</label>
+                    <input type="text" name="title" id="title" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">내용</label>
+                    <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+                </div>
+                <input type="submit" value="저장하기" class="btn btn-primary my-2">
+            </form>
         </div>
-        <input type="submit" value="저장하기" class="btn btn-primary my-2">
-    </form>
+    </div>
 </div>
 </html>

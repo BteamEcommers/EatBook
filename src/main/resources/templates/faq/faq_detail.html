@@ -1,8 +1,0 @@
-<html layout:decorate="~{layout}">
-<div layout:fragment="content">
-<h1 th:text="${faq.title}"></h1>
-<div th:text="${faq.content}"></div>
-    <a th:href="@{|/faq/modify/${faq.id}|}" class="btn btn-primary my-2" th:text="수정"></a>
-    <a th:href="@{|/faq/delete/${faq.id}|}" class="btn btn-primary my-2"th:text="삭제"></a>
-</div>>
-</html>
