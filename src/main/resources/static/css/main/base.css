@@ -1018,8 +1018,9 @@ main {
 }
 
 aside {
-     flex-grow: 1;
+    flex-grow: 1;
     height: 100%;
+    padding-right: 10px;
 }
 .aside_items {
    position:sticky;
@@ -1037,4 +1038,36 @@ aside {
 .pagination {
     display:flex;
     justify-content:space-between;
+}
+.sidebar-content {
+     text-align: left;
+}
+.sidebar-title a {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 5px;
+  display: flex;
+  justify-content:center;
+}
+.sidebar-content ul {
+    padding: 0;
+    margin: 0;
+}
+.sidebar-title {
+	position: relative;
+	background: #00aabb;
+}
+
+.sidebar-title:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 9px solid transparent;
+	border-top-color: #00aabb;
+	border-bottom: 0;
+	margin-left: -9px;
+	margin-bottom: -9px;
 }
