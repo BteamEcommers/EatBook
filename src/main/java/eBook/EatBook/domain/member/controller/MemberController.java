@@ -131,7 +131,6 @@ public class MemberController {
         String confirmCode = this.RandomCode();
         this.emailService.saveConfirmCode(member, confirmCode);
         this.emailService.send(findUsernameForm.getToEmail(), "[EatBook]아이디 찾기를 위한 코드입니다.", String.format("코드 입력 \n [%s]", confirmCode));
-
         return "redirect:/member/confirmCodeUsername";
     }
 

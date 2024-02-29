@@ -1,0 +1,32 @@
+html,
+body {
+  height: 100%;
+}
+
+.form-register {
+  max-width: 500px;
+  padding: 1rem;
+}
+
+.form-register .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-register input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-register input[type="password"] {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-register .form-floating {
+  padding-bottom: 5px;
+}
+
+.modify-button {
+  margin-bottom: 5px;
+}
