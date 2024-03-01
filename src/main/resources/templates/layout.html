@@ -10,11 +10,14 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" href="/css/main/sidebars.css"/>
     <link rel="stylesheet" type="text/css" href="/css/main/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/main/base.css">
     <link rel="stylesheet" type="text/css" href="/css/faq/faq.css">
+    <link rel="stylesheet" type="text/css" href="/css/event/event.css">
+    <link rel="stylesheet" type="text/css" href="/css/book/book.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -296,7 +299,7 @@
                     <ul class="lists">
                         <li class="list">
                             <a href="/" class="nav-link">
-                                <i class="bxgit bx-home-alt icon"></i>
+                                <i class="bx bx-home-alt icon"></i>
                                 <span class="link">Home</span>
                             </a>
                         </li>
@@ -336,106 +339,106 @@
         </div>
     </aside>
 </main>
-<footer id="footer" class="overflow-hidden">
-    <div class="container">
-        <div class="row">
-            <div class="footer-top-area">
-                <div class="row d-flex flex-wrap justify-content-between">
-                    <div class="col-lg-3 col-sm-6 pb-3">
-                        <div class="footer-menu">
-                            <a href="/"><img src="https://i.ibb.co/2t1PB1w/image.png" alt="image" class="logo"
-                                             style="width:100%; height:100%;"></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6 pb-3">
-                        <div class="footer-menu text-uppercase">
-                            <h5 class="widget-title pb-2">바로가기</h5>
-                            <ul class="menu-list list-unstyled text-uppercase">
-                                <li class="menu-item pb-2">
-                                    <a href="#">Home</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">베스트셀러</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">무료 eBook</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">대여</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">새로나온 eBook</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 pb-3">
-                        <div class="footer-menu text-uppercase">
-                            <h5 class="widget-title pb-2">Help & Info Help</h5>
-                            <ul class="menu-list list-unstyled">
-                                <li class="menu-item pb-2">
-                                    <a href="#">주문 내역 보기</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">장바구니</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">나의 서재</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">문의 하기</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">자주 묻는 질문</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a th:href="@{/apply/seller}">판매자 신청하기</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 pb-3">
-                        <div class="footer-menu contact-item">
-                            <h5 class="widget-title text-uppercase pb-2">문의하기</h5>
-                            <p>문의사항이나 제안사항이 있으신가요? <a href="mailto:">ds2386test@gmail.com</a>
-                            <div
-                                    id="kakao-talk-channel-chat-button"
-                                    data-channel-public-id="_xnuxbaG"
-                                    data-title="consult"
-                                    data-size="small"
-                                    data-color="mono"
-                                    data-shape="pc"
-                                    data-support-multiple-densities="true"
-                            ></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-</footer>
-<div id="footer-bottom">
-    <div class="container">
-        <div class="row d-flex flex-wrap justify-content-between">
-            <div class="col-md-4 col-sm-6">
-                <div class="Shipping d-flex">
-                    <p>BteamEcommers:</p>
-                    <div class="card-wrap ps-2">
-                        <p>전율택 김정배 류한선</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="copyright">
-                    <p>© Copyright 2023 MiniStore. Design by <a href="https://templatesjungle.com/">TemplatesJungle</a>
-                        Distribution by <a href="https://themewagon.com">ThemeWagon</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<footer id="footer" class="overflow-hidden">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="footer-top-area">-->
+<!--                <div class="row d-flex flex-wrap justify-content-between">-->
+<!--                    <div class="col-lg-3 col-sm-6 pb-3">-->
+<!--                        <div class="footer-menu">-->
+<!--                            <a href="/"><img src="https://i.ibb.co/2t1PB1w/image.png" alt="image" class="logo"-->
+<!--                                             style="width:100%; height:100%;"></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-2 col-sm-6 pb-3">-->
+<!--                        <div class="footer-menu text-uppercase">-->
+<!--                            <h5 class="widget-title pb-2">바로가기</h5>-->
+<!--                            <ul class="menu-list list-unstyled text-uppercase">-->
+<!--                                <li class="menu-item pb-2">-->
+<!--                                    <a href="#">Home</a>-->
+<!--                                </li>-->
+<!--                                <li class="menu-item pb-2">-->
+<!--                                    <a href="#">베스트셀러</a>-->
+<!--                                </li>-->
+<!--                                <li class="menu-item pb-2">-->
+<!--                                    <a href="#">무료 eBook</a>-->
+<!--                                </li>-->
+<!--                                <li class="menu-item pb-2">-->
+<!--                                    <a href="#">대여</a>-->
+<!--                                </li>-->
+<!--                                <li class="menu-item pb-2">-->
+<!--                                    <a href="#">새로나온 eBook</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-3 col-sm-6 pb-3">-->
+<!--                        <div class="footer-menu text-uppercase">-->
+<!--                            <h5 class="widget-title pb-2">Help & Info Help</h5>-->
+<!--                            <ul class="menu-list list-unstyled">-->
+<!--                                <li class="menu-item pb-2">-->
+<!--                                    <a href="#">주문 내역 보기</a>-->
+<!--                                </li>-->
+<!--                                <li class="menu-item pb-2">-->
+<!--                                    <a href="#">장바구니</a>-->
+<!--                                </li>-->
+<!--                                <li class="menu-item pb-2">-->
+<!--                                    <a href="#">나의 서재</a>-->
+<!--                                </li>-->
+<!--                                <li class="menu-item pb-2">-->
+<!--                                    <a href="#">문의 하기</a>-->
+<!--                                </li>-->
+<!--                                <li class="menu-item pb-2">-->
+<!--                                    <a href="#">자주 묻는 질문</a>-->
+<!--                                </li>-->
+<!--                                <li class="menu-item pb-2">-->
+<!--                                    <a th:href="@{/apply/seller}">판매자 신청하기</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-3 col-sm-6 pb-3">-->
+<!--                        <div class="footer-menu contact-item">-->
+<!--                            <h5 class="widget-title text-uppercase pb-2">문의하기</h5>-->
+<!--                            <p>문의사항이나 제안사항이 있으신가요? <a href="mailto:">ds2386test@gmail.com</a>-->
+<!--                            <div-->
+<!--                                    id="kakao-talk-channel-chat-button"-->
+<!--                                    data-channel-public-id="_xnuxbaG"-->
+<!--                                    data-title="consult"-->
+<!--                                    data-size="small"-->
+<!--                                    data-color="mono"-->
+<!--                                    data-shape="pc"-->
+<!--                                    data-support-multiple-densities="true"-->
+<!--                            ></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <hr>-->
+<!--</footer>-->
+<!--<div id="footer-bottom">-->
+<!--    <div class="container">-->
+<!--        <div class="row d-flex flex-wrap justify-content-between">-->
+<!--            <div class="col-md-4 col-sm-6">-->
+<!--                <div class="Shipping d-flex">-->
+<!--                    <p>BteamEcommers:</p>-->
+<!--                    <div class="card-wrap ps-2">-->
+<!--                        <p>전율택 김정배 류한선</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-4 col-sm-6">-->
+<!--                <div class="copyright">-->
+<!--                    <p>© Copyright 2023 MiniStore. Design by <a href="https://templatesjungle.com/">TemplatesJungle</a>-->
+<!--                        Distribution by <a href="https://themewagon.com">ThemeWagon</a>-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <script src="/js/main/jquery-1.11.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/js/main/bootstrap.bundle.min.js"></script>
