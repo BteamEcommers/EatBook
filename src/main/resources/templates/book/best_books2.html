@@ -1,94 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>가운데 정렬된 수평선</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .horizontal-line-container {
-            display: flex; /* Flexbox 사용 */
-
-            margin-top: 20px; /* 위쪽 여백 추가 */
-            width: 1000px; /* 원하는 가로 너비로 조절 */
-        }
-
-        .horizontal-line {
-            flex-grow: 1;
-            border-top: 2px solid black; /* 너비를 4픽셀로 변경 */
-            width: 100px;
-        }
-
-        .Ere_bo_title {
-            font-weight: bold; /* 굵게 설정 */
-            flex-grow: 0; /* 내용 크기에 맞춤 */
-            margin-right: 10px; /* 제목과 수평선 사이 여백 추가 */
-        }
-
-        .item-container {
-            display: flex; /* Flexbox 사용 */
-            margin-bottom: 10px; /* 추가 */
-        }
-
-        .item-container img {
-            margin-right: 20px; /* 사진과 텍스트 사이의 간격 조정 */
-            width: 100px; /* 사진 크기 수정 */
-            height: auto; /* 이미지 비율 유지 */
-        }
-
-        .rate {
-            background: url(https://aldo814.github.io/jobcloud/html/images/user/star_bg02.png) no-repeat;
-            width: 121px;
-            height: 20px;
-            position: relative;
-            cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
-            margin-top: 10px; /* 수정 */
-        }
-
-        .rate span {
-            position: absolute;
-            background: url(https://aldo814.github.io/jobcloud/html/images/user/star02.png);
-            width: auto;
-            height: 20px;
-            pointer-events: none; /* 이벤트를 통과시킴으로써 별점을 클릭할 수 있게 함 */
-        }
-
-        .dropdown {  /* 드롭박스 색깔 */
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown .btn {
-            background-color: #4CAF50; /* Green background */
-            color: white; /* White text */
-            padding: 10px; /* Some padding */
-            font-size: 16px; /* Increased font size */
-            border: none; /* Remove the default border */
-            cursor: pointer; /* Pointer cursor on hover */
-        }
-
-        .dropdown .dropdown-menu {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        .dropdown .dropdown-menu a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown .dropdown-menu a:hover {
-            background-color: #f1f1f1;
-        }
-    </style>
-</head>
-<body>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
 <div class="container">
     <div class="row">
 
@@ -205,5 +116,5 @@
         }
     }
 </script>
-</body>
+</div>>
 </html>

@@ -1,5 +1,7 @@
 package eBook.EatBook;
 
+import eBook.EatBook.domain.event.Entity.Event;
+import eBook.EatBook.domain.event.Repository.EventRepository;
 import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
@@ -21,6 +23,9 @@ class EatBookApplicationTests {
     private MemberService memberService;
     @Autowired
     FaqRepository faqRepository;
+
+    @Autowired
+    EventRepository eventRepository;
 
     @Test
     void createAll() {
@@ -55,6 +60,20 @@ class EatBookApplicationTests {
                     .member(member)
                     .build();
             faqRepository.save(faq);
+        }
+    }
+
+    @Test
+    void makeEvent() {
+        // Event 게시물 200개 생성
+        Member member = memberService.findById(1);
+        for (int i = 1; i <= 200; i++) {
+            Event event = Event.builder()
+                    .title(i + "번 이벤트 제목")
+                    .content(i + "번 이벤트 내용 입니다.")
+                    .member(member)
+                    .build();
+            eventRepository.save(event);
         }
     }
 
