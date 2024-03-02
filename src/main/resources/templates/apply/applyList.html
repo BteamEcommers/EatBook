@@ -24,7 +24,7 @@
                     <th scope="row">[[${apply.applicant.username}]]</th>
                     <td>[[${apply.applicant.nickname}]]</td>
                     <td class="sellerIntroduce">[[${apply.sellerIntroduce}]]</td>
-                    <td>[[${apply.createDate}]]</td>
+                    <td th:text="${#temporals.format(apply.createDate, 'yyyy-MM-dd HH:mm')}"></td>
                     <td><a th:href="@{|/apply/approve/${apply.id}|}" class="btn btn-sm btn-success">승인</a></td>
                     <td><a th:href="@{|/apply/refuse/${apply.id}|}" class="btn btn-sm btn-danger">거절</a></td>
                 </tr>
