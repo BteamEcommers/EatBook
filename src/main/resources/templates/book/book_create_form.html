@@ -1,12 +1,103 @@
-<h5 class="my-3 border-bottom pb-2">도서등록</h5>
-<form th:action="@{/book/create}" th:object="${bookForm}" method="post">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도서 등록</title>
+    <style>
+        /* CSS 스타일은 여기에 작성하십시오. */
+    </style>
+</head>
+<body>
+<form id="bookForm" th:action="@{/book/create}" th:object="${bookForm}" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="category" class="form-label">카테고리</label>
+        <select th:field="*{category}" class="form-control" id="category" onchange="changeCategory()">
+            <option value="1">베스트셀러</option>
+            <option value="2">외국도서</option>
+            <option value="3">국내도서</option>
+            <option value="4">무료도서</option>
+            <option value="5">신간도서</option>
+        </select>
+        <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}" class="text-danger"></span>
+    </div>
+
     <div class="mb-3">
         <label for="subject" class="form-label">제목</label>
-        <input type="text" name="subject" id="subject" class="form-control">
+        <input type="text" th:field="*{subject}" class="form-control">
+        <span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label for="content" class="form-label">내용</label>
-        <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+        <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
+        <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-danger"></span>
     </div>
-    <input type="submit" value="저장하기" class="btn btn-primary my-2">
+    <div class="mb-3">
+        <label for="price" class="form-label">가격</label>
+        <input type="number" th:field="*{price}" class="form-control">
+        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="publisher" class="form-label">출판사</label>
+        <input type="text" th:field="*{publisher}" class="form-control">
+        <span th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="bookIntroduce" class="form-label">책 소개</label>
+        <textarea th:field="*{bookIntroduce}" class="form-control" rows="5"></textarea>
+        <span th:if="${#fields.hasErrors('bookIntroduce')}" th:errors="*{bookIntroduce}" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="discount" class="form-label">할인율</label>
+        <input type="number" th:field="*{discount}" class="form-control">
+        <span th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="image" class="form-label">이미지 업로드</label>
+        <input type="file" id="image" name="file" accept="image/*">
+        <!-- 이미지 미리보기 -->
+        <img id="preview" src="#" alt="미리보기" style="max-width: 200px; max-height: 200px; display: none;">
+    </div>
+    <input type="submit" value="저장하기" id="saveButton" class="btn btn-primary my-2">
 </form>
+
+<script>
+    // 카테고리 선택 폼이 변경될 때마다 호출되는 함수
+    function changeCategory() {
+        // 선택한 카테고리 값 가져오기
+        var selectedCategory = document.getElementById("category").value;
+        document.getElementById("bookForm").action = getCategoryActionUrl(categoryValue);
+        // 이미지 미리보기를 보여줄 img 요소 선택
+        var previewImg = document.getElementById("preview");
+
+        // 선택한 카테고리에 따라 이미지 URL 설정하여 미리보기 창에 표시
+        function getCategoryActionUrl(categoryValue) {
+        switch (categoryValue) {
+            case "1":
+                previewImg.src = "http://localhost:8010/category/list#homeTabBest"; // 베스트셀러에 해당하는 이미지 URL
+                break;
+            case "2":
+                previewImg.src = "http://localhost:8010/category/list#homeTabForeign"; // 외국도서에 해당하는 이미지 URL
+                break;
+            case "3":
+                previewImg.src = "http://localhost:8010/category/list#homeTabKorea"; // 국내도서에 해당하는 이미지 URL
+                break;
+            case "4":
+                previewImg.src = "http://localhost:8010/category/list#homeTabFree"; // 무료도서에 해당하는 이미지 URL
+                break;
+            case "5":
+                previewImg.src = "http://localhost:8010/category/list#homeTabNew"; // 신간도서에 해당하는 이미지 URL
+                break;
+       default:
+              // 기본값으로 설정할 이미지 URL (선택 사항)
+                previewImg.src = "기본 이미지 URL";
+                break;
+        }
+}
+        // 이미지 미리보기 보이기
+        previewImg.style.display = "block";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Category Selection</title>
+</head>
+<body>
+<h1>Choose a Category</h1>
+<ul>
+    <li th:each="category : ${categories}">
+        <a th:href="@{|/books/list?category=${category.categoryName}|}" th:text="${category.categoryName}"></a>
+    </li>
+</ul>
+
+
+
+</body>
+</html>

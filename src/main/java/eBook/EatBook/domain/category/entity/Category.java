@@ -26,5 +26,12 @@ public class Category extends BaseEntity {
     private String categoryName;
 
     @Column
+    private String name;
+    @Column
     private String content;
+
+    @Column
+    private Integer categoryId;
+
+
 }

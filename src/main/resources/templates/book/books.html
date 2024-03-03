@@ -96,10 +96,12 @@
     <div>책제목</div>
     <div style="margin-bottom: 20px;"></div> <!-- 강제로 줄 바꿈+한 칸 공백 -->
     <div>글쓴이</div>
+    <a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
 </div>
 
 <div id="homeTabForeignContent" class="category-content">
     <h2>외국도서 카테고리</h2>
+    <a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
     <hr> <!-- 수평선 추가 -->
     <div class="image-gallery">
         <div class="gallery-item">
@@ -111,10 +113,26 @@
                 <div>책제목  1일 1페이지 영어 어원 365 </div>
                 <div>글쓴이</div>
                 <div>소장
-                    10%
                     11,340원
                     560P(5%)적립</div>
             </div>
+
+            <div th:each="book : ${books}">
+                <h6>제목: <span th:text="${book.subject}"></span></h6>
+                <p>내용: <span th:text="${book.content}"></span></p>
+                <p>가격: <span th:text="${book.price}"></span></p>
+                <p>출판사: <span th:text="${book.publisher}"></span></p>
+                <p>할인율: <span th:text="${book.discount}"></span></p>
+                <p>책 소개: <span th:text="${book.bookIntroduce}"></span></p>
+                <a href="http://localhost:8010/category/foreign1">
+                <!-- 이미지 파일 추가 -->
+                <img th:src="'/path/to/your/images/' + ${book.bookThumbnailImg}" alt="Book Thumbnail">
+                </a>
+            </div>
+
+
+
+
         </div>
         <div class="gallery-item">
             <a href="http://localhost:8010/category/foreign2">
@@ -135,11 +153,33 @@
             </div>
         </div>
 
+        <div class="image-gallery">
+            <div class="gallery-item" th:each="book : ${foreignBooks}">
+                <a th:href="@{'/category/' + ${book.categoryId}}" th:title="${book.subject}">
+                    <img th:src="@{'/images/' + ${book.imageFileName}}" alt="책 표지">
+                </a>
+                <div class="gallery-text">
+                    <div th:text="${book.subject}"></div>
+                    <div th:text="${book.author}"></div>
+                    <div>
+                        <span>소장</span>
+                        <span th:text="${book.discount}"></span>
+                        <span>할인</span>
+                        <span th:text="${book.price}"></span>
+                        <span>원</span>
+                        <span th:text="${book.points}"></span>
+                        <span>적립</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
 <div id="homeTabKoreaContent" class="category-content">
     <h2>국내도서 카테고리</h2>
+    <a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
     <hr> <!-- 수평선 추가 -->
     <div class="image-gallery">
         <div class="gallery-item">
