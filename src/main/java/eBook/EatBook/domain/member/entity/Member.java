@@ -1,7 +1,7 @@
 package eBook.EatBook.domain.member.entity;
 
-import eBook.EatBook.domain.cartitem.Entity.Cart;
-import eBook.EatBook.domain.cartitem.Entity.CartItem;
+//import eBook.EatBook.domain.cartitem.Entity.Cart;
+//import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.wish.Entity.Wish;
 import eBook.EatBook.global.baseEntity.BaseEntity;
 import jakarta.persistence.CascadeType;
@@ -43,13 +43,13 @@ public class Member extends BaseEntity {
     @Column
     private boolean isSeller;
 
-    //장바구니
-    @OneToMany(mappedBy = "member")
-    private List<Cart> carts;
+//    //장바구니
+//    @OneToMany(mappedBy = "member")
+//    private List<Cart> carts;
 
-    //장바구니 상품 (Cartitem)
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> cartList;
+//    //장바구니 상품 (Cartitem)
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<CartItem> cartList;
 
     // 찜 (Wish)
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
