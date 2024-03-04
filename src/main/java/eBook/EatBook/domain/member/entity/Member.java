@@ -1,5 +1,6 @@
 package eBook.EatBook.domain.member.entity;
 
+import eBook.EatBook.domain.book.entity.Book;
 //import eBook.EatBook.domain.cartitem.Entity.Cart;
 //import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.wish.Entity.Wish;
@@ -56,7 +57,21 @@ public class Member extends BaseEntity {
     private List<Wish> wishList;
 
 
+    // 판매자, admin이 필요한 계좌번호, 금융기관명, 예금주 Column
+    // 계좌번호
+    @Column
+    private String accountNumber;
+
+    // 은행이름
+    @Column
+    private String bankName;
+
+    // 예금주
+    @Column
+    private String accountHolderName;
+
+
     // 판매자가 가진 책 리스트
-//    @OneToMany
-//    private List<book> bookList;
+    @OneToMany
+    private List<Book> bookList;
 }
