@@ -13,7 +13,7 @@
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 <main class="form-register w-100 m-auto">
-    <form th:action="@{/member/pay}"  method="post">
+    <form th:action="@{/member/pay}" method="post">
         <a th:href="@{/}">
             <svg width="250" height="60" xmlns="http://www.w3.org/2000/svg" version="1.0"
                  preserveAspectRatio="xMidYMid meet">
@@ -41,9 +41,9 @@
             </svg>
         </a>
         <h1 class="h3 mb-3 fw-normal">주문/결제(임시)</h1>
-<!--        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">-->
-<!--            <div th:each="err : ${#fields.allErrors()}" th:text="${err}"/>-->
-<!--        </div>-->
+        <!--        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">-->
+        <!--            <div th:each="err : ${#fields.allErrors()}" th:text="${err}"/>-->
+        <!--        </div>-->
         <button type="button" class="btn btn-primary w-100 py-2" onclick="pclose1()">홈페이지</button>
     </form>
 </main>

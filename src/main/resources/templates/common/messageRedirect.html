@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head></head>
+<head>
+    <title>EatBook</title>
+    <!-- SweetAlert2   -->
+<!--    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>-->
+</head>
 <body>
 <form th:if="${not #maps.isEmpty( params.data )}" id="redirectForm" th:action="${params.redirectUri}" th:method="${params.method}" style="display: none;">
     <input th:each="key, status : ${params.data.keySet()}" type="hidden" th:name="${key}" th:value="${params.data.get(key)}" />
@@ -11,6 +16,7 @@
 
         window.onload = () => {
             const message = [[ ${params.message} ]];
+
             if (message) {
                 alert(message);
             }
