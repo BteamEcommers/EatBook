@@ -102,6 +102,7 @@
     <h2>외국도서 카테고리</h2>
     <hr> <!-- 수평선 추가 -->
     <div class="image-gallery">
+        <a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
         <div class="gallery-item">
             <a href="http://localhost:8010/category/foreign1">
                 <img src="https://image.aladin.co.kr/product/32849/3/cover500/e322532593_1.jpg" alt="Image 1">
@@ -116,24 +117,19 @@
                     560P(5%)적립</div>
             </div>
         </div>
-        <div class="gallery-item">
-            <a href="http://localhost:8010/category/foreign2">
-            <img src="https://image.aladin.co.kr/product/4382/61/letslook/0544442202_f.jpg" alt="Image 2">
+        <div th:each="book : ${books}">
+            <h6>제목: <span th:text="${book.subject}"></span></h6>
+            <p>내용: <span th:text="${book.content}"></span></p>
+            <p>가격: <span th:text="${book.price}"></span></p>
+            <p>출판사: <span th:text="${book.publisher}"></span></p>
+            <p>할인율: <span th:text="${book.discount}"></span></p>
+            <p>책 소개: <span th:text="${book.bookIntroduce}"></span></p>
+            <a href="http://localhost:8010/category/foreign1">
+                <!-- 이미지 파일 추가 -->
+                <img th:src="'/path/to/your/images/' + ${book.bookThumbnailImg}" alt="Book Thumbnail">
             </a>
-            <div class="gallery-text">
-                <div>책제목 The Giver(Paperback,International)</div>
-                <div>글쓴이</div>
-            </div>
         </div>
-        <div class="gallery-item">
-            <a href="http://localhost:8010/category/foreign3">
-            <img src="https://image.aladin.co.kr/product/31249/57/cover500/0593686659_1.jpg" alt="Image 3">
-            </a>
-            <div class="gallery-text">
-                <div>책제목</div>
-                <div>글쓴이</div>
-            </div>
-        </div>
+
 
     </div>
 </div>
@@ -142,6 +138,7 @@
     <h2>국내도서 카테고리</h2>
     <hr> <!-- 수평선 추가 -->
     <div class="image-gallery">
+        <a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
         <div class="gallery-item">
             <a href="http://localhost:8010/category/korea1">
                 <img src="https://image.aladin.co.kr/product/31559/97/cover500/s102936816_3.jpg" alt="Image 1">
@@ -156,23 +153,17 @@
                     560P(5%)적립</div>
             </div>
         </div>
-        <div class="gallery-item">
-            <a href="http://localhost:8010/category/korea2">
-                <img src="https://image.aladin.co.kr/product/33156/38/cover500/8962625938_1.jpg" alt="Image 2">
+        <div th:each="book : ${books}">
+            <h6>제목: <span th:text="${book.subject}"></span></h6>
+            <p>내용: <span th:text="${book.content}"></span></p>
+            <p>가격: <span th:text="${book.price}"></span></p>
+            <p>출판사: <span th:text="${book.publisher}"></span></p>
+            <p>할인율: <span th:text="${book.discount}"></span></p>
+            <p>책 소개: <span th:text="${book.bookIntroduce}"></span></p>
+            <a href="http://localhost:8010/category/foreign1">
+                <!-- 이미지 파일 추가 -->
+                <img th:src="'/path/to/your/images/' + ${book.bookThumbnailImg}" alt="Book Thumbnail">
             </a>
-            <div class="gallery-text">
-                <div>책제목 뉴럴 링크 - 21세기를 이끄는 거대한 연결, 뇌-컴퓨터 인터페이스</div>
-                <div>글쓴이</div>
-            </div>
-        </div>
-        <div class="gallery-item">
-            <a href="http://localhost:8010/category/korea3">
-                <img src="https://image.aladin.co.kr/product/33489/27/cover500/8958640421_1.jpg" alt="Image 3">
-            </a>
-            <div class="gallery-text">
-                <div>책제목 제주 로드 맛집 - 푸른바다 길 위에서 특별한 미식을 만나다</div>
-                <div>글쓴이</div>
-            </div>
         </div>
     </div>
     </div>
@@ -182,6 +173,7 @@
     <h2>베스트셀러 카테고리</h2>
     <hr> <!-- 수평선 추가 -->
     <div class="image-gallery">
+        <a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
         <div class="gallery-item">
             <a href="http://localhost:8010/category/best1">
                 <img src="https://image.aladin.co.kr/product/33322/8/cover500/k352938689_1.jpg" alt="Image 1">
@@ -196,23 +188,17 @@
                     560P(5%)적립</div>
             </div>
         </div>
-        <div class="gallery-item">
-            <a href="http://localhost:8010/category/best2">
-                <img src="https://image.aladin.co.kr/product/32648/45/cover500/k072935654_1.jpg" alt="Image 2">
+        <div th:each="book : ${books}">
+            <h6>제목: <span th:text="${book.subject}"></span></h6>
+            <p>내용: <span th:text="${book.content}"></span></p>
+            <p>가격: <span th:text="${book.price}"></span></p>
+            <p>출판사: <span th:text="${book.publisher}"></span></p>
+            <p>할인율: <span th:text="${book.discount}"></span></p>
+            <p>책 소개: <span th:text="${book.bookIntroduce}"></span></p>
+            <a href="http://localhost:8010/category/foreign1">
+                <!-- 이미지 파일 추가 -->
+                <img th:src="'/path/to/your/images/' + ${book.bookThumbnailImg}" alt="Book Thumbnail">
             </a>
-            <div class="gallery-text">
-                <div>남에게 보여주려고 인생을 낭비하지 마라</div>
-                <div>글쓴이</div>
-            </div>
-        </div>
-        <div class="gallery-item">
-            <a href="http://localhost:8010/category/best3">
-                <img src="https://image.aladin.co.kr/product/33273/25/cover500/k302938773_2.jpg" alt="Image 3">
-            </a>
-            <div class="gallery-text">
-                <div>책제목 아이는 무엇으로 자라는가</div>
-                <div>글쓴이</div>
-            </div>
         </div>
     </div>
 </div>
@@ -223,6 +209,7 @@
     <h2>신간도서 카테고리</h2>
     <hr> <!-- 수평선 추가 -->
     <div class="image-gallery">
+        <a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
         <div class="gallery-item">
             <a href="http://localhost:8010/category/new1">
                 <img src="https://image.aladin.co.kr/product/33526/19/cover500/8934916184_1.jpg" alt="Image 1">
@@ -237,23 +224,17 @@
                     560P(5%)적립</div>
             </div>
         </div>
-        <div class="gallery-item">
-            <a href="http://localhost:8010/category/new2">
-                <img src="https://image.aladin.co.kr/product/33516/69/cover500/k112938658_1.jpg" alt="Image 2">
+        <div th:each="book : ${books}">
+            <h6>제목: <span th:text="${book.subject}"></span></h6>
+            <p>내용: <span th:text="${book.content}"></span></p>
+            <p>가격: <span th:text="${book.price}"></span></p>
+            <p>출판사: <span th:text="${book.publisher}"></span></p>
+            <p>할인율: <span th:text="${book.discount}"></span></p>
+            <p>책 소개: <span th:text="${book.bookIntroduce}"></span></p>
+            <a href="http://localhost:8010/category/foreign1">
+                <!-- 이미지 파일 추가 -->
+                <img th:src="'/path/to/your/images/' + ${book.bookThumbnailImg}" alt="Book Thumbnail">
             </a>
-            <div class="gallery-text">
-                <div>책제목 각인된 지식</div>
-                <div>글쓴이</div>
-            </div>
-        </div>
-        <div class="gallery-item">
-            <a href="http://localhost:8010/category/new3">
-                <img src="https://image.aladin.co.kr/product/33460/46/cover500/k462938746_1.jpg" alt="Image 3">
-            </a>
-            <div class="gallery-text">
-                <div>책제목 나무: 삶과 죽음의 이야기</div>
-                <div>글쓴이</div>
-            </div>
         </div>
     </div>
 </div>
@@ -264,6 +245,7 @@
     <h2>무료도서 카테고리</h2>
     <hr> <!-- 수평선 추가 -->
     <div class="image-gallery">
+        <a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
         <div class="gallery-item">
             <a href="http://localhost:8010/category/free1">
                 <img src="https://image.aladin.co.kr/product/33522/77/cover500/k062939372_1.jpg" alt="Image 1">
@@ -278,23 +260,17 @@
                     560P(5%)적립</div>
             </div>
         </div>
-        <div class="gallery-item">
-            <a href="http://localhost:8010/category/free2">
-                <img src="https://image.aladin.co.kr/product/33518/77/cover500/k502938654_1.jpg" alt="Image 2">
+        <div th:each="book : ${books}">
+            <h6>제목: <span th:text="${book.subject}"></span></h6>
+            <p>내용: <span th:text="${book.content}"></span></p>
+            <p>가격: <span th:text="${book.price}"></span></p>
+            <p>출판사: <span th:text="${book.publisher}"></span></p>
+            <p>할인율: <span th:text="${book.discount}"></span></p>
+            <p>책 소개: <span th:text="${book.bookIntroduce}"></span></p>
+            <a href="http://localhost:8010/category/foreign1">
+                <!-- 이미지 파일 추가 -->
+                <img th:src="'/path/to/your/images/' + ${book.bookThumbnailImg}" alt="Book Thumbnail">
             </a>
-            <div class="gallery-text">
-                <div>책제목 불복종의 정치학</div>
-                <div>글쓴이</div>
-            </div>
-        </div>
-        <div class="gallery-item">
-            <a href="http://localhost:8010/category/free3">
-                <img src="https://image.aladin.co.kr/product/33518/36/cover500/k942938653_1.jpg" alt="Image 3">
-            </a>
-            <div class="gallery-text">
-                <div>책제목 대여금고</div>
-                <div>글쓴이</div>
-            </div>
         </div>
     </div>
 </div>
