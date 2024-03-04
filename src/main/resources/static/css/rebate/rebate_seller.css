@@ -1,0 +1,11 @@
+.container {
+     display: flex;
+     justify-content: center;
+ }
+.main-container {
+    max-width: 1200px;
+}
+.main-container > .head-box {
+    display: flex;
+    justify-content: center;
+}

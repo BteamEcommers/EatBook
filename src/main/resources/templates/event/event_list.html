@@ -1,5 +1,75 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
-    이벤트 페이지 출력
+    <div class="event-section">
+        <nav th:replace="~{/event/event_layout :: eventSide}"></nav>
+        <div class="container p-3">
+            <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold">이벤트 목록</span>
+            </a>
+            <div>
+                <div class=" d-flex justify-content-end">
+                    <a th:block sec:authorize="hasRole('ADMIN')" th:href="@{/event/create}"
+                       class="btn btn-primary btn-sm">작성</a>
+                </div>
+                <div class="album py-5 bg-body-tertiary">
+                    <div class="container">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                            <div class="col" th:each="event : ${eventList}">
+                                <div class="card shadow-sm">
+                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                                         xmlns="http://www.w3.org/2000/svg" role="img"
+                                         aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                                         focusable="false"><title>이벤트</title>
+                                        <rect width="100%" height="100%" fill="#55595c"/>
+                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                                    </svg>
+                                    <div class="card-body">
+                                        <p class="card-text" th:text="${event.title}"></p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group" sec:authorize="hasRole('ADMIN')">
+                                                <a th:href="@{|/event/modify/${event.id}|}" type="button"
+                                                   class="btn btn-sm btn-outline-secondary">수정</a>
+                                                <a th:href="@{|/event/delete/${event.id}|}" type="button"
+                                                   class="btn btn-sm btn-outline-secondary">삭제</a>
+                                            </div>
+                                            <a th:href="@{|/event/detail/${event.id}|}" class="btn btn-sm btn-primary">이벤트 보기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 페이징 구현 -->
+                <div aria-label="Page navigation example" style="text-align: center;">
+                    <ul class="pagination" style="display: inline-flex; list-style: none;">
+                        <li class="page-item" th:if="${currentPage > 0}">
+                            <a class="page-link" th:href="@{/event/list(page=0)}" aria-label="First">
+                                <span aria-hidden="true">&laquo;&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:if="${currentPage > 0}">
+                            <a class="page-link" th:href="@{/event/list(page=${currentPage - 1})}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:each="page, iterStat : ${#numbers.sequence(currentPage - 2, currentPage + 2)}" th:if="${page >= 0 and page < totalPages}">
+                            <a class="page-link" th:href="@{/event/list(page=${page})}" th:text="${page + 1}" th:style="${currentPage == page ? 'background-color: #72AEC8; color: #fff;' : ''}"></a>
+                        </li>
+                        <li class="page-item" th:if="${currentPage < totalPages - 1}">
+                            <a class="page-link" th:href="@{/event/list(page=${currentPage + 1})}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:if="${currentPage < totalPages - 1}">
+                            <a class="page-link" th:href="@{/event/list(page=${totalPages - 1})}" aria-label="Last">
+                                <span aria-hidden="true">&raquo;&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </html>

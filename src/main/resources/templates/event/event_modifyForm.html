@@ -1,0 +1,25 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
+    <div class="event-section">
+        <div class="left-side">
+            <nav th:replace="~{/event/event_layout :: eventSide}"></nav>
+        </div>
+        <div class="container p-3">
+            <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold">EVENT 수정</span>
+            </a>
+            <form th:action="@{/event/modify/{id}(id=${event.id})}" method="post">
+                <div class="mb-3">
+                    <label for="title" class="form-label">제목</label>
+                    <input type="text" th:field="${event.title}" name="title" id="title" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">내용</label>
+                    <textarea  th:field="${event.content}" name="content" id="content" class="form-control" rows="10"></textarea>
+                </div>
+                <input type="submit" value="저장하기" class="btn btn-primary my-2">
+            </form>
+        </div>
+    </div>
+</div>
+</html>

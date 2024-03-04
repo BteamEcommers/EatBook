@@ -74,7 +74,7 @@ public class ApplyController {
         //send email
         this.emailService.send(apply.getApplicant().getEmail(),"[EatBook] 판매자 신청이 승인되었습니다.", "EatBook 판매자 신청이 승인 되었습니다. \n 이제 ebook 등록을 할 수 있습니다.");
         //member.isSeller = true
-        this.memberService.approveSeller(apply.getApplicant());
+        this.memberService.approveSeller(apply.getApplicant(), apply);
 
         return "redirect:/apply/list";
     }
