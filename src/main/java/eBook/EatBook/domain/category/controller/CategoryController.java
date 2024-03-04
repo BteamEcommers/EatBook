@@ -2,8 +2,10 @@ package eBook.EatBook.domain.category.controller;
 
 
 import eBook.EatBook.domain.book.entity.Book;
+import eBook.EatBook.domain.book.repository.BookRepository;
 import eBook.EatBook.domain.book.service.BookService;
 import eBook.EatBook.domain.category.entity.Category;
+import eBook.EatBook.domain.category.repository.CategoryRepository;
 import eBook.EatBook.domain.category.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,10 +22,17 @@ public class CategoryController {
 
 
     private final CategoryService categoryService;
+    private final CategoryRepository categoryRepository;
+    private final BookService bookService;
+    private final BookRepository bookRepository;
 
     @GetMapping("/list")
-    public String handleBooksRequest() {
-        // 책 카테고리 선택 페이지로 이동
+    public String handleCategoryListRequest(Model model) {
+        List<Category> categories = categoryRepository.findAll();
+        model.addAttribute("categories", categories);
+        // 도서 목록 조회 (예시)
+        List<Book> books = bookRepository.findAll(); // 또는 다른 방식으로 도서 목록을 조회
+        model.addAttribute("books", books); // 도서 목록을 모델에 추가
         return "book/books";
     }
     @GetMapping("/foreign1")

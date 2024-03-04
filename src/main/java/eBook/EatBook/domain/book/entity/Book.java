@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Getter
@@ -49,6 +50,10 @@ public class Book extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    private String country;
+    @Transient
+    private MultipartFile image;
 
+    @Column
+    private String name;
 }
+
