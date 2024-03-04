@@ -96,10 +96,14 @@
 <div class="search-popup">
     <div class="search-popup-container">
 
-        <form role="search" method="get" class="search-form" action="">
+        <form role="search" method="get" class="search-form" onsubmit="searchBooks(); return false;">
             <input type="search" id="search-form" class="search-field" placeholder="검색어를 입력하세요" value="" name="s" />
             <button type="submit" class="search-submit"><svg class="search"><use xlink:href="#search"></use></svg></button>
         </form>
+
+        <div id="search-results">
+            <!-- 검색 결과를 여기에 출력할 예정 -->
+        </div>
 
         <h5 class="cat-list-title">카테고리 찾아보기</h5>
 
@@ -234,7 +238,7 @@
                                         </a>
                                     </li>
                                     <li class="pe-3">
-                                        <a href="#">
+                                        <a th:href="@{/member/profile}">
                                             <svg class="user">
                                                 <use xlink:href="#user"></use>
                                             </svg>
@@ -917,6 +921,32 @@
         </div>
     </div>
 </div>
+<script>
+    function searchBooks() {
+        // 검색어 입력란에서 검색어 가져오기
+        var query = document.getElementById("search-form").value;
+
+        // 알라딘 API 호출
+        var apiUrl = "/search-books?s=" + encodeURIComponent(query);
+
+        // AJAX를 사용하여 API 호출
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // 결과를 받아서 출력
+                displayResults(xhr.responseText);
+            }
+        };
+        xhr.open("GET", apiUrl, true);
+        xhr.send();
+    }
+
+    function displayResults(results) {
+        // 결과를 처리하여 화면에 출력
+        var searchResultsDiv = document.getElementById("search-results");
+        searchResultsDiv.innerHTML = results;
+    }
+</script>
 <script>
     function redirectToBestCategory() {
         // 이미지 클릭 시 원하는 카테고리 페이지로 이동

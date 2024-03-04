@@ -23,6 +23,57 @@
                 </div>
             </div>
             <a th:href="@{/event/list}" class="btn btn-sm btn-primary">돌아가기</a>
+            <!-- Button trigger modal -->
+            <button sec:authorize="isAnonymous()" type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#logincheckModal">
+                <a th:href="@{|/cartitem/add/${event.id}|}"></a>장바구니 담기
+            </button>
+            <a sec:authorize="isAuthenticated()" th:href="@{|/cartitem/add/${event.id}|}" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCartitem">장바구니 담기</a>
+
+
+            <!-- Modal 1 -->
+            <div class="modal fade" id="logincheckModal" tabindex="-1" aria-labelledby="#logincheckModal" aria-hidden="true">
+                <div class="modal-dialog " style="margin-top: 200px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="logincheckModal">로그인이 필요한 서비스 입니다</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            로그인 하시겠습니까
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="location.href='/member/login'">네</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal 2-->
+            <div class="modal fade" id="addCartitem" tabindex="-1" aria-labelledby="addCartitem" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">상품이 카트에 담겼습니다.</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            바로 확인하시겠습니까?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="location.href='/cartitem/list'">네</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니요</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-button d-flex">
+                <a th:href="@{|/wish/add/${event.id}|}" class="nav-link">
+                    <i class="bx bx-heart icon"></i>
+                    <span class="link">찜 하기</span>
+                </a>
+            </div>
+
         </div>
     </div>
 </div>

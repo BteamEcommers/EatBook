@@ -1,5 +1,6 @@
 package eBook.EatBook.domain.member.controller;
 
+import eBook.EatBook.domain.event.Entity.Event;
 import eBook.EatBook.domain.member.DTO.ConfirmCodeForm;
 import eBook.EatBook.domain.member.DTO.FindPasswordForm;
 import eBook.EatBook.domain.member.DTO.FindUsernameForm;
@@ -9,9 +10,11 @@ import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.global.email.entity.Email1;
 import eBook.EatBook.global.email.service.EmailService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 
 @Controller
@@ -92,10 +96,24 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String login() {
-
-
+    public String login(HttpServletRequest request, Model model) {
+        // 현재 페이지의 URL을 세션에 저장
+        String referrer = request.getHeader("Referer");
+        request.getSession().setAttribute("referrer", referrer);
+        System.out.println("Referrer URL: " + referrer); // 디버깅용 로그
         return "/member/loginForm";
+    }
+
+    @PostMapping("/login")
+    public String login(HttpServletRequest request) {
+        // 로그인 성공 후 세션에서 이전 페이지의 URL을 읽어와 리다이렉트
+        String referrer = (String) request.getSession().getAttribute("referrer");
+        System.out.println("Redirecting to: " + referrer); // 디버깅용 로그
+        if (referrer != null && !referrer.isEmpty()) {
+            request.getSession().removeAttribute("referrer"); // 리다이렉트 후 세션에서 제거
+            return "redirect:" + referrer;
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/logout")
@@ -223,6 +241,12 @@ public class MemberController {
         return randomCode.toString();
     }
 
-
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/profile")
+    public String profileMember(Model model, Principal principal) {
+        Member member = this.memberService.findByUsername(principal.getName());
+        model.addAttribute("member", member);
+        return "/member/member_Profile";
+    }
 
 }

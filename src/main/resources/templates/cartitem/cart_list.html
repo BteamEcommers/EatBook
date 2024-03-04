@@ -1,16 +1,38 @@
 <html layout:decorate="~{layout}">
-<div th:fragment="content">
-    <table>
-        <thead>
-        <tr>
-            <td>상품명</td>
-            <td>가격</td>
-            <td>보관/삭제</td>
-        </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
+<div layout:fragment="content">
+    <div class="event-section">
+        <nav th:replace="~{/event/event_layout :: eventSide}"></nav>
+        <div class="container p-3">
+            <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold">장바구니</span>
+            </a>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                        </label>
+                    </th>
+                    <th scope="col">상품명</th>
+                    <th scope="col">가격</th>
+                    <th scope="col">삭제</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="event : ${eventList}">
+                    <th scope="col">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                        </label>
+                    </th>
+                    <td><a th:href="@{|/event/detail/${event.id}|}" th:text="${event.title}"></a></td>
+                    <td th:text="${event.content}"></td>
+                    <td><a th:href="@{|/cartitem/remove/${event.id}|}">삭제</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </html>

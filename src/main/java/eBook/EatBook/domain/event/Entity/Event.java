@@ -1,13 +1,16 @@
 package eBook.EatBook.domain.event.Entity;
 
+import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.member.entity.Member;
+import eBook.EatBook.domain.wish.Entity.Wish;
 import eBook.EatBook.global.baseEntity.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,5 +24,16 @@ public class Event extends BaseEntity {
 
     @ManyToOne
     private Member member;
+
+    @OneToMany(mappedBy = "event")
+    private List<CartItem> cartItems;
+
+    //장바구니 (Cartitem)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartItem> cartList;
+
+    // 찜 (Wish)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Wish> wishList;
 
 }

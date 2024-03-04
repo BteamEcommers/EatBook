@@ -304,19 +304,20 @@
                             </a>
                         </li>
                         <li class="list">
-                            <a href="#" class="nav-link">
+                            <a th:href="@{/member/profile}" class="nav-link">
                                 <i class="bx bxs-user icon"></i>
                                 <span class="link">내 정보</span>
                             </a>
                         </li>
                         <li class="list">
-                            <a href="#" class="nav-link">
+                            <a th:href="@{/cartitem/list}" class="nav-link">
                                 <i class="bx bx-cart icon"></i>
                                 <span class="link">Cart</span>
+                                <span class="badge badge-pill badge-danger" th:text="${cartItemCount}"></span>
                             </a>
                         </li>
                         <li class="list">
-                            <a href="#" class="nav-link">
+                            <a th:href="@{/wish/list}" class="nav-link">
                                 <i class="bx bx-heart icon"></i>
                                 <span class="link">찜 목록</span>
                             </a>
@@ -439,6 +440,26 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
+<script>
+    $(document).ready(function () {
+        // 페이지 로드 후 실행될 스크립트
+        updateCartItemCount();
+
+        // 카트에 담긴 상품 수 업데이트 함수
+        function updateCartItemCount() {
+            $.ajax({
+                url: "/api/cartItemCount",  // 서버에서 카트 아이템 수를 가져오는 엔드포인트
+                type: "GET",
+                success: function (data) {
+                    $("#cartItemCount").text(data.cartItemCount);
+                },
+                error: function () {
+                    console.error("Failed to retrieve cart item count");
+                }
+            });
+        }
+    });
+</script>
 <script src="/js/main/jquery-1.11.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/js/main/bootstrap.bundle.min.js"></script>
