@@ -35,6 +35,9 @@ public class CategoryController {
         model.addAttribute("books", books); // 도서 목록을 모델에 추가
         return "book/books";
     }
+
+    //이 밑으로는 일단 내두시면 될 것 같습니다. 혹시몰라서 남겨두려 합니다.(추후 삭제 예정입니다.)
+
     @GetMapping("/foreign1")
     public String foreign1() {
         // 책 카테고리 선택 페이지로 이동

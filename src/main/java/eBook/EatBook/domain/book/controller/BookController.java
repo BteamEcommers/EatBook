@@ -27,14 +27,6 @@ public class BookController {
 
     private final BookService bookService;
 
-
-    @GetMapping("/list")
-    public String bookList(Model model){
-        List<Book> bookList = this.bookService.getList();
-        model.addAttribute("bookList", bookList);
-        return "book/book_list";
-    }
-
     @GetMapping("/detail/{id}") //책에 대한 상세페이지
     public String bookDetail(Model model, @PathVariable("id") Integer id) {
         Book book = this.bookService.getList(id);
@@ -59,7 +51,7 @@ public class BookController {
             Book book = bookService.createWithImage(bookForm.getSubject(), bookForm.getContent(),
                     bookForm.getBookIntroduce(),
                     bookForm.getAuthor(),
-                    (Category) bookForm.getCategory(),
+                    (Category) bookForm.getCategory(),  //원래 이코드가 아니지만 집에서 push 안해서 이걸로 대체(추후 수정예정)
                     bookForm.getPrice(),
                     bookForm.getDiscount(),
                     bookForm.getPublisher(),file);

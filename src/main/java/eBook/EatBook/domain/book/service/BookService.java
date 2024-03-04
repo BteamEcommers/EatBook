@@ -34,13 +34,13 @@ public class BookService {
                                 String bookIntroduce, String author, Category category,
                                 Integer price, Float discount, String publisher
             , MultipartFile image) throws IOException {
-        String fileName = StringUtils.cleanPath(image.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(image.getOriginalFilename());  //이미지파일 업로드하는 과정
         Book book = Book.builder()
                 .subject(subject)
                 .content(content)
                 .bookIntroduce(bookIntroduce)
                 .author(author)
-                .category((eBook.EatBook.domain.category.entity.Category) category)
+                .category((eBook.EatBook.domain.category.entity.Category) category) //원래 이코드가 아니지만 집에서 push 안해서 이걸로 대체(추후 수정예정)
                 .price(price)
                 .discount(discount)
                 .publisher(publisher)
