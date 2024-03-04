@@ -1,5 +1,6 @@
 package eBook.EatBook.domain.member.service;
 
+import eBook.EatBook.domain.apply.entity.Apply;
 import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
 import eBook.EatBook.domain.member.DTO.MemberModifyForm;
 import eBook.EatBook.domain.member.entity.Member;
@@ -107,9 +108,12 @@ public class MemberService {
     }
 
     //판매자 승인
-    public void approveSeller(Member member){
+    public void approveSeller(Member member, Apply apply){
         Member member1 = member.toBuilder()
                 .isSeller(true)
+                .accountNumber(apply.getAccountNumber())
+                .bankName(apply.getBankName())
+                .accountHolderName(apply.getAccountHolderName())
                 .build();
 
         this.memberRepository.save(member1);
