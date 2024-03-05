@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,8 +22,11 @@ public class RebateController {
     private final MemberService memberService;
 
     @GetMapping("/admin/list")
-    public String adminRebateList(){
-
+    public String adminRebateList(Model model){
+        List<Member> sellerList = this.memberService.findByIsSeller();
+        model.addAttribute("sellerList", sellerList);
+        Rebate rebate = this.rebateService.getRebate();
+        model.addAttribute("rebate",rebate);
         return "/rebate/rebate_admin";
     }
 
