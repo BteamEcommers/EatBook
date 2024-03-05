@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>EatBook</title>
+    <title>EatBook_redirecting</title>
     <!-- SweetAlert2   -->
-<!--    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>-->
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
 <form th:if="${not #maps.isEmpty( params.data )}" id="redirectForm" th:action="${params.redirectUri}" th:method="${params.method}" style="display: none;">
@@ -18,7 +18,11 @@
             const message = [[ ${params.message} ]];
 
             if (message) {
-                alert(message);
+                Swal.fire({
+                  title: "Good job!",
+                  text: "You clicked the button!",
+                  icon: "success"
+                });
             }
 
             const form = document.getElementById('redirectForm');
