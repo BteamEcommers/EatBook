@@ -55,7 +55,11 @@ public class Member extends BaseEntity {
     private String accountHolderName;
 
 
-    // 판매자가 가진 책 리스트
+    // 구매자가 가진 책 리스트
     @OneToMany
     private List<Book> bookList;
+
+    // 판매자가 가진 책 리스트
+    @OneToMany
+    private List<Book> bookSellList;
 }

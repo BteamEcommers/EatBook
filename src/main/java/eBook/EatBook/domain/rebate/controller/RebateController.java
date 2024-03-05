@@ -1,26 +1,52 @@
 package eBook.EatBook.domain.rebate.controller;
 
+import eBook.EatBook.domain.book.entity.Book;
+import eBook.EatBook.domain.member.entity.Member;
+import eBook.EatBook.domain.member.service.MemberService;
+import eBook.EatBook.domain.rebate.entity.Rebate;
 import eBook.EatBook.domain.rebate.service.RebateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/rebate")
 public class RebateController {
     private final RebateService rebateService;
+    private final MemberService memberService;
 
-    @GetMapping("/admin")
+    @GetMapping("/admin/list")
     public String adminRebateList(){
 
-        return "rebate/rebate_admin";
+        return "/rebate/rebate_admin";
     }
 
-    @GetMapping("/seller")
-    public String sellerRebateList(){
+    @GetMapping("/seller/list")
+    public String sellerRebateList(Model model, Principal principal){
+        // 현재 로그인한 판매자 Member
+        Member member = this.memberService.findByUsername(principal.getName());
+        model.addAttribute("bookList", member.getBookList());
+        Rebate rebate = this.rebateService.getRebate();
+        model.addAttribute("rebate",rebate);
+        Integer totalPrice = 0;
+        Integer totalSellCount = 0;
+        double totalRebate;
 
-        return "rebate/rebate_seller";
+        for(Book book : member.getBookList()){
+            totalPrice += book.getPrice()* book.getSellCount();
+            totalSellCount += book.getSellCount();
+        }
+        totalRebate = (totalPrice * 0.97);
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("totalSellCount", totalSellCount);
+        model.addAttribute("totalRebate", totalRebate);
+
+
+        return "/rebate/rebate_seller";
     }
 }

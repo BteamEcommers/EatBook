@@ -19,15 +19,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr >
-                    <th scope="row"></th>
-                    <td></td>
+                <tr th:each="book : ${bookList}">
+                    <th scope="row">[[${book.title}]]</th>
+                    <td th:text="${book.price * book.discount}"> 원</td>
+                    <td>[[${book.sellCount}]] 부</td>
+                    <td>[[${rebate.totalFee}]] %</td>
+                    <td th:text="${book.price * book.discount * rebate.totalFee}"> 원</td>
                 </tr>
                 <tr>
                     <th scope="row">합계</th>
-                    <td>판매 합계 금액</td>
+                    <td>판매 금액 합계</td>
                     <td>판매 부수 합계</td>
-                    <td>수수료</td>
+                    <td>[[${rebate.totalFee}]] %</td>
                     <td>정산 금액 총액</td>
                 </tr>
                 </tbody>
@@ -36,5 +39,4 @@
         </div>
     </div>
 </div>
-
 </html>

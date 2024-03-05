@@ -21,7 +21,7 @@ public class Rebate extends BaseEntity {
     private Integer totalPay;
 
     @Column
-    private float totalFee;
+    private float totalFee; // 수수료
 
     @ManyToOne
     private Member member;
