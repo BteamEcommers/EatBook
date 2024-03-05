@@ -1,19 +1,5 @@
-<!doctype html>
-<html lang="ko">
-<head>
-    <title>EatBook</title>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/orders/ordersPay.css">
-    <script src="/js/orders/ordersPay.js"></script>
-</head>
-<body class="d-flex align-items-center py-4 bg-body-tertiary">
-<main class="form-register w-100 m-auto">
-    <div>
+<html layout:decorate="~{memberLayout}">
+<div layout:fragment="content">
         <a th:href="@{/}">
             <svg width="250" height="60" xmlns="http://www.w3.org/2000/svg" version="1.0"
                  preserveAspectRatio="xMidYMid meet">
@@ -44,7 +30,5 @@
         <h4>주문/결제가 완료되었습니다. 감사합니다.</h4>
         <button type="button" class="btn btn-primary w-100 py-2" onclick="pclose1()">홈페이지</button>
     </div>
-</main>
-</body>
 </html>
 
