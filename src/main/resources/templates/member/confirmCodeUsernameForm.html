@@ -2,15 +2,15 @@
 <form layout:fragment="content" th:action="@{/member/confirmCodeUsername}" th:object="${confirmCodeForm}" method="post">
         <h1 class="h3 mb-3 fw-normal">아이디 찾기</h1>
         <h2 class="h6 mb-3 fw-normal">코드를 입력하고 확인 버튼을 누르면 이메일로 아이디가 전송됩니다.</h2>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-            <div th:each="err : ${#fields.allErrors()}" th:text="${err}"/>
-        </div>
+<!--        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">-->
+<!--            <div th:each="err : ${#fields.allErrors()}" th:text="${err}"/>-->
+<!--        </div>-->
         <div class="form-floating">
             <input type="password" id="confirmCode" name="confirmCode" class="form-control">
             <label for="confirmCode" class="floatingPassword">코드</label>
         </div>
 
-        <button type="submit" class="btn btn-primary w-100 py-2">코드 확인</button>
+        <button type="submit" class="btn btn-primary w-100 py-2" onclick="alertMail()">코드 확인</button>
     </form>
     <br/>
 </html>
