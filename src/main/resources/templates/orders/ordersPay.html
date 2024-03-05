@@ -1,4 +1,7 @@
 <html layout:decorate="~{memberLayout}">
+<head>
+    <script src="/js/orders/ordersPay.js"></script>
+</head>
 <form layout:fragment="content" th:action="@{/member/pay}" method="post">
         <h1 class="h3 mb-3 fw-normal">주문/결제(임시)</h1>
         <!--        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">-->
