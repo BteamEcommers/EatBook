@@ -1,39 +1,94 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content">
-  <div class="event-section">
-    <nav th:replace="~{/event/event_layout :: eventSide}"></nav>
-    <div class="container p-3">
-      <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-        <span class="fs-5 fw-semibold">찜 목록</span>
-      </a>
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th scope="col">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-            </label>
-          </th>
-          <th scope="col">상품명</th>
-          <th scope="col">가격</th>
-          <th scope="col">삭제</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="event : ${eventList}">
-          <th scope="col">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-            </label>
-          </th>
-          <td><a th:href="@{|/event/detail/${event.id}|}" th:text="${event.title}"></a></td>
-          <td th:text="${event.content}"></td>
-          <td><a th:href="@{|/event/delete/${event.id}|}">삭제</a></td>
-          <td><a th:href="@{|/cartitem/add/${event.id}|}">장바구니 담기</a></td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="event-section">
+        <div class="container p-3">
+            <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold">찜 목록</span>
+            </a>
+            <div class="top-wishContainer">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        전체 선택
+                    </label>
+                </div>
+                <div class="btn btn-sm btn-outline-secondary">
+                    삭제
+                </div>
+                <div class="btn btn-sm btn-outline-secondary">
+                    장바구니 담기
+                </div>
+            </div>
+            <div class="middle-wishContainer">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                </label>
+                            </div>
+                        </th>
+                        <th scope="col" style="text-align:center;">상품정보</th>
+                        <th scope="col" style="text-align:center;">가격</th>
+                        <th scope="col" style="text-align:center;">삭제 / 장바구니</th>
+                        <th scope="col" style="text-align:center;"> 삭제 </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- 이벤트 목록(eventList)을 기준으로 반복 -->
+                    <tr th:each="wish : ${wishList}">
+                        <!-- 이벤트 정보 출력 -->
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <div style="width:120px; height:120px;">
+                                    <svg class="bd-placeholder-img card-img-top" width="120px" height="120px"
+                                         xmlns="http://www.w3.org/2000/svg" role="img"
+                                         aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                                         focusable="false">
+                                        <title>이벤트</title>
+                                        <rect width="120px" height="120px" fill="#55595c"/>
+                                        <text x="25%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                                    </svg>
+                                </div>
+                                <div style="margin-left: 50px; justify-content:center;">
+                                    <a th:href="${wish.event.title}" th:text="${event.title}"></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td th:text="$${wish.event.content}"></td>
+                        <td style="align-items:center;">
+                            <!-- 이벤트에 대한 삭제 버튼 -->
+                            <div class="btn btn-sm btn-outline-secondary">
+                                <a th:href="@{|/wish/delete/${wish.id}|}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+                            </div>
+                            <!-- 이벤트를 장바구니에 담는 버튼 -->
+                            <div class="btn btn-sm btn-outline-secondary">
+                                <a th:href="@{/wish/delete/{wishId}(wishId=${wish.id})}">장바구니 담기</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- 위 반복문 내부에 또다른 반복문으로 Wish 목록(wishList)을 기준으로 반복 -->
+                    <tr th:each="wish : ${wishList}">
+                        <td colspan="3"></td> <!-- 이벤트 정보를 출력하는 칼럼 수에 맞게 빈 칼럼 생성 -->
+                        <td>
+                            <!-- Wish에 대한 삭제 버튼 -->
+                            <div class="btn btn-sm btn-outline-secondary">
+                                <a th:href="@{|/wish/delete/${wish.id}|}">삭제</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 </html>

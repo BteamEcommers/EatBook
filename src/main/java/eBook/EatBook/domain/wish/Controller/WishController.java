@@ -7,6 +7,7 @@ import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.domain.wish.Entity.Wish;
 import eBook.EatBook.domain.wish.Service.WishService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,13 @@ public class WishController {
         Member member = this.memberService.findByUsername(principal.getName());
         Event event = this.eventService.getEvent(id);
 
+        // 중복 체크: 해당 이벤트에 대한 Wish가 이미 존재하는지 확인
+        if (wishService.hasWish(member, event)) {
+            // 이미 Wish가 있으면 중복으로 추가하지 않고 이벤트 상세 페이지로 리다이렉트
+            return String.format("redirect:/event/detail/%d", id);
+        }
+
+        // 중복이 아니면 Wish를 추가하고 회원에게 연결
         Wish wish = this.wishService.addWish(member, event);
         this.memberService.addWish(member, wish);
 
@@ -51,10 +59,12 @@ public class WishController {
         return "/wish/wish_list";
     }
 
-    @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
+
+    @GetMapping("/delete/{id}")
+    public String wishDelete(@PathVariable("id") Integer id, Principal principal) {
         Wish wish = this.wishService.getWish(id);
-        model.addAttribute("wish",wish);
-        return "/event/event_detail";
+        this.wishService.delete(wish);
+        return "redirect:/wish/list";
     }
+
 }

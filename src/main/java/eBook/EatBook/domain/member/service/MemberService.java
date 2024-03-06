@@ -2,6 +2,7 @@ package eBook.EatBook.domain.member.service;
 
 import eBook.EatBook.domain.apply.entity.Apply;
 //import eBook.EatBook.domain.cartitem.Entity.CartItem;
+import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
 import eBook.EatBook.domain.member.DTO.MemberModifyForm;
 import eBook.EatBook.domain.member.entity.Member;
@@ -121,15 +122,15 @@ public class MemberService {
     }
 
     // Cartitem(장바구니)
-//    public void addCartItem(Member loginedUser, CartItem cartItem) {
-//        List<CartItem> cartList = loginedUser.getCartList();
-//        cartList.add(cartItem);
-//        Member member = loginedUser.toBuilder()
-//                .cartList(cartList)
-//                .build();
-//
-//        this.memberRepository.save(member);
-//    }
+    public void addCartItem(Member loginedUser, CartItem cartItem) {
+        List<CartItem> cartList = loginedUser.getCartList();
+        cartList.add(cartItem);
+        Member member = loginedUser.toBuilder()
+                .cartList(cartList)
+                .build();
+
+        this.memberRepository.save(member);
+    }
 
     // Wish(찜)
     public void addWish(Member loginedUser, Wish wish) {
