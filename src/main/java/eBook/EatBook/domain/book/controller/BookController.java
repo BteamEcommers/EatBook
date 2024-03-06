@@ -78,7 +78,7 @@ public class BookController {
 //    public String bookListCategory(Model model, @PathVariable("category") String category, @RequestParam(value ="page", defaultValue = "0") int page){
 //        Page<Book> paging =  this.bookService.getListByCategory(category, page);
 //        model.addAttribute("paging", paging);
-//
+//        model.addAttribute("categoryName", category);
 //        return "/book/book_list";
 //    }
 }

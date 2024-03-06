@@ -3,13 +3,17 @@
     <link rel="stylesheet" type="text/css" href="/css/book/book_list.css">
 </head>
 <div layout:fragment="content" class="container">
+    <div>
+        <h1 th:if="${categoryName != null}" th:text="${categoryName}"></h1>
+    </div>
     <div class="category-button-container">
-        <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">베스트셀러</a></span>
+        <span><a th:href="@{/book/bestSeller}" class="btn btn-primary btn-lg">베스트셀러</a></span>
         <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">국내도서</a></span>
         <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">외국도서</a></span>
         <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">신간도서</a></span>
         <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">무료도서</a></span>
     </div>
+
     <div class="main-container">
         <table class="table">
             <thead class="table-dark">
@@ -44,6 +48,10 @@
                                         <li>
                                             <span th:text="${book.price}"></span><span>원</span>
                                         </li>
+                                        <li>
+                                            <span th:text="${book.price}"></span><span>원</span>
+                                        </li>
+
                                     </ul>
                                 </div>
                             </td>
