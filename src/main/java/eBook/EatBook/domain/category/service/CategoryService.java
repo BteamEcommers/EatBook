@@ -15,9 +15,15 @@ import java.util.Optional;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
-
-
     public List<Category> getCategory() {
         return this.categoryRepository.findAll();
+    }
+
+    public void categoryCreate(String categoryName){
+        Category category = Category.builder()
+                .categoryName(categoryName)
+                .build();
+        categoryRepository.save(category);
+
     }
 }

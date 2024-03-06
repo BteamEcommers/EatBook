@@ -22,16 +22,20 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/category")
 public class CategoryController {
-
     private final CategoryService categoryService;
-    private final CategoryRepository categoryRepository;
-    private final BookService bookService;
-    private final BookRepository bookRepository;
-    private final MemberService memberService;
 
-
-
+    @GetMapping("/create")
+    public String createCategory(Model model){
+        model.addAttribute("category", new Category());
+        return "book/category_create_form";
     }
+    @PostMapping("/create")
+    public String createCategory(@RequestParam(value = "categoryName")String categoryName){
+
+        this.categoryService.categoryCreate(categoryName);
+        return "redirect:/book/list";
+    }
+}
 
 
 

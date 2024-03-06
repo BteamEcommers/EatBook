@@ -2,7 +2,6 @@ package eBook.EatBook.domain.book.controller;
 
 
 import eBook.EatBook.domain.book.form.BookForm;
-import eBook.EatBook.domain.book.form.CategoryForm;
 import eBook.EatBook.domain.book.repository.BookRepository;
 import eBook.EatBook.domain.book.service.BookService;
 import eBook.EatBook.domain.book.entity.Book;
@@ -42,9 +41,9 @@ public class BookController {
 
     @GetMapping("/list")
     public String handleCategoryListRequest( Model model) {
-        List<Category> category = this.categoryService.getCategory();
+        List<Category> categories = this.categoryService.getCategory();
         List<Book> books = this.bookService.getList(id);
-        model.addAttribute("category", category);
+        model.addAttribute("categories", categories);
         model.addAttribute("books", books);
         return "book/books";
     }
@@ -89,37 +88,8 @@ public class BookController {
         return "redirect:/book/list";
 
     }
-    @PostMapping("/category")
-    public String reportComment(@PathVariable("id") Integer id, Principal principal,
-                                @Valid CategoryForm categoryForm, BindingResult bindingResult)  {
-        Book book = this.bookService.getBook(id);
 
-        if (bindingResult.hasErrors()){
-            return "article_detail";
-        }
-
-        Member member = this.memberService.getMember(principal.getName());
-        String categoryType = determineReportType(categoryForm.getCategory());
-
-        this.bookService.report(book,categoryForm.getCategory(),member,categoryType);
-        return "redirect:/category/list";
-    }
-
-    private String determineReportType(String selectedValue) {
-
-        if ("베스트셀러".equals(selectedValue)) {
-            return "베스트셀러";
-        } else if ("외국도서".equals(selectedValue)) {
-            return "외국도서";
-        } else if ("국내도서".equals(selectedValue)) {
-            return "국내도서";
-        } else if ("무료도서".equals(selectedValue)) {
-            return "무료도서";
-        } else if ("신간도서".equals(selectedValue)) {
-            return "국내도서";
-        }
-        return "기타";
-    }
 }
+
 
 

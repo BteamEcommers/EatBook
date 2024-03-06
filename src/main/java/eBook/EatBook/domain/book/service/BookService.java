@@ -63,19 +63,6 @@ public class BookService {
         return bookRepository.findByCategory(category);
     }
 
-    public void report(Book book, String category, Member member, String categoryType) {
-
-        eBook.EatBook.domain.category.entity.Category category1 = eBook.EatBook.domain.category.entity.Category.builder()
-                .author(member)
-                .book((List<Book>) book)
-                .categoryName(category)
-                .categoryType(categoryType)
-                .build();
-
-        this.categoryRepository.save(category1);
-    }
-
-
     public List<Book> getList(SingularAttribute<AbstractPersistable, Serializable> id) {
         return null;
     }

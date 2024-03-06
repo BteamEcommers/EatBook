@@ -21,26 +21,7 @@ import java.util.List;
 @SuperBuilder(toBuilder = true)
 public class Category extends BaseEntity {
 
-    @OneToMany(mappedBy = "category")
-    private List<Book> book;
-
     @Column
     private String categoryName;
 
-    @ManyToOne
-    private Member author;
-
-    @Column
-    private String content;
-
-    @Column
-    public String getName;
-
-    private String radioButtonValue;
-
-    private String categoryType;
-
-    public String getName() {
-        return null;
-    }
 }

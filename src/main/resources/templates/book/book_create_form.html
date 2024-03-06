@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,112 +9,67 @@
     </style>
 </head>
 <body>
-<form  th:action="@{/book/create}" th:object="${bookForm}" method="post" enctype="multipart/form-data">
-    <!-- 게시글 모달 버튼 -->
-    <button class="btn btn-sm btn-outline-secondary" data-bs-target="#reportArticleModal"
-            data-bs-toggle="modal" sec:authorize="isAuthenticated()"
-            type="button">카테고리
-    </button>
+<form th:action="@{/book/create}" th:object="${bookForm}" method="post" enctype="multipart/form-data">
+
+    <!-- 카테고리 선택 드롭다운 -->
+    <div class="mb-3">
+        <label for="category" class="form-label">카테고리</label>
+        <select th:field="*{category}" class="form-select">
+            <option th:each="category : ${categories}" th:value="${category.categoryName}" th:text="${category.categoryName}">카테고리를 선택하세요</option>
+        </select>
+    </div>
+    <!-- 제목 입력 필드 -->
     <div class="mb-3">
         <label for="subject" class="form-label">제목</label>
         <input type="text" th:field="*{subject}" class="form-control">
+        <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="text-danger"></span>
     </div>
+    <!-- 내용 입력 필드 -->
     <div class="mb-3">
         <label for="content" class="form-label">내용</label>
         <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
+        <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-danger"></span>
     </div>
+    <!-- 가격 입력 필드 -->
     <div class="mb-3">
         <label for="price" class="form-label">가격</label>
         <input type="number" th:field="*{price}" class="form-control">
+        <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></span>
     </div>
+    <!-- 출판사 입력 필드 -->
     <div class="mb-3">
         <label for="publisher" class="form-label">출판사</label>
         <input type="text" th:field="*{publisher}" class="form-control">
+        <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}" class="text-danger"></span>
     </div>
+    <!-- 책 소개 입력 필드 -->
     <div class="mb-3">
         <label for="bookIntroduce" class="form-label">책 소개</label>
         <textarea th:field="*{bookIntroduce}" class="form-control" rows="5"></textarea>
+        <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('bookIntroduce')}" th:errors="*{bookIntroduce}" class="text-danger"></span>
     </div>
+    <!-- 할인율 입력 필드 -->
     <div class="mb-3">
         <label for="discount" class="form-label">할인율</label>
         <input type="number" th:field="*{discount}" class="form-control">
+        <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}" class="text-danger"></span>
     </div>
-
+    <!-- 이미지 업로드 입력 필드 -->
     <div class="mb-3">
         <label for="image" class="form-label">이미지 업로드</label>
         <input type="file" id="image" name="file" accept="image/*">
         <!-- 이미지 미리보기 -->
         <img id="preview" src="#" alt="미리보기" style="max-width: 200px; max-height: 200px; display: none;">
     </div>
+    <!-- 도서 등록 버튼 -->
     <input type="submit" value="저장하기"  class="btn btn-primary my-2">
 </form>
-<!-- 게시글 모달 부트스트랩 시작 -->
-<div aria-hidden="true" aria-labelledby="reportModalArticle" class="modal fade" id="reportArticleModal"
-     tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="reportModalArticle">카테고리 선택</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form class="was-validated" method="post" th:action="@{/book/category}">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="col-form-label" for="validationTextareaArticle">내용</label>
-                        <textarea class="form-control" id="validationTextareaArticle" name="reportContent"
-                                  placeholder="내용을 입력해주세요." required></textarea>
-                    </div>
 
-                    <!-- 라디오 버튼에 이벤트 리스너 추가 -->
-                    <div class="form-check">
-                        <input class="form-check-input" id="flexRadioDefault1" name="reportType"
-                               onchange="handleRadioSelection()"
-                               type="radio" value="베스트셀러">
-                        <label class="form-check-label" for="flexRadioDefault1">베스트셀러</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" id="flexRadioDefault2" name="reportType"
-                               onchange="handleRadioSelection()"
-                               type="radio" value="외국도서">
-                        <label class="form-check-label" for="flexRadioDefault2">외국도서</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" id="flexRadioDefault3" name="reportType"
-                               onchange="handleRadioSelection()"
-                               type="radio" value="국내도서">
-                        <label class="form-check-label" for="flexRadioDefault3">국내도서</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" id="flexRadioDefault4" name="reportType"
-                               onchange="handleRadioSelection()"
-                               type="radio" value="무료도서">
-                        <label class="form-check-label" for="flexRadioDefault4">무료도서</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" id="flexRadioDefault5" name="reportType"
-                               onchange="handleRadioSelection()"
-                               type="radio" value="신간도서">
-                        <label class="form-check-label" for="flexRadioDefault5">신간도서</label>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
-                        <button class="btn btn-primary" onclick="handleRadioSelection()" type="submit">카테고리 저장
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<script>
-
-</script>
 </body>
 </html>
