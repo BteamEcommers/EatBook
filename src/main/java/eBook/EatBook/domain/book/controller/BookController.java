@@ -50,7 +50,7 @@ public class BookController {
 
     @GetMapping("/detail/{id}") //책에 대한 상세페이지
     public String bookDetail(Model model, @PathVariable("id") Integer id) {
-        Book book = (Book) this.bookService.getList(id);
+        Book book = (Book) this.bookService.getBook(id);
         model.addAttribute("book", book);
         return "book/book_detail";
     }
