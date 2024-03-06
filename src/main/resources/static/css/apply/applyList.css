@@ -12,3 +12,7 @@
 .sellerIntroduce {
     max-width: 600px;
 }
+
+.main-container .table{
+    width: 1200px;
+}
