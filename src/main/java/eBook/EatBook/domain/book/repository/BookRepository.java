@@ -1,10 +1,11 @@
 package eBook.EatBook.domain.book.repository;
 
 import eBook.EatBook.domain.book.entity.Book;
-import eBook.EatBook.domain.member.entity.Member;
+import jdk.jfr.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book,Integer> {
 
@@ -16,5 +17,7 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
 
     List<Book> findBySubjectLike(String subject);
 
-//    List<Book> findBySeller(Member );
+    List<Book> findByCategory(Category category);
+
+    Optional<Book> findById(Long id);
 }
