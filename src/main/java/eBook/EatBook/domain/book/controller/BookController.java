@@ -38,31 +38,27 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 public class BookController {
 
     private final BookService bookService;
-    private final BookRepository bookRepository;
-    private final CategoryRepository categoryRepository;
     private final CategoryService categoryService;
     private final MemberService memberService;
 
-    @GetMapping("/list")
-    public String handleCategoryListRequest( Model model) {
-        List<Category> categories = this.categoryService.getCategory();
-        List<Book> books = this.bookService.getList(id);
-        model.addAttribute("categories", categories);
-        model.addAttribute("books", books);
-        return "book/books";
-    }
-    private final CategoryService categoryService;
-    private final MemberService memberService;
+//    @GetMapping("/list")
+//    public String handleCategoryListRequest( Model model) {
+//        List<Category> categories = this.categoryService.getCategory();
+//        List<Book> books = this.bookService.getList(id);
+//        model.addAttribute("categories", categories);
+//        model.addAttribute("books", books);
+//        return "book/books";
+//    }
 
     @GetMapping("/detail/{id}") //책에 대한 상세페이지
     public String bookDetail(Model model, @PathVariable("id") Integer id) {
-        Book book = (Book) this.bookService.getList(id);
+        Book book = this.bookService.getBookById(id);
         model.addAttribute("book", book);
         return "book/book_detail";
     }
     @GetMapping("/create")
     public String bookCreate(Model model) {
-        List<Category> categories = this.categoryService.getCategory();
+        List<Category> categories = this.categoryService.getAllCategory();
         model.addAttribute("bookForm", new BookForm());
         model.addAttribute("categories", categories);
         return "book/book_create_form";
@@ -106,34 +102,37 @@ public class BookController {
             model.addAttribute("member", member);
         }
         Page<Book> paging = this.bookService.getList(page);
+        List<Category> categoryList = this.categoryService.getAllCategory();
         model.addAttribute("paging", paging);
-
+        model.addAttribute("categoryList", categoryList);
 
         return "/book/book_list";
     }
-//    @GetMapping("/list/{categoryName}")
-//    public String bookListCategory(Model model, @PathVariable("categoryName") eBook.EatBook.domain.category.entity.Category categoryName, @RequestParam(value ="page", defaultValue = "0") int page, Principal principal){
-//        if (principal != null) {
-//            Member member = this.memberService.getMember(principal.getName());
-//            model.addAttribute("member", member);
-//        }
+    @GetMapping("/list/{categoryName}")
+    public String bookListCategory(Model model, @PathVariable("categoryName") String categoryName, @RequestParam(value ="page", defaultValue = "0") int page, Principal principal){
+        if (principal != null) {
+            Member member = this.memberService.getMember(principal.getName());
+            model.addAttribute("member", member);
+        }
 
-//        eBook.EatBook.domain.category.entity.Category category = this.categoryService.getCategoryByCategoryName(categoryName);
-
-//        Page<Book> paging =  this.bookService.getListByCategory(category, page);
-//        model.addAttribute("paging", paging);
-//        model.addAttribute("categoryName", category);
-//        return "/book/book_list";
-//    }
-    @GetMapping("/books/{category}")
-    public String getBooksByCategory(@PathVariable("category") String categoryName, Model model) {
-        List<Book> books = bookService.findBooksByCategory(categoryName);
-
-
-        model.addAttribute("categoryName", categoryName);
-        model.addAttribute("books", books);
-        return "books/category_books";
+        Category category = this.categoryService.getCategoryByCategoryName(categoryName);
+        List<Category> categoryList = this.categoryService.getAllCategory();
+        Page<Book> paging =  this.bookService.getListByCategory(category, page);
+        model.addAttribute("paging", paging);
+        model.addAttribute("categoryEntity", category);
+        model.addAttribute("categoryList", categoryList);
+        return "/book/book_list";
     }
+//    @GetMapping("/books/{category}")
+//    public String getBooksByCategory(@PathVariable("category") String categoryName, Model model) {
+//        Category category =  this.categoryService.getCategoryByCategoryName(categoryName);
+//        List<Book> books = bookService.findBooksByCategory(category);
+//
+//
+//        model.addAttribute("categoryName", categoryName);
+//        model.addAttribute("books", books);
+//        return "books/category_books";
+//    }
 }
 
 

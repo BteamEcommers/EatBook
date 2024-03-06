@@ -1,6 +1,7 @@
 package eBook.EatBook.domain.book.repository;
 
 import eBook.EatBook.domain.book.entity.Book;
+import eBook.EatBook.domain.category.entity.Category;
 import eBook.EatBook.domain.member.entity.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,10 +20,10 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
 
     List<Book> findBySubjectLike(String subject);
 
-//    List<Book> findBySeller(Member );
+    List<Book> findBySeller(Member seller);
 
     Page<Book> findAll(Pageable pageable);
-//    Page<Book> findAllByCategory(Pageable pageable);
+    Page<Book> findAllByCategory(Category category , Pageable pageable);
     List<Book> findByCategory(Category category);
 
     Optional<Book> findById(Long id);

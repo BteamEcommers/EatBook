@@ -123,13 +123,6 @@ public class MemberService {
 
         this.memberRepository.save(member1);
     }
-    public Member getMember(Integer id) {
-        Optional<Member> member = this.memberRepository.findById(id);
-        if (member.isEmpty()) {
-            return null;
-        }
-        return member.get();
-    }
 
     public Member getMember(Integer id) {
         Optional<Member> member = this.memberRepository.findById(id);

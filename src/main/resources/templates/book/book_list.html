@@ -4,15 +4,12 @@
 </head>
 <div layout:fragment="content" class="container">
     <div class="ebook-title">
-        <h1 th:if="${categoryName != null}" th:text="${categoryName}"></h1>
-        <h1 th:if="${categoryName == null}">EBook</h1>
+        <h1 th:if="${categoryEntity != null}" th:text="${categoryEntity.categoryName}"></h1>
+        <h1 th:if="${categoryEntity == null}">EBook</h1>
     </div>
-    <div class="category-button-container">
-        <span><a th:href="@{/book/bestSeller}" class="btn btn-primary btn-lg">베스트셀러</a></span>
-        <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">국내도서</a></span>
-        <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">외국도서</a></span>
-        <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">신간도서</a></span>
-        <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">무료도서</a></span>
+    <div  class="category-button-container" >
+        <span><a th:href="@{/book/list}" class="btn btn-primary btn-lg">EBook</a></span>
+        <span th:if="${categoryList != null}" th:each="category : ${categoryList}"><a th:href="@{|/book/list/${category.categoryName}|}" class="btn btn-primary btn-lg">[[${category.categoryName}]]</a></span>
     </div>
 
     <div class="main-container">
@@ -79,15 +76,15 @@
             </tbody>
         </table>
     </div>
-    <div th:if="principal != null ">
+    <div th:if="principal != null" class="create-button-container">
         <div>
             <a th:if="${member != null and member.isSeller == true}"
                th:href="@{/book/create}" class="btn btn-success">EBook 등록</a>
             <span sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/book/create}" class="btn btn-success">EBook 등록</a>
                 <a th:href="@{/category/create}" class="btn btn-success">카테고리 생성</a>
             </span>
         </div>
-
     </div>
     <div>
     </div>
