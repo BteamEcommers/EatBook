@@ -31,9 +31,9 @@ public class BookService {
         Pageable pageable = PageRequest.of(page, 10);
         return this.bookRepository.findAll(pageable);
     }
-//    public Page<Book> getListByCategory(String category, int page) {
+//    public Page<Book> getListByCategory(Category category, int page) {
 //        Pageable pageable = PageRequest.of(page, 10);
-//        return this.bookRepository.findAllByCategoryName(category, pageable);
+//        return this.bookRepository.findAllByCategory(category, pageable);
 //    }
 
     public Book getList(Integer id) {

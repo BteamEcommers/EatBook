@@ -4,6 +4,8 @@ package eBook.EatBook.domain.book.controller;
 import eBook.EatBook.domain.book.form.BookForm;
 import eBook.EatBook.domain.book.service.BookService;
 import eBook.EatBook.domain.book.entity.Book;
+import eBook.EatBook.domain.category.service.CategoryService;
+import eBook.EatBook.domain.member.entity.Member;
 import jakarta.validation.Valid;
 import jdk.jfr.Category;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
+    private final CategoryService categoryService;
 
     @GetMapping("/detail/{id}") //책에 대한 상세페이지
     public String bookDetail(Model model, @PathVariable("id") Integer id) {
@@ -71,11 +74,12 @@ public class BookController {
         model.addAttribute("paging", paging);
 
 
-
         return "/book/book_list";
     }
-//    @GetMapping("/list/{category}")
-//    public String bookListCategory(Model model, @PathVariable("category") String category, @RequestParam(value ="page", defaultValue = "0") int page){
+//    @GetMapping("/list/{categoryName}")
+//    public String bookListCategory(Model model, @PathVariable("categoryName") eBook.EatBook.domain.category.entity.Category categoryName, @RequestParam(value ="page", defaultValue = "0") int page){
+//        eBook.EatBook.domain.category.entity.Category category = this.categoryService.getCategoryByCategoryName(categoryName);
+
 //        Page<Book> paging =  this.bookService.getListByCategory(category, page);
 //        model.addAttribute("paging", paging);
 //        model.addAttribute("categoryName", category);
