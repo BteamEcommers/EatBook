@@ -25,8 +25,6 @@ public class Book extends BaseEntity {
     @ManyToOne
     private Category category;
     @Column
-    private String title;
-    @Column
     private String author;
     @Column
     private String publisher;

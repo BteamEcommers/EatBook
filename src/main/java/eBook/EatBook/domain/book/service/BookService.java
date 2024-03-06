@@ -6,6 +6,9 @@ import eBook.EatBook.domain.book.repository.BookRepository;
 import eBook.EatBook.domain.member.entity.Member;
 import jdk.jfr.Category;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +26,16 @@ public class BookService {
         return this.bookRepository.findAll();
     }
 
+
+    public Page<Book> getList(int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return this.bookRepository.findAll(pageable);
+    }
+//    public Page<Book> getListByCategory(String category, int page) {
+//        Pageable pageable = PageRequest.of(page, 10);
+//        return this.bookRepository.findAllByCategoryName(category, pageable);
+//    }
+
     public Book getList(Integer id) {
         Optional<Book> book = this.bookRepository.findById(id);
         if (book.isEmpty()) {
@@ -30,6 +43,7 @@ public class BookService {
         }
         return book.get();
     }
+
 
     public Book createWithImage(String subject, String content,
                                 String bookIntroduce, String author, Category category,
@@ -54,6 +68,8 @@ public class BookService {
 
         return book;
     }
+
+
 
 //    public List<Book> sellerBookList(Member seller){
 //        List<Book> sellerBookList = this.bookRepository.findBySeller(seller);

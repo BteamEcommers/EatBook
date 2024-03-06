@@ -1,18 +1,72 @@
-<table class="table">
-    <thead class="table-dark">
-    <tr>
-        <th>번호</th>
-        <th>제목</th>
-        <th>이미지</th> <!-- 새로운 열 추가 -->
-        <th>작성일시</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="book, loop : ${bookList}">
-        <td th:text="${loop.count}"></td>
-        <td>
-            <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.subject}"></a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<html layout:decorate="~{layout}">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/book/book_list.css">
+</head>
+<div layout:fragment="content" class="container">
+    <div class="category-button-container">
+        <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">베스트셀러</a></span>
+        <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">국내도서</a></span>
+        <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">외국도서</a></span>
+        <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">신간도서</a></span>
+        <span><a th:href="@{/book/bestseller}" class="btn btn-primary btn-lg">무료도서</a></span>
+    </div>
+    <div class="main-container">
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>번호</th>
+                <th>이미지</th>
+                <th>책 내용</th> <!-- 새로운 열 추가 -->
+                <th>버튼</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book, loop : ${paging}">
+                <td th:text="${loop.count}"></td>
+                <td>
+                    <a th:href="@{|/book/detail/${book.id}|}">
+                        <img src="..." class="" alt="..." style="width:150px; height:230px;">
+                    </a>
+                </td>
+                <td>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="book_content">
+                                    <ul>
+                                        <li>
+                                            <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.subject}"></a>
+                                        </li>
+                                        <li>
+                                            <span th:text="${book.author}"></span>
+                                        </li>
+                                        <li>
+                                            <span th:text="${book.price}"></span><span>원</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <button>장바구니 버튼</button>
+                        </li>
+                        <li>
+                            <button>찜 버튼</button>
+                        </li>
+                        <li>
+                            <button>결제 버튼</button>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>

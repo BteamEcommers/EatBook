@@ -7,6 +7,7 @@ import eBook.EatBook.domain.book.entity.Book;
 import jakarta.validation.Valid;
 import jdk.jfr.Category;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -63,6 +64,23 @@ public class BookController {
         }
         return "redirect:/category/list";
     }
+
+    @GetMapping("/list")
+    public String bookList(Model model, @RequestParam(value ="page", defaultValue = "0") int page){
+        Page<Book> paging = this.bookService.getList(page);
+        model.addAttribute("paging", paging);
+
+
+
+        return "/book/book_list";
+    }
+//    @GetMapping("/list/{category}")
+//    public String bookListCategory(Model model, @PathVariable("category") String category, @RequestParam(value ="page", defaultValue = "0") int page){
+//        Page<Book> paging =  this.bookService.getListByCategory(category, page);
+//        model.addAttribute("paging", paging);
+//
+//        return "/book/book_list";
+//    }
 }
 
 
