@@ -6,6 +6,7 @@ import eBook.EatBook.domain.category.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,13 +15,24 @@ import java.util.Optional;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
-    public void foreign(String content) {
+    public List<Category> getCategory() {
+        return this.categoryRepository.findAll();
+    }
+
+    public void categoryCreate(String categoryName){
         Category category = Category.builder()
-
-                .content(content)
-
+                .categoryName(categoryName)
                 .build();
+        categoryRepository.save(category);
 
-        this.categoryRepository.save(category);
+    }
+
+    public Category getCategoryByCategoryName(String categoryName){
+        Optional<Category> optionalCategory = this.categoryRepository.findByCategoryName(categoryName);
+        if(optionalCategory.isEmpty()){
+            return null;
+        }
+
+        return optionalCategory.get();
     }
 }

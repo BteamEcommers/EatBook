@@ -2,13 +2,18 @@ package eBook.EatBook.domain.book.controller;
 
 
 import eBook.EatBook.domain.book.form.BookForm;
+import eBook.EatBook.domain.book.repository.BookRepository;
 import eBook.EatBook.domain.book.service.BookService;
 import eBook.EatBook.domain.book.entity.Book;
+import eBook.EatBook.domain.category.entity.Category;
+import eBook.EatBook.domain.category.repository.CategoryRepository;
+import eBook.EatBook.domain.category.service.CategoryService;
+import eBook.EatBook.domain.member.entity.Member;
+import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.domain.category.service.CategoryService;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
 import jakarta.validation.Valid;
-import jdk.jfr.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -23,6 +28,8 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Controller
 @RequiredArgsConstructor
 
@@ -31,44 +38,65 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
+    private final BookRepository bookRepository;
+    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
+    private final MemberService memberService;
+
+    @GetMapping("/list")
+    public String handleCategoryListRequest( Model model) {
+        List<Category> categories = this.categoryService.getCategory();
+        List<Book> books = this.bookService.getList(id);
+        model.addAttribute("categories", categories);
+        model.addAttribute("books", books);
+        return "book/books";
+    }
     private final CategoryService categoryService;
     private final MemberService memberService;
 
     @GetMapping("/detail/{id}") //책에 대한 상세페이지
     public String bookDetail(Model model, @PathVariable("id") Integer id) {
-        Book book = this.bookService.getList(id);
+        Book book = (Book) this.bookService.getList(id);
         model.addAttribute("book", book);
         return "book/book_detail";
     }
-
-    @GetMapping("/create")  //판매자가 책을 올림
-    public String bookCreate(BookForm bookForm) {
+    @GetMapping("/create")
+    public String bookCreate(Model model) {
+        List<Category> categories = this.categoryService.getCategory();
+        model.addAttribute("bookForm", new BookForm());
+        model.addAttribute("categories", categories);
         return "book/book_create_form";
     }
-
     @PostMapping("/create")
     public String bookCreate(@Valid BookForm bookForm, BindingResult bindingResult,
-                             @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+                             @RequestParam("file") MultipartFile file,
+                             @RequestParam(value = "categoryName", defaultValue = "기본 카테고리") String categoryName,
+                             RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "/book_create_form";
         }
+
+        Category category = this.categoryService.getCategoryByCategoryName(categoryName);
         // 이미지 업로드 로직 추가
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
-            Book book = bookService.createWithImage(bookForm.getSubject(), bookForm.getContent(),
+            Book book = bookService.createWithImage(
+                    bookForm.getSubject(),
+                    bookForm.getContent(),
                     bookForm.getBookIntroduce(),
                     bookForm.getAuthor(),
-                    (Category) bookForm.getCategory(),  //원래 이코드가 아니지만 집에서 push 안해서 이걸로 대체(추후 수정예정)
                     bookForm.getPrice(),
                     bookForm.getDiscount(),
-                    bookForm.getPublisher(),file);
+                    bookForm.getPublisher(),file, category);
             redirectAttributes.addFlashAttribute("success", "도서가 성공적으로 등록되었습니다.");
-            // 도서가 등록된 후 리스트 페이지로 리다이렉트
-            return "redirect:/category/list";
+            // 카테고리 페이지로 리다이렉트
+            return "redirect:/book/list";
+
+
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute("error", "도서 등록에 실패하였습니다.");
         }
-        return "redirect:/category/list";
+        return "redirect:/book/list";
     }
 
     @GetMapping("/list")
@@ -97,6 +125,15 @@ public class BookController {
 //        model.addAttribute("categoryName", category);
 //        return "/book/book_list";
 //    }
+    @GetMapping("/books/{category}")
+    public String getBooksByCategory(@PathVariable("category") String categoryName, Model model) {
+        List<Book> books = bookService.findBooksByCategory(categoryName);
+
+
+        model.addAttribute("categoryName", categoryName);
+        model.addAttribute("books", books);
+        return "books/category_books";
+    }
 }
 
 

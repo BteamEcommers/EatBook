@@ -57,6 +57,9 @@ public class Book extends BaseEntity {
     private MultipartFile image;    //MultipartFile 은 파일 업로드시에 필요하다 해서 사용합니다.
 
     @Column
-    private String name;
-}
+    private String radioButtonValue;
 
+    @Column
+    private String categoryName;
+
+}

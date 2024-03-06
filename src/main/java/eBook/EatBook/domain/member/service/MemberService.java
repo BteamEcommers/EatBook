@@ -1,8 +1,12 @@
 package eBook.EatBook.domain.member.service;
 
 import eBook.EatBook.domain.apply.entity.Apply;
+
+import eBook.EatBook.domain.category.entity.Category;
+
 //import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.cartitem.Entity.CartItem;
+
 import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
 import eBook.EatBook.domain.member.DTO.MemberModifyForm;
 import eBook.EatBook.domain.member.entity.Member;
@@ -118,6 +122,13 @@ public class MemberService {
                 .build();
 
         this.memberRepository.save(member1);
+    }
+    public Member getMember(Integer id) {
+        Optional<Member> member = this.memberRepository.findById(id);
+        if (member.isEmpty()) {
+            return null;
+        }
+        return member.get();
     }
 
     public Member getMember(Integer id) {
