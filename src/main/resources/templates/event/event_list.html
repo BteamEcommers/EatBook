@@ -32,10 +32,7 @@
                                                 <a th:href="@{|/event/delete/${event.id}|}" type="button"
                                                    class="btn btn-sm btn-outline-secondary">삭제</a>
                                             </div>
-                                            <div class="d-flex justify-content-end">
-                                                <a th:href="@{|/event/detail/${event.id}|}" class="btn btn-sm btn-primary">
-                                                    이벤트 보기</a>
-                                            </div>
+                                            <a th:href="@{|/event/detail/${event.id}|}" class="btn btn-sm btn-primary">이벤트 보기</a>
                                         </div>
                                     </div>
                                 </div>
@@ -52,16 +49,12 @@
                             </a>
                         </li>
                         <li class="page-item" th:if="${currentPage > 0}">
-                            <a class="page-link" th:href="@{/event/list(page=${currentPage - 1})}"
-                               aria-label="Previous">
+                            <a class="page-link" th:href="@{/event/list(page=${currentPage - 1})}" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li class="page-item"
-                            th:each="page, iterStat : ${#numbers.sequence(currentPage - 2, currentPage + 2)}"
-                            th:if="${page >= 0 and page < totalPages}">
-                            <a class="page-link" th:href="@{/event/list(page=${page})}" th:text="${page + 1}"
-                               th:style="${currentPage == page ? 'background-color: #72AEC8; color: #fff;' : ''}"></a>
+                        <li class="page-item" th:each="page, iterStat : ${#numbers.sequence(currentPage - 2, currentPage + 2)}" th:if="${page >= 0 and page < totalPages}">
+                            <a class="page-link" th:href="@{/event/list(page=${page})}" th:text="${page + 1}" th:style="${currentPage == page ? 'background-color: #72AEC8; color: #fff;' : ''}"></a>
                         </li>
                         <li class="page-item" th:if="${currentPage < totalPages - 1}">
                             <a class="page-link" th:href="@{/event/list(page=${currentPage + 1})}" aria-label="Next">

@@ -27,7 +27,8 @@
 <a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
 <a th:href="@{/category/create}" class="btn btn-primary">카테고리 등록하기</a>
 
-<div th:each="category : ${categories}">
-    <div th:text="${category.categoryName}"></div>
-</div>
+<!--<div th:each="category : ${categories}">-->
+<!--    <div th:text="${category.categoryName}"></div>-->
+<!--</div>-->
+<a th:href="@{'/' + ${categoryName}}">베스트셀러 페이지로 이동</a>
 

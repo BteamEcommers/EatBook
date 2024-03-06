@@ -1021,7 +1021,6 @@ aside {
     flex-grow: 1;
     height: 100%;
     padding-right: 10px;
-    padding-top : 80px;
 }
 .aside_items {
    position:sticky;

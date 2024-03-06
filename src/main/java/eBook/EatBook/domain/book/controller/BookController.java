@@ -91,6 +91,7 @@ public class BookController {
             redirectAttributes.addFlashAttribute("error", "도서 등록에 실패하였습니다.");
         }
         return "redirect:/book/list";
+
     }
     @GetMapping("/books/{category}")
     public String getBooksByCategory(@PathVariable("category") String categoryName, Model model) {
@@ -100,7 +101,10 @@ public class BookController {
         model.addAttribute("categoryName", categoryName);
         model.addAttribute("books", books);
         return "books/category_books";
+
     }
+
+
 
 }
 

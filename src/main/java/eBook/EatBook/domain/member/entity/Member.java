@@ -1,13 +1,7 @@
 package eBook.EatBook.domain.member.entity;
 
 import eBook.EatBook.domain.book.entity.Book;
-//import eBook.EatBook.domain.cartitem.Entity.Cart;
-//import eBook.EatBook.domain.cartitem.Entity.CartItem;
-import eBook.EatBook.domain.cartitem.Entity.CartItem;
-import eBook.EatBook.domain.coupon.Entity.Coupon;
-import eBook.EatBook.domain.wish.Entity.Wish;
 import eBook.EatBook.global.baseEntity.BaseEntity;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -45,19 +39,6 @@ public class Member extends BaseEntity {
 
     @Column
     private boolean isSeller;
-
-
-    //장바구니 상품 (Cartitem)
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> cartList;
-
-    // 찜 (Wish)
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Wish> wishList;
-
-    // 쿠폰 (Coupon)
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Coupon> couponList;
 
 
     // 판매자, admin이 필요한 계좌번호, 금융기관명, 예금주 Column

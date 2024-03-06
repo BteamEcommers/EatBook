@@ -19,7 +19,7 @@ public class BookForm {
 
     private String BookIntroduce;
     private String author;
-    private Category category;
+    private String category;
     private Integer price;
     private float discount;
     private String publisher;

@@ -1,27 +1,22 @@
 package eBook.EatBook.domain.member.service;
 
 import eBook.EatBook.domain.apply.entity.Apply;
-
 import eBook.EatBook.domain.category.entity.Category;
-
-//import eBook.EatBook.domain.cartitem.Entity.CartItem;
-import eBook.EatBook.domain.cartitem.Entity.CartItem;
-
 import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
 import eBook.EatBook.domain.member.DTO.MemberModifyForm;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.repository.MemberRepository;
-import eBook.EatBook.domain.wish.Entity.Wish;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
+import java.util.UUID;
 
 
 @Service
@@ -130,28 +125,6 @@ public class MemberService {
             return null;
         }
         return member.get();
-    }
-
-    // Cartitem(장바구니)
-    public void addCartItem(Member loginedUser, CartItem cartItem) {
-        List<CartItem> cartList = loginedUser.getCartList();
-        cartList.add(cartItem);
-        Member member = loginedUser.toBuilder()
-                .cartList(cartList)
-                .build();
-
-        this.memberRepository.save(member);
-    }
-
-    // Wish(찜)
-    public void addWish(Member loginedUser, Wish wish) {
-        List<Wish> wishList = loginedUser.getWishList();
-        wishList.add(wish);
-        Member member = loginedUser.toBuilder()
-                .wishList(wishList)
-                .build();
-
-        this.memberRepository.save(member);
     }
 
 

@@ -56,4 +56,7 @@ public class Book extends BaseEntity {
     @Column
     private String radioButtonValue;
 
+    @Column
+    private String categoryName;
+
 }

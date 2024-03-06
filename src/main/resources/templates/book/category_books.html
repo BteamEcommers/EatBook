@@ -1,4 +1,15 @@
-<h2>Books in this category</h2>
+<!-- books/category_books.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카테고리별 도서 목록</title>
+</head>
+<body>
+<!--<h1 th:text="'카테고리: ' + ${categoryName} + '에 속한 도서 목록'"></h1>-->
 <ul>
-    <li th:each="book : ${books}" th:text="${book.title}"></li>
+    <li th:each="book : ${books}" th:text="${book.categoryName}"></li>
 </ul>
+</body>
+</html>

@@ -49,7 +49,6 @@ public class EventService {
         return event.get();
     }
 
-
     public void delete(Event event) {
         this.eventRepository.delete(event);
     }
