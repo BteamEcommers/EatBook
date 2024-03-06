@@ -10,7 +10,6 @@
 }
 
 .book_left-side {
-    width: 30%;
     height:auto;
 }
 .center-detail {
@@ -39,4 +38,10 @@
     border: 1px solid blue;
     width: auto;
     height: 400px;
+}
+
+
+.book_middle-section {
+
+    background: var(--light-color);
 }

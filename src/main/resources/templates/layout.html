@@ -35,14 +35,17 @@
       tabindex="0">
 <!-- 네비바-->
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div class="layout_container">
     <main>
         <section class="main_content">
             <!-- 여기에 내용이 들어감-->
             <th:block layout:fragment="content"></th:block>
         </section>
- <!-- 바로가기 메뉴-->
-<div th:replace="~{quickmenu :: quickmenuFragment}"></div>
+        <!-- 바로가기 메뉴-->
+        <div th:replace="~{quickmenu :: quickmenuFragment}"></div>
     </main>
+</div>
+
 <!-- footer(수정필요)-->
 <!--<div th:replace="~{footer :: footerFragment}"></div>-->
 <!-- script -->
