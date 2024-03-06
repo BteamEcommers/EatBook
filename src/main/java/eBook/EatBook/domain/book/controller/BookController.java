@@ -6,6 +6,7 @@ import eBook.EatBook.domain.book.service.BookService;
 import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.category.service.CategoryService;
 import eBook.EatBook.domain.member.entity.Member;
+import eBook.EatBook.domain.member.service.MemberService;
 import jakarta.validation.Valid;
 import jdk.jfr.Category;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -30,6 +32,7 @@ public class BookController {
 
     private final BookService bookService;
     private final CategoryService categoryService;
+    private final MemberService memberService;
 
     @GetMapping("/detail/{id}") //책에 대한 상세페이지
     public String bookDetail(Model model, @PathVariable("id") Integer id) {
@@ -69,7 +72,11 @@ public class BookController {
     }
 
     @GetMapping("/list")
-    public String bookList(Model model, @RequestParam(value ="page", defaultValue = "0") int page){
+    public String bookList(Model model, @RequestParam(value ="page", defaultValue = "0") int page, Principal principal){
+        if (principal != null) {
+            Member member = this.memberService.getMember(principal.getName());
+            model.addAttribute("member", member);
+        }
         Page<Book> paging = this.bookService.getList(page);
         model.addAttribute("paging", paging);
 
@@ -77,7 +84,12 @@ public class BookController {
         return "/book/book_list";
     }
 //    @GetMapping("/list/{categoryName}")
-//    public String bookListCategory(Model model, @PathVariable("categoryName") eBook.EatBook.domain.category.entity.Category categoryName, @RequestParam(value ="page", defaultValue = "0") int page){
+//    public String bookListCategory(Model model, @PathVariable("categoryName") eBook.EatBook.domain.category.entity.Category categoryName, @RequestParam(value ="page", defaultValue = "0") int page, Principal principal){
+//        if (principal != null) {
+//            Member member = this.memberService.getMember(principal.getName());
+//            model.addAttribute("member", member);
+//        }
+
 //        eBook.EatBook.domain.category.entity.Category category = this.categoryService.getCategoryByCategoryName(categoryName);
 
 //        Page<Book> paging =  this.bookService.getListByCategory(category, page);
