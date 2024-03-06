@@ -1,5 +1,96 @@
-<h1>책제목</h1>
-<h1 text="${book.subject}"></h1>
-<div text="${book.content}"></div>
-<a href="http://localhost:8010/book/list">리스트로 이동</a>
-
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
+    <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;">
+        <div class="formation-item d-flex" style="padding-top:5px;">
+            게시글 제목 / 판매자
+        </div>
+    </div>
+    <div class="bt_section">
+        <div class="book_top-section">
+            <div class="book_left-side">
+                <div style="width:400px; height:600px;">
+                    <svg class="bd-placeholder-img card-img-top" width="400px" height="600px"
+                         xmlns="http://www.w3.org/2000/svg" role="img"
+                         aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                         focusable="false">
+                        <title>이벤트</title>
+                        <rect width="400px" height="600px" fill="#55595c"/>
+                        <text x="25%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                    </svg>
+                </div>
+            </div>
+            <div class="center-detail">
+                <div>
+                    <div class="card my-3">
+                        <div class="card-body">
+                            책 제목:
+                            <div class="card-text" style="white-space: pre-line;" th:text="${book.subject}"></div>
+                            출판사 :
+                            <div class="card-text" style="white-space: pre-line;" th:text="${book.publisher}"></div>
+                            책 소개:
+                            <div class="card-text" style="white-space: pre-line;" th:text="${book.bookIntroduce}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card my-3">
+                        <div class="card-body">
+                            가격
+                            <div class="card-text" style="white-space: pre-line;" th:text="${book.price}"></div>
+                        </div>
+                    </div>
+                    <div class="card my-3">
+                        <div class="card-body">
+                            할인율
+                            <div class="card-text" style="white-space: pre-line;" th:text="${book.discount}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book_right-side">
+                구매 창 예정
+                <div style="margin-bottom:5px">
+                    <a class="btn btn-sm btn-primary" style="width: 150px">바로구매</a>
+                </div>
+                <div style="margin-bottom:5px">
+                    <a class="btn btn-sm btn-primary" style="width: 150px">장바구니 담기</a>
+                </div>
+                <div>
+                    <a class="btn btn-sm btn-primary" style="width: 150px">찜 하기</a>
+                </div>
+            </div>
+        </div>
+        <div class="book_middle-section">
+            <div id="header" class="book_navbar header-scrolled text-black bg-light">
+                    <div class="book_nav-container">
+                        <div class="card-body btn btn-light">
+                            도서정보
+                        </div>
+                        <div class="card-body btn btn-light">
+                            리뷰
+                        </div>
+                        <div class="card-body" style="font-size:20px; color: red;">
+                            <div class="card-text" style="white-space: pre-line;" th:text="${book.price + ' 원'}"></div>
+                        </div>
+                        <div style="margin-bottom:5px" class="justify-content-end">
+                            <a class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">바로구매</a>
+                            <a class="btn btn-sm btn-primary" style="width: 120px;">장바구니 넣기</a>
+                        </div>
+                    </div>
+            </div>
+            <div class="book_info">
+                <div class="formation-item d-flex" style="padding-top:5px;">
+                    기본 정보 : 책분류
+                    기본 정보 : ISBN
+                    기타 등등
+                </div>
+            </div>
+            <div class="book_bottom-section">
+                <div class="formation-item d-flex" style="padding-top:5px;">
+                    리뷰 영역
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
