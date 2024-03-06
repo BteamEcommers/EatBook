@@ -3,6 +3,7 @@ package eBook.EatBook.domain.book.service;
 import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.book.entity.FileUploadUtil;
 import eBook.EatBook.domain.book.repository.BookRepository;
+import eBook.EatBook.domain.member.entity.Member;
 import jdk.jfr.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -53,4 +54,12 @@ public class BookService {
 
         return book;
     }
+
+//    public List<Book> sellerBookList(Member seller){
+//        List<Book> sellerBookList = this.bookRepository.findBySeller(seller);
+//        if(sellerBookList == null){
+//            return null;
+//        }
+//        return sellerBookList;
+//    }
 }

@@ -19,4 +19,9 @@ public class OrdersController {
 
         return "/orders/ordersPay";
     }
+    @GetMapping("/confirm")
+    public String ordersConfirm(){
+        
+        return "/orders/ordersConfirm";
+    }
 }
