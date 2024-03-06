@@ -30,7 +30,7 @@
 .book_middle-section {
     border: 1px solid orange;
     width: auto;
-    height: 500px;
+    height: 2000px;
 }
 
 /*판매(책) 하단 (리뷰 영역)*/
@@ -40,8 +40,16 @@
     height: 400px;
 }
 
-
-.book_middle-section {
-
-    background: var(--light-color);
+.book_navbar {
+    position:sticky;
+    top:0;
 }
+.book_nav-container {
+    border-bottom: 1px solid black;
+    display:flex;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+}
+
+
