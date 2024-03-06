@@ -39,14 +39,16 @@ public class BookService {
     public Book createWithImage(String subject, String content,
                                 String bookIntroduce, String author,
                                 Integer price, Float discount, String publisher
-            , MultipartFile image) throws IOException {
+            , MultipartFile image, eBook.EatBook.domain.category.entity.Category category) throws IOException {
         String fileName = StringUtils.cleanPath(image.getOriginalFilename());  //이미지파일 업로드하는 과정
+
+
         Book book = Book.builder()
                 .subject(subject)
                 .content(content)
                 .bookIntroduce(bookIntroduce)
                 .author(author)
-//                .category((eBook.EatBook.domain.category.entity.Category) category)
+                .category(category)
                 .price(price)
                 .discount(discount)
                 .publisher(publisher)
@@ -65,5 +67,8 @@ public class BookService {
 
     public List<Book> getList(SingularAttribute<AbstractPersistable, Serializable> id) {
         return null;
+    }
+    public List<Book> findBooksByCategory(String categoryName) {
+        return bookRepository.findByCategoryCategoryName(categoryName);
     }
 }
