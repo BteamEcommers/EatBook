@@ -597,6 +597,7 @@ h3.cart-title {
 }
 .navbar-nav .nav-item a.nav-link {
     color: var(--accent-color);
+    cursor : pointer
 }
 .navbar-nav .nav-item a.nav-link.active, 
 .navbar-nav .nav-item a.nav-link:focus, 

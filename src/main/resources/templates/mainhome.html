@@ -234,12 +234,12 @@
                                 <th:block th:if="principal != null ">
                                     <li>
                                         <a th:if="${member != null and member.isSeller == true}"
-                                           th:href="@{/rebate/seller}" class="dropdown-item">판매자 정산 리스트</a>
+                                           th:href="@{/rebate/seller/list}" class="dropdown-item">판매자 정산 리스트</a>
                                     </li>
                                 </th:block>
                                 <th:block sec:authorize="hasRole('ADMIN')">
                                     <li>
-                                        <a th:href="@{/rebate/admin}" class="dropdown-item">관리자 정산 리스트</a>
+                                        <a th:href="@{/rebate/admin/list}" class="dropdown-item">관리자 정산 리스트</a>
                                     </li>
                                 </th:block>
                                 <!-- admin 에게만 표시 -->
