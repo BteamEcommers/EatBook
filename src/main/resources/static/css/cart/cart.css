@@ -1,0 +1,33 @@
+.top-cartContainer {
+    display: flex;
+   margin-top: 20px;
+}
+
+.middle-cartContainer {
+    margin-top: 100px;
+}
+
+.formation-item {
+    width:500px;
+    height:50px;
+}
+
+.cart-formation {
+	position: relative;
+	background: #00aabb;
+    width: 30%;
+}
+
+.cart-formation:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 59px solid transparent;
+	border-left-color: #00aabb;
+	border-right: 0;
+	margin-top: -59px;
+	margin-right: -59px;
+}

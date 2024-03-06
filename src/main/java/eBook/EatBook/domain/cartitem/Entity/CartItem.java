@@ -1,4 +1,4 @@
-package eBook.EatBook.domain.coupon.Entity;
+package eBook.EatBook.domain.cartitem.Entity;
 
 import eBook.EatBook.domain.event.Entity.Event;
 import eBook.EatBook.domain.member.entity.Member;
@@ -6,10 +6,10 @@ import eBook.EatBook.global.baseEntity.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
@@ -17,10 +17,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Coupon extends BaseEntity {
-    private String couponName;
-    private Integer discountPrice;
-    private float discountRate;
+public class CartItem extends BaseEntity {
+
 
     @ManyToOne
     @JoinColumn(name = "member_id")
@@ -31,6 +29,5 @@ public class Coupon extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;
-
 
 }
