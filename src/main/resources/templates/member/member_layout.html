@@ -14,11 +14,11 @@
         </button>
         <div class="collapse show" id="home-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정보 수정</a>
+            <li><a th:href="@{/member/modify}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정보 수정</a>
             </li>
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">장바구니</a>
+            <li><a th:href="@{/cartitem/list}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">장바구니</a>
             </li>
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">찜목록</a>
+            <li><a th:href="@{/wish/list}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">찜목록</a>
             </li>
             <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">쿠폰함</a>
             </li>
@@ -50,7 +50,7 @@
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">판매 목록</a>
             </li>
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정산 내역</a>
+            <li><a th:href="@{/rebate/seller/list}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정산 내역</a>
             </li>
             <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정산 확인</a>
           </ul>

@@ -3,6 +3,7 @@ package eBook.EatBook.domain.book.entity;
 
 import eBook.EatBook.domain.category.entity.Category;
 import eBook.EatBook.domain.member.entity.Member;
+import eBook.EatBook.domain.review.entity.Review;
 import eBook.EatBook.global.baseEntity.BaseEntity;
 
 import jakarta.persistence.*;
@@ -11,6 +12,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,11 +24,11 @@ public class Book extends BaseEntity {
 
     @ManyToOne
     private Member seller;
+    @OneToMany
+    private List<Review> reviewList;
 
     @ManyToOne
     private Category category;
-    @Column
-    private String title;
     @Column
     private String author;
     @Column

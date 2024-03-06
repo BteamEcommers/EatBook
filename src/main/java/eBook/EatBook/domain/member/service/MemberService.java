@@ -1,8 +1,12 @@
 package eBook.EatBook.domain.member.service;
 
 import eBook.EatBook.domain.apply.entity.Apply;
+
+import eBook.EatBook.domain.category.entity.Category;
+
 //import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.cartitem.Entity.CartItem;
+
 import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
 import eBook.EatBook.domain.member.DTO.MemberModifyForm;
 import eBook.EatBook.domain.member.entity.Member;
@@ -17,7 +21,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
 
 
 @Service
@@ -98,10 +101,10 @@ public class MemberService {
 
     // 패스워드 검증
     public BindingResult PasswordValidator(MemberModifyForm memberModifyForm, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return bindingResult;
         }
-        if(!memberModifyForm.getPassword1().equals(memberModifyForm.getPassword2())) {
+        if (!memberModifyForm.getPassword1().equals(memberModifyForm.getPassword2())) {
             bindingResult.rejectValue("password2", "passwordInCorrect",
                     "패스워드가 일치하지 않습니다.");
             return bindingResult;
@@ -110,7 +113,7 @@ public class MemberService {
     }
 
     //판매자 승인
-    public void approveSeller(Member member, Apply apply){
+    public void approveSeller(Member member, Apply apply) {
         Member member1 = member.toBuilder()
                 .isSeller(true)
                 .accountNumber(apply.getAccountNumber())
@@ -119,6 +122,14 @@ public class MemberService {
                 .build();
 
         this.memberRepository.save(member1);
+    }
+
+    public Member getMember(Integer id) {
+        Optional<Member> member = this.memberRepository.findById(id);
+        if (member.isEmpty()) {
+            return null;
+        }
+        return member.get();
     }
 
     // Cartitem(장바구니)
@@ -145,6 +156,6 @@ public class MemberService {
 
 
     public List<Member> findByIsSeller() {
-       return this.memberRepository.findByIsSeller(true);
+        return this.memberRepository.findByIsSeller(true);
     }
 }
