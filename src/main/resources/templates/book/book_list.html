@@ -51,7 +51,8 @@
                                         </li>
                                         <li>
                                             <!---->
-                                            </span><span>(</span><span th:text="${book.reviewList.size}"></span><span>)</span>
+                                            </span><span>(</span><span
+                                                th:text="${book.reviewList.size}"></span><span>)</span>
                                         </li>
 
                                     </ul>
@@ -82,7 +83,11 @@
         <div>
             <a th:if="${member != null and member.isSeller == true}"
                th:href="@{/book/create}" class="btn btn-success">EBook 등록</a>
+            <span sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/category/create}" class="btn btn-success">카테고리 생성</a>
+            </span>
         </div>
+
     </div>
     <div>
     </div>
