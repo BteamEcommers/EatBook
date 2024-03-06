@@ -1,0 +1,16 @@
+html,
+body {
+  height: 100%;
+}
+
+.form-member {
+  max-width: 500px;
+  padding: 1rem;
+}
+.form-member .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-member .form-floating {
+  padding-bottom: 5px;
+}

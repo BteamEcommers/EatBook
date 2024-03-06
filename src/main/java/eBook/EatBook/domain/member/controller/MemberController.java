@@ -127,8 +127,7 @@ public class MemberController {
         String confirmCode = this.RandomCode();
         this.emailService.saveConfirmCode(member, confirmCode);
         this.emailService.send(findUsernameForm.getToEmail(), "[EatBook]아이디 찾기를 위한 코드입니다.", String.format("코드 입력 \n [%s]", confirmCode));
-        MessageDTO message = new MessageDTO("아이디 찾기를 위한 코드가 발송되었습니다.", "/member/confirmCodeUsername", RequestMethod.GET, null);
-        return showMessageAndRedirect(message, model);
+        return "/member/confirmCodeUsernameForm";
     }
 
     @GetMapping("/confirmCodeUsername")
@@ -153,8 +152,7 @@ public class MemberController {
         this.emailService.send(member.getEmail(), "[EatBook] 아이디를 확인하세요", String.format("\n 아이디 : [%s]", member.getUsername()));
         // 확인을 위한 이메일 객체 삭제
         this.emailService.delete(email1);
-        MessageDTO message = new MessageDTO("아이디가 이메일로 발송되었습니다.", "/member/login", RequestMethod.GET, null);
-        return showMessageAndRedirect(message, model);
+        return "redirect:/member/login";
     }
 
     @PostMapping("/sendPasswordConfirmCode")
@@ -175,8 +173,7 @@ public class MemberController {
         String confirmCode = this.RandomCode();
         this.emailService.saveConfirmCode(memberByUsername, confirmCode);
         this.emailService.send(findPasswordForm.getToEmail(), "[EatBook]비밀번호 찾기를 위한 코드입니다.", String.format("코드 입력 \n [%s]", confirmCode));
-        MessageDTO message = new MessageDTO("비밀번호 찾기를 위한 코드가 이메일로 발송되었습니다.", "/member/confirmCodePassword", RequestMethod.GET, null);
-        return showMessageAndRedirect(message, model);
+        return "/member/confirmCodePasswordForm";
     }
 
     @GetMapping("/confirmCodePassword")
@@ -203,8 +200,7 @@ public class MemberController {
         this.emailService.send(member.getEmail(), "[EatBook] 임시 비밀번호를 확인하세요", String.format("\n 임시 비밀번호 : [%s]", tempPassword));
         // 확인을 위한 이메일 객체 삭제
         this.emailService.delete(email1);
-        MessageDTO message = new MessageDTO("임시 비밀번호가 이메일로 발송되었습니다.", "/member/login", RequestMethod.GET, null);
-        return showMessageAndRedirect(message, model);
+        return "redirect:/member/login";
     }
 
     // 인증 위한 랜덤 코드 생성기 (대문자 알파벳 6자리)
@@ -221,11 +217,7 @@ public class MemberController {
         return randomCode.toString();
     }
 
-    // 사용자에게 메시지를 전달하고, 페이지를 리다이렉트 한다.
-    private String showMessageAndRedirect(final MessageDTO params, Model model) {
-        model.addAttribute("params", params);
-        return "common/messageRedirect";
-    }
+
 
 
 
