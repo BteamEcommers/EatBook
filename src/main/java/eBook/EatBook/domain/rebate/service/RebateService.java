@@ -12,6 +12,15 @@ import java.util.Optional;
 public class RebateService {
     private final RebateRepository rebateRepository;
 
+//    public void createRebate(RebateForm rebateForm){
+//        Rebate rebate = Rebate.builder()
+//                .totalFee()
+//                .totalPay()
+//                .member()
+//                .build();
+//
+//    }
+
     public Rebate getRebate() {
         Optional<Rebate> optionalRebate = this.rebateRepository.findById(1);
         return optionalRebate.get();

@@ -1,6 +1,7 @@
 <html layout:decorate="~{layout}">
 <head>
     <link rel="stylesheet" type="text/css" href="/css/rebate/rebate_admin.css">
+    <link rel="stylesheet" type="text/css" href="/css/rebate/rebate.css"/>
 </head>
 <div layout:fragment="content" class="container">
     <div class="main-container">
@@ -14,21 +15,23 @@
                     <th scope="col">아이디</th>
                     <th>닉네임</th>
                     <th>판매자 정산 금액</th>
+                    <th>수수료</th>
                     <th>관리자 정산 금액</th>
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
-<!--                <tr th:each="member : ${sellerList}">-->
-<!--                    <th scope="row">[[${member.username}]]</th>-->
-<!--                    <td >[[${member.nickname}]] </td>-->
-<!--                    <td></td>-->
-<!--                    <td>[[${rebate.totalFee}]] %</td>-->
-<!--                    <td> 원</td>-->
-<!--                </tr>-->
+                <tr th:each="member : ${sellerList}">
+                    <th scope="row">[[${member.username}]]</th>
+                    <td >[[${member.nickname}]] </td>
+                    <td></td>
+                    <td>수수료</td>
+                    <td> 원</td>
+                </tr>
                 <tr>
-                    <th scope="row">합계</th>
+                    <th scope="row" class="fw-bold">합계</th>
                     <td>/  /</td>
                     <td>판매자 정산 금액 합계</td>
+                    <td>수수료</td>
                     <td>관리자 정산 금액 합계</td>
                 </tr>
                 </tbody>
