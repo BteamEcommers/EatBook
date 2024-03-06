@@ -1,0 +1,52 @@
+<div th:fragment="quickmenuFragment">
+    <aside>
+        <div class="aside_items">
+            <div class="side-items">
+                <div class="sidebar-content">
+                    <div class="sidebar-title">
+                        <a style="color: white;">바로가기</a>
+                    </div>
+                    <ul class="lists">
+                        <li class="list">
+                            <a href="/" class="nav-link">
+                                <i class="bx bx-home-alt icon"></i>
+                                <span class="link">Home</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a th:href="@{/member/profile}" class="nav-link">
+                                <i class="bx bxs-user icon"></i>
+                                <span class="link">내 정보</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a th:href="@{/cartitem/list}" class="nav-link">
+                                <i class="bx bx-cart icon"></i>
+                                <span class="link">Cart</span>
+                                <span class="badge badge-pill badge-danger" th:text="${cartItemCount}"></span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a th:href="@{/wish/list}" class="nav-link">
+                                <i class="bx bx-heart icon"></i>
+                                <span class="link">찜 목록</span>
+                            </a>
+                        </li>
+                        <!--                        <li class="list">-->
+                        <!--                            <a href="#" class="nav-link">-->
+                        <!--                                <i class="bx bx-log-in icon"></i>-->
+                        <!--                                <span class="link">Login</span>-->
+                        <!--                            </a>-->
+                        <!--                        </li>-->
+                        <!--                        <li class="list">-->
+                        <!--                            <a href="#" class="nav-link">-->
+                        <!--                                <i class="bx bx-log-out icon"></i>-->
+                        <!--                                <span class="link">Logout</span>-->
+                        <!--                            </a>-->
+                        <!--                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>

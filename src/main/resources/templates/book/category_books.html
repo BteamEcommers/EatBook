@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Category Books</title>
-</head>
-<body>
-<h1>Category: <span th:text="${category != null ? category : '기본 카테고리'}"></span></h1>
+<h2>Books in this category</h2>
 <ul>
-    <li th:each="book : ${bookList}">
-        <span th:text="${book.title}"></span> - <span th:text="${book.author}"></span>
-    </li>
+    <li th:each="book : ${books}" th:text="${book.title}"></li>
 </ul>
-</body>
-</html>

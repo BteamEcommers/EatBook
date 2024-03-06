@@ -1,5 +1,7 @@
 package eBook.EatBook.domain.member.controller;
 
+import eBook.EatBook.domain.member.DTO.*;
+import eBook.EatBook.domain.event.Entity.Event;
 import eBook.EatBook.domain.member.DTO.ConfirmCodeForm;
 import eBook.EatBook.domain.member.DTO.FindPasswordForm;
 import eBook.EatBook.domain.member.DTO.FindUsernameForm;
@@ -9,9 +11,11 @@ import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.global.email.entity.Email1;
 import eBook.EatBook.global.email.service.EmailService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 
 @Controller
@@ -117,7 +122,7 @@ public class MemberController {
     }
 
     @PostMapping("/sendConfirmCode")
-    public String sendConfirmCode(@Valid FindUsernameForm findUsernameForm, BindingResult bindingResult) {
+    public String sendConfirmCode(@Valid FindUsernameForm findUsernameForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "/member/findUsernameForm";
         }
@@ -131,7 +136,7 @@ public class MemberController {
         String confirmCode = this.RandomCode();
         this.emailService.saveConfirmCode(member, confirmCode);
         this.emailService.send(findUsernameForm.getToEmail(), "[EatBook]아이디 찾기를 위한 코드입니다.", String.format("코드 입력 \n [%s]", confirmCode));
-        return "redirect:/member/confirmCodeUsername";
+        return "/member/confirmCodeUsernameForm";
     }
 
     @GetMapping("/confirmCodeUsername")
@@ -142,7 +147,7 @@ public class MemberController {
     }
 
     @PostMapping("/confirmCodeUsername")
-    public String confirmCodeUsername(@Valid ConfirmCodeForm confirmCodeForm, BindingResult bindingResult) {
+    public String confirmCodeUsername(@Valid ConfirmCodeForm confirmCodeForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "/member/confirmCodeUsernameForm";
         }
@@ -156,11 +161,11 @@ public class MemberController {
         this.emailService.send(member.getEmail(), "[EatBook] 아이디를 확인하세요", String.format("\n 아이디 : [%s]", member.getUsername()));
         // 확인을 위한 이메일 객체 삭제
         this.emailService.delete(email1);
-        return "redirect:/";
+        return "redirect:/member/login";
     }
 
     @PostMapping("/sendPasswordConfirmCode")
-    public String sendPasswordConfirmCode(@Valid FindPasswordForm findPasswordForm, BindingResult bindingResult) {
+    public String sendPasswordConfirmCode(@Valid FindPasswordForm findPasswordForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "/member/findPasswordForm";
         }
@@ -177,8 +182,7 @@ public class MemberController {
         String confirmCode = this.RandomCode();
         this.emailService.saveConfirmCode(memberByUsername, confirmCode);
         this.emailService.send(findPasswordForm.getToEmail(), "[EatBook]비밀번호 찾기를 위한 코드입니다.", String.format("코드 입력 \n [%s]", confirmCode));
-
-        return "redirect:/member/confirmCodePassword";
+        return "/member/confirmCodePasswordForm";
     }
 
     @GetMapping("/confirmCodePassword")
@@ -188,7 +192,7 @@ public class MemberController {
     }
 
     @PostMapping("/confirmCodePassword")
-    public String confirmCodePassword(@Valid ConfirmCodeForm confirmCodeForm, BindingResult bindingResult) {
+    public String confirmCodePassword(@Valid ConfirmCodeForm confirmCodeForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "/member/confirmCodePasswordForm";
         }
@@ -205,8 +209,7 @@ public class MemberController {
         this.emailService.send(member.getEmail(), "[EatBook] 임시 비밀번호를 확인하세요", String.format("\n 임시 비밀번호 : [%s]", tempPassword));
         // 확인을 위한 이메일 객체 삭제
         this.emailService.delete(email1);
-
-        return "redirect:/";
+        return "redirect:/member/login";
     }
 
     // 인증 위한 랜덤 코드 생성기 (대문자 알파벳 6자리)
@@ -221,6 +224,14 @@ public class MemberController {
         }
 
         return randomCode.toString();
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/profile")
+    public String profileMember(Model model, Principal principal) {
+        Member member = this.memberService.findByUsername(principal.getName());
+        model.addAttribute("member", member);
+        return "/member/member_Profile";
     }
 
 
