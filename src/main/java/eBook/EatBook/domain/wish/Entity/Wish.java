@@ -23,7 +23,6 @@ public class Wish extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-
     // 이벤트로 임시 (변경필요)
     @ManyToOne
     @JoinColumn(name = "event_id")

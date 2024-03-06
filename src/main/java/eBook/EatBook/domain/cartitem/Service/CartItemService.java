@@ -27,9 +27,8 @@ public class CartItemService {
         return cartItem;
     }
 
-    private boolean isProductAlreadyInCart(Member member, Event event) {
-        // 동일한 상품이 이미 장바구니에 담겨 있는지 확인
-        return cartItemRepository.existsByMemberAndEvent(member, event);
+    public boolean hasWish(Member member, Event event) {
+        return this.cartItemRepository.existsByMemberAndEvent(member, event);
     }
 
     public List<Event> findProductByCart(List<CartItem> cartList) {
