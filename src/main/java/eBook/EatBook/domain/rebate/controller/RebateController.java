@@ -7,6 +7,7 @@ import eBook.EatBook.domain.rebate.entity.Rebate;
 import eBook.EatBook.domain.rebate.service.RebateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,7 @@ public class RebateController {
 //        return
 //    }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/list")
     public String adminRebateList(Model model){
         List<Member> sellerList = this.memberService.findByIsSeller();
