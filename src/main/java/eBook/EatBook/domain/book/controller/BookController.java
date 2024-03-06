@@ -69,6 +69,8 @@ public class BookController {
         if (bindingResult.hasErrors()) {
             return "/book_create_form";
         }
+
+        Category category = this.categoryService.getCategoryByCategoryName(categoryName);
         // 이미지 업로드 로직 추가
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
@@ -79,7 +81,7 @@ public class BookController {
                     bookForm.getAuthor(),
                     bookForm.getPrice(),
                     bookForm.getDiscount(),
-                    bookForm.getPublisher(),file, categoryName);
+                    bookForm.getPublisher(),file, category);
             redirectAttributes.addFlashAttribute("success", "도서가 성공적으로 등록되었습니다.");
             // 카테고리 페이지로 리다이렉트
             return "redirect:/book/list";
@@ -90,9 +92,11 @@ public class BookController {
         }
         return "redirect:/book/list";
     }
-    @GetMapping("/books")
-    public String getBooksByCategory(@RequestParam("category") String categoryName, Model model) {
+    @GetMapping("/books/{category}")
+    public String getBooksByCategory(@PathVariable("category") String categoryName, Model model) {
         List<Book> books = bookService.findBooksByCategory(categoryName);
+
+
         model.addAttribute("categoryName", categoryName);
         model.addAttribute("books", books);
         return "books/category_books";
