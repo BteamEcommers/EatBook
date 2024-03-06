@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="/css/faq/faq.css">
     <link rel="stylesheet" type="text/css" href="/css/event/event.css">
     <link rel="stylesheet" type="text/css" href="/css/book/book.css">
+    <link rel="stylesheet" type="text/css" href="/css/book/book_detail.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,20 +35,23 @@
       tabindex="0">
 <!-- 네비바-->
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div class="layout_container">
     <main>
         <section class="main_content">
             <!-- 여기에 내용이 들어감-->
             <th:block layout:fragment="content"></th:block>
         </section>
- <!-- 바로가기 메뉴-->
-<div th:replace="~{quickmenu :: quickmenuFragment}"></div>
+        <!-- 바로가기 메뉴-->
+        <div th:replace="~{quickmenu :: quickmenuFragment}"></div>
     </main>
+</div>
+
 <!-- footer(수정필요)-->
 <!--<div th:replace="~{footer :: footerFragment}"></div>-->
 <!-- script -->
+<script type="text/javascript" src="/js/main/bootstrap.bundle.min.js"></script>
 <script src="/js/main/jquery-1.11.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-<script type="text/javascript" src="/js/main/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="/js/main/script.js"></script>
 </body>
 </html>

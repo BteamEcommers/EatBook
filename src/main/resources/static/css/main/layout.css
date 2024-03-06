@@ -1026,6 +1026,7 @@ aside {
 .aside_items {
    position:sticky;
    top:0;
+   width:120px;
 }
 .side-items {
   border: 2px solid var(--primary-color);
@@ -1071,4 +1072,8 @@ aside {
 	border-bottom: 0;
 	margin-left: -9px;
 	margin-bottom: -9px;
+}
+.layout_container {
+    padding-right: var(--bs-gutter-x, 10rem);
+    padding-left: var(--bs-gutter-x, 10rem);
 }
