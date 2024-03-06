@@ -26,4 +26,13 @@ public class CategoryService {
         categoryRepository.save(category);
 
     }
+
+    public Category getCategoryByCategoryName(String categoryName){
+        Optional<Category> optionalCategory = this.categoryRepository.findByCategoryName(categoryName);
+        if(optionalCategory.isEmpty()){
+            return null;
+        }
+
+        return optionalCategory.get();
+    }
 }
