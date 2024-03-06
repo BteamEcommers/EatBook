@@ -32,6 +32,7 @@ class EatBookApplicationTests {
         //데이터 한번에 생성
         createAdmin();
         makeFaq();
+        makeEvent();
     }
 
     @Test
