@@ -1,0 +1,35 @@
+<html layout:decorate="~{layout}">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/rebate/rebate_seller.css">
+</head>
+<div layout:fragment="content" class="container">
+    <div class="main-container">
+        <div class="head-box">
+            <h2>판매 책 관리</h2>
+        </div>
+        <div class="body-box">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">책</th>
+                    <th>판매가</th>
+                    <th>할인</th>
+                    <th>등록일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${bookList}">
+                    <th scope="row">[[${book.title}]]</th>
+                    <td th:text="${book.price}"> 원</td>
+                    <td th:text="${book.discount * 100}">%</td>
+                    <td th:text="${#temporals.format(book.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                    <button class="btn btn-success">수정버튼</button>
+                    <button class="btn btn-danger">삭제버튼</button>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+</html>

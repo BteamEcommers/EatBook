@@ -128,5 +128,7 @@ public class MemberService {
     }
 
 
-
+    public List<Member> findByIsSeller() {
+       return this.memberRepository.findByIsSeller(true);
+    }
 }

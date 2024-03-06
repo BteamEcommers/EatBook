@@ -29,7 +29,9 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Controller
 @RequiredArgsConstructor
+
 @RequestMapping("/book")
+
 public class BookController {
 
     private final BookService bookService;

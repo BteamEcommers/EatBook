@@ -8,24 +8,35 @@
             <h2>판매자 정산 페이지</h2>
         </div>
         <div class="body-box">
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                 <tr>
                     <th scope="col">책</th>
-                    <th>닉네임</th>
+                    <th>판매가</th>
+                    <th>판매 부수</th>
+                    <th>수수료</th>
                     <th>정산 금액</th>
-                    <th></th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr >
-                    <th scope="row"></th>
-                    <td></td>
-                </tr>
+                <tbody class="table-group-divider">
+<!--                <tr th:each="book : ${bookList}">-->
+<!--                    <th scope="row">[[${book.title}]]</th>-->
+<!--                    <td th:text="${book.price * book.discount}"> 원</td>-->
+<!--                    <td>[[${book.sellCount}]] 부</td>-->
+<!--                    <td>[[${rebate.totalFee}]] %</td>-->
+<!--                    <td th:text="${book.price * book.discount * rebate.totalFee}"> 원</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th scope="row">합계</th>-->
+<!--                    <td>판매 금액 합계</td>-->
+<!--                    <td>판매 부수 합계</td>-->
+<!--                    <td>[[${rebate.totalFee}]] %</td>-->
+<!--                    <td>정산 금액 총액</td>-->
+<!--                </tr>-->
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>
-
 </html>
