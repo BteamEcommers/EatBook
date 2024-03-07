@@ -1,5 +1,6 @@
 package eBook.EatBook.domain.orders.repository;
 
+import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.orders.entity.Orders;
 import org.aspectj.weaver.ast.Or;
@@ -13,4 +14,6 @@ import java.util.Optional;
 public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 
     Optional<Orders> findByBuyer(Member member);
+
+    Optional<Orders> findByBuyerAndBook(Member member, Book book);
 }

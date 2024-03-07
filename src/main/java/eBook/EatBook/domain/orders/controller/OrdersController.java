@@ -10,6 +10,7 @@ import eBook.EatBook.domain.orders.entity.Orders;
 import eBook.EatBook.domain.orders.service.OrdersService;
 import jakarta.persistence.Column;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.query.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,11 +30,18 @@ public class OrdersController {
     private final BookService bookService;
 
     // 단건 결제
-    @GetMapping("/pay/{ordersId}")
-    public String ordersPay(Model model, @PathVariable("ordersId") Integer ordersId, Principal principal){
-        Orders orders = this.ordersService.findById(ordersId);
+    @GetMapping("/pay/progress")
+    public String ordersPay(){
 
+        return "/orders/ordersProgress";
+    }
 
+    @GetMapping("/pay/{bookId}")
+    public String ordersPayOne(Model model, @PathVariable("bookId") Integer bookId, Principal principal){
+        Book book = this.bookService.getBookById(bookId);
+        Member member = this.memberService.findByUsername(principal.getName());
+        Orders orders =  this.ordersService.findByMemberAndBook(member, book);
+        model.addAttribute("orders", orders);
         return "/orders/ordersPay";
     }
 
@@ -43,7 +51,7 @@ public class OrdersController {
         Member member = this.memberService.findByUsername(principal.getName());
         Orders orders = this.ordersService.createOrders(book, member);
         model.addAttribute("orders", orders);
-        return String.format("redirect:/orders/pay/%d", bookId);
+        return "redirect:/pay/progress";
     }
     @GetMapping("/confirm")
     public String ordersConfirm(){

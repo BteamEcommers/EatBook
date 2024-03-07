@@ -5,6 +5,7 @@ import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.orders.entity.Orders;
 import eBook.EatBook.domain.orders.repository.OrdersRepository;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -45,6 +46,14 @@ public class OrdersService {
             return null;
         }
 
+        return optionalOrders.get();
+    }
+
+    public Orders findByMemberAndBook(Member member, Book book) {
+        Optional<Orders> optionalOrders = this.ordersRepository.findByBuyerAndBook(member, book);
+        if(optionalOrders.isEmpty()){
+            return null;
+        }
         return optionalOrders.get();
     }
 }

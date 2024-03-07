@@ -27,8 +27,4 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
     List<Book> findByCategory(Category category);
 
     Optional<Book> findById(Long id);
-
-    List<Book> findByCategoryCategoryName(String categoryName);
-
-    List<Book> findAllByCategoryName(Category category);
 }

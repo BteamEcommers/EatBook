@@ -70,9 +70,8 @@
                         <li>
                             <!--수정중-->
 
-                            <button onclick="window.open('http://localhost:8010/orders/pay/[[${book.id}]]', '로그인창', 'width=500, height=500, location=no, status=no, scrollbars=yes, top=150,left=600');">
-                                결제
-                            </button>
+                                <a th:href="@{/orders/pay/progress}"  class="btn btn-primary" onclick="movePage([[${book.id}]])" >결제</a>
+
                         </li>
                     </ul>
                 </td>
