@@ -18,7 +18,7 @@
             <tr>
                 <th>번호</th>
                 <th>이미지</th>
-                <th>책 내용</th> <!-- 새로운 열 추가 -->
+                <th>책 내용</th>
                 <th>버튼</th>
             </tr>
             </thead>
@@ -62,13 +62,17 @@
                 <td>
                     <ul>
                         <li>
-                            <button>장바구니 버튼</button>
+                            <a href="#" class="btn btn-primary">장바구니</a>
                         </li>
                         <li>
-                            <button>찜 버튼</button>
+                            <a href="#" class="btn btn-primary">찜</a>
                         </li>
                         <li>
-                            <button>결제 버튼</button>
+                            <!--수정중-->
+
+                            <button onclick="window.open('http://localhost:8010/orders/pay/[[${book.id}]]', '로그인창', 'width=500, height=500, location=no, status=no, scrollbars=yes, top=150,left=600');">
+                                결제
+                            </button>
                         </li>
                     </ul>
                 </td>

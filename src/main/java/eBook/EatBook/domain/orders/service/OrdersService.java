@@ -31,7 +31,7 @@ public class OrdersService {
     }
 
     public Orders findByMember(Member member) {
-        Optional<Orders> optionalOrders = this.ordersRepository.findByMember(member);
+        Optional<Orders> optionalOrders = this.ordersRepository.findByBuyer(member);
         if(optionalOrders.isEmpty()){
             return null;
         }
