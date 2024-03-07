@@ -1,0 +1,33 @@
+<!-- book.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>도서 목록</title>
+    <style>
+        /* CSS 스타일을 여기에 추가 */
+    </style>
+</head>
+<body>
+<h2>도서 목록</h2>
+<div th:each="category : ${categories}">
+    <h3 th:text="${category.name}"></h3>
+    <ul>
+        <li th:each="book : ${#lists.isEmpty(category.books) ? null : category.books}">
+            <div>
+                <h4 th:text="${book.subject}"></h4>
+                <p th:text="${book.content}"></p>
+                <p th:text="${book.bookIntroduce}"></p>
+                <p th:text="${book.author}"></p>
+                <p th:text="${book.price}"></p>
+                <p th:text="${book.discount}"></p>
+                <p th:text="${book.publisher}"></p>
+                <!-- 도서 이미지를 표시하는 코드 -->
+                <img th:src="@{/book-thumbnails/{id}/{fileName}(id=${book.id}, fileName=${book.bookThumbnailImg})}" alt="Book Thumbnail">
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+<a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
+</html>

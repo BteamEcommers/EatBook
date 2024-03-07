@@ -94,11 +94,4 @@ public class BookService {
         }
         return sellerBookList;
     }
-//    public Book getBookById(Integer id) {
-//        Optional<Book> book = this.bookRepository.findById(id);
-//        if (book.isEmpty()) {
-//            return null;
-//        }
-//        return book.get();
-//    }
 }
