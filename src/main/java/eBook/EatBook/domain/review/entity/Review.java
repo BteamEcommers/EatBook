@@ -35,4 +35,7 @@ public class Review extends BaseEntity {
 
     @ManyToMany
     private Set<Member> voter;
+
+//    @Column
+//    private Review review;
 }

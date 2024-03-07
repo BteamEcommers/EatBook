@@ -27,8 +27,6 @@ public class BookService {
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
 
-
-
     public Page<Book> getList(int page) {
         Pageable pageable = PageRequest.of(page, 10);
         return this.bookRepository.findAll(pageable);
@@ -45,7 +43,6 @@ public class BookService {
         }
         return book.get();
     }
-
 
     public Book createWithImage(String subject, String content,
                                 String bookIntroduce, String author,
@@ -93,5 +90,13 @@ public class BookService {
     }
     public List<Book> findBooksByCategory(String categoryName) {
         return bookRepository.findByCategoryCategoryName(categoryName);
+    }
+
+    public Book getBookById(SingularAttribute<AbstractPersistable, Serializable> id) {
+        Optional<Book> book = this.bookRepository.findById(id);
+        if (book.isEmpty()) {
+            return null;
+        }
+        return book.get();
     }
 }

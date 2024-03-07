@@ -11,7 +11,8 @@
         <span><a th:href="@{/book/list}" class="btn btn-primary btn-lg">EBook</a></span>
         <span th:if="${categoryList != null}" th:each="category : ${categoryList}"><a th:href="@{|/book/list/${category.categoryName}|}" class="btn btn-primary btn-lg">[[${category.categoryName}]]</a></span>
     </div>
-
+    <a th:href="@{/book/create}" class="btn btn-primary">도서 등록하기</a>
+    <a th:href="@{/category/create}" class="btn btn-primary">카테고리 등록하기</a>
     <div class="main-container">
         <table class="table">
             <thead class="table-dark">

@@ -87,7 +87,14 @@
             </div>
             <div class="book_bottom-section">
                 <div class="formation-item d-flex" style="padding-top:5px;">
-                    리뷰 영역
+
+                    <form th:action="@{|/review/create/${book.id}|}"  method="post">
+<!--                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">-->
+                            <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+<!--                        </div>-->
+                        <textarea  name="content" id="content" rows="15"></textarea>
+                        <input type="submit" value="리뷰등록">
+                    </form>
                 </div>
             </div>
         </div>
