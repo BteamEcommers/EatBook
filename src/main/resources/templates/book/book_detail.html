@@ -74,7 +74,7 @@
                         </div>
                         <div style="margin-bottom:5px" class="justify-content-end">
                             <a class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">바로구매</a>
-                            <a class="btn btn-sm btn-primary" style="width: 120px;">장바구니 넣기</a>
+                            <a class="btn btn-sm btn-primary"style="width: 120px" th:id="'addCartItem_' + ${book.id}" onclick="addCartItem(${book.id}); return false;">장바구니 담기</a>
                         </div>
                     </div>
             </div>

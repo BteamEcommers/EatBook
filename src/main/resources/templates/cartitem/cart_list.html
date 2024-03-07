@@ -72,7 +72,7 @@
                         <td th:text="${book.price}"></td>
                         <td style="align-items:center;">
                             <div class="btn btn-sm btn-outline-secondary">
-                                <a th:href="@{/orders/pay/progress}">주문</a>
+                                <a th:href="@{/orders/order/list}">주문</a>
                             </div>
                             <div class="btn btn-sm btn-outline-secondary">
                                 <a class="cartItemDelete" th:id="'cartItemDelete_' + ${book.id}" href="#" onclick="deleteEvent(${book.id}); return false;">삭제</a>
