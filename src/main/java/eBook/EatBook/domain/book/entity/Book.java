@@ -27,7 +27,7 @@ public class Book extends BaseEntity {
 
     @ManyToOne
     private Member seller;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     private List<Review> reviewList;
 
     @ManyToOne

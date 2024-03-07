@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,9 +29,9 @@ public class ReviewService {
         return review.get();
     }
 
-    public void create(Book book, String content, Member author) {
+    public void create(Book books, String content, Member author) {
         Review review = Review.builder()
-                .book(book)
+                .book(books)
                 .content(content)
                 .author(author)
                 .build();
@@ -47,5 +48,10 @@ public class ReviewService {
 
     public void delete(Review review) {
         reviewRepository.delete(review);
+    }
+
+    public List<Review> findAllByBook(Book book) {
+
+        return this.reviewRepository.findAllByBook(book);
     }
 }

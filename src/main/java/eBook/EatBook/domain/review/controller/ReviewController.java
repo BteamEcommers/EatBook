@@ -41,14 +41,12 @@ public class ReviewController {
             model.addAttribute("books",books);
             return "book_detail";
         }
-
         Member author =  this.memberService.findByUsername(principal.getName());
         if (author == null) {
             // 작성자를 찾을 수 없는 경우에 대한 처리
             return "redirect:/book/list"; // 예시로 홈 페이지로 리다이렉트
         }
         this.reviewService.create(books,reviewForm.getContent(), author);
-
         return String.format("redirect:/book/detail/%d", id);
     }
     @GetMapping("/modify/{id}")
