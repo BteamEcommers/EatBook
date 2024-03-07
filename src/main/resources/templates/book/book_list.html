@@ -7,9 +7,10 @@
         <h1 th:if="${categoryEntity != null}" th:text="${categoryEntity.categoryName}"></h1>
         <h1 th:if="${categoryEntity == null}">EBook</h1>
     </div>
-    <div  class="category-button-container" >
+    <div class="category-button-container">
         <span><a th:href="@{/book/list}" class="btn btn-primary btn-lg">EBook</a></span>
-        <span th:if="${categoryList != null}" th:each="category : ${categoryList}"><a th:href="@{|/book/list/${category.categoryName}|}" class="btn btn-primary btn-lg">[[${category.categoryName}]]</a></span>
+        <span th:if="${categoryList != null}" th:each="category : ${categoryList}"><a
+                th:href="@{|/book/list/${category.categoryName}|}" class="btn btn-primary btn-lg">[[${category.categoryName}]]</a></span>
     </div>
 
     <div class="main-container">
@@ -18,7 +19,7 @@
             <tr>
                 <th>번호</th>
                 <th>이미지</th>
-                <th>책 내용</th> <!-- 새로운 열 추가 -->
+                <th>책 내용</th>
                 <th>버튼</th>
             </tr>
             </thead>
@@ -61,14 +62,18 @@
                 </td>
                 <td>
                     <ul>
+                        <div style="margin-bottom:5px">
+                            <a th:href="@{|/cartitem/add/${book.id}|}" onclick="return confirm('장바구니에 추가 하시겠습니까?')"
+                               class="btn btn-sm btn-primary" style="width: 150px">장바구니 담기</a>
+                        </div>
+                        <div>
+                            <a th:href="@{|/wish/add/${book.id}|}" onclick="return confirm('찜 목록에 추가 하시겠습니까?')"
+                               class="btn btn-sm btn-primary" style="width: 150px">찜 하기</a>
+                        </div>
                         <li>
-                            <button>장바구니 버튼</button>
-                        </li>
-                        <li>
-                            <button>찜 버튼</button>
-                        </li>
-                        <li>
-                            <button>결제 버튼</button>
+                            <!--수정중-->
+                            <a th:href="@{/orders/pay/progress}" class="btn btn-primary"
+                               onclick="movePage([[${book.id}]])">결제</a>
                         </li>
                     </ul>
                 </td>

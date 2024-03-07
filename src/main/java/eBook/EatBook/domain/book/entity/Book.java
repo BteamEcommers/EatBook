@@ -47,7 +47,7 @@ public class Book extends BaseEntity {
     @Column
     private float averageRating;
     @Column
-    private Integer sellCount;
+    private Integer sellCount = 0;
     @Column
     private char ISBN;
     @Column(length = 200)
@@ -56,13 +56,6 @@ public class Book extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-
-    @Column
-    private String categoryName;
-
-
-    @ManyToOne
-    private Member member;
 
     @OneToMany(mappedBy = "book")
     private List<CartItem> cartItems;

@@ -1,0 +1,28 @@
+<html layout:decorate="~{layout}">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/apply/applyList.css">
+    <script src="/js/orders/order_progress.js"></script>
+</head>
+<div layout:fragment="content" class="container">
+    <div class="main-container">
+        <div class="head-box">
+            <h2>결제 진행 중</h2>
+        </div>
+        <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;" >
+            <div class="formation-item d-flex" style="padding-top:5px;">
+                <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">장바구니</div>
+                <div class="p-3 btn btn-sm btn-primary">주문</div>
+                <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">완료</div>
+            </div>
+        </div>
+        <div class="body-box">
+            <div class="text-center">
+                <div class="spinner-border"  style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
