@@ -41,14 +41,6 @@ public class BookController {
     private final CategoryService categoryService;
     private final MemberService memberService;
 
-//    @GetMapping("/list")
-//    public String handleCategoryListRequest( Model model) {
-//        List<Category> categories = this.categoryService.getCategory();
-//        List<Book> books = this.bookService.getList(id);
-//        model.addAttribute("categories", categories);
-//        model.addAttribute("books", books);
-//        return "book/books";
-//    }
 
     @GetMapping("/detail/{id}") //책에 대한 상세페이지
     public String bookDetail(Model model, @PathVariable("id") Integer id) {
@@ -67,7 +59,7 @@ public class BookController {
     public String bookCreate(@Valid BookForm bookForm, BindingResult bindingResult,
                              @RequestParam("file") MultipartFile file,
                              @RequestParam(value = "categoryName", defaultValue = "기본 카테고리") String categoryName,
-                             RedirectAttributes redirectAttributes) {
+                             RedirectAttributes redirectAttributes, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "/book_create_form";
         }
@@ -75,15 +67,9 @@ public class BookController {
         Category category = this.categoryService.getCategoryByCategoryName(categoryName);
         // 이미지 업로드 로직 추가
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        Member seller = this.memberService.findByUsername(principal.getName());
         try {
-            Book book = bookService.createWithImage(
-                    bookForm.getSubject(),
-                    bookForm.getContent(),
-                    bookForm.getBookIntroduce(),
-                    bookForm.getAuthor(),
-                    bookForm.getPrice(),
-                    bookForm.getDiscount(),
-                    bookForm.getPublisher(),file, category);
+            Book book = bookService.createWithImage(bookForm,file, category, seller);
             redirectAttributes.addFlashAttribute("success", "도서가 성공적으로 등록되었습니다.");
             // 카테고리 페이지로 리다이렉트
             return "redirect:/book/list";
@@ -123,16 +109,8 @@ public class BookController {
         model.addAttribute("categoryList", categoryList);
         return "/book/book_list";
     }
-//    @GetMapping("/books/{category}")
-//    public String getBooksByCategory(@PathVariable("category") String categoryName, Model model) {
-//        Category category =  this.categoryService.getCategoryByCategoryName(categoryName);
-//        List<Book> books = bookService.findBooksByCategory(category);
-//
-//
-//        model.addAttribute("categoryName", categoryName);
-//        model.addAttribute("books", books);
-//        return "books/category_books";
-//    }
+
+
 }
 
 

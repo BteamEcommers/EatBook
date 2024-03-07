@@ -1,6 +1,5 @@
-
-
-
+<html layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="container">
 <form th:action="@{/book/create}" th:object="${bookForm}" method="post" enctype="multipart/form-data">
 
     <!-- 카테고리 선택 드롭다운 -->
@@ -16,6 +15,12 @@
     <div class="mb-3">
         <label for="subject" class="form-label">제목</label>
         <input type="text" th:field="*{subject}" class="form-control">
+        <!-- 유효성 검사 에러 메시지 -->
+        <span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="author" class="form-label">작가</label>
+        <input type="text" th:field="*{author}" class="form-control">
         <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="text-danger"></span>
     </div>
@@ -64,5 +69,7 @@
     <!-- 도서 등록 버튼 -->
     <input type="submit" value="저장하기"  class="btn btn-primary my-2">
 </form>
+</div>
+</html>
 
 
