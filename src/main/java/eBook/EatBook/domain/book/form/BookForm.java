@@ -1,6 +1,7 @@
 package eBook.EatBook.domain.book.form;
 
 import eBook.EatBook.domain.category.entity.Category;
+import eBook.EatBook.domain.member.entity.Member;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -23,4 +24,5 @@ public class BookForm {
     private Integer price;
     private float discount;
     private String publisher;
+    private Member seller;
 }
