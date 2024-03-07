@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.web.multipart.MultipartFile;
+import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
@@ -26,8 +27,9 @@ public class Book extends BaseEntity {
 
     @ManyToOne
     private Member seller;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Review> reviewList;
+
 
     @ManyToOne
     private Category category;
@@ -55,11 +57,6 @@ public class Book extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Transient
-    private MultipartFile image;    //MultipartFile 은 파일 업로드시에 필요하다 해서 사용합니다.
-
-    @Column
-    private String radioButtonValue;
 
     @Column
     private String categoryName;
@@ -83,5 +80,6 @@ public class Book extends BaseEntity {
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Wish> wishList;
+
 
 }
