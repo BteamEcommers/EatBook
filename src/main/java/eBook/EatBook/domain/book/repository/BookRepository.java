@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book,Integer> {
+
+
+
     Book findBySubject(String subject);
 
     Book findBySubjectAndContent(String subject, String content);
@@ -26,9 +29,5 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
     Page<Book> findAllByCategory(Category category , Pageable pageable);
     List<Book> findByCategory(Category category);
 
-    List<Book> findByCategoryCategoryName(String categoryName);
-
-    List<Book> findAllByCategoryName(Category category);
-
-    Optional<Book> findById(Integer id);
+    Optional<Book> findById(Long id);
 }
