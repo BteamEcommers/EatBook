@@ -55,9 +55,6 @@ public class Book extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @ManyToOne
-    private Member member;
-
     @OneToMany(mappedBy = "book")
     private List<CartItem> cartItems;
 
