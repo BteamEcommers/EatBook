@@ -64,9 +64,9 @@
                         </td>
                         <td th:text="${event.content}"></td>
                         <td style="align-items:center;">
-                            <!-- 이벤트에 대한 삭제 버튼 -->
+                            <!-- 찜 삭제 버튼 -->
                             <div class="btn btn-sm btn-outline-secondary">
-                                <a th:href="@{|/wish/delete/${event.id}|}" onclick="return confirm('정말 삭제 하시겠습니까?')">삭제</a>
+                                <a class="wishDelete" th:id="'wishDelete_' + ${event.id}" href="#" onclick="deleteEvent(${event.id}); return false;">삭제</a>
                             </div>
                             <!-- 이벤트를 장바구니에 담는 버튼 -->
                             <div class="btn btn-sm btn-outline-secondary">
@@ -79,5 +79,6 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="/js/wish/wish.js"></script>
 </div>
 </html>

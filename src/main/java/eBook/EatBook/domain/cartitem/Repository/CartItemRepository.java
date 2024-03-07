@@ -8,4 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
     boolean existsByMemberAndEvent(Member member, Event event);
+
+    CartItem findByMemberAndEvent(Member member, Event event);
 }

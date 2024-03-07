@@ -59,4 +59,14 @@ public class CartItemController {
         return "/cartitem/cart_list";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteCartItem(@PathVariable(value = "id") Integer id, Principal principal) {
+        Member member = memberService.findByUsername(principal.getName());
+        Event event = eventService.getEvent(id);
+
+        cartItemService.deleteCartItemByMemberAndEvent(member, event);
+
+        return "redirect:/cartitem/list";
+    }
+
 }

@@ -61,9 +61,12 @@ public class WishController {
 
 
     @GetMapping("/delete/{id}")
-    public String wishDelete(@PathVariable("id") Integer id, Principal principal) {
-        Wish wish = this.wishService.getWish(id);
-        this.wishService.delete(wish);
+    public String deleteWish(@PathVariable(value = "id") Integer id, Principal principal) {
+        Member member = memberService.findByUsername(principal.getName());
+        Event event = eventService.getEvent(id);
+
+        wishService.deleteWishByMemberAndEvent(member, event);
+
         return "redirect:/wish/list";
     }
 

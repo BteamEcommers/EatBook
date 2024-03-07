@@ -4,6 +4,7 @@ import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.cartitem.Repository.CartItemRepository;
 import eBook.EatBook.domain.event.Entity.Event;
 import eBook.EatBook.domain.member.entity.Member;
+import eBook.EatBook.domain.wish.Entity.Wish;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +57,11 @@ public class CartItemService {
         return cartList.size();
     }
 
-    public void delete(CartItem cartItem) {
-        this.cartItemRepository.delete(cartItem);
+    public void deleteCartItemByMemberAndEvent(Member member, Event event) {
+        CartItem CartItemToDelete = cartItemRepository.findByMemberAndEvent(member, event);
+
+        if (CartItemToDelete != null) {
+            cartItemRepository.delete(CartItemToDelete);
+        }
     }
 }

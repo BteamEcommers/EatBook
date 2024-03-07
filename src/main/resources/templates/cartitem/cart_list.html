@@ -75,7 +75,7 @@
                                 <a href="/">주문</a>
                             </div>
                             <div class="btn btn-sm btn-outline-secondary">
-                                <a href="/">삭제</a>
+                                <a class="cartItemDelete" th:id="'cartItemDelete_' + ${event.id}" href="#" onclick="deleteEvent(${event.id}); return false;">삭제</a>
                             </div>
                         </td>
                     </tr>
@@ -83,6 +83,7 @@
                 </table>
             </div>
         </div>
+        <script type="text/javascript" src="/js/cart/cart.js"></script>
     </div>
 </div>
 </html>

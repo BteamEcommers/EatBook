@@ -50,8 +50,13 @@ public class WishService {
         return wish.get();
     }
 
-    public void delete(Wish wish){
-        this.wishRepository.delete(wish);
+    public void deleteWishByMemberAndEvent(Member member, Event event) {
+        Wish wishToDelete = wishRepository.findByMemberAndEvent(member, event);
+
+        if (wishToDelete != null) {
+            wishRepository.delete(wishToDelete);
+        }
     }
+
 
 }
