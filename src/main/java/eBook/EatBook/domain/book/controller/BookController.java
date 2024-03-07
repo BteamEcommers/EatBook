@@ -13,6 +13,8 @@ import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.domain.category.service.CategoryService;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
+import eBook.EatBook.domain.review.entity.Review;
+import eBook.EatBook.domain.review.service.ReviewService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -41,6 +43,7 @@ public class BookController {
     private final BookService bookService;
     private final CategoryService categoryService;
     private final MemberService memberService;
+    private final ReviewService reviewService;
 
 //    @GetMapping("/list")
 //    public String handleCategoryListRequest( Model model) {
@@ -54,7 +57,9 @@ public class BookController {
     @GetMapping("/detail/{id}") //책에 대한 상세페이지
     public String bookDetail(Model model, @PathVariable("id") Integer id) {
         Book book = this.bookService.getBookById(id);
+        List<Review> reviewList = this.reviewService.findAllByBook(book);
         model.addAttribute("book", book);
+        model.addAttribute("reviewList", reviewList);
         return "book/book_detail";
     }
     @GetMapping("/create")
@@ -68,7 +73,7 @@ public class BookController {
     public String bookCreate(@Valid BookForm bookForm, BindingResult bindingResult,
                              @RequestParam("file") MultipartFile file,
                              @RequestParam(value = "categoryName", defaultValue = "기본 카테고리") String categoryName,
-                             RedirectAttributes redirectAttributes) {
+                             RedirectAttributes redirectAttributes, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "/book_create_form";
         }
@@ -76,15 +81,9 @@ public class BookController {
         Category category = this.categoryService.getCategoryByCategoryName(categoryName);
         // 이미지 업로드 로직 추가
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        Member seller = this.memberService.findByUsername(principal.getName());
         try {
-            Book book = bookService.createWithImage(
-                    bookForm.getSubject(),
-                    bookForm.getContent(),
-                    bookForm.getBookIntroduce(),
-                    bookForm.getAuthor(),
-                    bookForm.getPrice(),
-                    bookForm.getDiscount(),
-                    bookForm.getPublisher(),file, category);
+            Book book = bookService.createWithImage(bookForm,file, category, seller);
             redirectAttributes.addFlashAttribute("success", "도서가 성공적으로 등록되었습니다.");
             // 카테고리 페이지로 리다이렉트
             return "redirect:/book/list";

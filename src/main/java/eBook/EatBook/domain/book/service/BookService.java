@@ -2,6 +2,7 @@ package eBook.EatBook.domain.book.service;
 
 import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.book.entity.FileUploadUtil;
+import eBook.EatBook.domain.book.form.BookForm;
 import eBook.EatBook.domain.book.repository.BookRepository;
 import eBook.EatBook.domain.category.entity.Category;
 import eBook.EatBook.domain.category.repository.CategoryRepository;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,23 +49,24 @@ public class BookService {
     }
 
 
-    public Book createWithImage(String subject, String content,
-                                String bookIntroduce, String author,
-                                Integer price, Float discount, String publisher
-            , MultipartFile image, eBook.EatBook.domain.category.entity.Category category) throws IOException {
+    public Book createWithImage(BookForm bookForm
+            , MultipartFile image, Category category, Member seller) throws IOException {
         String fileName = StringUtils.cleanPath(image.getOriginalFilename());  //이미지파일 업로드하는 과정
 
 
         Book book = Book.builder()
-                .subject(subject)
-                .content(content)
-                .bookIntroduce(bookIntroduce)
-                .author(author)
+                .subject(bookForm.getSubject())
+                .content(bookForm.getContent())
+                .bookIntroduce(bookForm.getBookIntroduce())
+                .author(bookForm.getAuthor())
                 .category(category)
-                .price(price)
-                .discount(discount)
-                .publisher(publisher)
+                .price(bookForm.getPrice())
+                .discount(bookForm.getDiscount())
+                .publisher(bookForm.getPublisher())
                 .bookThumbnailImg(fileName)
+                .seller(seller)
+                .createDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
                 .build();
         bookRepository.save(book);
 
@@ -82,4 +85,11 @@ public class BookService {
         }
         return sellerBookList;
     }
+//    public Book getBookById(Integer id) {
+//        Optional<Book> book = this.bookRepository.findById(id);
+//        if (book.isEmpty()) {
+//            return null;
+//        }
+//        return book.get();
+//    }
 }
