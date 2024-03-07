@@ -100,7 +100,20 @@
             </div>
             <div class="book_bottom-section">
                 <div class="formation-item d-flex" style="padding-top:5px;">
-
+                    <form th:action="@{|/review/create/${book.id}|}" method="post">
+                        <textarea name="content" id="content" rows="15"></textarea>
+                        <input type="submit" value="리뷰등록">
+                    </form>
+                    <div>
+                        <ul>
+                            <li th:if="${not #lists.isEmpty(book.reviewList)}" th:each="review : ${book.reviewList}" th:text="${review.content}"></li>
+                            <li th:if="${#lists.isEmpty(book.reviewList)}">리뷰가 없습니다.</li>
+                        </ul>
+                    </div>
+                    <a th:href="@{|/review/delete/${book.id}|}"
+                       class="delete btn btn-sm btn-outline-secondary"
+                       th:text="삭제">
+                    </a>
                 </div>
             </div>
         </div>

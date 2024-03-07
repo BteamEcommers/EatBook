@@ -30,7 +30,6 @@ public class Book extends BaseEntity {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Review> reviewList;
 
-
     @ManyToOne
     private Category category;
     @Column
