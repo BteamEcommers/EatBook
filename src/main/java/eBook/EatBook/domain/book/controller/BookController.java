@@ -45,14 +45,6 @@ public class BookController {
     private final MemberService memberService;
     private final ReviewService reviewService;
 
-//    @GetMapping("/list")
-//    public String handleCategoryListRequest( Model model) {
-//        List<Category> categories = this.categoryService.getCategory();
-//        List<Book> books = this.bookService.getList(id);
-//        model.addAttribute("categories", categories);
-//        model.addAttribute("books", books);
-//        return "book/books";
-//    }
 
     @GetMapping("/detail/{id}") //책에 대한 상세페이지
     public String bookDetail(Model model, @PathVariable("id") Integer id) {
