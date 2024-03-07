@@ -104,18 +104,20 @@
                         <textarea name="content" id="content" rows="15"></textarea>
                         <input type="submit" value="리뷰등록">
                     </form>
-                    <div>
-                        <ul th:each="review : ${reviewList}">
-                            <li th:text="${review.content}"></li>
-                        </ul>
-                    </div>
-                    <a th:href="@{|/review/delete/${book.id}|}"
-                       class="delete btn btn-sm btn-outline-secondary"
-                       th:text="삭제">
-                    </a>
                 </div>
+
             </div>
+
         </div>
+        <div >
+            <ul th:each="review : ${reviewList}">
+                <li th:text="${review.content}"></li>
+            </ul>
+        </div>
+        <!--                    <a th:href="@{|/review/delete/${review.id}|}"-->
+        <!--                       class="delete btn btn-sm btn-outline-secondary"-->
+        <!--                       th:text="삭제">-->
+        <!--                    </a>-->
     </div>
 </div>
 </html>

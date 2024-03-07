@@ -67,11 +67,11 @@ public class ReviewController {
         return String.format("redirect:/book/detail/%d", reviewForm.getBookId());
     }
     @GetMapping("/delete/{id}")
-    public String reviewDelete(Principal principal, @PathVariable("id") Integer id) {
+    public String reviewDelete(@PathVariable("id") Integer id,Model model) {
         Review review = this.reviewService.getReview(id);
 
         this.reviewService.delete(review);
 
-        return "redirect:/book/list";
+        return String.format("redirect:/book/detail/%d", id);
     }
 }

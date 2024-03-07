@@ -35,7 +35,7 @@ public class CategoryController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/create/{id}")
-    public String reviewCreate(@PathVariable("id") Integer id, @Valid ReviewForm reviewForm,
+    public String reviewCreate(@PathVariable("id") Integer id, @RequestParam(value = "content")String content,
                                BindingResult bindingResult, Principal principal, org.springframework.ui.Model model){
         Book books = this.bookService.getBookById(id);
         if (books == null) {
@@ -52,7 +52,7 @@ public class CategoryController {
             // 작성자를 찾을 수 없는 경우에 대한 처리
             return "redirect:/book/list"; // 예시로 홈 페이지로 리다이렉트
         }
-        this.reviewService.create(books,reviewForm.getContent(), author);
+        this.reviewService.create(books,content, author);
 
         return String.format("redirect:/book/detail/%d", id);
     }
