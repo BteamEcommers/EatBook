@@ -13,6 +13,8 @@ import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.domain.category.service.CategoryService;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
+import eBook.EatBook.domain.review.entity.Review;
+import eBook.EatBook.domain.review.service.ReviewService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -40,12 +42,15 @@ public class BookController {
     private final BookService bookService;
     private final CategoryService categoryService;
     private final MemberService memberService;
+    private final ReviewService reviewService;
 
 
     @GetMapping("/detail/{id}") //책에 대한 상세페이지
     public String bookDetail(Model model, @PathVariable("id") Integer id) {
         Book book = this.bookService.getBookById(id);
+        List<Review> reviewList = this.reviewService.findAllByBook(book);
         model.addAttribute("book", book);
+        model.addAttribute("reviewList", reviewList);
         return "book/book_detail";
     }
     @GetMapping("/create")
