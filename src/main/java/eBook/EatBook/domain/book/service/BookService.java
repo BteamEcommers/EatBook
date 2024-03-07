@@ -72,19 +72,10 @@ public class BookService {
 
         return book;
     }
-//    public List<Book> getBooksByCategory(Category category) {
-//        return bookRepository.findByCategory(category);
-//    }
-//
-//    public List<Book> getList(SingularAttribute<AbstractPersistable, Serializable> id) {
-//        return null;
-//    }
-//    public List<Book> findBooksByCategory(String categoryName) {
-//        return bookRepository.findByCategoryCategoryName(categoryName);
-//    }
 
 
-    public List<Book> sellerBookList(Member seller){
+
+    public List<Book> findAllBySeller(Member seller) {
         List<Book> sellerBookList = this.bookRepository.findBySeller(seller);
         if(sellerBookList == null){
             return null;

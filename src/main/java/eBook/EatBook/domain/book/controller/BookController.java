@@ -16,6 +16,7 @@ import eBook.EatBook.domain.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -123,16 +124,16 @@ public class BookController {
         model.addAttribute("categoryList", categoryList);
         return "/book/book_list";
     }
-//    @GetMapping("/books/{category}")
-//    public String getBooksByCategory(@PathVariable("category") String categoryName, Model model) {
-//        Category category =  this.categoryService.getCategoryByCategoryName(categoryName);
-//        List<Book> books = bookService.findBooksByCategory(category);
-//
-//
-//        model.addAttribute("categoryName", categoryName);
-//        model.addAttribute("books", books);
-//        return "books/category_books";
-//    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/list/seller")
+    public String bookListSeller(Model model, Principal principal){
+        Member member = this.memberService.findByUsername(principal.getName());
+        List<Book> bookList = this.bookService.findAllBySeller(member);
+        model.addAttribute("bookList", bookList);
+        return "/book/sellerBookList";
+    }
+
 }
 
 
