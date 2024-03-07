@@ -25,7 +25,7 @@ public class Orders extends BaseEntity {
     private Integer bookPrice;
 
     @Column
-    private String title;
+    private String subject; // title => subject 로 수정했습니다.
 
     @Column
     private Integer totalPrice;

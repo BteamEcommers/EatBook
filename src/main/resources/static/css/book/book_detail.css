@@ -1,0 +1,57 @@
+.bt_section {
+    width: 100%;
+    height: 2000px;
+}
+
+/*판매(책) 상단부*/
+.book_top-section {
+    width: 100%;
+    display: flex
+}
+
+.book_left-side {
+    height:auto;
+}
+.center-detail {
+    width: 50%;
+    height:auto;
+}
+.book_right-side {
+    border: 1px solid indigo;
+    position: sticky;
+    margin-top: 5px;
+    top: 0;
+    width: 20%;
+    height:150px;
+    justify-content:center;
+}
+
+/*판매(책) 중간*/
+.book_middle-section {
+    border: 1px solid orange;
+    width: auto;
+    height: 2000px;
+}
+
+/*판매(책) 하단 (리뷰 영역)*/
+.book_bottom-section {
+    border: 1px solid blue;
+    width: auto;
+    height: 900px;
+}
+
+.book_navbar {
+    position:sticky;
+    top:0;
+}
+.book_nav-container {
+    border-bottom: 1px solid black;
+    display:flex;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+}
+.book_info {
+    height: 1000px;
+}
+

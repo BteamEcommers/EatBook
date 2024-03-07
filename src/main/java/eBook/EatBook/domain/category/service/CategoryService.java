@@ -15,7 +15,7 @@ import java.util.Optional;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
-    public List<Category> getCategory() {
+    public List<Category> getAllCategory() {
         return this.categoryRepository.findAll();
     }
 
@@ -26,4 +26,15 @@ public class CategoryService {
         categoryRepository.save(category);
 
     }
+
+    public Category getCategoryByCategoryName(String categoryName){
+        Optional<Category> optionalCategory = this.categoryRepository.findByCategoryName(categoryName);
+        if(optionalCategory.isEmpty()){
+            return null;
+        }
+
+        return optionalCategory.get();
+    }
+
+
 }

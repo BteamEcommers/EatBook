@@ -32,6 +32,12 @@ public class CartItemController {
         Member member = this.memberService.findByUsername(principal.getName());
         Event event = this.eventService.getEvent(id);
 
+        // 중복 체크: 해당 상품이 카트에 이미 존재하는지 확인
+        if (cartItemService.hasWish(member, event)) {
+            // 이미 카드에 있으면 중복으로 추가하지 않고 이벤트 상세 페이지로 리다이렉트
+            return String.format("redirect:/event/detail/%d", id);
+        }
+
         CartItem cartItem = this.cartItemService.addCartItem(member, event);
         this.memberService.addCartItem(member, cartItem);
 
