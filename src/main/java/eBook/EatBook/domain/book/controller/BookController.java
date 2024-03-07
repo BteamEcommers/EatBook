@@ -13,6 +13,7 @@ import eBook.EatBook.domain.review.service.ReviewService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -109,6 +110,14 @@ public class BookController {
         return "/book/book_list";
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/list/seller")
+    public String bookListSeller(Model model, Principal principal){
+        Member member = this.memberService.findByUsername(principal.getName());
+        List<Book> bookList = this.bookService.findAllBySeller(member);
+        model.addAttribute("bookList", bookList);
+        return "/book/sellerBookList";
+    }
 
 }
 

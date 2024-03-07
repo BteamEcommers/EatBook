@@ -1,6 +1,7 @@
 <html layout:decorate="~{layout}">
 <head>
     <link rel="stylesheet" type="text/css" href="/css/rebate/rebate_seller.css">
+    <link rel="stylesheet" type="text/css" href="/css/book/sellerBookList.css">
 </head>
 <div layout:fragment="content" class="container">
     <div class="left-side">
@@ -22,12 +23,17 @@
                 </thead>
                 <tbody>
                 <tr th:each="book : ${bookList}">
-                    <th scope="row">[[${book.title}]]</th>
+                    <th scope="row">[[${book.subject}]]</th>
                     <td th:text="${book.price}"> 원</td>
                     <td th:text="${book.discount * 100}">%</td>
                     <td th:text="${#temporals.format(book.createDate, 'yyyy-MM-dd HH:mm')}"></td>
-                    <button class="btn btn-success">수정버튼</button>
-                    <button class="btn btn-danger">삭제버튼</button>
+                    <td>
+                        <button class="btn btn-sm btn-success">수정버튼</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-danger">삭제버튼</button>
+                    </td>
+
                 </tr>
                 </tbody>
             </table>

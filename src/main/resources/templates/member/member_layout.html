@@ -36,8 +36,8 @@
             </li>
             <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">결제 목록</a>
             </li>
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">대여 목록</a>
-            </li>
+<!--            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">대여 목록</a>-->
+<!--            </li>-->
           </ul>
         </div>
       </li>
@@ -48,11 +48,11 @@
         </button>
         <div class="collapse" id="orders-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">판매 목록</a>
+            <li><a th:href="@{/book/list/seller}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">판매 목록</a>
             </li>
             <li><a th:href="@{/rebate/seller/list}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정산 내역</a>
             </li>
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정산 확인</a>
+            <li><a th:href="@{/rebate/seller/list}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정산 확인</a>
           </ul>
         </div>
       </li>
@@ -63,13 +63,13 @@
         </button>
         <div class="collapse" id="account-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">판매자 신청 리스트</a>
+            <li><a th:href="@{/apply/list}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">판매자 신청 리스트</a>
             </li>
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">신고 리스트</a>
+<!--            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">신고 리스트</a>-->
+<!--            </li>-->
+            <li><a th:href="@{/faq/list}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">FAQ</a>
             </li>
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">FAQ</a>
-            </li>
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">이벤트</a>
+            <li><a th:href="@{/event/list}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">이벤트</a>
             </li>
           </ul>
         </div>
