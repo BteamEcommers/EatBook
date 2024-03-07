@@ -30,20 +30,6 @@ public class Event extends BaseEntity {
     @ManyToOne
     private Member member;
 
-    @OneToMany(mappedBy = "event")
-    private List<CartItem> cartItems;
 
-    //장바구니 (Cartitem)
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> cartList;
-
-    // 찜 (Wish)
-
-    @ManyToOne
-    @JoinColumn(name = "wish_id")
-    private Wish wish;
-
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Wish> wishList;
 
 }

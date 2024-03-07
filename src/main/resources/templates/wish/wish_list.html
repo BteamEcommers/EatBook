@@ -1,4 +1,4 @@
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content">
     <div class="event-section">
         <div class="container p-3">
@@ -37,7 +37,7 @@
                     </thead>
                     <tbody>
                     <!-- 이벤트 목록(eventList)을 기준으로 반복 -->
-                    <tr th:each="event : ${eventList}">
+                    <tr th:each="book : ${bookList}">
                         <!-- 이벤트 정보 출력 -->
                         <td>
                             <div class="form-check">
@@ -58,19 +58,19 @@
                                     </svg>
                                 </div>
                                 <div style="margin-left: 50px; justify-content:center;">
-                                    <a th:href="@{|/event/detail/${event.id}|}" th:text="${event.title}"></a>
+                                    <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.subject}"></a>
                                 </div>
                             </div>
                         </td>
-                        <td th:text="${event.content}"></td>
+                        <td th:text="${book.price}"></td>
                         <td style="align-items:center;">
                             <!-- 찜 삭제 버튼 -->
                             <div class="btn btn-sm btn-outline-secondary">
-                                <a class="wishDelete" th:id="'wishDelete_' + ${event.id}" href="#" onclick="deleteEvent(${event.id}); return false;">삭제</a>
+                                <a class="wishDelete" th:id="'wishDelete_' + ${book.id}" href="#" onclick="deleteEvent(${book.id}); return false;">삭제</a>
                             </div>
                             <!-- 이벤트를 장바구니에 담는 버튼 -->
                             <div class="btn btn-sm btn-outline-secondary">
-                                <a th:href="@{|/cartitem/add/${event.id}|}" onclick="return confirm('장바구니에 추가 하시겠습니까?')">장바구니 담기</a>
+                                <a th:href="@{|/cartitem/add/${book.id}|}" onclick="return confirm('장바구니에 추가 하시겠습니까?')">장바구니 담기</a>
                             </div>
                         </td>
                     </tr>

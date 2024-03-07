@@ -1,5 +1,6 @@
 package eBook.EatBook.domain.wish.Service;
 
+import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.event.Entity.Event;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.service_center.Entity.Faq;
@@ -17,26 +18,26 @@ import java.util.Optional;
 public class WishService {
     private final WishRepository wishRepository;
 
-    public Wish addWish(Member member, Event event) {
+    public Wish addWish(Member member, Book book) {
         Wish wish = Wish.builder()
                 .member(member)
-                .event(event)
+                .book(book)
                 .build();
 
         this.wishRepository.save(wish);
 
         return wish;
     }
-    public boolean hasWish(Member member, Event event) {
-        return this.wishRepository.existsByMemberAndEvent(member, event);
+    public boolean hasWish(Member member, Book book) {
+        return this.wishRepository.existsByMemberAndBook(member, book);
     }
 
-    public List<Event> findProductByWish(List<Wish> wishList) {
-        List<Event> eventList = new ArrayList<>();
+    public List<Book> findProductByWish(List<Wish> wishList) {
+        List<Book> bookList = new ArrayList<>();
         for(int i = 0; i < wishList.size(); i++) {
-            eventList.add(wishList.get(i).getEvent());
+            bookList.add(wishList.get(i).getBook());
         }
-        return eventList;
+        return bookList;
     }
     public List<Wish> findAllWish(){
         return this.wishRepository.findAll();
@@ -50,8 +51,8 @@ public class WishService {
         return wish.get();
     }
 
-    public void deleteWishByMemberAndEvent(Member member, Event event) {
-        Wish wishToDelete = wishRepository.findByMemberAndEvent(member, event);
+    public void deleteWishByMemberAndBook(Member member, Book book) {
+        Wish wishToDelete = wishRepository.findByMemberAndBook(member, book);
 
         if (wishToDelete != null) {
             wishRepository.delete(wishToDelete);

@@ -53,10 +53,10 @@
                     <a class="btn btn-sm btn-primary" style="width: 150px">바로구매</a>
                 </div>
                 <div style="margin-bottom:5px">
-                    <a class="btn btn-sm btn-primary" style="width: 150px">장바구니 담기</a>
+                    <a  th:href="@{|/cartitem/add/${book.id}|}" onclick="return confirm('장바구니에 추가 하시겠습니까?')" class="btn btn-sm btn-primary" style="width: 150px">장바구니 담기</a>
                 </div>
                 <div>
-                    <a class="btn btn-sm btn-primary" style="width: 150px">찜 하기</a>
+                    <a th:href="@{|/wish/add/${book.id}|}" class="btn btn-sm btn-primary" style="width: 150px">찜 하기</a>
                 </div>
             </div>
         </div>

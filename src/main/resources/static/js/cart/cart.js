@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $(".cartItemDelete").click(function () {
-        var eventId = this.id.split('_')[1];
+        var bookId = this.id.split('_')[1];
 
         Swal.fire({
             title: '장바구니 에서',
@@ -15,7 +15,7 @@ $(document).ready(function () {
                 return new Promise((resolve) => {
                     // Ajax 요청을 통한 서버에서의 삭제 작업
                     $.ajax({
-                        url: '/cartitem/delete/' + eventId,
+                        url: '/cartitem/delete/' + bookId,
                         type: 'GET',
                         success: function (data) {
                               resolve(true);
