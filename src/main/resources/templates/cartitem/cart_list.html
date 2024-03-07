@@ -44,7 +44,7 @@
                     </thead>
                     <tbody>
                     <!-- 이벤트 목록(eventList)을 기준으로 반복 -->
-                    <tr th:each="event : ${eventList}">
+                    <tr th:each="book : ${bookList}">
                         <!-- 이벤트 정보 출력 -->
                         <td>
                             <div class="form-check">
@@ -65,17 +65,17 @@
                                     </svg>
                                 </div>
                                 <div style="margin-left: 50px; justify-content:center;">
-                                    <a th:href="@{|/event/detail/${event.id}|}" th:text="${event.title}"></a>
+                                    <a th:href="@{|/event/detail/${book.id}|}" th:text="${book.subject}"></a>
                                 </div>
                             </div>
                         </td>
-                        <td th:text="${event.content}"></td>
+                        <td th:text="${book.price}"></td>
                         <td style="align-items:center;">
                             <div class="btn btn-sm btn-outline-secondary">
-                                <a th:href="@{|/wish/delete/${event.id}|}">주문</a>
+                                <a href="/">주문</a>
                             </div>
                             <div class="btn btn-sm btn-outline-secondary">
-                                <a th:href="@{|/cartitem/add/${event.id}|}">삭제</a>
+                                <a class="cartItemDelete" th:id="'cartItemDelete_' + ${book.id}" href="#" onclick="deleteEvent(${book.id}); return false;">삭제</a>
                             </div>
                         </td>
                     </tr>
@@ -83,6 +83,7 @@
                 </table>
             </div>
         </div>
+        <script type="text/javascript" src="/js/cart/cart.js"></script>
     </div>
 </div>
 </html>

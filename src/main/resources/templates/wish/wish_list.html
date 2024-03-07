@@ -1,22 +1,21 @@
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content">
     <div class="event-section">
-        <nav th:replace="~{/event/event_layout :: eventSide}"></nav>
         <div class="container p-3">
             <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
                 <span class="fs-5 fw-semibold">찜 목록</span>
             </a>
             <div class="top-wishContainer">
-                <div class="form-check">
+                <div class="form-check" style="padding-top:5px; margin-left:5px;">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                     <label class="form-check-label" for="flexCheckDefault">
                         전체 선택
                     </label>
                 </div>
-                <div class="btn btn-sm btn-outline-secondary">
+                <div class="btn btn-sm btn-outline-secondary" style="margin-left:5px;">
                     삭제
                 </div>
-                <div class="btn btn-sm btn-outline-secondary">
+                <div class="btn btn-sm btn-outline-secondary" style="margin-left:5px;">
                     장바구니 담기
                 </div>
             </div>
@@ -34,12 +33,11 @@
                         <th scope="col" style="text-align:center;">상품정보</th>
                         <th scope="col" style="text-align:center;">가격</th>
                         <th scope="col" style="text-align:center;">삭제 / 장바구니</th>
-                        <th scope="col" style="text-align:center;"> 삭제 </th>
                     </tr>
                     </thead>
                     <tbody>
                     <!-- 이벤트 목록(eventList)을 기준으로 반복 -->
-                    <tr th:each="wish : ${wishList}">
+                    <tr th:each="book : ${bookList}">
                         <!-- 이벤트 정보 출력 -->
                         <td>
                             <div class="form-check">
@@ -60,19 +58,19 @@
                                     </svg>
                                 </div>
                                 <div style="margin-left: 50px; justify-content:center;">
-                                    <a th:href="${wish.event.title}" th:text="${event.title}"></a>
+                                    <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.subject}"></a>
                                 </div>
                             </div>
                         </td>
-                        <td th:text="$${wish.event.content}"></td>
+                        <td th:text="${book.price}"></td>
                         <td style="align-items:center;">
-                            <!-- 이벤트에 대한 삭제 버튼 -->
+                            <!-- 찜 삭제 버튼 -->
                             <div class="btn btn-sm btn-outline-secondary">
-                                <a th:href="@{|/wish/delete/${wish.id}|}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+                                <a class="wishDelete" th:id="'wishDelete_' + ${book.id}" href="#" onclick="deleteEvent(${book.id}); return false;">삭제</a>
                             </div>
                             <!-- 이벤트를 장바구니에 담는 버튼 -->
                             <div class="btn btn-sm btn-outline-secondary">
-                                <a th:href="@{/wish/delete/{wishId}(wishId=${wish.id})}">장바구니 담기</a>
+                                <a th:href="@{|/cartitem/add/${book.id}|}" onclick="return confirm('장바구니에 추가 하시겠습니까?')">장바구니 담기</a>
                             </div>
                         </td>
                     </tr>
@@ -81,5 +79,6 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="/js/wish/wish.js"></script>
 </div>
 </html>

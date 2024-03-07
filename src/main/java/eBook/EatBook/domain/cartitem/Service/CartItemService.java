@@ -1,8 +1,8 @@
 package eBook.EatBook.domain.cartitem.Service;
 
+import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.cartitem.Repository.CartItemRepository;
-import eBook.EatBook.domain.event.Entity.Event;
 import eBook.EatBook.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,10 +16,10 @@ import java.util.Optional;
 public class CartItemService {
     private final CartItemRepository cartItemRepository;
 
-    public CartItem addCartItem(Member member, Event event) {
+    public CartItem addCartItem(Member member, Book book) {
         CartItem cartItem = CartItem.builder()
                 .member(member)
-                .event(event)
+                .book(book)
                 .build();
 
         this.cartItemRepository.save(cartItem);
@@ -27,17 +27,16 @@ public class CartItemService {
         return cartItem;
     }
 
-    private boolean isProductAlreadyInCart(Member member, Event event) {
-        // 동일한 상품이 이미 장바구니에 담겨 있는지 확인
-        return cartItemRepository.existsByMemberAndEvent(member, event);
+    public boolean hasWish(Member member, Book book) {
+        return this.cartItemRepository.existsByMemberAndBook(member, book);
     }
 
-    public List<Event> findProductByCart(List<CartItem> cartList) {
-        List<Event> eventList = new ArrayList<>();
+    public List<Book> findProductByCart(List<CartItem> cartList) {
+        List<Book> bookList = new ArrayList<>();
         for(int i = 0; i < cartList.size(); i++) {
-            eventList.add(cartList.get(i).getEvent());
+            bookList.add(cartList.get(i).getBook());
         }
-        return eventList;
+        return bookList;
     }
 
     public CartItem getCartItem(Integer CartId) {
@@ -57,7 +56,11 @@ public class CartItemService {
         return cartList.size();
     }
 
-    public void delete(CartItem cartItem) {
-        this.cartItemRepository.delete(cartItem);
+    public void deleteCartItemByMemberAndBook(Member member, Book book) {
+        CartItem CartItemToDelete = cartItemRepository.findByMemberAndBook(member, book);
+
+        if (CartItemToDelete != null) {
+            cartItemRepository.delete(CartItemToDelete);
+        }
     }
 }
