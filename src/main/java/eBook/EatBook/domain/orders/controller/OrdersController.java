@@ -30,9 +30,10 @@ public class OrdersController {
     private final BookService bookService;
 
     // 단건 결제
-    @GetMapping("/pay/progress")
-    public String ordersPay(){
-
+    @GetMapping("/pay/progress/{orderId}")
+    public String ordersPay(Model model, @PathVariable("orderId") Integer orderId, Principal principal){
+        Orders orders = this.ordersService.findById(orderId);
+        model.addAttribute("orders", orders);
         return "/orders/ordersProgress";
     }
 
@@ -51,7 +52,7 @@ public class OrdersController {
         Member member = this.memberService.findByUsername(principal.getName());
         Orders orders = this.ordersService.createOrders(book, member);
         model.addAttribute("orders", orders);
-        return "redirect:/pay/progress";
+        return  String.format("redirect:/pay/progress/%d", orders.getId());
     }
     @GetMapping("/confirm")
     public String ordersConfirm(){

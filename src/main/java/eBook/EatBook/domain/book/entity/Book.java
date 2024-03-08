@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.web.multipart.MultipartFile;
+import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class Book extends BaseEntity {
 
     @Column(columnDefinition = "TEXT")
     private String content;
+
 
     @OneToMany(mappedBy = "book")
     private List<CartItem> cartItems;
