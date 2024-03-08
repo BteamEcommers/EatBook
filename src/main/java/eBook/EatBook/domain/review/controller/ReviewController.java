@@ -72,7 +72,7 @@ public class ReviewController {
 
         this.reviewService.delete(review);
 
-        return String.format("redirect:/book/%s",review.getBook().getId());
+        return String.format("redirect:/book/detail/%s",review.getBook().getId());
     }
 }
 

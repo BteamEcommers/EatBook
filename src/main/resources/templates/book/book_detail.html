@@ -17,7 +17,6 @@
             display: flex;
             flex-wrap: wrap;
             justify-content:space-between;
-
         }
         .formation-item d-flex {
             border: 1px solid rgba(0, 0, 0, .125);
@@ -142,12 +141,11 @@
                 </div>
                 <div class="a_comment_top">
                     <ul th:each="review : ${reviewList}">
-                        <li th:text="${review.content}"></li>
+                        <li>
+                            <span th:text="${review.content}"></span>
+                            <a th:href="@{|/review/delete/${review.id}|}" class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">삭제</a>
+                        </li>
                     </ul>
-                    <a th:href="@{|/review/delete/${book.id}|}"
-                       class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;"
-                       th:text="삭제">
-                    </a>
                 </div>
             </div>
         </div>
