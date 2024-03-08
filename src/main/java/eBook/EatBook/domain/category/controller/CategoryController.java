@@ -27,7 +27,7 @@ public class CategoryController {
     @GetMapping("/create")
     public String createCategory(Model model){
         model.addAttribute("category", new Category());
-        return "book/category_create_form";
+        return "category/category_create_form";
     }
     @PostMapping("/create")
     public String createCategory(@RequestParam(value = "categoryName")String categoryName){
@@ -36,7 +36,3 @@ public class CategoryController {
         return "redirect:/book/list";
     }
 }
-
-
-
-
