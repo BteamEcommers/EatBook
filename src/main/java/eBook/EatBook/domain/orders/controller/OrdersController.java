@@ -2,6 +2,8 @@ package eBook.EatBook.domain.orders.controller;
 
 import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.book.service.BookService;
+import eBook.EatBook.domain.cartitem.Entity.CartItem;
+import eBook.EatBook.domain.cartitem.Service.CartItemService;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.domain.order_item.entity.OrderItem;
@@ -28,6 +30,9 @@ public class OrdersController {
     private final OrderItemService orderItemService;
     private final MemberService memberService;
     private final BookService bookService;
+    private final CartItemService cartItemService;
+
+
 
     // 단건 결제
     @GetMapping("/pay/progress/{orderId}")
@@ -36,6 +41,9 @@ public class OrdersController {
         model.addAttribute("orders", orders);
         return "/orders/ordersProgress";
     }
+
+
+
 
     @GetMapping("/pay/{bookId}")
     public String ordersPayOne(Model model, @PathVariable("bookId") Integer bookId, Principal principal){

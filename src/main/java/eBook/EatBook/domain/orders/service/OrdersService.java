@@ -1,6 +1,7 @@
 package eBook.EatBook.domain.orders.service;
 
 import eBook.EatBook.domain.book.entity.Book;
+import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.orders.entity.Orders;
 import eBook.EatBook.domain.orders.repository.OrdersRepository;
@@ -15,6 +16,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrdersService {
     private final OrdersRepository ordersRepository;
+
+//    // 카트 상품 결제
+//    public Orders addCartitems(CartItem cartItem, Member member) {
+//        Orders orders =
+//
+//    }
 
     // 단건 결제
     public Orders createOrders(Book book, Member member) {

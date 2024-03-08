@@ -7,11 +7,11 @@ import eBook.EatBook.domain.cartitem.Service.CartItemService;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -32,7 +32,7 @@ public class CartItemController {
         Book book = this.bookService.getBookById(id);
 
         // 중복 체크: 해당 상품이 카트에 이미 존재하는지 확인
-        if (cartItemService.hasWish(member, book)) {
+        if (cartItemService.hasCartItem(member, book)) {
             // 이미 카드에 있으면 중복으로 추가하지 않고 이벤트 상세 페이지로 리다이렉트
             return String.format("redirect:/book/detail/%d", id);
         }
@@ -67,5 +67,19 @@ public class CartItemController {
 
         return "redirect:/cartitem/list";
     }
+
+
+    @PostMapping("/deleteSelected")
+    public String deleteSelectedCartItems(@RequestParam("selectedItems") List<Integer> selectedItems, Principal principal) {
+        Member member = memberService.findByUsername(principal.getName());
+
+        for (Integer itemId : selectedItems) {
+            Book book = bookService.getBookById(itemId);
+            cartItemService.deleteCartItemByMemberAndBook(member, book);
+        }
+
+        return "redirect:/cartitem/list";
+    }
+
 
 }
