@@ -217,16 +217,13 @@
                                     <a href="blog.html" class="dropdown-item">구매내역</a>
                                 </li>
                                 <li>
-                                    <a href="shop.html" class="dropdown-item">장바구니</a>
+                                    <a th:href="@{/cartitem/list}" class="dropdown-item">장바구니</a>
                                 </li>
                                 <li>
-                                    <a href="cart.html" class="dropdown-item">나의 서재(찜)</a>
+                                    <a th:href="@{/wish/list}" class="dropdown-item">나의 서재(찜)</a>
                                 </li>
                                 <li>
-                                    <a href="checkout.html" class="dropdown-item">쿠폰함</a>
-                                </li>
-                                <li>
-                                    <a href="single-post.html" class="dropdown-item">문의 내역</a>
+                                    <a href="/" class="dropdown-item">쿠폰함</a>
                                 </li>
                                 <li>
                                     <a href="single-product.html" class="dropdown-item">판매글 보기</a>
@@ -269,9 +266,11 @@
                                     </li>
                                     <li>
                                         <a href="cart.html">
-                                            <svg class="cart">
-                                                <use xlink:href="#cart"></use>
-                                            </svg>
+                                            <a th:href="@{/cartitem/list}">
+                                                <svg class="cart">
+                                                    <use xlink:href="#cart"></use>
+                                                </svg>
+                                            </a>
                                         </a>
                                     </li>
                                 </ul>

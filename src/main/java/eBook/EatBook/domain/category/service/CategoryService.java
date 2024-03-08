@@ -1,6 +1,5 @@
 package eBook.EatBook.domain.category.service;
 
-import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.category.entity.Category;
 import eBook.EatBook.domain.category.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;

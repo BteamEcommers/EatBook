@@ -2,14 +2,9 @@ package eBook.EatBook.domain.book.controller;
 
 
 import eBook.EatBook.domain.book.form.BookForm;
-import eBook.EatBook.domain.book.repository.BookRepository;
 import eBook.EatBook.domain.book.service.BookService;
 import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.category.entity.Category;
-import eBook.EatBook.domain.category.repository.CategoryRepository;
-import eBook.EatBook.domain.category.service.CategoryService;
-import eBook.EatBook.domain.member.entity.Member;
-import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.domain.category.service.CategoryService;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
@@ -29,7 +24,6 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Controller
 @RequiredArgsConstructor
