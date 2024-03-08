@@ -17,13 +17,11 @@
     height:auto;
 }
 .book_right-side {
-    border: 1px solid indigo;
     position: sticky;
     margin-top: 5px;
     top: 0;
-    width: 20%;
+    width: 15%;
     height:150px;
-    justify-content:center;
 }
 
 /*판매(책) 중간*/
