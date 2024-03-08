@@ -16,18 +16,25 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Value;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class BookService {
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
+
+
+    @Value("${custom.fileDirPath}")
+    private String fileDirPath;
 
 
 
@@ -50,9 +57,17 @@ public class BookService {
 
 
     public Book createWithImage(BookForm bookForm
-            , MultipartFile image, Category category, Member seller) throws IOException {
-        String fileName = StringUtils.cleanPath(image.getOriginalFilename());  //이미지파일 업로드하는 과정
+            , Category category, Member seller, MultipartFile thumbnail) throws IOException {
+//        String fileName = StringUtils.cleanPath(image.getOriginalFilename());  //이미지파일 업로드하는 과정
+        //MultipartFile => String type
+        String thumbnailRelPath = "book/" + UUID.randomUUID().toString() + ".jpg";
+        File thumbnailFile = new File(fileDirPath + "/" + thumbnailRelPath);
 
+        try {
+            thumbnail.transferTo(thumbnailFile);
+        } catch (IOException e) {
+            throw  new RuntimeException(e);
+        }
 
         Book book = Book.builder()
                 .subject(bookForm.getSubject())
@@ -63,15 +78,15 @@ public class BookService {
                 .price(bookForm.getPrice())
                 .discount(bookForm.getDiscount())
                 .publisher(bookForm.getPublisher())
-                .bookThumbnailImg(fileName)
+                .thumbnailImg(thumbnailRelPath)
                 .seller(seller)
                 .createDate(LocalDateTime.now())
                 .modifiedDate(LocalDateTime.now())
                 .build();
         bookRepository.save(book);
 
-        String uploadDir = "book-thumbnails/" + book.getId();
-        FileUploadUtil.saveFile(uploadDir, fileName, image);
+//        String uploadDir = "book-thumbnails/" + book.getId();
+//        FileUploadUtil.saveFile(uploadDir, fileName, image);
 
         return book;
     }
