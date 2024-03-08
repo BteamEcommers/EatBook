@@ -5,12 +5,10 @@ import eBook.EatBook.domain.book.entity.Book;
 //import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.coupon.Entity.Coupon;
+import eBook.EatBook.domain.review.entity.Review;
 import eBook.EatBook.domain.wish.Entity.Wish;
 import eBook.EatBook.global.baseEntity.BaseEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -81,4 +79,5 @@ public class Member extends BaseEntity {
     // 판매자가 가진 책 리스트
     @OneToMany
     private List<Book> bookSellList;
+
 }

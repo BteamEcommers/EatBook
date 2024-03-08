@@ -1,4 +1,51 @@
 <html layout:decorate="~{layout}">
+<head>
+    <style>
+        .Ere_btn_register {
+            float: right;
+            margin: 0;
+            padding: 0px;
+            width: 95px;
+            width: 100px;
+            margin-right: 10px;
+
+        }
+        .a_comment_top {
+            margin-right: auto;
+            padding-top: 50px;
+            padding-bottom: 5px;
+        }
+        .a_comment_top ul {
+            list-style-type: none; /* 리스트 스타일 제거 */
+        }
+
+        .a_comment_top li {
+            margin-bottom: 50px; /* 각 리뷰 아래에 여백 추가 */
+        }
+        .a_comment_top li a {
+            margin-left: 250px; /* 삭제 버튼과 리뷰 사이에 여백 추가 */
+        }
+        .formation-item d-flex {
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-radius: 0.25rem;
+        }
+        ul {
+            list-style-type: none;
+        }
+        textarea {
+            resize: none; /* 드래그 기능을 없앰 */
+        }
+        .review-box {
+            border: 1px solid #ccc; /* 네모칸 테두리 스타일 */
+            padding: 10px; /* 네모칸 안 패딩 설정 */
+            border-radius: 5px; /* 네모칸 테두리 곡선 설정 */
+        }
+        .create-date {
+            margin-bottom: 5px; /* 생성 날짜와 리뷰 내용 사이의 간격 조정 */
+        }
+
+    </style>
+</head>
 <div layout:fragment="content">
     <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;">
         <div class="formation-item d-flex" style="padding-top:5px;">
@@ -62,21 +109,21 @@
         </div>
         <div class="book_middle-section">
             <div id="header" class="book_navbar header-scrolled text-black bg-light">
-                    <div class="book_nav-container">
-                        <div class="card-body btn btn-light">
-                            도서정보
-                        </div>
-                        <div class="card-body btn btn-light">
-                            리뷰
-                        </div>
-                        <div class="card-body" style="font-size:20px; color: red;">
-                            <div class="card-text" style="white-space: pre-line;" th:text="${book.price + ' 원'}"></div>
-                        </div>
-                        <div style="margin-bottom:5px" class="justify-content-end">
-                            <a class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">바로구매</a>
-                            <a class="btn btn-sm btn-primary" style="width: 120px;">장바구니 넣기</a>
-                        </div>
+                <div class="book_nav-container">
+                    <div class="card-body btn btn-light">
+                        도서정보
                     </div>
+                    <div class="card-body btn btn-light">
+                        리뷰
+                    </div>
+                    <div class="card-body" style="font-size:20px; color: red;">
+                        <div class="card-text" style="white-space: pre-line;" th:text="${book.price + ' 원'}"></div>
+                    </div>
+                    <div style="margin-bottom:5px" class="justify-content-end">
+                        <a class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">바로구매</a>
+                        <a class="btn btn-sm btn-primary" style="width: 120px;">장바구니 넣기</a>
+                    </div>
+                </div>
             </div>
             <div class="book_info">
                 <div class="formation-item d-flex" style="padding-top:5px;">
@@ -99,22 +146,37 @@
                 </div>
             </div>
             <div class="book_bottom-section">
-                <div class="formation-item d-flex" style="padding-top:5px;">
+                <!-- 리뷰 등록 폼 -->
+                <div class="mb-3">
+                    <label for="content" class="form-label"></label>
                     <form th:action="@{|/review/create/${book.id}|}" method="post">
-                        <textarea name="content" id="content" rows="15"></textarea>
-                        <input type="submit" value="리뷰등록">
+                        <textarea name="content" id="content" class="form-control" rows="3"></textarea>
+                        <button type="submit" class="btn btn-sm btn-primary" style="width: 100px; margin-top: 5px;">리뷰등록</button>
                     </form>
-                    <div>
-                        <ul th:each="review : ${reviewList}">
-                            <li th:text="${review.content}"></li>
-                        </ul>
-                    </div>
-                    <a th:href="@{|/review/delete/${book.id}|}"
-                       class="delete btn btn-sm btn-outline-secondary"
-                       th:text="삭제">
-                    </a>
+                </div>
+
+                <!-- 리뷰 목록 -->
+                <div class="a_comment_top">
+                    <ul th:each="review : ${reviewList}">
+                        <li>
+                            <div class="review-box mb-2">
+                                <div>
+                                    <span th:text="${review.author.username}"></span>
+                                    <div class="create-date" th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                                </div>
+
+                                <div class="review-content">
+                                    <span th:text="${review.content}"></span>
+                                </div>
+                                <a th:href="@{|/review/delete/${review.id}|}" class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">삭제</a>
+                            </div>
+
+
+                        </li>
+                    </ul>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
