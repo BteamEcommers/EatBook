@@ -28,7 +28,7 @@
                 <td th:text="${loop.count}"></td>
                 <td>
                     <a th:href="@{|/book/detail/${book.id}|}">
-                        <img src="..." class="" alt="..." style="width:150px; height:230px;">
+                        <img th:src="@{|/file/${book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;">
                     </a>
                 </td>
                 <td>
