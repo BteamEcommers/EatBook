@@ -13,6 +13,7 @@ import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.domain.category.service.CategoryService;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
+import eBook.EatBook.domain.review.DTO.ReviewForm;
 import eBook.EatBook.domain.review.entity.Review;
 import eBook.EatBook.domain.review.service.ReviewService;
 import jakarta.validation.Valid;
@@ -47,7 +48,7 @@ public class BookController {
 
 
     @GetMapping("/detail/{id}") //책에 대한 상세페이지
-    public String bookDetail(Model model, @PathVariable("id") Integer id) {
+    public String bookDetail(Model model, @PathVariable("id") Integer id, ReviewForm reviewForm) {
         Book book = this.bookService.getBookById(id);
         List<Review> reviewList = this.reviewService.findAllByBook(book);
         model.addAttribute("book", book);
