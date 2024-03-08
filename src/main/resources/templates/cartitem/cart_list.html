@@ -5,85 +5,94 @@
             <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
                 <span class="fs-5 fw-semibold">장바구니</span>
             </a>
-            <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;" >
+            <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;">
                 <div class="formation-item d-flex" style="padding-top:5px;">
                     <div class="p-3 btn btn-sm btn-primary">장바구니</div>
-                    <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">주문</div>
-                    <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">완료</div>
+                    <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">주문
+                    </div>
+                    <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">완료
+                    </div>
                 </div>
             </div>
-            <div class="top-cartContainer">
-                <div class="form-check" style="padding-top:5px; margin-left:5px;">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        전체 선택
-                    </label>
+            <form th:action="@{/cartitem/deleteSelected}" method="post" id="deleteForm">
+                <div class="top-cartContainer">
+                    <div class="form-check" style="padding-top:5px; margin-left:5px;">
+                        <input class="form-check-input" type="checkbox" value="" id="allCheckBox"
+                               onclick="allChecked()">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            전체 선택
+                        </label>
+                    </div>
+                    <button style="margin-left:5px;" type="button" class="btn btn-sm btn-outline-secondary"
+                            onclick="deleteSelectedItems()">선택 삭제
+                    </button>
+                    <div class="btn btn-sm btn-outline-secondary" style="margin-left:5px;">
+                        결제 하기
+                    </div>
                 </div>
-                <div class="btn btn-sm btn-outline-secondary" style="margin-left:5px;">
-                    삭제
-                </div>
-                <div class="btn btn-sm btn-outline-secondary" style="margin-left:5px;">
-                    결제 하기
-                </div>
-            </div>
-            <div class="middle-cartContainer">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                </label>
-                            </div>
-                        </th>
-                        <th scope="col" style="text-align:center;">상품정보</th>
-                        <th scope="col" style="text-align:center;">가격</th>
-                        <th scope="col" style="text-align:center;">주문</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- 이벤트 목록(eventList)을 기준으로 반복 -->
-                    <tr th:each="book : ${bookList}">
-                        <!-- 이벤트 정보 출력 -->
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault"></label>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex">
-                                <div style="width:120px; height:120px;">
-                                    <svg class="bd-placeholder-img card-img-top" width="120px" height="120px"
-                                         xmlns="http://www.w3.org/2000/svg" role="img"
-                                         aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                         focusable="false">
-                                        <title>이벤트</title>
-                                        <rect width="120px" height="120px" fill="#55595c"/>
-                                        <text x="25%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg>
+                <div class="middle-cartContainer">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="allCheckBox2"
+                                           onclick="allChecked2()">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                    </label>
                                 </div>
-                                <div style="margin-left: 50px; justify-content:center;">
-                                    <a th:href="@{|/event/detail/${book.id}|}" th:text="${book.subject}"></a>
+                            </th>
+                            <th scope="col" style="text-align:center;">상품정보</th>
+                            <th scope="col" style="text-align:center;">가격</th>
+                            <th scope="col" style="text-align:center;">주문</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="book : ${bookList}">
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input rowCheckBox" type="checkbox" th:value="${book.id}"
+                                           id="flexCheck${book.id}">
+                                    <label class="form-check-label" for="flexCheck${book.id}"></label>
                                 </div>
-                            </div>
-                        </td>
-                        <td th:text="${book.price}"></td>
-                        <td style="align-items:center;">
-                            <div class="btn btn-sm btn-outline-secondary">
-                                <a href="/">주문</a>
-                            </div>
-                            <div class="btn btn-sm btn-outline-secondary">
-                                <a class="cartItemDelete" th:id="'cartItemDelete_' + ${book.id}" href="#" onclick="deleteEvent(${book.id}); return false;">삭제</a>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <div style="width:120px; height:120px;">
+                                        <svg class="bd-placeholder-img card-img-top" width="120px" height="120px"
+                                             xmlns="http://www.w3.org/2000/svg" role="img"
+                                             aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                                             focusable="false">
+                                            <title>이벤트</title>
+                                            <rect width="120px" height="120px" fill="#55595c"/>
+                                            <text x="25%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                                        </svg>
+                                    </div>
+                                    <div style="margin-left: 50px; justify-content:center;">
+                                        <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.subject}"></a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td th:text="${book.price}"></td>
+                            <td style="align-items:center;">
+                                <div class="btn btn-sm btn-outline-secondary">
+                                    <a th:href="@{/orders/order/list}">주문</a>
+                                </div>
+                                <div class="btn btn-sm btn-outline-secondary">
+                                    <a class="cartItemDelete" th:id="'cartItemDelete_' + ${book.id}">삭제</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
         </div>
-        <script type="text/javascript" src="/js/cart/cart.js"></script>
     </div>
+    <script type="text/javascript" src="/js/cart/cart.js"></script>
+    <script>
+
+    </script>
 </div>
+
 </html>

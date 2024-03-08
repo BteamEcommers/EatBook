@@ -2,6 +2,8 @@ package eBook.EatBook.domain.wish.Controller;
 
 import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.book.service.BookService;
+import eBook.EatBook.domain.cartitem.Entity.CartItem;
+import eBook.EatBook.domain.cartitem.Service.CartItemService;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.domain.wish.Entity.Wish;
@@ -9,9 +11,7 @@ import eBook.EatBook.domain.wish.Service.WishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -24,6 +24,7 @@ public class WishController {
     private final WishService wishService;
     private final MemberService memberService;
     private final BookService bookService;
+    private final CartItemService cartItemService;
 
 
     @GetMapping("/add/{id}")
@@ -64,6 +65,35 @@ public class WishController {
         Book book = bookService.getBookById(id);
 
         wishService.deleteWishByMemberAndBook(member, book);
+
+        return "redirect:/wish/list";
+    }
+
+    @PostMapping("/deleteSelected")
+    public String deleteSelectedWish(@RequestParam("selectedItems") List<Integer> selectedItems, Principal principal) {
+        Member member = memberService.findByUsername(principal.getName());
+
+        for (Integer itemId : selectedItems) {
+            Book book = bookService.getBookById(itemId);
+            wishService.deleteWishByMemberAndBook(member,book);
+        }
+
+        return "redirect:/wish/list";
+    }
+    @PostMapping("/addSelected")
+    public String addSelectedToCart(@RequestParam("selectedItems") List<Integer> selectedItems, Principal principal) {
+        Member member = memberService.findByUsername(principal.getName());
+
+        for (Integer itemId : selectedItems) {
+            Book book = bookService.getBookById(itemId);
+
+            // 중복 체크: 해당 상품이 카트에 이미 존재하는지 확인
+            if (!cartItemService.hasCartItem(member, book)) {
+                // 중복이 아니면 카트에 추가
+                CartItem cartItem = cartItemService.addCartItem(member, book);
+                memberService.addCartItem(member, cartItem);
+            }
+        }
 
         return "redirect:/wish/list";
     }

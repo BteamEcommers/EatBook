@@ -1,0 +1,57 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
+   <div class="event-section">
+      <div class="container p-3">
+         <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+            <span class="fs-5 fw-semibold">상품 확인</span>
+         </a>
+         <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;" >
+            <div class="formation-item d-flex" style="padding-top:5px;">
+               <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">장바구니</div>
+               <div class="p-3 btn btn-sm btn-primary">주문</div>
+               <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">완료</div>
+            </div>
+         </div>
+         <div class="top-cartContainer">
+            <div class="btn btn-sm btn-outline-secondary" style="margin-left:5px;">
+               장바구니 가기
+            </div>
+         </div>
+         <div class="middle-cartContainer">
+            <table class="table table-hover">
+               <thead>
+               <tr>
+                  <th scope="col" style="text-align:center;">상품정보</th>
+                  <th scope="col" style="text-align:center;">가격</th>
+               </tr>
+               </thead>
+               <tbody>
+               <!-- 주문 상세 목록-->
+               <tr th:each="book : ${bookList}">
+                  <!-- 주문 정보 출력 -->
+                  <td>
+                     <div class="d-flex">
+                        <div style="width:120px; height:120px;">
+                           <svg class="bd-placeholder-img card-img-top" width="120px" height="120px"
+                                xmlns="http://www.w3.org/2000/svg" role="img"
+                                aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                                focusable="false">
+                              <title>이벤트</title>
+                              <rect width="120px" height="120px" fill="#55595c"/>
+                              <text x="25%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                           </svg>
+                        </div>
+                        <div style="margin-left: 50px; justify-content:center;">
+                           <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.subject}"></a>
+                        </div>
+                     </div>
+                  </td>
+                  <td th:text="${book.price}"></td>
+               </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
+</html>

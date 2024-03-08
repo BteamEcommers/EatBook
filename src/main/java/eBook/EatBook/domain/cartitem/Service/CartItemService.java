@@ -27,13 +27,13 @@ public class CartItemService {
         return cartItem;
     }
 
-    public boolean hasWish(Member member, Book book) {
+    public boolean hasCartItem(Member member, Book book) {
         return this.cartItemRepository.existsByMemberAndBook(member, book);
     }
 
     public List<Book> findProductByCart(List<CartItem> cartList) {
         List<Book> bookList = new ArrayList<>();
-        for(int i = 0; i < cartList.size(); i++) {
+        for (int i = 0; i < cartList.size(); i++) {
             bookList.add(cartList.get(i).getBook());
         }
         return bookList;
@@ -63,4 +63,6 @@ public class CartItemService {
             cartItemRepository.delete(CartItemToDelete);
         }
     }
+
+
 }

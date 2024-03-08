@@ -1,6 +1,7 @@
 package eBook.EatBook.domain.orders.entity;
 
 import eBook.EatBook.domain.book.entity.Book;
+import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.order_item.entity.OrderItem;
 import eBook.EatBook.global.baseEntity.BaseEntity;
@@ -34,6 +35,10 @@ public class Orders extends BaseEntity {
     private Integer totalDiscount;
 
     @ManyToOne
+    private CartItem cartItem;
+
+
+    @ManyToOne
     private Book book;
 
     @ManyToOne
@@ -42,6 +47,4 @@ public class Orders extends BaseEntity {
     @OneToMany
     private List<OrderItem> orderItemList;
 
-//    @ManyToOne
-//    private CartItem cartItem;
 }
