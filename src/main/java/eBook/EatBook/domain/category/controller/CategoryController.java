@@ -36,7 +36,3 @@ public class CategoryController {
         return "redirect:/book/list";
     }
 }
-
-
-
-

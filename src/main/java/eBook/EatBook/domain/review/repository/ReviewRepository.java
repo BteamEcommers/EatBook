@@ -13,7 +13,9 @@ import java.util.Optional;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
-    Optional<Review> findById(SingularAttribute<AbstractPersistable, Serializable> id);
+    Optional<Review> findById(Integer id);
+
+
 
     List<Review> findAllByBook(Book book);
 

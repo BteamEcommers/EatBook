@@ -1,4 +1,36 @@
 <html layout:decorate="~{layout}">
+<head>
+    <style>
+        .Ere_btn_register {
+            float: right;
+            margin: 0;
+            padding: 0px;
+            width: 95px;
+            width: 100px;
+            margin-right: 10px;
+
+        }
+        .a_comment_top {
+            margin-right: auto;
+            padding-top: 50px;
+            padding-bottom: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:space-between;
+
+        }
+        .formation-item d-flex {
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-radius: 0.25rem;
+        }
+        ul {
+            list-style-type: none;
+        }
+        textarea {
+            resize: none; /* 드래그 기능을 없앰 */
+        }
+    </style>
+</head>
 <div layout:fragment="content">
     <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;">
         <div class="formation-item d-flex" style="padding-top:5px;">
@@ -62,21 +94,21 @@
         </div>
         <div class="book_middle-section">
             <div id="header" class="book_navbar header-scrolled text-black bg-light">
-                    <div class="book_nav-container">
-                        <div class="card-body btn btn-light">
-                            도서정보
-                        </div>
-                        <div class="card-body btn btn-light">
-                            리뷰
-                        </div>
-                        <div class="card-body" style="font-size:20px; color: red;">
-                            <div class="card-text" style="white-space: pre-line;" th:text="${book.price + ' 원'}"></div>
-                        </div>
-                        <div style="margin-bottom:5px" class="justify-content-end">
-                            <a class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">바로구매</a>
-                            <a class="btn btn-sm btn-primary" style="width: 120px;">장바구니 넣기</a>
-                        </div>
+                <div class="book_nav-container">
+                    <div class="card-body btn btn-light">
+                        도서정보
                     </div>
+                    <div class="card-body btn btn-light">
+                        리뷰
+                    </div>
+                    <div class="card-body" style="font-size:20px; color: red;">
+                        <div class="card-text" style="white-space: pre-line;" th:text="${book.price + ' 원'}"></div>
+                    </div>
+                    <div style="margin-bottom:5px" class="justify-content-end">
+                        <a class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">바로구매</a>
+                        <a class="btn btn-sm btn-primary" style="width: 120px;">장바구니 넣기</a>
+                    </div>
+                </div>
             </div>
             <div class="book_info">
                 <div class="formation-item d-flex" style="padding-top:5px;">
@@ -99,18 +131,21 @@
                 </div>
             </div>
             <div class="book_bottom-section">
-                <div class="formation-item d-flex" style="padding-top:5px;">
+                <div class="justify-content-end" style="margin-bottom:5px">
                     <form th:action="@{|/review/create/${book.id}|}" method="post">
-                        <textarea name="content" id="content" rows="15"></textarea>
-                        <input type="submit" value="리뷰등록">
+                        <textarea name="content" id="content" cols="50" rows="3"></textarea>
+                        <div class="btn btn-sm btn-primary">
+                            <input class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;"
+                                   type="submit" value="리뷰등록">
+                        </div>
                     </form>
-                    <div>
-                        <ul th:each="review : ${reviewList}">
-                            <li th:text="${review.content}"></li>
-                        </ul>
-                    </div>
+                </div>
+                <div class="a_comment_top">
+                    <ul th:each="review : ${reviewList}">
+                        <li th:text="${review.content}"></li>
+                    </ul>
                     <a th:href="@{|/review/delete/${book.id}|}"
-                       class="delete btn btn-sm btn-outline-secondary"
+                       class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;"
                        th:text="삭제">
                     </a>
                 </div>
