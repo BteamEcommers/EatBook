@@ -57,19 +57,18 @@ public class BookController {
     }
     @PostMapping("/create")
     public String bookCreate(@Valid BookForm bookForm, BindingResult bindingResult,
-                             @RequestParam("file") MultipartFile file,
                              @RequestParam(value = "categoryName", defaultValue = "기본 카테고리") String categoryName,
-                             RedirectAttributes redirectAttributes, Principal principal) {
+                             RedirectAttributes redirectAttributes, @RequestParam(value = "thumbnail",required = false) MultipartFile thumbnail, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "/book_create_form";
         }
 
         Category category = this.categoryService.getCategoryByCategoryName(categoryName);
         // 이미지 업로드 로직 추가
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Member seller = this.memberService.findByUsername(principal.getName());
         try {
-            Book book = bookService.createWithImage(bookForm,file, category, seller);
+            Book book = bookService.createWithImage(bookForm, category, seller, thumbnail);
             redirectAttributes.addFlashAttribute("success", "도서가 성공적으로 등록되었습니다.");
             // 카테고리 페이지로 리다이렉트
             return "redirect:/book/list";
