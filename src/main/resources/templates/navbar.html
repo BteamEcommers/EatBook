@@ -195,25 +195,24 @@
                                     <a th:href="@{/member/modify}" class="dropdown-item">개인정보수정</a>
                                 </li>
                                 <li>
-                                    <a href="blog.html" class="dropdown-item">구매내역</a>
+                                    <a href="/" class="dropdown-item">구매내역</a>
                                 </li>
                                 <li>
-                                    <a href="shop.html" class="dropdown-item">장바구니</a>
+                                    <a th:href="@{/cartitem/list}" class="dropdown-item">장바구니</a>
                                 </li>
                                 <li>
-                                    <a href="cart.html" class="dropdown-item">나의 서재(찜)</a>
+                                    <a th:href="@{/wish/list}" class="dropdown-item">나의 서재(찜)</a>
                                 </li>
                                 <li>
                                     <a href="checkout.html" class="dropdown-item">쿠폰함</a>
                                 </li>
                                 <li>
-                                    <a href="single-post.html" class="dropdown-item">문의 내역</a>
+                                    <a th:if="${member != null and member.isSeller == true}"
+                                       th:href="@{/rebate/seller/list}" class="dropdown-item">판매글 보기</a>
                                 </li>
                                 <li>
-                                    <a href="single-product.html" class="dropdown-item">판매글 보기</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html" class="dropdown-item">정산 리스트</a>
+                                    <a th:if="${member != null and member.isSeller == true}"
+                                       th:href="@{/rebate/seller/list}" class="dropdown-item">판매자 정산 리스트</a>
                                 </li>
                                 <!-- admin 에게만 표시 -->
                                 <th:block sec:authorize="hasRole('ADMIN')">

@@ -39,7 +39,7 @@ public class Book extends BaseEntity {
     @Column
     private String bookIntroduce;
     @Column
-    private String bookThumbnailImg;
+    private String thumbnailImg;
     @Column
     private Integer price;
     @Column

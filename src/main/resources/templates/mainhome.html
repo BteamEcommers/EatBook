@@ -217,19 +217,19 @@
                                     <a href="blog.html" class="dropdown-item">구매내역</a>
                                 </li>
                                 <li>
-                                    <a href="shop.html" class="dropdown-item">장바구니</a>
+                                    <a th:href="@{/cartitem/list}" class="dropdown-item">장바구니</a>
                                 </li>
                                 <li>
-                                    <a href="cart.html" class="dropdown-item">나의 서재(찜)</a>
+                                    <a th:href="@{/wish/list}" class="dropdown-item">나의 서재(찜)</a>
                                 </li>
                                 <li>
-                                    <a href="checkout.html" class="dropdown-item">쿠폰함</a>
+                                    <a href="/" class="dropdown-item">쿠폰함</a>
                                 </li>
                                 <li>
-                                    <a href="single-post.html" class="dropdown-item">문의 내역</a>
+                                    <a th:href="@{/apply/seller}" class="dropdown-item">판매자 신청하기</a>
                                 </li>
                                 <li>
-                                    <a href="single-product.html" class="dropdown-item">판매글 보기</a>
+                                    <a th:if="${member != null and member.isSeller == true}" href="/" class="dropdown-item">판매글 보기</a>
                                 </li>
                                 <th:block th:if="principal != null ">
                                     <li>
@@ -269,9 +269,11 @@
                                     </li>
                                     <li>
                                         <a href="cart.html">
-                                            <svg class="cart">
-                                                <use xlink:href="#cart"></use>
-                                            </svg>
+                                            <a th:href="@{/cartitem/list}">
+                                                <svg class="cart">
+                                                    <use xlink:href="#cart"></use>
+                                                </svg>
+                                            </a>
                                         </a>
                                     </li>
                                 </ul>
@@ -288,7 +290,7 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="container">
-                    <div class="row d-flex align-items-center">
+                    <div class="row-top d-flex align-items-center" style="margin-top:100px;">
                         <div class="col-md-6">
                             <div class="banner-content">
                                 <h1 class="display-2 text-uppercase text-dark pb-5">EBook</h1>
@@ -298,8 +300,8 @@
                         </div>
                         <div class="col-md-5">
                             <div class="image-holder">
-                                <img style="width:657px; height:657px;"
-                                     src="https://image.aladin.co.kr/product/33116/15/cover200/k062937128_3.jpg?RS=170"
+                                <img style="width:500px; height:500px; margin:50px;"
+                                     src="https://image.yes24.com/goods/118379109/XL"
                                      alt="banner">
                             </div>
                         </div>
@@ -309,18 +311,18 @@
             </div>
             <div class="swiper-slide">
                 <div class="container">
-                    <div class="row d-flex flex-wrap align-items-center">
+                    <div class="row-top d-flex flex-wrap align-items-center" style="margin-top:100px;">
                         <div class="col-md-6">
                             <div class="banner-content">
-                                <h1 class="display-2 text-uppercase text-dark pb-5">책 제목</h1>
-                                <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">eBook
+                                <h1 class="display-2 text-uppercase text-dark pb-5">EBook</h1>
+                                <a th:href="@{/book/list}" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">eBook
                                     바로가기</a>
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="image-holder">
-                                <img style="width:657px; height:657px;"
-                                     src="https://image.aladin.co.kr/product/33074/28/cover200/k742937307_1.jpg?RS=170"
+                                <img style="width:500px; height:500px; margin:50px;"
+                                     src="https://image.yes24.com/goods/19040233/XL"
                                      alt="banner">
                             </div>
                         </div>
@@ -330,12 +332,12 @@
         </div>
     </div>
     <div class="swiper-icon swiper-arrow swiper-arrow-prev">
-        <svg class="chevron-left">
+        <svg class="chevron-left" style="margin-top:100px;">
             <use xlink:href="#chevron-left"/>
         </svg>
     </div>
     <div class="swiper-icon swiper-arrow swiper-arrow-next">
-        <svg class="chevron-right">
+        <svg class="chevron-right" style="margin-top:100px;">
             <use xlink:href="#chevron-right"/>
         </svg>
     </div>
@@ -692,18 +694,20 @@
     </div>
     <div class="swiper-pagination position-absolute text-center"></div>
 </section>
-<section id="yearly-sale" class="bg-light-blue overflow-hidden mt-5 padding-xlarge"
-         style="background-image: url('https://image.aladin.co.kr/product/30878/9/cover150/e672531362_1.jpg');background-position: right; background-repeat: no-repeat;">
+<section id="yearly-sale" class="bg-light-blue overflow-hidden mt-5 padding-xlarge">
     <div class="row d-flex flex-wrap align-items-center">
         <div class="col-md-6 col-sm-12">
             <div class="text-content offset-4 padding-medium">
-                <h3>대여 eBook</h3>
-                <h2 class="display-2 pb-5 text-uppercase text-dark">대여 eBook</h2>
-                <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">바로가기</a>
+                <h3>eBook</h3>
+                <h2 class="display-2 pb-5 text-uppercase text-dark">eBook</h2>
+                <a th:href="@{/book/list}" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">eBook
+                    바로가기</a>
             </div>
         </div>
         <div class="col-md-6 col-sm-12">
-
+            <img style="width:500px; height:500px; margin:50px;"
+                 src="https://image.yes24.com/goods/123122731/XL"
+                 alt="banner">
         </div>
     </div>
 </section>
@@ -868,32 +872,7 @@
     </div>
     <div class="swiper-pagination"></div>
 </section>
-<section id="subscribe" class="container-grid padding-large position-relative overflow-hidden">
-    <div class="container">
-        <div class="row">
-            <div class="subscribe-content bg-dark d-flex flex-wrap justify-content-center align-items-center padding-medium">
-                <div class="col-md-6 col-sm-12">
-                    <div class="display-header pe-3">
-                        <h2 class="display-7 text-uppercase text-light">Subscribe Us Now</h2>
-                        <p>Get latest news, updates and deals directly mailed to your inbox.</p>
-                    </div>
-                </div>
-                <div class="col-md-5 col-sm-12">
-                    <form class="subscription-form validate">
-                        <div class="input-group flex-wrap">
-                            <input class="form-control btn-rounded-none" type="email1" name="EMAIL"
-                                   placeholder="Your email1 address here" required="">
-                            <button class="btn btn-medium btn-primary text-uppercase btn-rounded-none" type="submit"
-                                    name="subscribe">Subscribe
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="instagram" class="padding-large overflow-hidden no-padding-top">
+<section id="instagram" class="padding-large overflow-hidden no-padding-top" style="margin-top:100px;">
     <div class="container">
         <div class="row">
             <div class="display-header text-uppercase text-dark text-center pb-3">
@@ -1008,10 +987,6 @@
                                     data-shape="pc"
                                     data-support-multiple-densities="true"
                             ></div>
-                            <!--결제 테스트를 위한 임시 버튼(추후 이동예정)-->
-                            <button onclick="window.open('http://localhost:8010/orders/pay', '로그인창', 'width=500, height=500, location=no, status=no, scrollbars=yes, top=150,left=600');">
-                                팝업 테스트 버튼
-                            </button>
                         </div>
                     </div>
                 </div>

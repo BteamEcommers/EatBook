@@ -5,80 +5,137 @@
             <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
                 <span class="fs-5 fw-semibold">찜 목록</span>
             </a>
-            <div class="top-wishContainer">
-                <div class="form-check" style="padding-top:5px; margin-left:5px;">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        전체 선택
-                    </label>
-                </div>
-                <div class="btn btn-sm btn-outline-secondary" style="margin-left:5px;">
-                    삭제
-                </div>
-                <div class="btn btn-sm btn-outline-secondary" style="margin-left:5px;">
-                    장바구니 담기
-                </div>
-            </div>
-            <div class="middle-wishContainer">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                </label>
-                            </div>
-                        </th>
-                        <th scope="col" style="text-align:center;">상품정보</th>
-                        <th scope="col" style="text-align:center;">가격</th>
-                        <th scope="col" style="text-align:center;">삭제 / 장바구니</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- 이벤트 목록(eventList)을 기준으로 반복 -->
-                    <tr th:each="book : ${bookList}">
-                        <!-- 이벤트 정보 출력 -->
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault"></label>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex">
-                                <div style="width:120px; height:120px;">
-                                    <svg class="bd-placeholder-img card-img-top" width="120px" height="120px"
-                                         xmlns="http://www.w3.org/2000/svg" role="img"
-                                         aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                         focusable="false">
-                                        <title>이벤트</title>
-                                        <rect width="120px" height="120px" fill="#55595c"/>
-                                        <text x="25%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg>
-                                </div>
-                                <div style="margin-left: 50px; justify-content:center;">
-                                    <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.subject}"></a>
-                                </div>
-                            </div>
-                        </td>
-                        <td th:text="${book.price}"></td>
-                        <td style="align-items:center;">
-                            <!-- 찜 삭제 버튼 -->
-                            <div class="btn btn-sm btn-outline-secondary">
-                                <a class="wishDelete" th:id="'wishDelete_' + ${book.id}" href="#" onclick="deleteEvent(${book.id}); return false;">삭제</a>
-                            </div>
-                            <!-- 이벤트를 장바구니에 담는 버튼 -->
-                            <div class="btn btn-sm btn-outline-secondary">
-                                <a th:href="@{|/cartitem/add/${book.id}|}" onclick="return confirm('장바구니에 추가 하시겠습니까?')">장바구니 담기</a>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <form th:action="@{/wish/addSelected}" method="post" id="addToCartForm">
+                <form th:action="@{/wish/deleteSelected}" method="post" id="deleteForm">
+                    <div class="top-wishContainer">
+                        <div class="form-check" style="padding-top:5px; margin-left:5px;">
+                            <input class="form-check-input" type="checkbox" value="" id="allCheckBox"
+                                   onclick="allChecked()">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                전체 선택
+                            </label>
+                        </div>
+<!--                        <button style="margin-left:5px;" type="button" class="btn btn-sm btn-outline-secondary"-->
+<!--                                onclick="deleteSelectedItems()">선택 삭제-->
+<!--                        </button>-->
+                        <div class="btn btn-sm btn-outline-secondary" style="margin-left:5px;" onclick="addToCart()">
+                            장바구니 담기
+                        </div>
+                    </div>
+                    <div class="middle-wishContainer">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        </label>
+                                    </div>
+                                </th>
+                                <th scope="col" style="text-align:center;">상품정보</th>
+                                <th scope="col" style="text-align:center;">가격</th>
+                                <th scope="col" style="text-align:center;">삭제 / 장바구니</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="book : ${bookList}">
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input rowCheckBox" type="checkbox"
+                                               th:value="${book.id}"
+                                               id="flexCheck${book.id}">
+                                        <label class="form-check-label" for="flexCheck${book.id}"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div style="width:120px; height:120px;">
+                                            <div style="width:120px; height:120px;">
+                                                <img th:src="@{|/file/${book.thumbnailImg}|}" alt="사진" style="width: 120px; height: 120px;">
+                                            </div>
+                                        </div>
+                                        <div style="margin-left: 50px; justify-content:center;">
+                                            <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.subject}"></a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td th:text="${book.price}"></td>
+                                <td style="align-items:center;">
+                                    <!-- 상품을 장바구니에 담는 버튼 -->
+                                    <div class="btn btn-sm btn-outline-secondary">
+                                        <a class="addCartItem" th:id="'addCartItem_' + ${book.id}"
+                                           onclick="addCartItem(${book.id}); return false;">장바구니 담기</a>
+                                    </div>
+                                    <!-- 찜 삭제 버튼 -->
+                                    <div class="btn btn-sm btn-outline-secondary">
+                                        <a class="wishDelete" th:id="'wishDelete_' + ${book.id}" href="#"
+                                           onclick="deleteEvent(${book.id}); return false;">삭제</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </form>
         </div>
     </div>
     <script type="text/javascript" src="/js/wish/wish.js"></script>
+    <script>
+        function addToCart() {
+            var form = document.getElementById('addToCartForm');
+            var selectedItems = [];
+            var checkboxes = document.querySelectorAll('.rowCheckBox:checked');
+
+            checkboxes.forEach(function(checkbox) {
+                selectedItems.push(checkbox.value);
+            });
+
+            addSelectedItemsToCart(selectedItems);
+        }
+
+        function addSelectedItemsToCart(selectedItems) {
+            var form = document.getElementById('addToCartForm');
+
+            if (selectedItems.length === 0) {
+                Swal.fire({
+                    icon: 'info',
+                    title: '찜 목록에서',
+                    text: '선택한 항목이 없거나 찜 이 비어있습니다.'
+                });
+            } else {
+                Swal.fire({
+                    title: '장바구니에 추가',
+                    text: '선택한 항목을 장바구니에 추가하시겠습니까?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '추가',
+                    cancelButtonText: '취소'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                selectedItems.forEach(function(itemId) {
+                    var input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'selectedItems';
+                    input.value = itemId;
+                    form.appendChild(input);
+                });
+                Swal.fire({
+                    title: '추가 가 완료되었습니다.',
+                    icon: 'success',
+                    showConfirmButton: true
+                }).then(() => {
+                    form.submit();
+                });
+            } else {
+                window.location.href = '/wish/list';
+            }
+        });
+    }
+}
+    </script>
 </div>
 </html>

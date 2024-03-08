@@ -1,6 +1,6 @@
 <div class="left-side" th:fragment="memberSide">
-  <div class="flex-shrink-0 p-3" style="width: 280px;">
-    <a th:href="@{/event/list}"
+  <div class="flex-shrink-0 p-3" style="width: 200px;">
+    <a th:href="@{/member/profile}"
        class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
       <span class="fs-5 fw-semibold">마이 페이지</span>
     </a>
@@ -16,6 +16,8 @@
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li><a th:href="@{/member/modify}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정보 수정</a>
             </li>
+            <li><a th:href="@{/apply/seller}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">판매자 신청</a>
+            </li>
             <li><a th:href="@{/cartitem/list}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">장바구니</a>
             </li>
             <li><a th:href="@{/wish/list}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">찜목록</a>
@@ -27,7 +29,7 @@
       </li>
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"  aria-expanded="true">
           구매
         </button>
         <div class="collapse" id="dashboard-collapse">
@@ -41,9 +43,9 @@
           </ul>
         </div>
       </li>
-      <li class="mb-1">
+      <li class="mb-1" th:if="${member != null and member.isSeller == true}">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true">
           판매
         </button>
         <div class="collapse" id="orders-collapse">
@@ -56,9 +58,9 @@
           </ul>
         </div>
       </li>
-      <li class="mb-1">
+      <li class="mb-1" sec:authorize="hasRole('ADMIN')">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                data-bs-toggle="collapse" data-bs-target="#account-collapse"  aria-expanded="true">
           관리자
         </button>
         <div class="collapse" id="account-collapse">
