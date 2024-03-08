@@ -33,12 +33,7 @@ public class OrdersController {
     private final CartItemService cartItemService;
 
 
-    // 카트아이템 결제
-    @GetMapping("/order/list")
-    public String oderslist() {
 
-        return "orders/oder_detail";
-    }
     // 단건 결제
     @GetMapping("/pay/progress/{orderId}")
     public String ordersPay(Model model, @PathVariable("orderId") Integer orderId, Principal principal){
