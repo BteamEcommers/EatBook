@@ -2,8 +2,6 @@ package eBook.EatBook.domain.review.repository;
 
 import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.review.entity.Review;
-import jakarta.persistence.metamodel.SingularAttribute;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
