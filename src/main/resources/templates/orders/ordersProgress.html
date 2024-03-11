@@ -8,20 +8,78 @@
         <div class="head-box">
             <h2>결제 진행 중</h2>
         </div>
-        <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;" >
+        <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;">
             <div class="formation-item d-flex" style="padding-top:5px;">
-                <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">장바구니</div>
+                <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">장바구니
+                </div>
                 <div class="p-3 btn btn-sm btn-primary">주문</div>
                 <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">완료</div>
             </div>
         </div>
         <div class="body-box">
-            <div class="text-center">
-                <div class="spinner-border"  style="width: 3rem; height: 3rem;" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
+            <div class="order-item-box">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            제품명
+                        </th>
+                        <th>
+                            제품
+                        </th>
+                        <th>
+                            제품정보
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${orders.book.subject}"></td>
+                        <td>
+                            <span>
+                                <img th:src="@{|/file/${orders.book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;">
+                            </span>
+                        </td>
+                        <td>[[${orders.book.price}]] <span>원</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="bottom-box border-dark">
+            <div>
+                <table class="table table-success">
+                    <thead>
+                        <tr>
+                            <th>제품명</th>
+                            <th>제품 이미지</th>
+                            <th>합계</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fw-bold">
+                            <td th:text="${orders.book.subject}"></td>
+                            <td>
+                                <span>
+                                <img th:src="@{|/file/${orders.book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;">
+                            </span>
+                            </td>
+                            <td>[[${orders.book.price}]] <span>원</span></td>
+                            <td>
+                                <button onclick="window.open('http://localhost:8010/orders/confirm', '결제완료', 'width=500, height=500, location=no, status=no, scrollbars=yes, top=150,left=600');"
+                                class="btn btn-primary">
+                                    결제
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
+
     </div>
 </div>
 

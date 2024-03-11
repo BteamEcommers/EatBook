@@ -60,11 +60,17 @@ public class OrdersController {
         Member member = this.memberService.findByUsername(principal.getName());
         Orders orders = this.ordersService.createOrders(book, member);
         model.addAttribute("orders", orders);
-        return  String.format("redirect:/pay/progress/%d", orders.getId());
+        return  String.format("redirect:/orders/pay/progress/%d", orders.getId());
     }
     @GetMapping("/confirm")
     public String ordersConfirm(){
         
         return "/orders/ordersConfirm";
+    }
+
+    @GetMapping("/complete")
+    public String ordersComplete(){
+
+        return "/orders/ordersComplete";
     }
 }
