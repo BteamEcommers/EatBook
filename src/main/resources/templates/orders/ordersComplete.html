@@ -1,0 +1,26 @@
+<html layout:decorate="~{layout}">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/apply/applyList.css">
+</head>
+<div layout:fragment="content" class="container">
+    <div class="main-container">
+        <div class="head-box">
+            <h2>결제 완료</h2>
+        </div>
+        <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;">
+            <div class="formation-item d-flex" style="padding-top:5px;">
+                <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">장바구니
+                </div>
+                <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">주문</div>
+                <div class="p-3 btn btn-sm btn-primary">완료</div>
+            </div>
+        </div>
+        <div class="body-box">
+            <h1>🎉 결제가 완료되었습니다! 🎉</h1>
+        </div>
+        <div class="bottom-box border-dark d-flex justify-content-center">
+            <a th:href="@{/}" class="btn btn-primary" style="width: 150px;">메인으로</a>
+        </div>
+    </div>
+</div>
+</html>
