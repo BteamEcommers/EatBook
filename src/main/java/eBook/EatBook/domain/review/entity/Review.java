@@ -11,7 +11,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 
@@ -35,4 +37,7 @@ public class Review extends BaseEntity {
 
     @ManyToMany
     private Set<Member> voter;
+
+    @CreatedDate
+    private LocalDateTime createDate;
 }

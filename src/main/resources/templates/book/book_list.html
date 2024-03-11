@@ -8,9 +8,9 @@
         <h1 th:if="${categoryEntity == null}">EBook</h1>
     </div>
     <div class="category-button-container">
-        <span><a th:href="@{/book/list}" class="btn btn-primary btn-lg">EBook</a></span>
+        <span><a th:href="@{/book/list}" class="btn btn-primary btn-ll">EBook</a></span>
         <span th:if="${categoryList != null}" th:each="category : ${categoryList}"><a
-                th:href="@{|/book/list/${category.categoryName}|}" class="btn btn-primary btn-lg">[[${category.categoryName}]]</a></span>
+                th:href="@{|/book/list/${category.categoryName}|}" class="btn btn-primary btn-ll">[[${category.categoryName}]]</a></span>
     </div>
 
     <div class="main-container">
@@ -63,17 +63,17 @@
                 <td>
                     <ul>
                         <div style="margin-bottom:5px">
-                            <a th:href="@{|/cartitem/add/${book.id}|}" onclick="return confirm('장바구니에 추가 하시겠습니까?')"
-                               class="btn btn-sm btn-primary" style="width: 150px">장바구니 담기</a>
+                            <a class="addCartItem btn btn-sm btn-primary" th:id="'addCartItem_' + ${book.id}" onclick="addCartItem(${book.id}); return false;" style="width:100%;">장바구니
+                                담기</a>
                         </div>
                         <div>
                             <a th:href="@{|/wish/add/${book.id}|}" onclick="return confirm('찜 목록에 추가 하시겠습니까?')"
-                               class="btn btn-sm btn-primary" style="width: 150px">찜 하기</a>
+                               class="btn btn-sm btn-primary" style="width: 100%;">찜 하기</a>
                         </div>
                         <li>
                             <!--수정중-->
                             <a th:href="@{/orders/pay/progress}" class="btn btn-sm btn-primary"
-                               onclick="movePage([[${book.id}]])" style="width: 150px; margin-top:5px">결제</a>
+                               onclick="movePage([[${book.id}]])" style="width: 100%; margin-top:5px">결제</a>
                         </li>
                     </ul>
                 </td>
@@ -115,5 +115,92 @@
         </ul>
     </div>
     <!-- 페이징처리 끝 -->
+    <script>
+        $(document).ready(function () {
+    $(".addCartItem").click(function () {
+        var bookId = this.id.split('_')[1];
+
+        Swal.fire({
+            title: '장바구니에',
+            text: '해당 상품을 담으시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '담기',
+            cancelButtonText: '취소',
+            preConfirm: () => {
+                return new Promise((resolve) => {
+                    // Ajax 요청을 통한 서버에서의 삭제 작업
+                    $.ajax({
+                        url: '/cartitem/add/' + bookId,
+                        type: 'GET',
+                        success: function (data) {
+                              resolve(true);
+                        },
+                        error: function () {
+                            resolve(false);
+                        }
+                    });
+                });
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // SweetAlert2 확인 버튼을 누르면 실행되는 부분
+                Swal.fire(
+                    '장바구니에 상품을 담았습니다.',
+                    '',
+                    'success'
+                ).then(() => {
+                    window.location.href = '/book/list'
+                });
+            }
+        });
+    });
+});
+    </script>
+    <script>
+        $(document).ready(function () {
+        $(".addWish").click(function () {
+        var bookId = this.id.split('_')[1];
+
+        Swal.fire({
+            title: '찜 목록에',
+            text: '해당 상품을 담으시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '담기',
+            cancelButtonText: '취소',
+            preConfirm: () => {
+                return new Promise((resolve) => {
+                    $.ajax({
+                        url: '/wish/add/' + bookId,
+                        type: 'GET',
+                        success: function (data) {
+                              resolve(true);
+                        },
+                        error: function () {
+                            resolve(false);
+                        }
+                    });
+                });
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // SweetAlert2 확인 버튼을 누르면 실행되는 부분
+                Swal.fire(
+                    '찜 목록에 상품을 담았습니다.',
+                    '',
+                    'success'
+                ).then(() => {
+                    window.location.href = '/book/list'
+                });
+            }
+        });
+    });
+});
+    </script>
 </div>
 </html>

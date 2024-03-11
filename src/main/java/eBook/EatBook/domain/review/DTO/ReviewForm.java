@@ -15,4 +15,6 @@ public class ReviewForm {
 
     private Integer bookId;
 
+    private String nickname;
+
 }

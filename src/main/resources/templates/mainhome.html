@@ -184,16 +184,16 @@
                             <a class="nav-link me-4 active" href="#billboard">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="#mobile-products">베스트 셀러</a>
+                            <a class="nav-link me-4" href="#best_ebook">베스트 셀러</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="#smart-watches">무료 eBook</a>
+                            <a class="nav-link me-4" href="#free_ebook">무료 eBook</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="#yearly-sale">대여</a>
+                            <a class="nav-link me-4" href="#product_ebook">ebook</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="#latest-blog">새로나온 eBook</a>
+                            <a class="nav-link me-4" href="#new_ebook">새로나온 eBook</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link me-4" sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a>
@@ -294,7 +294,7 @@
                         <div class="col-md-6">
                             <div class="banner-content">
                                 <h1 class="display-2 text-uppercase text-dark pb-5">EBook</h1>
-                                <a th:href="@{/book/list}" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">eBook
+                                <a th:href="@{/book/list}" class="btn btn-medium btn-black text-uppercase btn-rounded-none">eBook
                                     바로가기</a>
                             </div>
                         </div>
@@ -307,7 +307,6 @@
                         </div>
                     </div>
                 </div>
-            <!--                -->
             </div>
             <div class="swiper-slide">
                 <div class="container">
@@ -315,7 +314,7 @@
                         <div class="col-md-6">
                             <div class="banner-content">
                                 <h1 class="display-2 text-uppercase text-dark pb-5">EBook</h1>
-                                <a th:href="@{/book/list}" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">eBook
+                                <a th:href="@{/book/list}" class="btn btn-medium btn-black text-uppercase btn-rounded-none">eBook
                                     바로가기</a>
                             </div>
                         </div>
@@ -400,13 +399,13 @@
         </div>
     </div>
 </section>
-<section id="mobile-products" class="product-store position-relative padding-large no-padding-top">
+<section id="best_ebook" class="product-store position-relative padding-large no-padding-top">
     <div class="container">
         <div class="row">
             <div class="display-header d-flex justify-content-between pb-3">
                 <h2 class="display-7 text-dark text-uppercase">베스트셀러</h2>
                 <div class="btn-right">
-                    <a href="http://localhost:8010/category/list#homeTabBest"
+                    <a href="http://localhost:8010/book/list/베스트셀러"
                        class="btn btn-medium btn-normal text-uppercase">바로가기</a>
                 </div>
             </div>
@@ -417,7 +416,7 @@
                             <div class="image-holder">
                                 <a href="http://localhost:8010/category/list#homeTabBest">
                                     <img style="width:310px; height:418px;"
-                                         src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg"
+                                         src="https://image.yes24.com/goods/118379109/XL"
                                          alt="product-item" class="img-fluid">
                                 </a>
                             </div>
@@ -443,7 +442,7 @@
                             <div class="image-holder">
                                 <a href="http://localhost:8010/category/list#homeTabBest">
                                     <img style="width:310px; height:418px;"
-                                         src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg"
+                                         src="https://i.ibb.co/pvcP37W/5.jpg"
                                          alt="product-item" class="img-fluid">
                                 </a>
                             </div>
@@ -469,7 +468,7 @@
                             <div class="image-holder">
                                 <a href="http://localhost:8010/category/list#homeTabBest">
                                     <img style="width:310px; height:418px;"
-                                         src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg"
+                                         src="https://i.ibb.co/TvXJX3G/3.jpg"
                                          alt="product-item" class="img-fluid">
                                 </a>
                             </div>
@@ -495,7 +494,7 @@
                             <div class="image-holder">
                                 <a href="http://localhost:8010/category/list#homeTabBest">
                                     <img style="width:310px; height:418px;"
-                                         src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg"
+                                         src="https://i.ibb.co/CKcZqf6/2.jpg"
                                          alt="product-item" class="img-fluid">
                                 </a>
                             </div>
@@ -520,7 +519,7 @@
                         <div class="product-card position-relative">
                             <div class="image-holder">
                                 <img style="width:310px; height:418px;"
-                                     src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg"
+                                     src="https://i.ibb.co/pvcP37W/5.jpg"
                                      alt="product-item" class="img-fluid">
                             </div>
                             <div class="cart-concern position-absolute">
@@ -546,13 +545,13 @@
     </div>
     <div class="swiper-pagination position-absolute text-center"></div>
 </section>
-<section id="smart-watches" class="product-store padding-large position-relative">
+<section id="free_ebook" class="product-store padding-large position-relative">
     <div class="container">
         <div class="row">
             <div class="display-header d-flex justify-content-between pb-3">
                 <h2 class="display-7 text-dark text-uppercase">무료 eBook</h2>
                 <div class="btn-right">
-                    <a href="http://localhost:8010/category/list#homeTabFree"
+                    <a href="http://localhost:8010/book/list/무료%20Ebook"
                        class="btn btn-medium btn-normal text-uppercase">바로가기</a>
                 </div>
             </div>
@@ -563,7 +562,59 @@
                             <div class="image-holder">
                                 <a href="http://localhost:8010/category/list#homeTabFree">
                                     <img style="width:310px; height:418px;"
-                                         src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg"
+                                         src="https://i.ibb.co/CKcZqf6/2.jpg"
+                                         alt="product-item" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="cart-concern position-absolute">
+                                <div class="cart-button d-flex">
+                                    <a href="#" class="btn btn-medium btn-black">장바구니 담기
+                                        <svg class="cart-outline">
+                                            <use xlink:href="#cart-outline"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                                <h3 class="card-title text-uppercase">
+                                    <a href="#">책 제목</a>
+                                </h3>
+                                <span class="item-price text-primary">가격</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card position-relative">
+                            <div class="image-holder">
+                                <a href="http://localhost:8010/category/list#homeTabFree">
+                                    <img style="width:310px; height:418px;"
+                                         src="https://i.ibb.co/55zMbZf/3.jpg"
+                                         alt="product-item" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="cart-concern position-absolute">
+                                <div class="cart-button d-flex">
+                                    <a href="#" class="btn btn-medium btn-black">장바구니 담기
+                                        <svg class="cart-outline">
+                                            <use xlink:href="#cart-outline"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                                <h3 class="card-title text-uppercase">
+                                    <a href="#">책 제목</a>
+                                </h3>
+                                <span class="item-price text-primary">가격</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="product-card position-relative">
+                            <div class="image-holder">
+                                <a href="http://localhost:8010/category/list#homeTabFree">
+                                    <img style="width:310px; height:418px;"
+                                         src="https://i.ibb.co/ssGJ2f8/4.jpg"
                                          alt="product-item" class="img-fluid">
                                 </a>
                             </div>
@@ -615,59 +666,7 @@
                             <div class="image-holder">
                                 <a href="http://localhost:8010/category/list#homeTabFree">
                                     <img style="width:310px; height:418px;"
-                                         src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg"
-                                         alt="product-item" class="img-fluid">
-                                </a>
-                            </div>
-                            <div class="cart-concern position-absolute">
-                                <div class="cart-button d-flex">
-                                    <a href="#" class="btn btn-medium btn-black">장바구니 담기
-                                        <svg class="cart-outline">
-                                            <use xlink:href="#cart-outline"></use>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                                <h3 class="card-title text-uppercase">
-                                    <a href="#">책 제목</a>
-                                </h3>
-                                <span class="item-price text-primary">가격</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card position-relative">
-                            <div class="image-holder">
-                                <a href="http://localhost:8010/category/list#homeTabFree">
-                                    <img style="width:310px; height:418px;"
-                                         src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg"
-                                         alt="product-item" class="img-fluid">
-                                </a>
-                            </div>
-                            <div class="cart-concern position-absolute">
-                                <div class="cart-button d-flex">
-                                    <a href="#" class="btn btn-medium btn-black">장바구니 담기
-                                        <svg class="cart-outline">
-                                            <use xlink:href="#cart-outline"></use>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                                <h3 class="card-title text-uppercase">
-                                    <a href="#">책 제목</a>
-                                </h3>
-                                <span class="item-price text-primary">가격</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="product-card position-relative">
-                            <div class="image-holder">
-                                <a href="http://localhost:8010/category/list#homeTabFree">
-                                    <img style="width:310px; height:418px;"
-                                         src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg"
+                                         src="https://i.ibb.co/BfQ8wmY/pg73137-cover-medium.jpg"
                                          alt="product-item" class="img-fluid">
                                 </a>
                             </div>
@@ -694,13 +693,13 @@
     </div>
     <div class="swiper-pagination position-absolute text-center"></div>
 </section>
-<section id="yearly-sale" class="bg-light-blue overflow-hidden mt-5 padding-xlarge">
+<section id="product_ebook" class="bg-light-blue overflow-hidden mt-5 padding-xlarge">
     <div class="row d-flex flex-wrap align-items-center">
         <div class="col-md-6 col-sm-12">
             <div class="text-content offset-4 padding-medium">
                 <h3>eBook</h3>
                 <h2 class="display-2 pb-5 text-uppercase text-dark">eBook</h2>
-                <a th:href="@{/book/list}" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">eBook
+                <a th:href="@{/book/list}" class="btn btn-medium btn-black text-uppercase btn-rounded-none">eBook
                     바로가기</a>
             </div>
         </div>
@@ -711,13 +710,13 @@
         </div>
     </div>
 </section>
-<section id="latest-blog" class="padding-large">
+<section id="new_ebook" class="padding-large">
     <div class="container">
         <div class="row">
             <div class="display-header d-flex justify-content-between pb-3">
                 <h2 class="display-7 text-dark text-uppercase">새로나온 eBook</h2>
                 <div class="btn-right">
-                    <a href="http://localhost:8010/category/list#homeTabNew"
+                    <a href="http://localhost:8010/book/list/새로나온%20Ebook"
                        class="btn btn-medium btn-normal text-uppercase">바로 가기</a>
                 </div>
             </div>
@@ -727,18 +726,18 @@
                         <div class="card-image">
                             <a href="http://localhost:8010/category/list#homeTabNew">
                                 <img style="width:414px; height:418px;"
-                                     src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg" alt=""
+                                     src="https://i.ibb.co/pJ5qhRR/1.jpg" alt=""
                                      class="img-fluid">
                             </a>
                         </div>
                     </div>
                     <div class="card-body text-uppercase">
                         <div class="card-meta text-muted">
-                            <span class="meta-date">2024년 1월 1일</span>
-                            <span class="meta-category">- 제목</span>
+                            <span class="meta-date">2024년 3월 11일</span>
+<!--                            <span class="meta-category">- 제목</span>-->
                         </div>
                         <h3 class="card-title">
-                            <a href="#">내용</a>
+<!--                            <a href="#">내용</a>-->
                         </h3>
                     </div>
                 </div>
@@ -747,18 +746,18 @@
                         <div class="card-image">
                             <a href="http://localhost:8010/category/list#homeTabNew">
                                 <img style="width:414px; height:418px;"
-                                     src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg" alt=""
+                                     src="https://i.ibb.co/FxkntVq/2.jpg" alt=""
                                      class="img-fluid">
                             </a>
                         </div>
                     </div>
                     <div class="card-body text-uppercase">
                         <div class="card-meta text-muted">
-                            <span class="meta-date">2024년 1월 1일</span>
-                            <span class="meta-category">- 제목</span>
+                            <span class="meta-date">2024년 3월 11일</span>
+<!--                            <span class="meta-category">- 제목</span>-->
                         </div>
                         <h3 class="card-title">
-                            <a href="#">내용</a>
+<!--                            <a href="#">내용</a>-->
                         </h3>
                     </div>
                 </div>
@@ -767,18 +766,18 @@
                         <div class="card-image">
                             <a href="http://localhost:8010/category/list#homeTabNew">
                                 <img style="width:414px; height:418px;"
-                                     src="https://image.aladin.co.kr/product/32860/35/cover/e712532694_1.jpg" alt=""
+                                     src="https://i.ibb.co/0DdZQBN/3.jpg" alt=""
                                      class="img-fluid">
                             </a>
                         </div>
                     </div>
                     <div class="card-body text-uppercase">
                         <div class="card-meta text-muted">
-                            <span class="meta-date">2024년 1월 1일</span>
-                            <span class="meta-category">- 제목</span>
+                            <span class="meta-date">2024년 3월 11일</span>
+<!--                            <span class="meta-category">- 제목</span>-->
                         </div>
                         <h3 class="card-title">
-                            <a href="#">내용</a>
+<!--                            <a href="#">내용</a>-->
                         </h3>
                     </div>
                 </div>
@@ -881,31 +880,31 @@
             <div class="d-flex flex-wrap">
                 <figure class="instagram-item pe-2">
                     <a href="/" class="image-link position-relative">
-                        <img src="https://image.aladin.co.kr/img/bn/ebook/2024/01/240206_ewriter_b.jpg" alt="instagram"
+                        <img src="https://image.aladin.co.kr/img/bn/ebook/2024/01/240307_gazi_b.jpg" alt="instagram"
                              class="insta-image">
                     </a>
                 </figure>
                 <figure class="instagram-item pe-2">
                     <a href="/" class="image-link position-relative">
-                        <img src="https://image.aladin.co.kr/img/bn/ebook/2024/01/240206_ewriter_b.jpg" alt="instagram"
+                        <img src="https://image.aladin.co.kr/img/bn/ebook/2024/01/240306_self_b.jpg" alt="instagram"
                              class="insta-image">
                     </a>
                 </figure>
                 <figure class="instagram-item pe-2">
                     <a href="/" class="image-link position-relative">
-                        <img src="https://image.aladin.co.kr/img/bn/ebook/2024/01/240206_ewriter_b.jpg" alt="instagram"
+                        <img src="https://image.aladin.co.kr/img/bn/ebook/2023/04/231219_sdedu_b.jpg" alt="instagram"
                              class="insta-image">
                     </a>
                 </figure>
                 <figure class="instagram-item pe-2">
                     <a href="/" class="image-link position-relative">
-                        <img src="https://image.aladin.co.kr/img/bn/ebook/2024/01/240206_ewriter_b.jpg" alt="instagram"
+                        <img src="https://image.aladin.co.kr/img/bn/ebook/2024/01/240201_review_b.jpg" alt="instagram"
                              class="insta-image">
                     </a>
                 </figure>
                 <figure class="instagram-item pe-2">
                     <a href="/" class="image-link position-relative">
-                        <img src="https://image.aladin.co.kr/img/bn/ebook/2024/01/240206_ewriter_b.jpg" alt="instagram"
+                        <img src="https://image.aladin.co.kr/img/bn/ebook/2024/01/240223_lang_b.jpg" alt="instagram"
                              class="insta-image">
                     </a>
                 </figure>
@@ -1016,12 +1015,6 @@
         </div>
     </div>
 </div>
-<script>
-    function redirectToBestCategory() {
-        // 이미지 클릭 시 원하는 카테고리 페이지로 이동
-        window.location.href = 'http://localhost:8010/category/list#homeTabBest';
-    }
-</script>
 <script src="/js/main/jquery-1.11.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="/js/main/bootstrap.bundle.min.js"></script>
