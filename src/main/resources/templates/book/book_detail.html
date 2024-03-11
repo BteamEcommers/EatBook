@@ -1,40 +1,15 @@
 <html layout:decorate="~{layout}">
-<head>
+<div layout:fragment="content">
     <style>
-        .Ere_btn_register {
-            float: right;
-            margin: 0;
-            padding: 0px;
-            width: 95px;
-            width: 100px;
-            margin-right: 10px;
-
-        }
-        .a_comment_top {
-            margin-right: auto;
-            padding-top: 50px;
-            padding-bottom: 5px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content:space-between;
-
-        }
-        .formation-item d-flex {
-            border: 1px solid rgba(0, 0, 0, .125);
-            border-radius: 0.25rem;
-        }
-        ul {
-            list-style-type: none;
-        }
-        textarea {
-            resize: none; /* 드래그 기능을 없앰 */
+        .aside_items {
+            display:none;
         }
     </style>
-</head>
-<div layout:fragment="content">
     <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;">
-        <div class="formation-item d-flex" style="padding-top:5px;">
-            게시글 제목 / 판매자
+        <div class="title_book d-flex" style="padding-top:5px;">
+            제목:
+            <div th:text="${book.subject}"></div>
+            / 출판사:<div th:text="${book.publisher}"></div>
         </div>
     </div>
     <div class="bt_section">
@@ -47,22 +22,36 @@
             </div>
             <div class="center-detail">
                 <div>
-                    <div class="card my-3">
-                        <div class="card-body">
-                            책 제목:
+                    <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
+                         style="width: 100%; padding-left:10px;">
+                        <h2>
                             <div class="card-text" style="white-space: pre-line;" th:text="${book.subject}"></div>
-                            출판사 :
-                            <div class="card-text" style="white-space: pre-line;" th:text="${book.publisher}"></div>
-                            책 소개:
-                            <div class="card-text" style="white-space: pre-line;" th:text="${book.bookIntroduce}"></div>
-                        </div>
+                        </h2>
+                    </div>
+                    <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
+                         style="width: 100%; padding-left:10px;">
+                        <h6>정가</h6>
+                        <div class="card-text" style="white-space: pre-line;" th:text="${book.price}"></div>
+                        <br>
+                        <h6>할인가</h6>
+                        <div class="card-text" style="white-space: pre-line; color:red;"
+                             th:text="${book.price}"></div>
                     </div>
                 </div>
                 <div>
-                    <div class="card my-3">
-                        <div class="card-body">
-                            가격
-                            <div class="card-text" style="white-space: pre-line;" th:text="${book.price}"></div>
+                    <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
+                         style="width: 100%; padding-left:10px;">
+                        <h5>쿠폰 받기</h5>
+                        <div class="card my-3">
+                            <div class="card-body">
+                                쿠폰 내용
+                                <div class="card-text" style="white-space: pre-line;">
+                                    홈페이지 오픈 기념 이벤트 중 입니다
+                                </div>
+                            </div>
+                            <div>
+                                <p>신간 책 이벤트 중입니다</p>
+                            </div>
                         </div>
                     </div>
                     <div class="card my-3">
@@ -73,123 +62,157 @@
                     </div>
                 </div>
             </div>
-            <div class="book_right-side">
-                구매 창 예정
-                <div style="margin-bottom:5px">
-                    <a class="btn btn-sm btn-primary" style="width: 150px">바로구매</a>
-                </div>
-                <div style="margin-bottom:5px">
-                    <a class="addCartItem btn btn-sm btn-primary" style="width: 150px" th:id="'addCartItem_' + ${book.id}" onclick="addCartItem(${book.id}); return false;">장바구니 담기</a>
-                </div>
-                <div>
-                    <a th:href="@{|/wish/add/${book.id}|}" onclick="return confirm('찜 목록에 추가 하시겠습니까?')" class="btn btn-sm btn-primary" style="width: 150px">찜 하기</a>
+            <div class="book_right-side bg-light">
+                <div class="book_right-nav">
+                    <div style="margin-bottom:5px">
+                        <a class="btn btn-sm btn-primary" style="width: 150px">바로구매</a>
+                    </div>
+                    <div style="margin-bottom:5px">
+                        <a class="addCartItem btn btn-sm btn-primary" style="width: 150px"
+                           th:id="'addCartItem_' + ${book.id}" onclick="addCartItem(${book.id}); return false;">장바구니
+                            담기</a>
+                    </div>
+                    <div>
+                        <a th:href="@{|/wish/add/${book.id}|}" onclick="return confirm('찜 목록에 추가 하시겠습니까?')"
+                           class="btn btn-sm btn-primary" style="width: 150px">찜 하기</a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="book_middle-section">
             <div id="header" class="book_navbar header-scrolled text-black bg-light">
-                    <div class="book_nav-container">
-                        <div class="card-body btn btn-light">
-                            도서정보
-                        </div>
-                        <div class="card-body btn btn-light">
-                            리뷰
-                        </div>
-                        <div class="card-body" style="font-size:20px; color: red;">
-                            <div class="card-text" style="white-space: pre-line;" th:text="${book.price + ' 원'}"></div>
-                        </div>
-                        <div style="margin-bottom:5px" class="justify-content-end">
-                            <a class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">바로구매</a>
-                            <a class="btn btn-sm btn-primary"style="width: 120px" th:id="'addCartItem_' + ${book.id}" onclick="addCartItem(${book.id}); return false;">장바구니 담기</a>
-                        </div>
+                <div class="book_nav-container">
+                    <a href="#ebook_info" class="card-body btn btn-light" onclick="activateSection('ebook_info')">
+                        도서정보
+                    </a>
+                    <a href="#review_info" class="card-body btn btn-light" onclick="activateSection('review_info')">
+                        리뷰
+                    </a>
+                    <div class="card-body" style="font-size:20px; color: red;">
+                        <div class="card-text" style="white-space: pre-line;" th:text="${book.price + ' 원'}"></div>
                     </div>
+                    <div style="margin-bottom:5px" class="justify-content-end">
+                        <a class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">바로구매</a>
+                        <a class="addCartItem btn btn-sm btn-primary" style="width: 120px"
+                           th:id="'addCartItem_' + ${book.id}" onclick="addCartItem(${book.id}); return false;">장바구니
+                            담기</a>
+                    </div>
+                </div>
             </div>
-            <div class="book_info">
-                <div class="formation-item d-flex" style="padding-top:5px;">
+            <div id="ebook_info" class="book_info">
+                <div class="formation-item d-flex" style="padding-top:5px; width:100%;">
                     <article class="blog-post">
+                        <div class="card-text" style="white-space: pre-line;" th:text="${book.publisher}"></div>
+                        <div class="card-text" style="white-space: pre-line;" th:text="${book.bookIntroduce}"></div>
                         <h2 class="display-5 link-body-emphasis mb-1">Sample blog post</h2>
                         <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p>
 
-                        <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic typography, lists, tables, images, code, and more are all supported as expected.</p>
+                        <p>This blog post shows a few different types of content that’s supported and styled with
+                            Bootstrap. Basic typography, lists, tables, images, code, and more are all supported as
+                            expected.</p>
                         <hr>
-                        <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
+                        <p>This is some additional paragraph placeholder content. It has been written to fill the
+                            available space and show how a longer snippet of text affects the surrounding content. We'll
+                            repeat it often to keep the demonstration flowing, so be on the lookout for this exact same
+                            string of text.</p>
                         <h2>Blockquotes</h2>
                         <p>This is an example blockquote in action:</p>
                         <blockquote class="blockquote">
                             <p>Quoted text goes here.</p>
                         </blockquote>
-                        <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
+                        <p>This is some additional paragraph placeholder content. It has been written to fill the
+                            available space and show how a longer snippet of text affects the surrounding content. We'll
+                            repeat it often to keep the demonstration flowing, so be on the lookout for this exact same
+                            string of text.</p>
                         <h3>Example lists</h3>
-                        <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the other highly repetitive body text used throughout. This is an example unordered list:</p>
+                        <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the
+                            other highly repetitive body text used throughout. This is an example unordered list:</p>
                     </article>
                 </div>
             </div>
+            <div id="review_info" class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
+                 style="width: 100%;"></div>
+            <h2>회원 리뷰</h2>
+            <div id="review_info" class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
+                 style="width: 100%;"></div>
             <div class="book_bottom-section">
                 <div class="justify-content-end" style="margin-bottom:5px">
-                    <form th:action="@{|/review/create/${book.id}|}" method="post">
-                        <textarea name="content" id="content" cols="50" rows="3"></textarea>
-                        <div class="btn btn-sm btn-primary">
-                            <input class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;"
-                                   type="submit" value="리뷰등록">
-                        </div>
-                    </form>
-                </div>
-                <div class="a_comment_top">
-                    <ul th:each="review : ${reviewList}">
-                        <li th:text="${review.content}"></li>
-                    </ul>
-                    <a th:href="@{|/review/delete/${book.id}|}"
-                       class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;"
-                       th:text="삭제">
-                    </a>
+                    <!-- 리뷰 등록 폼 -->
+                    <div class="review_form mb-3">
+                        <label for="content" class="form-label"></label>
+                        <form th:action="@{|/review/create/${book.id}|}" method="post">
+                            <textarea name="content" id="content" class="form-control" rows="3"
+                                      placeholder="책에 대한 스포일러 및 심한 욕설은 제외됩니다"></textarea>
+                            <button type="submit" class="btn btn-sm btn-primary" style="width: 100px; margin-top: 5px;">
+                                리뷰등록
+                            </button>
+                        </form>
+                    </div>
+                    <!-- 리뷰 목록 -->
+                    <div class="a_comment_top">
+                        <ul th:each="review : ${reviewList}">
+                            <li>
+                                <div id="review_info"
+                                     class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
+                                     style="width: 100%;">
+                                    <div class="review-box mb-2">
+                                        <div style="display:flex;" th:text="${review.author.username}"></div>
+                                        <div style="display:flex; justify-content:end; padding-right:10px;" th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd')}"></div>
+                                        <div class="review-content">
+                                            <span th:text="${review.content}"></span>
+                                        </div>
+                                        <a th:href="@{|/review/delete/${review.id}|}" class="btn btn-sm btn-primary"
+                                           style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <script>
-        $(document).ready(function () {
-    $(".addCartItem").click(function () {
-        var bookId = this.id.split('_')[1];
+            <script>
+                $(document).ready(function () {
+            $(".addCartItem").click(function () {
+                var bookId = this.id.split('_')[1];
 
-        Swal.fire({
-            title: '장바구니에',
-            text: '해당 상품을 담으시겠습니까?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '담기',
-            cancelButtonText: '취소',
-            preConfirm: () => {
-                return new Promise((resolve) => {
-                    // Ajax 요청을 통한 서버에서의 삭제 작업
-                    $.ajax({
-                        url: '/cartitem/add/' + bookId,
-                        type: 'GET',
-                        success: function (data) {
-                              resolve(true);
-                        },
-                        error: function () {
-                            resolve(false);
-                        }
-                    });
+                Swal.fire({
+                    title: '장바구니에',
+                    text: '해당 상품을 담으시겠습니까?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '담기',
+                    cancelButtonText: '취소',
+                    preConfirm: () => {
+                        return new Promise((resolve) => {
+                            // Ajax 요청을 통한 서버에서의 삭제 작업
+                            $.ajax({
+                                url: '/cartitem/add/' + bookId,
+                                type: 'GET',
+                                success: function (data) {
+                                      resolve(true);
+                                },
+                                error: function () {
+                                    resolve(false);
+                                }
+                            });
+                        });
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // SweetAlert2 확인 버튼을 누르면 실행되는 부분
+                        Swal.fire(
+                            '장바구니에 상품을 담았습니다.',
+                            '',
+                            'success'
+                        ).then(() => {
+                            window.location.href = '/book/detail/' + bookId;
+                        });
+                    }
                 });
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // SweetAlert2 확인 버튼을 누르면 실행되는 부분
-                Swal.fire(
-                    '장바구니에 상품을 담았습니다.',
-                    '',
-                    'success'
-                ).then(() => {
-                    window.location.href = '/book/detail/' + bookId;
-                });
-            }
+            });
         });
-    });
-});
-
-    </script>
-</div>
+            </script>
+        </div>
 </html>

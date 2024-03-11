@@ -115,3 +115,13 @@
     }); // End of a document ready
 
 })(jQuery);
+
+document.addEventListener('DOMContentLoaded', function () {
+      var mySwiper = new Swiper('.main-swiper', {
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+      });
+});

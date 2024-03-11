@@ -17,27 +17,31 @@
     height:auto;
 }
 .book_right-side {
-    border: 1px solid indigo;
-    position: sticky;
     margin-top: 5px;
+    width: 15%;
+}
+.book_right-nav {
+    position: sticky;
     top: 0;
-    width: 20%;
-    height:150px;
-    justify-content:center;
+
 }
 
 /*판매(책) 중간*/
 .book_middle-section {
-    border: 1px solid orange;
+    border: 1px solid rgb(0,0,0,.125);
     width: auto;
     height: 2000px;
 }
 
+
 /*판매(책) 하단 (리뷰 영역)*/
 .book_bottom-section {
-    border: 1px solid blue;
     width: auto;
     height: 900px;
+}
+.review_form {
+    padding: 0.5rem 1rem;
+    background-color: rgb(0,0,0,.03);
 }
 
 .book_navbar {
@@ -53,5 +57,12 @@
 }
 .book_info {
     height: 1000px;
+    width: 100%;
 }
 
+ul {
+     list-style-type: none;
+}
+textarea {
+     resize: none;
+}

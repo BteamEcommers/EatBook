@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,8 @@ public class ReviewService {
         Review review = Review.builder()
                 .book(books)
                 .content(content)
+                .createDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
                 .author(author)
                 .build();
         reviewRepository.save(review);

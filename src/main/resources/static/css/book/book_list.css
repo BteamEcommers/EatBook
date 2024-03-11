@@ -29,4 +29,7 @@ list-style: none;
     padding-left: 50px;
 }
 
-
+.btn-ll {
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+}
