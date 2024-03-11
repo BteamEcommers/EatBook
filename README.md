@@ -62,8 +62,9 @@
 
 - 판매자 신청하기 + 리스트
  ![판매자 신청_리스트](https://velog.velcdn.com/images/twinogre/post/b6cb1bc3-53cb-4aa1-8d5d-412f7b2d0ebe/image.png)
-  
-- 장바구니 + 찜 / 전체 삭제, 전체 결제
+
+- 장바구니 + 찜 / 찜 -> 장바구니 선택추가 -> 장바구니 -> 선택삭제
+  ![장바구니+ 찜](https://velog.velcdn.com/images/gprhf651/post/49d09ec3-f14b-4c86-be6f-57a0cc29294d/image.jpg)
   
 
 ## 트러블 슈팅 ⚠
