@@ -108,7 +108,7 @@ name="toEmail"
 ## 🔥 트러블 슈팅(김정배 / kimjeongbae)
 
 ### 🚨 Issue 1
-### 🚧  null
+### 🚧  따로 작동 하는 아코디언
 
 A. 이슈 내역
 따로 작동 하는 아코디언
@@ -177,9 +177,9 @@ A. 이슈 내역
 이고유한 id를 할당 하여 아코디언이 각각 작동 하도록 코드를 수정 하였습니다
 
 
-🔥 트러블 슈팅(류한선 / ryuhanseon)
-🚨 Issue 1
-🚧 null
+## 🔥 트러블 슈팅(류한선 / ryuhanseon)
+## 🚨 Issue 1
+### 🚧 HTML 전송 오류
 A. 이슈 내역
 리뷰를 작성한 값이 데이터베이스에 들어가는데 HTML로 불러오는게 불가능해지는 오류
  "Exception evaluating SpringEL expression: 'review.content'"
