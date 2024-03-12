@@ -145,6 +145,13 @@ public class BookController {
         }
         model.addAttribute("book",book);
 
+        bookForm.setSubject(book.getSubject());
+        bookForm.setAuthor(book.getAuthor());
+        bookForm.setContent(book.getContent());
+        bookForm.setPrice(book.getPrice());
+        bookForm.setPublisher(book.getPublisher());
+        bookForm.setBookIntroduce(book.getBookIntroduce());
+        bookForm.setDiscount(book.getDiscount());
         return "book/book_modify_form";
     }
 
