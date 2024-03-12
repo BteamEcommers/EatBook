@@ -59,7 +59,8 @@ public class OrdersController {
         Book book = this.bookService.getBookById(bookId);
         Member member = this.memberService.findByUsername(principal.getName());
         Orders orders = this.ordersService.createOrders(book, member);
-        model.addAttribute("orders", orders);
+        this.orderItemService.createOrderItem(orders, book);
+
         return  String.format("redirect:/orders/pay/progress/%d", orders.getId());
     }
     @GetMapping("/confirm")
