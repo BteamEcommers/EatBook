@@ -14,60 +14,60 @@
     <!-- 제목 입력 필드 -->
     <div class="mb-3">
         <label for="subject" class="form-label">제목</label>
-        <input type="text" th:field="*{subject}" class="form-control">
+        <input type="text" th:field="*{subject}" class="form-control" placeholder="제목"/>
         <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label for="author" class="form-label">작가</label>
-        <input type="text" th:field="*{author}" class="form-control">
+        <input type="text" th:field="*{author}" class="form-control" placeholder="작가"/>
         <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="text-danger"></span>
     </div>
     <!-- 내용 입력 필드 -->
     <div class="mb-3">
         <label for="content" class="form-label">내용</label>
-        <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
+        <textarea th:field="*{content}" class="form-control" rows="10" placeholder="책 내용 작성"></textarea>
         <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-danger"></span>
     </div>
     <!-- 가격 입력 필드 -->
     <div class="mb-3">
         <label for="price" class="form-label">가격</label>
-        <input type="number" th:field="*{price}" class="form-control">
+        <input type="number" th:field="*{price}" class="form-control" min="0" placeholder="정가"/>
         <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></span>
     </div>
     <!-- 출판사 입력 필드 -->
     <div class="mb-3">
         <label for="publisher" class="form-label">출판사</label>
-        <input type="text" th:field="*{publisher}" class="form-control">
+        <input type="text" th:field="*{publisher}" class="form-control" placeholder="출판사명">
         <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}" class="text-danger"></span>
     </div>
     <!-- 책 소개 입력 필드 -->
     <div class="mb-3">
         <label for="bookIntroduce" class="form-label">책 소개</label>
-        <textarea th:field="*{bookIntroduce}" class="form-control" rows="5"></textarea>
+        <textarea th:field="*{bookIntroduce}" class="form-control" rows="5" placeholder="책에 대한 소개"></textarea>
         <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('bookIntroduce')}" th:errors="*{bookIntroduce}" class="text-danger"></span>
     </div>
     <!-- 할인율 입력 필드 -->
     <div class="mb-3">
         <label for="discount" class="form-label">할인율</label>
-        <input type="number" th:field="*{discount}" class="form-control">
+        <input type="number" th:field="*{discount}" class="form-control"  min="0" max="100" placeholder="0~100 사이로 입력해주세요. 단위는 %입니다" />
         <!-- 유효성 검사 에러 메시지 -->
         <span th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}" class="text-danger"></span>
     </div>
     <!-- 이미지 업로드 입력 필드 -->
     <div class="mb-3">
         <label for="thumbnail" class="form-label">이미지 업로드</label>
-        <input type="file" name="thumbnail" id="thumbnail" accept="image/png, image/gif, image/jpeg">
+        <input type="file" name="thumbnail" id="thumbnail" accept="image/png, image/gif, image/jpeg" />
         <!-- 이미지 미리보기 -->
         <img id="preview" src="#" alt="미리보기" style="max-width: 200px; max-height: 200px; display: none;">
     </div>
     <!-- 도서 등록 버튼 -->
-    <input type="submit" value="저장하기"  class="btn btn-primary my-2">
+    <input type="submit" value="저장하기"  class="btn btn-primary my-2" />
 </form>
 </div>
 </html>
