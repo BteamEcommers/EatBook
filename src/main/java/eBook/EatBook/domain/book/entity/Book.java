@@ -43,7 +43,9 @@ public class Book extends BaseEntity {
     @Column
     private Integer price;
     @Column
-    private float discount;
+    private Integer discount;
+    @Column
+    private Integer discountPrice;
     @Column
     private float averageRating;
     @Column
