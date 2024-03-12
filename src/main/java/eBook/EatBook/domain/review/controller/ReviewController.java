@@ -52,19 +52,21 @@ public class ReviewController {
     @GetMapping("/modify/{id}")
     public String reviewModify(@PathVariable("id") Integer id, Model model){
         Book book = this.bookService.getBookById(id);
+        Review review = this.reviewService.getReview(id);
         model.addAttribute("book",book);
-        return "review_modify_form";
+        model.addAttribute("review", review);
+        return "book/review_modify_form";
     }
-    @PostMapping("/modify")
-    public String reviewModify(@Valid ReviewForm reviewForm, BindingResult bindingResult, Principal principal){
+    @PostMapping("/modify/{id}")
+    public String reviewModify(@PathVariable("id") Integer id,@Valid ReviewForm reviewForm, BindingResult bindingResult, Principal principal){
 
         if (bindingResult.hasErrors()) {
-            return "book_detail";
+            return "book/book_detail";
         }
-        Book book = this.bookService.getBookById(reviewForm.getBookId());
 
-        this.reviewService.modify(book, reviewForm.getContent());
-        return String.format("redirect:/book/detail/%d", reviewForm.getBookId());
+        Review review = this.reviewService.getReview(id);
+        this.reviewService.modify(review, reviewForm.getContent());
+        return String.format("redirect:/book/detail/%s",review.getBook().getId());
     }
     @GetMapping("/delete/{id}")
     public String reviewDelete(Principal principal, @PathVariable("id") Integer id) {

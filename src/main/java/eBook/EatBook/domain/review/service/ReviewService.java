@@ -40,13 +40,12 @@ public class ReviewService {
                 .build();
         reviewRepository.save(review);
     }
-    public void modify(Book book, String content){
+    public void modify(Review review, String content){
 
         Review reviewModify = Review.builder()
                 .content(content)
                 .build();
         reviewRepository.save(reviewModify);
-
     }
 
     public void delete(Review review) {
