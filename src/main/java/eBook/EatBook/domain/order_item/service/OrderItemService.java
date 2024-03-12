@@ -7,6 +7,7 @@ import eBook.EatBook.domain.orders.entity.Orders;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,8 +32,18 @@ public class OrderItemService {
                 .bookPrice(book.getPrice())
                 .build();
 
+
+
         this.orderItemRepository.save(orderItem);
 
         return orderItem;
+    }
+
+    public List<OrderItem> findAllByOrders(Orders orders){
+        List<OrderItem> orderItemList = this.orderItemRepository.findAllByOrders(orders);
+        if(orderItemList.isEmpty()){
+            return null;
+        }
+        return orderItemList;
     }
 }

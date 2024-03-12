@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -22,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -30,20 +32,23 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class BookService {
     private final BookRepository bookRepository;
-    private final CategoryRepository categoryRepository;
 
 
     @Value("${custom.fileDirPath}")
     private String fileDirPath;
 
 
-
     public Page<Book> getList(int page) {
-        Pageable pageable = PageRequest.of(page, 10);
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return this.bookRepository.findAll(pageable);
     }
+
     public Page<Book> getListByCategory(Category category, int page) {
-        Pageable pageable = PageRequest.of(page, 10);
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return this.bookRepository.findAllByCategory(category, pageable);
     }
 
@@ -58,18 +63,19 @@ public class BookService {
 
     public Book createWithImage(BookForm bookForm
             , Category category, Member seller, MultipartFile thumbnail) throws IOException {
-//        String fileName = StringUtils.cleanPath(image.getOriginalFilename());  //이미지파일 업로드하는 과정
-        //MultipartFile => String type
         String thumbnailRelPath = "book/" + UUID.randomUUID().toString() + ".jpg";
         File thumbnailFile = new File(fileDirPath + "/" + thumbnailRelPath);
 
         try {
             thumbnail.transferTo(thumbnailFile);
         } catch (IOException e) {
-            throw  new RuntimeException(e);
+            throw new RuntimeException(e);
         }
+        Book book;
+        double percent = (double) (100 - bookForm.getDiscount()) / 100;
+        Integer discountPrice = (int) (bookForm.getPrice() * percent);
 
-        Book book = Book.builder()
+        book = Book.builder()
                 .subject(bookForm.getSubject())
                 .content(bookForm.getContent())
                 .bookIntroduce(bookForm.getBookIntroduce())
@@ -77,34 +83,43 @@ public class BookService {
                 .category(category)
                 .price(bookForm.getPrice())
                 .discount(bookForm.getDiscount())
+                .discountPrice(discountPrice)
                 .publisher(bookForm.getPublisher())
                 .thumbnailImg(thumbnailRelPath)
                 .seller(seller)
                 .createDate(LocalDateTime.now())
                 .modifiedDate(LocalDateTime.now())
                 .build();
+
+
         bookRepository.save(book);
 
-//        String uploadDir = "book-thumbnails/" + book.getId();
-//        FileUploadUtil.saveFile(uploadDir, fileName, image);
 
         return book;
     }
 
 
-
     public List<Book> findAllBySeller(Member seller) {
         List<Book> sellerBookList = this.bookRepository.findBySeller(seller);
-        if(sellerBookList == null){
+        if (sellerBookList == null) {
             return null;
         }
         return sellerBookList;
     }
-//    public Book getBookById(Integer id) {
-//        Optional<Book> book = this.bookRepository.findById(id);
-//        if (book.isEmpty()) {
-//            return null;
-//        }
-//        return book.get();
-//    }
+
+    public Page<Book> indexBestSellerList(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("sellCount"));
+        Pageable pageable = PageRequest.of(page, 4, Sort.by(sorts));
+        return this.bookRepository.findAll(pageable);
+    }
+
+    public Page<Book> indexFreeBookList(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.asc("price"));
+        Pageable pageable = PageRequest.of(page, 4, Sort.by(sorts));
+        return this.bookRepository.findAll(pageable);
+    }
+
+
 }

@@ -22,7 +22,7 @@ public class BookForm {
     private String author;
     private Category category;
     private Integer price;
-    private float discount;
+    private Integer discount;
     private String publisher;
     private Member seller;
 }
