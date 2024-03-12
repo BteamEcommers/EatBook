@@ -20,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class OrderItem extends BaseEntity {
     @Column
-    private String title;
+    private String subject;
 
     @Column
     private Integer bookPrice;
