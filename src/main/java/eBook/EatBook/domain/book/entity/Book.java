@@ -36,7 +36,7 @@ public class Book extends BaseEntity {
     private String author;
     @Column
     private String publisher;
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String bookIntroduce;
     @Column
     private String thumbnailImg;
