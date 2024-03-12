@@ -33,14 +33,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td th:text="${orders.book.subject}"></td>
+                    <tr th:each="orderItem : ${orderItemList}">
+                        <td th:text="${orderItem.book.subject}"></td>
                         <td>
                             <span>
-                                <img th:src="@{|/file/${orders.book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;">
+                                <img th:src="@{|/file/${orderItem.book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;">
                             </span>
                         </td>
-                        <td>[[${orders.book.price}]] <span>원</span></td>
+                        <td>[[${orderItem.book.price}]] <span>원</span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -60,7 +60,7 @@
                     </thead>
                     <tbody>
                         <tr class="fw-bold">
-                            <td th:text="${orders.book.subject}"></td>
+                            <td>[[${orders.book.subject}]]</td>
                             <td>
                                 <span>
                                 <img th:src="@{|/file/${orders.book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;">
