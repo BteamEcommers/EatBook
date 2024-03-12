@@ -28,7 +28,7 @@
                     <td th:text="${book.discount * 100}">%</td>
                     <td th:text="${#temporals.format(book.createDate, 'yyyy-MM-dd HH:mm')}"></td>
                     <td>
-                        <button class="btn btn-sm btn-success">수정버튼</button>
+                        <a th:href="@{|/book/modify/${book.Id}|}" class="btn btn-sm btn-success">수정</a>
                     </td>
                     <td>
                         <a th:href="@{|/book/delete/${book.Id}|}" class="btn btn-sm btn-danger">삭제</a>

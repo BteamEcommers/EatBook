@@ -125,5 +125,35 @@ public class BookService {
         this.bookRepository.delete(book);
     }
 
+    public void modifyBook(Book book, BookForm bookForm
+            , Category category,  MultipartFile thumbnail){
+        String thumbnailRelPath = "book/" + UUID.randomUUID().toString() + ".jpg";
+        File thumbnailFile = new File(fileDirPath + "/" + thumbnailRelPath);
+
+        try {
+            thumbnail.transferTo(thumbnailFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Book book1;
+        double percent = (double) (100 - bookForm.getDiscount()) / 100;
+        Integer discountPrice = (int) (bookForm.getPrice() * percent);
+
+        book1 = book.toBuilder()
+                .subject(bookForm.getSubject())
+                .author(book.getAuthor())
+                .content(bookForm.getContent())
+                .price(bookForm.getPrice())
+                .publisher(bookForm.getPublisher())
+                .bookIntroduce(bookForm.getBookIntroduce())
+                .discount(bookForm.getDiscount())
+                .discountPrice(discountPrice)
+                .thumbnailImg(thumbnailRelPath)
+                .modifiedDate(LocalDateTime.now())
+                .build();
+
+        this.bookRepository.save(book1);
+    }
+
 
 }
