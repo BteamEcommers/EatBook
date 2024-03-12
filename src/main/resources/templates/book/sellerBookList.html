@@ -31,7 +31,7 @@
                         <button class="btn btn-sm btn-success">수정버튼</button>
                     </td>
                     <td>
-                        <button class="btn btn-sm btn-danger">삭제버튼</button>
+                        <a th:href="@{|/book/delete/${book.Id}|}" class="btn btn-sm btn-danger">삭제</a>
                     </td>
 
                 </tr>

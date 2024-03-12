@@ -121,5 +121,9 @@ public class BookService {
         return this.bookRepository.findAll(pageable);
     }
 
+    public void deleteBook(Book book){
+        this.bookRepository.delete(book);
+    }
+
 
 }

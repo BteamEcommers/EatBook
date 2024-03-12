@@ -111,10 +111,27 @@ public class BookController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/list/seller")
     public String bookListSeller(Model model, Principal principal){
+
         Member member = this.memberService.findByUsername(principal.getName());
+        // 최종본에 추가(seller가 아니면 리다이렉트)
+//        if(!member.isSeller()){
+//            return "redirect:/";
+//        }
         List<Book> bookList = this.bookService.findAllBySeller(member);
         model.addAttribute("bookList", bookList);
         return "/book/sellerBookList";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{bookId}")
+    public String deleteBook(@PathVariable("bookId") Integer bookId, Principal principal){
+        Book book = this.bookService.getBookById(bookId);
+        Member member = this.memberService.findByUsername(principal.getName());
+        if(book.getSeller().getId() != member.getId()){
+            return "redirect:/";
+        }
+        this.bookService.deleteBook(book);
+        return "redirect:/book/list/seller";
     }
 
 }
