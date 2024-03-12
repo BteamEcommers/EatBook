@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,7 +39,9 @@ public class OrdersController {
     @GetMapping("/pay/progress/{orderId}")
     public String ordersPay(Model model, @PathVariable("orderId") Integer orderId, Principal principal){
         Orders orders = this.ordersService.findById(orderId);
+        List<OrderItem> orderItemList = this.orderItemService.findAllByOrders(orders);
         model.addAttribute("orders", orders);
+        model.addAttribute("orderItemList", orderItemList);
         return "/orders/ordersProgress";
     }
 
@@ -59,7 +62,8 @@ public class OrdersController {
         Book book = this.bookService.getBookById(bookId);
         Member member = this.memberService.findByUsername(principal.getName());
         Orders orders = this.ordersService.createOrders(book, member);
-        model.addAttribute("orders", orders);
+        this.orderItemService.createOrderItem(orders, book);
+
         return  String.format("redirect:/orders/pay/progress/%d", orders.getId());
     }
     @GetMapping("/confirm")

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
@@ -24,12 +25,18 @@ public class HomeController {
     private final CategoryService categoryService;
 
     @GetMapping("/")
-    public String home(Model model, Principal principal) {
+    public String home(Model model, Principal principal, @RequestParam(value ="page", defaultValue = "0") int page) {
         if (principal != null) {
             Member member = this.memberService.getMember(principal.getName());
             model.addAttribute("member", member);
         }
+        // bestSeller
+        Page<Book> bestPaging = this.bookService.indexBestSellerList(page);
+        // freeBook
+        Page<Book> freePaging = this.bookService.indexFreeBookList(page);
 
+        model.addAttribute(bestPaging);
+        model.addAttribute(freePaging);
         return "mainhome";
     }
 
