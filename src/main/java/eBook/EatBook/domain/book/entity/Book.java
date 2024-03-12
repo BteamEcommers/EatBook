@@ -36,14 +36,14 @@ public class Book extends BaseEntity {
     private String author;
     @Column
     private String publisher;
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String bookIntroduce;
     @Column
     private String thumbnailImg;
     @Column
     private Integer price;
     @Column
-    private float discount;
+    private Integer discount;
     @Column
     private float averageRating;
     @Column
