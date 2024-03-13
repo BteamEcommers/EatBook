@@ -41,12 +41,12 @@ public class ReviewService {
         reviewRepository.save(review);
     }
     public void modify(Review review, String content){
-
-        Review reviewModify = Review.builder()
-                .content(content)
-                .build();
-        reviewRepository.save(reviewModify);
+        // 기존의 리뷰 객체의 내용을 업데이트
+        review.setContent(content);
+        review.setModifiedDate(LocalDateTime.now()); // 수정일 업데이트
+        reviewRepository.save(review); // 업데이트된 리뷰 저장
     }
+
 
     public void delete(Review review) {
         reviewRepository.delete(review);
@@ -56,4 +56,6 @@ public class ReviewService {
 
         return this.reviewRepository.findAllByBook(book);
     }
+
+
 }

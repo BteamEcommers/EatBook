@@ -49,22 +49,27 @@ public class ReviewController {
         this.reviewService.create(books,reviewForm.getContent(), member);
         return String.format("redirect:/book/detail/%d", id);
     }
-    @GetMapping("/modify/{id}")
-    public String reviewModify(@PathVariable("id") Integer id, Model model){
-        Book book = this.bookService.getBookById(id);
-        Review review = this.reviewService.getReview(id);
-        model.addAttribute("book",book);
-        model.addAttribute("review", review);
-        return "book/review_modify_form";
-    }
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
-    public String reviewModify(@PathVariable("id") Integer id,@Valid ReviewForm reviewForm, BindingResult bindingResult, Principal principal){
-
-        if (bindingResult.hasErrors()) {
-            return "book/book_detail";
-        }
+    public String reviewModify(@PathVariable("id") Integer id,@Valid ReviewForm reviewForm,
+                               BindingResult bindingResult, Principal principal){
 
         Review review = this.reviewService.getReview(id);
+        if (review == null) {
+            // 책이 존재하지 않는 경우에 대한 처리
+            return "redirect:/book/list"; // 예시로 책 목록 페이지로 리다이렉트
+        }
+        if (bindingResult.hasErrors()) {
+
+            return "book_detail";
+        }
+        Member author = review.getAuthor();
+        // 현재 로그인한 사용자가 해당 리뷰의 작성자인지 확인
+        if (!principal.getName().equals(author.getUsername())) {
+            // 작성자와 다른 사용자가 수정을 시도한 경우에 대한 처리
+            return "redirect:/books/list"; // 예시로 책 목록 페이지로 리다이렉트
+        }
+        review.setContent(reviewForm.getContent());
         this.reviewService.modify(review, reviewForm.getContent());
         return String.format("redirect:/book/detail/%s",review.getBook().getId());
     }

@@ -156,10 +156,23 @@
                                     <div class="review-box mb-2">
                                         <div style="display:flex;" th:text="${review.author.username}"></div>
                                         <div style="display:flex; justify-content:end; padding-right:10px;"
-                                             th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd')}"></div>
+                                             th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                                        <div style="display:flex; justify-content:end; padding-right:10px;"
+                                             th:text="${#temporals.format(review.modifiedDate, 'yyyy-MM-dd HH:mm')}"></div>
                                         <div class="review-content">
                                             <span th:text="${review.content}"></span>
                                         </div>
+                                        <h5 class="my-3 border-bottom pb-2">리뷰수정</h5>
+                                        <form th:action="@{|/review/modify/${review.id}|}" th:object="${reviewForm}" method="post">
+                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                            <div class="mb-3">
+                                                <label for="content" class="form-label">내용</label>
+                                                <textarea name="content" id="content" class="form-control" rows="10" th:text="${review.content}"></textarea>
+                                            </div>
+                                            <input type="submit" value="저장하기" class="btn btn-primary my-2">
+                                        </form>
+                                        <a href="#" onclick="editReview(${review.id}, '${review.content}')"
+                                           class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">수정</a>
                                         <a th:href="@{|/review/delete/${review.id}|}" class="btn btn-sm btn-primary"
                                            style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
                                     </div>
@@ -258,4 +271,6 @@
         });
     });
         </script>
+    </div>
+</div>
 </html>

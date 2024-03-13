@@ -40,4 +40,11 @@ public class Review extends BaseEntity {
 
     @CreatedDate
     private LocalDateTime createDate;
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setModifiedDate(LocalDateTime now) {
+    }
 }
