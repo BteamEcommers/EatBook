@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -62,7 +63,8 @@ public class OrdersController {
         Book book = this.bookService.getBookById(bookId);
         Member member = this.memberService.findByUsername(principal.getName());
         Orders orders = this.ordersService.createOrders(book, member);
-        this.orderItemService.createOrderItem(orders, book);
+        ArrayList<OrderItem> orderItemList = this.orderItemService.createOrderItem(orders, book);
+        this.ordersService.addOrderItemList(orders, orderItemList);
 
         return  String.format("redirect:/orders/pay/progress/%d", orders.getId());
     }

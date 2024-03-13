@@ -38,6 +38,8 @@ dependencies {
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 	// 부트스트랩
 	implementation 'org.webjars:bootstrap:5.1.3'
+	// maven
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 }
 
 tasks.named('test') {

@@ -7,6 +7,7 @@ import eBook.EatBook.domain.orders.entity.Orders;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class OrderItemService {
     }
 
     //  단건 결제
-    public OrderItem createOrderItem(Orders orders, Book book){
+    public ArrayList<OrderItem> createOrderItem(Orders orders, Book book){
         OrderItem orderItem = OrderItem.builder()
                 .orders(orders)
                 .book(book)
@@ -32,11 +33,13 @@ public class OrderItemService {
                 .bookPrice(book.getPrice())
                 .build();
 
+        ArrayList<OrderItem> ordersArrayList = new ArrayList<>();
+        ordersArrayList.add(orderItem);
 
 
         this.orderItemRepository.save(orderItem);
 
-        return orderItem;
+        return ordersArrayList;
     }
 
     public List<OrderItem> findAllByOrders(Orders orders){

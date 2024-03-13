@@ -3,6 +3,7 @@ package eBook.EatBook.domain.orders.service;
 import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.member.entity.Member;
+import eBook.EatBook.domain.order_item.entity.OrderItem;
 import eBook.EatBook.domain.orders.entity.Orders;
 import eBook.EatBook.domain.orders.repository.OrdersRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -62,5 +64,13 @@ public class OrdersService {
             return null;
         }
         return optionalOrders.get();
+    }
+
+    public void addOrderItemList(Orders orders, ArrayList<OrderItem> orderItemList) {
+        Orders orders1 = orders.toBuilder()
+                .orderItemList(orderItemList)
+                .build();
+
+        this.ordersRepository.save(orders1);
     }
 }

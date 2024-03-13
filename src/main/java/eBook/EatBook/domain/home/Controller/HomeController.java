@@ -34,7 +34,6 @@ public class HomeController {
         Page<Book> bestPaging = this.bookService.indexBestSellerList(page);
         // freeBook
         Page<Book> freePaging = this.bookService.indexFreeBookList(page);
-
         model.addAttribute(bestPaging);
         model.addAttribute(freePaging);
         return "mainhome";
