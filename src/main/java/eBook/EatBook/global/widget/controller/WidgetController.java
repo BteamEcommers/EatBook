@@ -1,9 +1,12 @@
 package eBook.EatBook.global.widget.controller;
 
 
+import eBook.EatBook.domain.orders.entity.Orders;
+import eBook.EatBook.domain.orders.service.OrdersService;
 import jakarta.servlet.http.HttpServletRequest;
 
 
+import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -12,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +28,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @Controller
+@RequiredArgsConstructor
 public class WidgetController {
 
     @Value("${api.key}")
     private String API_KEY;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final OrdersService ordersService;
 
     @RequestMapping(value = "/confirm")
     public ResponseEntity<JSONObject> confirmPayment(@RequestBody String jsonBody) throws Exception {
@@ -105,8 +111,10 @@ public class WidgetController {
         return "/success";
     }
 
-    @RequestMapping(value = "/checkout", method = RequestMethod.GET)
-    public String index(HttpServletRequest request, Model model) throws Exception {
+    @RequestMapping(value = "/checkout/{orderId}", method = RequestMethod.GET)
+    public String index(HttpServletRequest request, Model model, @PathVariable("orderId") Integer orderId) throws Exception {
+        Orders orders = this.ordersService.findById(orderId);
+        model.addAttribute("orders", orders);
         return "/orders/orders_checkout";
     }
 
