@@ -108,7 +108,7 @@ public class WidgetController {
      */
     @RequestMapping(value = "/success", method = RequestMethod.GET)
     public String paymentRequest(HttpServletRequest request, Model model) throws Exception {
-        return "/success";
+        return "/orders/orders_success";
     }
 
     @RequestMapping(value = "/checkout/{orderId}", method = RequestMethod.GET)
@@ -133,7 +133,7 @@ public class WidgetController {
         model.addAttribute("code", failCode);
         model.addAttribute("message", failMessage);
 
-        return "/fail";
+        return "/orders/orders_fail";
     }
 }
 
