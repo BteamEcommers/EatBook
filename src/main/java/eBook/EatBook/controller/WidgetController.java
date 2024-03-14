@@ -94,6 +94,10 @@ public class WidgetController {
         // TODO: 결제 성공 및 실패 비즈니스 로직을 구현하세요.
         Reader reader = new InputStreamReader(responseStream, StandardCharsets.UTF_8);
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
+        if(isSuccess){
+            // order isOrdered = true;
+            // member bookList(buyer).add(Orders.orderItem.book)
+        }
         responseStream.close();
 
         return ResponseEntity.status(code).body(jsonObject);

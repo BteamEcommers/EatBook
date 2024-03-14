@@ -34,6 +34,9 @@ public class Orders extends BaseEntity {
     @Column
     private Integer totalDiscount;
 
+    @Column
+    private boolean isOrdered = false;
+
     @ManyToOne
     private CartItem cartItem;
 

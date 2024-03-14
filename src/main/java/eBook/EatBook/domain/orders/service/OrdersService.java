@@ -73,4 +73,11 @@ public class OrdersService {
 
         this.ordersRepository.save(orders1);
     }
+
+    public void isOrdered(Orders orders){
+        Orders orders1 = orders.toBuilder()
+                .isOrdered(true)
+                .build();
+    }
+
 }
