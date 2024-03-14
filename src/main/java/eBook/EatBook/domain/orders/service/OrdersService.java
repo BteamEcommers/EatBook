@@ -27,6 +27,7 @@ public class OrdersService {
 
     // 단건 결제
     public Orders createOrders(Book book, Member member) {
+        // random string 생성
         Orders orders = Orders.builder()
                 .subject(book.getSubject())
                 .totalPrice(book.getPrice())
