@@ -1,11 +1,11 @@
-package eBook.EatBook.global.widget.controller;
+package eBook.EatBook.controller;
 
 
 import eBook.EatBook.domain.orders.entity.Orders;
 import eBook.EatBook.domain.orders.service.OrdersService;
+
+
 import jakarta.servlet.http.HttpServletRequest;
-
-
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -40,6 +40,7 @@ public class WidgetController {
     @RequestMapping(value = "/confirm")
     public ResponseEntity<JSONObject> confirmPayment(@RequestBody String jsonBody) throws Exception {
 
+
         JSONParser parser = new JSONParser();
         String orderId;
         String amount;
@@ -52,7 +53,8 @@ public class WidgetController {
             amount = (String) requestData.get("amount");
         } catch (ParseException e) {
             throw new RuntimeException(e);
-        };
+        }
+        ;
         JSONObject obj = new JSONObject();
         obj.put("orderId", orderId);
         obj.put("amount", amount);
@@ -87,8 +89,6 @@ public class WidgetController {
         boolean isSuccess = code == 200 ? true : false;
 
 
-
-
         InputStream responseStream = isSuccess ? connection.getInputStream() : connection.getErrorStream();
 
         // TODO: 결제 성공 및 실패 비즈니스 로직을 구현하세요.
@@ -101,6 +101,7 @@ public class WidgetController {
 
     /**
      * 인증성공처리
+     *
      * @param request
      * @param model
      * @return
@@ -108,18 +109,19 @@ public class WidgetController {
      */
     @RequestMapping(value = "/success", method = RequestMethod.GET)
     public String paymentRequest(HttpServletRequest request, Model model) throws Exception {
-        return "/orders/orders_success";
+        return "/success";
     }
 
     @RequestMapping(value = "/checkout/{orderId}", method = RequestMethod.GET)
     public String index(HttpServletRequest request, Model model, @PathVariable("orderId") Integer orderId) throws Exception {
         Orders orders = this.ordersService.findById(orderId);
         model.addAttribute("orders", orders);
-        return "/orders/orders_checkout";
+        return "/checkout";
     }
 
     /**
      * 인증실패처리
+     *
      * @param request
      * @param model
      * @return
@@ -133,7 +135,7 @@ public class WidgetController {
         model.addAttribute("code", failCode);
         model.addAttribute("message", failMessage);
 
-        return "/orders/orders_fail";
+        return "/fail";
     }
 }
 
