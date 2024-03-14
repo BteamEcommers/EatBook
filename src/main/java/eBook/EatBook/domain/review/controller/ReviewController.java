@@ -37,6 +37,9 @@ public class ReviewController {
             // 책이 존재하지 않는 경우에 대한 처리
             return "redirect:/books/list"; // 예시로 책 목록 페이지로 리다이렉트
         }
+
+        float rating = reviewForm.getRating();
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("books",books);
             return "book_detail";
@@ -46,9 +49,10 @@ public class ReviewController {
             // 작성자를 찾을 수 없는 경우에 대한 처리
             return "redirect:/book/list"; // 예시로 홈 페이지로 리다이렉트
         }
-        this.reviewService.create(books,reviewForm.getContent(), member);
+        this.reviewService.create(books,reviewForm.getContent(), member,rating);
         return String.format("redirect:/book/detail/%d", id);
     }
+
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
     public String reviewModify(@PathVariable("id") Integer id,@Valid ReviewForm reviewForm,
@@ -59,6 +63,9 @@ public class ReviewController {
             // 책이 존재하지 않는 경우에 대한 처리
             return "redirect:/book/list"; // 예시로 책 목록 페이지로 리다이렉트
         }
+
+        float rating = reviewForm.getRating();
+
         if (bindingResult.hasErrors()) {
 
             return "book_detail";
@@ -70,7 +77,7 @@ public class ReviewController {
             return "redirect:/books/list"; // 예시로 책 목록 페이지로 리다이렉트
         }
         review.setContent(reviewForm.getContent());
-        this.reviewService.modify(review, reviewForm.getContent());
+        this.reviewService.modify(review, reviewForm.getContent(),rating);
         return String.format("redirect:/book/detail/%s",review.getBook().getId());
     }
     @GetMapping("/delete/{id}")

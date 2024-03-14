@@ -47,4 +47,8 @@ public class Review extends BaseEntity {
 
     public void setModifiedDate(LocalDateTime now) {
     }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
 }
