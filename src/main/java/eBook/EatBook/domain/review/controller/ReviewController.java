@@ -24,9 +24,12 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 @RequiredArgsConstructor
 @RequestMapping("/review")
 public class ReviewController {
+
         private final ReviewService reviewService;
         private final MemberService memberService;
         private final BookService bookService;
+
+
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/create/{id}")
@@ -88,4 +91,9 @@ public class ReviewController {
 
         return String.format("redirect:/book/detail/%s",review.getBook().getId());
     }
+    @GetMapping("/text")
+    public String text(){
+        return "book/text";
+    }
+
 }
