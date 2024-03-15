@@ -29,8 +29,6 @@ public class ReviewController {
         private final MemberService memberService;
         private final BookService bookService;
 
-
-
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/create/{id}")
     public String reviewCreate(@PathVariable("id") Integer id, @Valid ReviewForm reviewForm,
@@ -83,9 +81,16 @@ public class ReviewController {
         this.reviewService.modify(review, reviewForm.getContent(),rating);
         return String.format("redirect:/book/detail/%s",review.getBook().getId());
     }
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{id}")
     public String reviewDelete(Principal principal, @PathVariable("id") Integer id) {
         Review review = this.reviewService.getReview(id);
+
+        Member member =  this.memberService.findByUsername(principal.getName());
+        if (member == null) {
+            // 작성자를 찾을 수 없는 경우에 대한 처리
+            return "redirect:/book/list"; // 예시로 홈 페이지로 리다이렉트
+        }
 
         this.reviewService.delete(review);
 
