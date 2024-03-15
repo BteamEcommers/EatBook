@@ -91,9 +91,5 @@ public class ReviewController {
 
         return String.format("redirect:/book/detail/%s",review.getBook().getId());
     }
-    @GetMapping("/text")
-    public String text(){
-        return "book/text";
-    }
 
 }
