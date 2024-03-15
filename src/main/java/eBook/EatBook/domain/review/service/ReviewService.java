@@ -5,6 +5,8 @@ import eBook.EatBook.domain.book.repository.BookRepository;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.review.entity.Review;
 import eBook.EatBook.domain.review.repository.ReviewRepository;
+import eBook.EatBook.report.Repository.ReportRepository;
+import eBook.EatBook.report.entity.Report;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final BookRepository bookRepository;
+    private final ReportRepository reportRepository;
 
 
     public Review getReview(Integer id) {
@@ -53,5 +56,16 @@ public class ReviewService {
     public List<Review> findAllByBook(Book book) {
 
         return this.reviewRepository.findAllByBook(book);
+    }
+    public void report(Review review, String reportContent, Member member, String reportType) {
+
+        Report report = Report.builder()
+                .author(member)
+                .review(review)
+                .content(reportContent)
+                .reportType(reportType)
+                .build();
+
+        this.reportRepository.save(report);
     }
 }
