@@ -23,10 +23,7 @@ public class ReportController {
         }
         List<Report> reportList= this.reportService.getReport();
 
-
         model.addAttribute("reportList", reportList);
-
-
 
         return "book/report_list";
     }
