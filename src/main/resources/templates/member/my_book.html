@@ -15,16 +15,22 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">책 제목</th>
+                    <th scope="col"> 책</th>
+                    <th>책 제목</th>
                     <th>작가</th>
                     <th>등록일</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="book : ${bookList}">
+                    <td>
+                        <a th:href="@{|/book/detail/${book.id}|}">
+                            <img th:src="@{|/file/${book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;">
+                        </a>
+                    </td>
                     <th scope="row">[[${book.subject}]]</th>
                     <td th:text="${book.author}"> 원</td>
-                    <td th:text="${#temporals.format(book.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="${#temporals.format(book.createDate, 'yyyy-MM-dd')}"></td>
                     <td>
                         <a href="#" class="btn btn-sm btn-success">읽기</a>
                     </td>
