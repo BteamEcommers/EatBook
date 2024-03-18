@@ -1,0 +1,37 @@
+<html layout:decorate="~{layout}">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/rebate/rebate_seller.css">
+    <link rel="stylesheet" type="text/css" href="/css/book/sellerBookList.css">
+</head>
+<div layout:fragment="content" class="container">
+    <div class="left-side">
+        <nav th:replace="~{/member/member_layout :: memberSide}"></nav>
+    </div>
+    <div class="main-container">
+        <div class="head-box">
+            <h2>나의 책</h2>
+        </div>
+        <div class="body-box">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">책 제목</th>
+                    <th>작가</th>
+                    <th>등록일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${bookList}">
+                    <th scope="row">[[${book.subject}]]</th>
+                    <td th:text="${book.author}"> 원</td>
+                    <td th:text="${#temporals.format(book.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-success">읽기</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</html>

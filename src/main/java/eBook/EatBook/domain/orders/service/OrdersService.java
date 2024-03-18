@@ -82,6 +82,8 @@ public class OrdersService {
         Orders orders1 = orders.toBuilder()
                 .isOrdered(true)
                 .build();
+
+        this.ordersRepository.save(orders1);
     }
 
     public String RandomCode() {

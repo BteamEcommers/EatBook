@@ -1,6 +1,10 @@
 package eBook.EatBook.controller;
 
 
+import eBook.EatBook.domain.book.entity.Book;
+import eBook.EatBook.domain.member.entity.Member;
+import eBook.EatBook.domain.member.service.MemberService;
+import eBook.EatBook.domain.order_item.entity.OrderItem;
 import eBook.EatBook.domain.orders.entity.Orders;
 import eBook.EatBook.domain.orders.service.OrdersService;
 
@@ -36,6 +40,7 @@ public class WidgetController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final OrdersService ordersService;
+    private final MemberService memberService;
 
     @RequestMapping(value = "/confirm")
     public ResponseEntity<JSONObject> confirmPayment(@RequestBody String jsonBody) throws Exception {
@@ -96,8 +101,17 @@ public class WidgetController {
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
         if(isSuccess){
             // order isOrdered = true;
-
+             Orders orders =  this.ordersService.findByRandomStringOrderId(orderId);
+             this.ordersService.isOrdered(orders);
             // member bookList(buyer).add(Orders.orderItem.book)
+            Member member = orders.getBuyer();
+
+            for(OrderItem orderItem : orders.getOrderItemList()){
+                member.getBookList().add(orderItem.getBook());
+            }
+            this.memberService.saveMember(member);
+
+
 
         }
         responseStream.close();

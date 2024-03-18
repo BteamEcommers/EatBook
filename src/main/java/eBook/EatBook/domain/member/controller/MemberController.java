@@ -234,6 +234,15 @@ public class MemberController {
         return "/member/member_Profile";
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/myBook")
+    public String myBookList(Model model, Principal principal){
+        Member member = this.memberService.findByUsername(principal.getName());
+
+        model.addAttribute("bookList", member.getBookList());
+        return "/member/my_book";
+    }
+
 
 
 }
