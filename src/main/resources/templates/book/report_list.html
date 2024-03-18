@@ -1,0 +1,95 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
+    <div class="container my-3">
+        <!-- SweetAlert2 script -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <br>
+        <br>
+        <div id="repot_list" class="row align-items-start">
+            <!-- 신고된 댓글 목록 -->
+            <div class="col" >
+                <h3>신고된 댓글 목록</h3>
+                <table class="table">
+                    <thead class="table-dark">
+                    <tr>
+                        <th style="text-align: center;">댓글번호</th>
+                        <th style="text-align: center;">댓글내용</th>
+                        <th style="text-align: center;">신고자</th>
+                        <th style="text-align: center;">신고 내용</th>
+                        <th style="text-align: center;">신고 유형</th>
+                        <th style="text-align: center;">바로가기</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="report, loop : ${reportList}">
+                    <td style="display: flex;justify-content: center;" th:text="${report.review.id}"></td>
+                    <td th:text="${#strings.replace(report.review.content, '<p>', '')}"
+                        th:utext="${#strings.replace(#strings.replace(report.review.content, '<p>', ''), '</p>', '')}"></td>
+                    <td style="display: flex;justify-content: center;"
+                        th:text="${report.author.nickname}"></td>
+                    <td th:text="${report.content}"></td>
+                    <td style="display: flex;justify-content: center;" th:text="${report.reportType}"></td>
+                    <td>
+                        <a style="display: flex;justify-content: center;"
+                           th:href="@{|/book/detail/${report.review.book.id}|}">링크</a>
+                    </td>
+                            <!-- 삭제 버튼 -->
+                                <td>
+                                    <button class="deleteReport btn btn-sm btn-primary" sec:authorize="isAuthenticated()"
+                                            th:id="'deleteReport_' + ${report.id}"
+                                            style="width: 100px; margin-right:10px; margin-top:20px;">삭제</button>
+                                </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    <script>
+        $(document).ready(function () {
+            $(".deleteReport").click(function () {
+                var reportId = this.id.split('_')[1];
+
+                Swal.fire({
+                    title: '신고된 댓글을 삭제하시겠습니까?',
+                    text: '삭제한 후에는 복구할 수 없습니다.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '삭제',
+                    cancelButtonText: '취소',
+                    preConfirm: () => {
+                        return new Promise((resolve) => {
+                            // Ajax 요청을 통한 서버에서의 삭제 작업
+                            $.ajax({
+                                url: '/report/delete/' + reportId,
+                                type: 'GET',
+                                success: function (data) {
+                                    resolve(true);
+                                },
+                                error: function () {
+                                    resolve(false);
+                                }
+                            });
+                        });
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // SweetAlert2 확인 버튼을 누르면 실행되는 부분
+                        Swal.fire(
+                            '삭제되었습니다.',
+                            '',
+                            'success'
+                        ).then(() => {
+                            // 페이지 새로고침
+                            location.reload();
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</div>
+</html>

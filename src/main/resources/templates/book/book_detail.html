@@ -181,6 +181,15 @@
                                         <a th:href="@{|/review/delete/${review.id}|}" sec:authorize="isAuthenticated()"
                                            class="btn btn-sm btn-primary"
                                            style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
+
+                                        <!-- 댓글 모달 버튼 -->
+                                        <button sec:authorize="isAuthenticated()" type="button" class="btn btn-sm btn-outline-secondary reportReview"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#reportReviewModal"
+                                                th:data-review-id="${review.id}"
+                                                id="reportReviewButton">신고
+                                        </button>
+
                                         <!-- 리뷰 수정 폼 -->
                                         <div class="review-edit-form">
                                             <h5 class="my-3 border-bottom pb-2">리뷰수정</h5>
@@ -214,6 +223,62 @@
                             </li>
                         </ul>
                     </div>
+
+                    <!-- 댓글 모달 부트스트랩 시작 -->
+                    <div aria-hidden="true" aria-labelledby="reportModalReview" class="modal" id="reportReviewModal"
+                         tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="reportModalReview">신고내용</h1>
+                                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                                </div>
+                                <form class="was-validated" method="post" th:action="@{|/review/report/${book.id}|}">
+                                    <div class="modal-body">
+                                        <input type="hidden" id="reviewId" name="reviewId">
+                                        <div class="mb-3">
+                                            <label class="col-form-label" for="validationTextareaComment">내용</label>
+                                            <textarea class="form-control" id="validationTextareaComment" name="reportContent"
+                                                      placeholder="내용을 입력해주세요." required></textarea>
+                                        </div>
+
+                                        <!-- 라디오 버튼에 이벤트 리스너 추가 -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="flexRadioComment1" name="reportType"
+                                                   onchange="handleRadioSelection()"
+                                                   type="radio" value="욕설">
+                                            <label class="form-check-label" for="flexRadioComment1">욕설</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="flexRadioComment2" name="reportType"
+                                                   onchange="handleRadioSelection()"
+                                                   type="radio" value="스팸 및 광고">
+                                            <label class="form-check-label" for="flexRadioComment2">스팸 및 광고</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="flexRadioComment3" name="reportType"
+                                                   onchange="handleRadioSelection()"
+                                                   type="radio" value="불법적인 콘텐츠">
+                                            <label class="form-check-label" for="flexRadioComment3">불법적인 콘텐츠</label>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                                            <button class="btn btn-primary" onclick="handleRadioSelection()" type="submit">신고 보내기
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 댓글 모달 부트스트랩 종료 -->
+                    <script>
+                        $(".reportReview").on('click', function() {
+                              var reviewId = $(this).attr('data-review-id');
+                              $("input[name=reviewId]").val(reviewId)
+                        })
+
 
                     <!-- JavaScript 코드 -->
                     <script>
