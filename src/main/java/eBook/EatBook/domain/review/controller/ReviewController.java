@@ -4,6 +4,7 @@ import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.book.service.BookService;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
+import eBook.EatBook.domain.review.DTO.ReportForm;
 import eBook.EatBook.domain.review.DTO.ReviewForm;
 import eBook.EatBook.domain.review.entity.Review;
 import eBook.EatBook.domain.review.service.ReviewService;
@@ -95,6 +96,37 @@ public class ReviewController {
         this.reviewService.delete(review);
 
         return String.format("redirect:/book/detail/%s",review.getBook().getId());
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/report/{id}")
+    public String reportComment(@PathVariable("id") Integer id, Principal principal,
+                                @Valid ReportForm reportForm, BindingResult bindingResult)  {
+
+        Integer reviewId = reportForm.getReviewId();
+        Review review = this.reviewService.getReview(reviewId);
+
+        if (bindingResult.hasErrors()) {
+            return "book_detail";
+        }
+        Member member = this.memberService.getMember(principal.getName());
+
+        String reportType = determineReportType(reportForm.getReportType());
+
+        this.reviewService.report(review, reportForm.getReportContent(), member,reportType);
+
+        return String.format("redirect:/book/detail/%s",review.getBook().getId());
+    }
+    private String determineReportType(String selectedValue) {
+
+        if ("욕설".equals(selectedValue)) {
+            return "욕설";
+        } else if ("스팸 및 광고".equals(selectedValue)) {
+            return "스팸 및 광고";
+        } else if ("불법적인 콘텐츠".equals(selectedValue)) {
+            return "불법적인 콘텐츠";
+        }
+        return "기타";
     }
 
 }
