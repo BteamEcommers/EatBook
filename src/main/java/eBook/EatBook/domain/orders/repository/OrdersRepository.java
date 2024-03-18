@@ -19,4 +19,6 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     Optional<Orders> findByBuyerAndBook(Member member, Book book);
 
     Optional<Orders> findByBuyerAndCartItem(Member member, CartItem cartItem);
+
+    Optional<Orders> findByRandomStringOrderId(String randomStringOrderId);
 }

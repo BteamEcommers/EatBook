@@ -28,6 +28,8 @@ public class OrdersService {
     // 단건 결제
     public Orders createOrders(Book book, Member member) {
         // random string 생성
+        String orderCode = this.RandomCode();
+
         Orders orders = Orders.builder()
                 .subject(book.getSubject())
                 .totalPrice(book.getPrice())
@@ -35,6 +37,7 @@ public class OrdersService {
                 .buyer(member)
                 .createDate(LocalDateTime.now())
                 .modifiedDate(LocalDateTime.now())
+                .randomStringOrderId(orderCode)
                 .build();
 
         this.ordersRepository.save(orders);
@@ -79,6 +82,28 @@ public class OrdersService {
         Orders orders1 = orders.toBuilder()
                 .isOrdered(true)
                 .build();
+    }
+
+    public String RandomCode() {
+        StringBuilder randomCode = new StringBuilder();
+        // 대문자 A-Z 랜덤 알파벳 생성
+        for (int i = 1; i <= 6; i++) {
+            // (Math.random() * 26 => 0 ~ 25 까지의 랜덤한 실수
+            //  "대문자 A의 10진수 아스키 코드 번호" == 65
+            char ch = (char) ((Math.random() * 26) + 65);
+            randomCode.append(ch);
+        }
+
+        return randomCode.toString();
+    }
+
+    public Orders findByRandomStringOrderId(String randomStringOrderId){
+        Optional<Orders> optionalOrders = this.ordersRepository.findByRandomStringOrderId(randomStringOrderId);
+        if(optionalOrders.isEmpty()){
+            return null;
+        }
+
+        return optionalOrders.get();
     }
 
 }

@@ -38,7 +38,7 @@ public class Orders extends BaseEntity {
     private boolean isOrdered = false;
 
     @Column
-    private String RandomStringOrderId;
+    private String randomStringOrderId;
 
     @ManyToOne
     private CartItem cartItem;
