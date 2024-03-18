@@ -30,8 +30,12 @@
                     <td>
                         <a style="display: flex;justify-content: center;"
                            th:href="@{|/book/detail/${report.review.book.id}|}">링크</a>
-
                     </td>
+                        <td>
+                            <!-- 삭제 버튼 -->
+                            <a th:href="@{|/report/delete/${report.id}|}" sec:authorize="isAuthenticated()" class="btn btn-sm btn-primary"
+                               style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
