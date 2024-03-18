@@ -139,8 +139,16 @@
                     <div class="review_form mb-3">
                         <label for="content" class="form-label"></label>
                         <form th:action="@{|/review/create/${book.id}|}" method="post">
-                            <textarea name="content" id="content" class="form-control" rows="3"
-                                      placeholder="책에 대한 스포일러 및 심한 욕설은 제외됩니다"></textarea>
+        <textarea name="content" id="content" class="form-control" rows="3"
+                  placeholder="책에 대한 스포일러 및 심한 욕설은 제외됩니다"></textarea>
+                            <div class="rating">
+                                <input type="hidden" name="rating" id="rating-value" value="0">
+                                <span class="star" data-value="1">&#9733;</span>
+                                <span class="star" data-value="2">&#9733;</span>
+                                <span class="star" data-value="3">&#9733;</span>
+                                <span class="star" data-value="4">&#9733;</span>
+                                <span class="star" data-value="5">&#9733;</span>
+                            </div>
                             <button type="submit" class="btn btn-sm btn-primary" style="width: 100px; margin-top: 5px;">
                                 리뷰등록
                             </button>
@@ -154,23 +162,190 @@
                                      class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                                      style="width: 100%;">
                                     <div class="review-box mb-2">
+                                        <span>평점: <span th:utext="|&#9733;| + ${review.rating}" class="star"></span></span>
                                         <div style="display:flex;" th:text="${review.author.username}"></div>
                                         <div style="display:flex; justify-content:end; padding-right:10px;"
-                                             th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd')}"></div>
+                                             th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd ')}"></div>
+                                        <div style="display:flex; justify-content:end; padding-right:10px;"
+                                             th:text="${#temporals.format(review.modifiedDate, 'yyyy-MM-dd ')}"></div>
                                         <div class="review-content">
                                             <span th:text="${review.content}"></span>
                                         </div>
-                                        <a th:href="@{|/review/delete/${review.id}|}" class="btn btn-sm btn-primary"
+                                        <!-- 수정 버튼 -->
+                                        <button sec:authorize="isAuthenticated()" class="btn btn-sm btn-primary btn-edit" style="width: 100px; margin-right:10px;">수정</button>
+                                        <!-- 삭제 버튼 -->
+                                        <a th:href="@{|/review/delete/${review.id}|}" sec:authorize="isAuthenticated()" class="btn btn-sm btn-primary"
                                            style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
+                                        <!-- 리뷰 수정 폼 -->
+                                        <div class="review-edit-form">
+                                            <h5 class="my-3 border-bottom pb-2">리뷰수정</h5>
+                                            <form th:action="@{|/review/modify/${review.id}|}" th:object="${reviewForm}" method="post">
+                                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                                <div class="mb-3">
+                                                    <label for="content" class="form-label">내용</label>
+                                                    <textarea name="content" id="content" class="form-control" rows="10" th:text="${review.content}"></textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="modify-rating" class="form-label">평점</label>
+                                                    <div class="rating" id="modify-rating">
+                                                        <!-- 수정 시에도 별점을 선택할 수 있는 별 아이콘 -->
+                                                        <input type="hidden" name="rating" id="modify-rating-value" value="0">
+                                                        <span class="star" data-value="1">&#9733;</span>
+                                                        <span class="star" data-value="2">&#9733;</span>
+                                                        <span class="star" data-value="3">&#9733;</span>
+                                                        <span class="star" data-value="4">&#9733;</span>
+                                                        <span class="star" data-value="5">&#9733;</span>
+                                                    </div>
+                                                </div>
+                                                <input type="submit" value="저장하기" class="btn btn-primary my-2">
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- 장바구니,찜 기능 -->
+
+                    <!-- JavaScript 코드 -->
+                    <script>
+                        // 페이지가 로드될 때 실행되는 함수
+                        window.onload = function () {
+                            // 모든 리뷰 수정 폼 숨기기
+                            var reviewForms = document.querySelectorAll('.review-edit-form');
+                            reviewForms.forEach(function (form) {
+                                form.style.display = 'none';
+                            });
+
+                            // 수정 버튼에 클릭 이벤트 추가
+                            var editButtons = document.querySelectorAll('.btn-edit');
+                            editButtons.forEach(function (button) {
+                                button.addEventListener('click', function () {
+                                    // 클릭된 버튼의 부모 요소를 찾아 해당 리뷰 수정 폼 표시/숨김 토글
+                                    var parent = button.closest('.a_comment_top');
+                                    var editForm = parent.querySelector('.review-edit-form');
+                                    if (editForm.style.display === 'none') {
+                                        editForm.style.display = 'block';
+                                    } else {
+                                        editForm.style.display = 'none';
+                                    }
+                                });
+                            });
+                        };
+                    </script>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+    const reviewStars = document.querySelectorAll('.review_form .star'); // 리뷰 작성 별점
+    const modifyStars = document.querySelectorAll('.a_comment_top .star'); // 리뷰 수정 별점
+
+    reviewStars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+            const value = parseInt(star.getAttribute('data-value'));
+
+            // 선택된 별의 인덱스까지만 활성화
+            reviewStars.forEach((s, index) => {
+                if (index < value) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+        });
+
+        star.addEventListener('click', () => {
+            const value = parseInt(star.getAttribute('data-value'));
+
+            // 선택된 별의 값을 폼에 설정
+            const ratingInput = document.getElementById('rating-value');
+            if (ratingInput) {
+                ratingInput.value = value;
+            }
+
+            // 현재 선택된 별까지만 활성화
+            reviewStars.forEach((s, index) => {
+                if (index < value) {
+                    s.classList.add('selected');
+                } else {
+                    s.classList.remove('selected');
+                }
+            });
+        });
+    });
+
+    modifyStars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+            const value = parseInt(star.getAttribute('data-value'));
+
+            // 선택된 별의 인덱스까지만 활성화
+            modifyStars.forEach((s, index) => {
+                if (index < value) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+        });
+
+        star.addEventListener('click', () => {
+            const value = parseInt(star.getAttribute('data-value'));
+
+            // 선택된 별의 값을 폼에 설정
+            const ratingInput = document.getElementById('modify-rating-value');
+            if (ratingInput) {
+                ratingInput.value = value;
+            }
+
+            // 현재 선택된 별까지만 활성화
+            modifyStars.forEach((s, index) => {
+                if (index < value) {
+                    s.classList.add('selected');
+                } else {
+                    s.classList.remove('selected');
+                }
+            });
+        });
+    });
+
+    // 별점을 마우스로 선택하고 나서 마우스가 벗어났을 때 별을 초기화
+    const ratingContainer = document.querySelector('.rating');
+    ratingContainer.addEventListener('mouseleave', () => {
+        const ratingInput = ratingContainer.querySelector('input[type="hidden"]');
+        const currentValue = parseInt(ratingInput.value);
+
+        // 현재 선택된 별까지만 활성화
+        modifyStars.forEach((star, index) => {
+            if (index < currentValue) {
+                star.classList.add('selected');
+            } else {
+                star.classList.remove('selected');
+            }
+        });
+    });
+});
+                    </script>
+                    <!-- CSS 코드 -->
+                    <style>
+                        .rating {
+                            display: inline-block;
+                        }
+
+                        .rating .star {
+                            font-size: 20px;
+                            cursor: pointer;
+                            color: #aaa;
+                            transition: color 0.2s;
+                        }
+
+                        .rating .star.active,
+                        .rating .star.selected {
+                            color: #fdd835; /* 활성화된 별 색상 */
+                        }
+                        /* 별 아이콘의 색상을 노란색으로 변경 */
+    .star {
+        color: #fdd835; /* 원하는 색상으로 변경 */
+    }
+                    </style>
+
+                    <!-- 장바구니,찜 기능 -->
         <script>
             $(document).ready(function () {
             $(".addWish").click(function () {
@@ -258,4 +433,6 @@
         });
     });
         </script>
+    </div>
+</div>
 </html>
