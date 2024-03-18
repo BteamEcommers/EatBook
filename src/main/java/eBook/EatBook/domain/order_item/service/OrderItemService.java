@@ -1,6 +1,9 @@
 package eBook.EatBook.domain.order_item.service;
 
 import eBook.EatBook.domain.book.entity.Book;
+import eBook.EatBook.domain.cartitem.Entity.CartItem;
+import eBook.EatBook.domain.cartitem.Repository.CartItemRepository;
+import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.order_item.entity.OrderItem;
 import eBook.EatBook.domain.order_item.repository.OrderItemRepository;
 import eBook.EatBook.domain.orders.entity.Orders;
@@ -15,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrderItemService {
     private final OrderItemRepository orderItemRepository;
+    private final CartItemRepository cartItemRepository;
 
     public OrderItem getOrderItemById(Integer orderItemId) {
         Optional<OrderItem> optionalOrderItem = this.orderItemRepository.findById(orderItemId);
@@ -48,5 +52,32 @@ public class OrderItemService {
             return null;
         }
         return orderItemList;
+    }
+        // 수정중
+    public ArrayList<OrderItem> createOrderItemByCartItem(Orders orders, Member member) {
+        ArrayList<OrderItem> ordersArrayList = new ArrayList<>();
+        List<CartItem> cartItemList = this.cartItemRepository.findAllByMember(member);
+        if(cartItemList.isEmpty()){
+            return null;
+        }
+        OrderItem orderItem = null;
+        for(CartItem cartItem : cartItemList){
+                     orderItem = OrderItem.builder()
+                    .orders(orders)
+                    .book(cartItem.getBook())
+                    .subject(cartItem.getBook().getSubject())
+                    .bookPrice(cartItem.getBook().getPrice())
+                    .build();
+
+
+            ordersArrayList.add(orderItem);
+        }
+
+
+
+
+        this.orderItemRepository.save(orderItem);
+
+        return ordersArrayList;
     }
 }

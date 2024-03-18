@@ -5,8 +5,12 @@ import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
     boolean existsByMemberAndBook(Member member, Book book);
 
     CartItem findByMemberAndBook(Member member, Book book);
+
+    List<CartItem> findAllByMember(Member member);
 }

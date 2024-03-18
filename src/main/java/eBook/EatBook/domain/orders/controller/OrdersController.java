@@ -68,6 +68,18 @@ public class OrdersController {
 
         return  String.format("redirect:/orders/pay/progress/%d", orders.getId());
     }
+
+    @PostMapping("/pay/cartItem/{memberId}")
+    public String orderCartItem(Model model, @PathVariable("memberId") Integer memberId, Principal principal){
+
+        Member member = this.memberService.findByUsername(principal.getName());
+        Orders orders = this.ordersService.createOrders(null, member);
+        ArrayList<OrderItem> orderItemList = this.orderItemService.createOrderItemByCartItem(orders, member);
+        this.ordersService.addOrderItemList(orders, orderItemList);
+
+        return String.format("redirect:/orders/pay/progress/%d", orders.getId());
+    }
+
     @GetMapping("/confirm")
     public String ordersConfirm(){
         
