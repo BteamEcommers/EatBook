@@ -81,6 +81,7 @@ public class OrdersService {
     public void isOrdered(Orders orders){
         Orders orders1 = orders.toBuilder()
                 .isOrdered(true)
+                .isRebated(false)
                 .build();
 
         this.ordersRepository.save(orders1);

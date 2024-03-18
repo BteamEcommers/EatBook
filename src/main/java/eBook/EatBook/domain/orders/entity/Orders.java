@@ -40,9 +40,12 @@ public class Orders extends BaseEntity {
     @Column
     private String randomStringOrderId;
 
+    // 정산 유무 칼럼(생성 시 null / 주문 완료 시 false/ 정산 완료 시 true)
+    @Column
+    private boolean isRebated;
+
     @ManyToOne
     private CartItem cartItem;
-
 
     @ManyToOne
     private Book book;
@@ -52,5 +55,7 @@ public class Orders extends BaseEntity {
 
     @OneToMany
     private List<OrderItem> orderItemList;
+
+
 
 }
