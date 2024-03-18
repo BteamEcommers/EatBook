@@ -176,6 +176,7 @@
                                         <!-- 삭제 버튼 -->
                                         <a th:href="@{|/review/delete/${review.id}|}" sec:authorize="isAuthenticated()" class="btn btn-sm btn-primary"
                                            style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
+
                                         <!-- 댓글 모달 버튼 -->
                                         <button sec:authorize="isAuthenticated()" type="button" class="btn btn-sm btn-outline-secondary reportReview"
                                                 data-bs-toggle="modal"
@@ -183,6 +184,7 @@
                                                 th:data-review-id="${review.id}"
                                                 id="reportReviewButton">신고
                                         </button>
+
                                         <!-- 리뷰 수정 폼 -->
                                         <div class="review-edit-form">
                                             <h5 class="my-3 border-bottom pb-2">리뷰수정</h5>
@@ -212,6 +214,7 @@
                             </li>
                         </ul>
                     </div>
+
                     <!-- 댓글 모달 부트스트랩 시작 -->
                     <div aria-hidden="true" aria-labelledby="reportModalReview" class="modal" id="reportReviewModal"
                          tabindex="-1">
@@ -266,7 +269,7 @@
                               var reviewId = $(this).attr('data-review-id');
                               $("input[name=reviewId]").val(reviewId)
                         })
-                    </script>
+
 
                     <!-- JavaScript 코드 -->
                     <script>

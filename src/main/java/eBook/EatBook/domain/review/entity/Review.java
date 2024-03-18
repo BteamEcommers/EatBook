@@ -51,6 +51,7 @@ public class Review extends BaseEntity {
         this.rating = rating;
     }
 
+
     @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
     private List<Report> report;
 
@@ -59,4 +60,5 @@ public class Review extends BaseEntity {
     @Column
     private String radioButtonValue;
     private String subject;
+
 }
