@@ -1,7 +1,6 @@
 package eBook.EatBook.domain.member.controller;
 
 import eBook.EatBook.domain.member.DTO.*;
-import eBook.EatBook.domain.event.Entity.Event;
 import eBook.EatBook.domain.member.DTO.ConfirmCodeForm;
 import eBook.EatBook.domain.member.DTO.FindPasswordForm;
 import eBook.EatBook.domain.member.DTO.FindUsernameForm;
@@ -11,7 +10,6 @@ import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
 import eBook.EatBook.global.email.entity.Email1;
 import eBook.EatBook.global.email.service.EmailService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,12 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+
 
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.List;
+
 
 
 @Controller
@@ -233,7 +231,5 @@ public class MemberController {
         model.addAttribute("member", member);
         return "/member/member_Profile";
     }
-
-
 
 }

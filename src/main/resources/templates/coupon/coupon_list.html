@@ -1,0 +1,66 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
+    <div class="event-section">
+        <nav th:replace="~{/event/event_layout :: eventSide}"></nav>
+        <div class="container p-3">
+            <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold">쿠폰 목록</span>
+            </a>
+            <div>
+                <div class=" d-flex justify-content-end">
+                    <a th:block sec:authorize="hasRole('ADMIN')" th:href="@{/coupon/create}"
+                       class="btn btn-primary btn-sm">쿠폰 만들기</a>
+                </div>
+                <div class="album py-5 bg-body-tertiary">
+                    <div class="event_container">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                            <div class="col" th:each="coupon : ${couponList}">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <p class="card-text" th:text="${coupon.title}"></p>
+                                        <div class="card-text" style="margin-bottom:10px;" th:text="${coupon.content}"></div>
+                                        <div class="card-text" style="white-space: pre-line; margin-bottom:10px;" th:text="${#numbers.formatInteger(coupon.discount_price, 0, 'COMMA')} + ' 원'"></div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group" sec:authorize="hasRole('ADMIN')">
+                                                <a th:href="@{|/coupon/delete/${coupon.id}|}" type="button"
+                                                   class="btn btn-sm btn-outline-secondary">삭제</a>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <a th:href="@{|/coupon/add/${coupon.id}|}" class="btn btn-sm btn-primary"
+                                                        id="couponBtn" type="button">
+                                                    쿠폰 발급 받기</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#couponBtn").click(function () {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'center-center',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: '쿠폰을 발급 받으셨습니다.'
+                })
+            });
+        });
+    </script>
+</div>
+</html>

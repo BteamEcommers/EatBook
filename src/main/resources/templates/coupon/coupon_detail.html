@@ -1,0 +1,27 @@
+<html layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content">
+    <div class="event-section">
+        <div class="container p-3">
+            <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold" th:text="${coupon.title}"></span>
+            </a>
+            <div class="card my-3">
+                <div style="width:100%; height:225px;">
+                    <img th:src="@{|/file/${coupon.thumbnailImg}|}" alt="사진" style="width:100%; height:100%;">
+                </div>
+            </div>
+            <div class="card my-3">
+                <div class="card-body">
+                    <div class="card-text" style="white-space: pre-line;" th:text="${coupon.content}"></div>
+                </div>
+            </div>
+            <div class="card my-3">
+                <div class="card-body">
+                    <div class="card-text" style="white-space: pre-line;" th:text="${#numbers.formatInteger(coupon.discount_price, 0, 'COMMA')} + ' 원'"></div>
+                </div>
+            </div>
+            <a th:href="@{/coupon/list}" class="btn btn-sm btn-primary">돌아가기</a>
+        </div>
+    </div>
+</div>
+</html>

@@ -4,6 +4,8 @@ import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.book.service.BookService;
 import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.cartitem.Service.CartItemService;
+import eBook.EatBook.domain.coupon.Entity.Coupon;
+import eBook.EatBook.domain.coupon.Service.GetCouponService;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,8 @@ public class CartItemController {
     private final CartItemService cartItemService;
     private final MemberService memberService;
     private final BookService bookService;
+    private final GetCouponService getCouponService;
+
 
 
     @GetMapping("/add/{id}")
@@ -45,18 +49,37 @@ public class CartItemController {
 
     @GetMapping("/list")
     public String cartList(Model model, Principal principal) {
-        if(principal==null) {
+        if(principal == null) {
             return "redirect:/member/login";
         }
         Member member = this.memberService.findByUsername(principal.getName());
 
-        //이벤트 게시물로 임시 사용(변경필요)
+
+        List<Coupon> couponList = this.getCouponService.findaddCouponByCoupon(member.getGetCouponList());
+        model.addAttribute("couponList", couponList);
+
         List<Book> bookList = this.cartItemService.findProductByCart(member.getCartList());
-        model.addAttribute("bookList",bookList);
+        model.addAttribute("bookList", bookList);
+
+        // 카트에 담긴 총 상품 금액 계산
+        int total_price = 0;
+        for(Book book : bookList) {
+            total_price += book.getPrice();
+        }
+        model.addAttribute("total_price", total_price);
+
+        // 카트에 담긴 총 할인 금액 계산
+        int total_discount = 0;
+        for(Book book : bookList) {
+            total_discount += book.getDiscountPrice();
+        }
+        model.addAttribute("total_discount", total_discount);
+
         int cartItemCount = this.cartItemService.getCartItemCount(member.getCartList());
         model.addAttribute("cartItemCount", cartItemCount);
         return "/cartitem/cart_list";
     }
+
 
     @GetMapping("/delete/{id}")
     public String deleteCartItem(@PathVariable(value = "id") Integer id, Principal principal) {

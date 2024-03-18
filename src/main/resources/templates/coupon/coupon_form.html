@@ -1,0 +1,37 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
+    <div class="event-section">
+        <div class="container p-3">
+            <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <span class="fs-5 fw-semibold">쿠폰</span>
+            </a>
+                <form th:action="@{/coupon/create}" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">쿠폰 이름</label>
+                        <input type="text" name="title" id="title" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">쿠폰 내용</label>
+                        <input type="text" name="content" id="content" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="discount_price" class="form-label">쿠폰 할인 가격</label>
+                        <input type="text" name="discount_price" id="discount_price" class="form-control">
+                    </div>
+<!--                    우선 할인율을 제외 하고 가격정보로만 쿠폰 적용 기능-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="discount_rate" class="form-label">쿠폰 할인률</label>-->
+<!--                        <input type="text" name="discount_rate" id="discount_rate" class="form-control">-->
+<!--                    </div>-->
+                    <div class="mb-3">
+                        <label for="thumbnailImg" class="form-label">이미지 업로드</label>
+                        <input type="file" name="thumbnailImg" id="thumbnailImg" accept="image/png, image/gif, image/jpeg">
+                        <!-- 이미지 미리보기 -->
+                        <img id="preview" src="#" alt="미리보기" style="max-width: 200px; max-height: 200px;">
+                    </div>
+                    <input type="submit" value="저장하기" class="btn btn-primary my-2">
+                </form>
+        </div>
+    </div>
+</div>
+</html>

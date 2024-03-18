@@ -32,11 +32,12 @@
                     <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                          style="width: 100%; padding-left:10px;">
                         <h6>정가</h6>
-                        <del th:text="${book.price  + ' 원'}"></del>
+                        <del th:text="${#numbers.formatInteger(book.price, 0, 'COMMA')} + ' 원'"></del>
                         <br>
                         <h6>할인가</h6>
                         <div class="d-flex" style="color:red;">
-                            <div style="margin-right:10px;" th:text="${book.discountPrice}  + ' 원'"></div>
+                            <div style="margin-right:10px;"
+                                 th:text="${#numbers.formatInteger(book.discountPrice, 0, 'COMMA')} + ' 원'"></div>
                             <div th:text=" ' ( ' + ${book.discount} +'  % 할인' + ' ) ' "></div>
                         </div>
                     </div>
@@ -44,16 +45,14 @@
                 <div>
                     <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                          style="width: 100%; padding-left:10px;">
-                        <h5>쿠폰 받기</h5>
+                        <h5>쿠폰</h5>
                         <div class="card my-3">
                             <div class="card-body">
-                                쿠폰 내용
-                                <div class="card-text" style="white-space: pre-line;">
-                                    홈페이지 오픈 기념 이벤트 중 입니다
-                                </div>
+                                <p style="color:black;">홈페이지 오픈 기념 이벤트 중 입니다</p>
+                                <a class="btn btn-sm btn-primary" th:href="@{/coupon/list}">쿠폰 받기</a>
                             </div>
                             <div>
-                                <p>신간 책 이벤트 중입니다</p>
+                                <p>쿠폰 발급 받으세요</p>
                             </div>
                         </div>
                     </div>
@@ -86,7 +85,8 @@
                         리뷰
                     </a>
                     <div class="card-body" style="font-size:20px; color: red;">
-                        <div class="card-text" style="white-space: pre-line;" th:text="${book.discountPrice + ' 원'}"></div>
+                        <div class="card-text" style="white-space: pre-line;"
+                             th:text="${#numbers.formatInteger(book.discountPrice, 0, 'COMMA')} + ' 원'"></div>
                     </div>
                     <div style="margin-bottom:5px" class="justify-content-end">
                         <a class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">바로구매</a>
@@ -162,7 +162,8 @@
                                      class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                                      style="width: 100%;">
                                     <div class="review-box mb-2">
-                                        <span>평점: <span th:utext="|&#9733;| + ${review.rating}" class="star"></span></span>
+                                        <span>평점: <span th:utext="|&#9733;| + ${review.rating}"
+                                                        class="star"></span></span>
                                         <div style="display:flex;" th:text="${review.author.username}"></div>
                                         <div style="display:flex; justify-content:end; padding-right:10px;"
                                              th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd ')}"></div>
@@ -172,24 +173,32 @@
                                             <span th:text="${review.content}"></span>
                                         </div>
                                         <!-- 수정 버튼 -->
-                                        <button sec:authorize="isAuthenticated()" class="btn btn-sm btn-primary btn-edit" style="width: 100px; margin-right:10px;">수정</button>
+                                        <button sec:authorize="isAuthenticated()"
+                                                class="btn btn-sm btn-primary btn-edit"
+                                                style="width: 100px; margin-right:10px;">수정
+                                        </button>
                                         <!-- 삭제 버튼 -->
-                                        <a th:href="@{|/review/delete/${review.id}|}" sec:authorize="isAuthenticated()" class="btn btn-sm btn-primary"
+                                        <a th:href="@{|/review/delete/${review.id}|}" sec:authorize="isAuthenticated()"
+                                           class="btn btn-sm btn-primary"
                                            style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
                                         <!-- 리뷰 수정 폼 -->
                                         <div class="review-edit-form">
                                             <h5 class="my-3 border-bottom pb-2">리뷰수정</h5>
-                                            <form th:action="@{|/review/modify/${review.id}|}" th:object="${reviewForm}" method="post">
-                                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                            <form th:action="@{|/review/modify/${review.id}|}" th:object="${reviewForm}"
+                                                  method="post">
+                                                <input type="hidden" th:name="${_csrf.parameterName}"
+                                                       th:value="${_csrf.token}"/>
                                                 <div class="mb-3">
                                                     <label for="content" class="form-label">내용</label>
-                                                    <textarea name="content" id="content" class="form-control" rows="10" th:text="${review.content}"></textarea>
+                                                    <textarea name="content" id="content" class="form-control" rows="10"
+                                                              th:text="${review.content}"></textarea>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="modify-rating" class="form-label">평점</label>
                                                     <div class="rating" id="modify-rating">
                                                         <!-- 수정 시에도 별점을 선택할 수 있는 별 아이콘 -->
-                                                        <input type="hidden" name="rating" id="modify-rating-value" value="0">
+                                                        <input type="hidden" name="rating" id="modify-rating-value"
+                                                               value="0">
                                                         <span class="star" data-value="1">&#9733;</span>
                                                         <span class="star" data-value="2">&#9733;</span>
                                                         <span class="star" data-value="3">&#9733;</span>
@@ -346,93 +355,93 @@
                     </style>
 
                     <!-- 장바구니,찜 기능 -->
-        <script>
-            $(document).ready(function () {
-            $(".addWish").click(function () {
-                var bookId = this.id.split('_')[1];
+                    <script>
+                        $(document).ready(function () {
+                        $(".addWish").click(function () {
+                            var bookId = this.id.split('_')[1];
 
-                Swal.fire({
-                    title: '찜 목록에',
-                    text: '해당 상품을 담으시겠습니까?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: '담기',
-                    cancelButtonText: '취소',
-                    preConfirm: () => {
-                        return new Promise((resolve) => {
-                            $.ajax({
-                                url: '/wish/add/' + bookId,
-                                type: 'GET',
-                                success: function (data) {
-                                      resolve(true);
-                                },
-                                error: function () {
-                                    resolve(false);
+                            Swal.fire({
+                                title: '찜 목록에',
+                                text: '해당 상품을 담으시겠습니까?',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: '담기',
+                                cancelButtonText: '취소',
+                                preConfirm: () => {
+                                    return new Promise((resolve) => {
+                                        $.ajax({
+                                            url: '/wish/add/' + bookId,
+                                            type: 'GET',
+                                            success: function (data) {
+                                                  resolve(true);
+                                            },
+                                            error: function () {
+                                                resolve(false);
+                                            }
+                                        });
+                                    });
+                                }
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // SweetAlert2 확인 버튼을 누르면 실행되는 부분
+                                    Swal.fire(
+                                        '찜 목록에 상품을 담았습니다.',
+                                        '',
+                                        'success'
+                                    ).then(() => {
+                                        window.location.href = '/book/detail/' + bookId;
+                                    });
                                 }
                             });
                         });
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // SweetAlert2 확인 버튼을 누르면 실행되는 부분
-                        Swal.fire(
-                            '찜 목록에 상품을 담았습니다.',
-                            '',
-                            'success'
-                        ).then(() => {
-                            window.location.href = '/book/detail/' + bookId;
-                        });
-                    }
-                });
-            });
-        });
-        </script>
-        <script>
-            $(document).ready(function () {
-             $(".addCartItem").click(function () {
-            var bookId = this.id.split('_')[1];
+                    });
+                    </script>
+                    <script>
+                        $(document).ready(function () {
+                         $(".addCartItem").click(function () {
+                        var bookId = this.id.split('_')[1];
 
-            Swal.fire({
-                title: '장바구니에',
-                text: '해당 상품을 담으시겠습니까?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '담기',
-                cancelButtonText: '취소',
-                preConfirm: () => {
-                    return new Promise((resolve) => {
-                        // Ajax 요청을 통한 서버에서의 삭제 작업
-                        $.ajax({
-                            url: '/cartitem/add/' + bookId,
-                            type: 'GET',
-                            success: function (data) {
-                                  resolve(true);
-                            },
-                            error: function () {
-                                resolve(false);
+                        Swal.fire({
+                            title: '장바구니에',
+                            text: '해당 상품을 담으시겠습니까?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '담기',
+                            cancelButtonText: '취소',
+                            preConfirm: () => {
+                                return new Promise((resolve) => {
+                                    // Ajax 요청을 통한 서버에서의 삭제 작업
+                                    $.ajax({
+                                        url: '/cartitem/add/' + bookId,
+                                        type: 'GET',
+                                        success: function (data) {
+                                              resolve(true);
+                                        },
+                                        error: function () {
+                                            resolve(false);
+                                        }
+                                    });
+                                });
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // SweetAlert2 확인 버튼을 누르면 실행되는 부분
+                                Swal.fire(
+                                    '장바구니에 상품을 담았습니다.',
+                                    '',
+                                    'success'
+                                ).then(() => {
+                                    window.location.href = '/book/detail/' + bookId;
+                                });
                             }
                         });
                     });
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // SweetAlert2 확인 버튼을 누르면 실행되는 부분
-                    Swal.fire(
-                        '장바구니에 상품을 담았습니다.',
-                        '',
-                        'success'
-                    ).then(() => {
-                        window.location.href = '/book/detail/' + bookId;
-                    });
-                }
-            });
-        });
-    });
-        </script>
-    </div>
-</div>
+                });
+                    </script>
+                </div>
+            </div>
 </html>
