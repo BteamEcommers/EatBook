@@ -99,6 +99,7 @@ public class WidgetController {
         // TODO: 결제 성공 및 실패 비즈니스 로직을 구현하세요.
         Reader reader = new InputStreamReader(responseStream, StandardCharsets.UTF_8);
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
+        // 결제 성공 로직
         if(isSuccess){
             // order isOrdered = true;
              Orders orders =  this.ordersService.findByRandomStringOrderId(orderId);
@@ -110,10 +111,8 @@ public class WidgetController {
                 member.getBookList().add(orderItem.getBook());
             }
             this.memberService.saveMember(member);
-
-
-
         }
+
         responseStream.close();
 
         return ResponseEntity.status(code).body(jsonObject);

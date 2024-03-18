@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -82,6 +83,7 @@ public class OrdersService {
         Orders orders1 = orders.toBuilder()
                 .isOrdered(true)
                 .isRebated(false)
+                .paymentDate(LocalDateTime.now())
                 .build();
 
         this.ordersRepository.save(orders1);
@@ -107,6 +109,16 @@ public class OrdersService {
         }
 
         return optionalOrders.get();
+    }
+
+    public List<Orders> findAllByBuyer(Member buyer){
+        List<Orders> ordersList = this.ordersRepository.findAllByBuyerAndIsOrdered(buyer, true);
+        if(ordersList.isEmpty()){
+            return null;
+        }
+
+        return ordersList;
+
     }
 
 }

@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -43,6 +44,10 @@ public class Orders extends BaseEntity {
     // 정산 유무 칼럼(생성 시 null / 주문 완료 시 false/ 정산 완료 시 true)
     @Column
     private boolean isRebated;
+
+    // 결제일
+    @Column
+    private LocalDateTime paymentDate;
 
     @ManyToOne
     private CartItem cartItem;

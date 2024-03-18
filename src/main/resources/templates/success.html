@@ -7,6 +7,7 @@
             href="https://static.toss.im/icons/png/4x/icon-toss-logo.png"
     />
     <link rel="stylesheet" type="text/css" href="/css/orders/orders_checkout.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main/bootstrap.min.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="_csrf" th:content="${_csrf.token}"/>
@@ -29,6 +30,7 @@
         <p id="paymentKey"></p>
         <p id="orderId"></p>
         <p id="amount"></p>
+        <button onclick="popupShutdown()" class="btn btn-primary">페이지로 돌아가기</button>
     </div>
 </div>
 <script>
@@ -78,6 +80,12 @@
     amountElement.textContent = "결제 금액: " + urlParams.get("amount");
     paymentKeyElement.textContent =
     "paymentKey: " + urlParams.get("paymentKey");
+
+    function popupShutdown(){
+        opener.location.href= window.location.origin +"/orders/complete";
+        window.close();
+    }
+
 </script>
 </body>
 </html>
