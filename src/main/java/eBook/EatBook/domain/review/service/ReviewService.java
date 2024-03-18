@@ -5,8 +5,10 @@ import eBook.EatBook.domain.book.repository.BookRepository;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.review.entity.Review;
 import eBook.EatBook.domain.review.repository.ReviewRepository;
+
 import eBook.EatBook.report.Repository.ReportRepository;
 import eBook.EatBook.report.entity.Report;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final BookRepository bookRepository;
     private final ReportRepository reportRepository;
+
 
 
     public Review getReview(Integer id) {

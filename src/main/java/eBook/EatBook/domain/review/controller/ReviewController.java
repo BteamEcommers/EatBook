@@ -97,6 +97,7 @@ public class ReviewController {
 
         return String.format("redirect:/book/detail/%s",review.getBook().getId());
     }
+
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/report/{id}")
     public String reportComment(@PathVariable("id") Integer id, Principal principal,
@@ -127,4 +128,5 @@ public class ReviewController {
         }
         return "기타";
     }
+
 }
