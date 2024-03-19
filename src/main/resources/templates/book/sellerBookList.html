@@ -12,7 +12,7 @@
             <h2>판매 책 관리</h2>
         </div>
         <div class="body-box">
-            <table class="table">
+            <table class="table border">
                 <thead>
                 <tr>
                     <th scope="col">책</th>
@@ -23,16 +23,18 @@
                 </thead>
                 <tbody>
                 <tr th:each="book : ${bookList}">
-                    <th scope="row">[[${book.subject}]]</th>
-                    <td th:text="${book.price}"> 원</td>
-                    <td >[[${book.discount}]]<span>%</span></td>
+                    <th scope="row">
+                        <a th:href="@{|/book/detail/${book.id}|}">[[${book.subject}]]</a>
+                    </th>
+                    <td>[[${book.price}]] <span>원</span></td>
+                    <td>[[${book.discount}]]<span>%</span></td>
                     <td th:text="${#temporals.format(book.createDate, 'yyyy-MM-dd HH:mm')}"></td>
                     <td>
                         <a th:href="@{|/book/modify/${book.Id}|}" class="btn btn-sm btn-success">수정</a>
                     </td>
-                    <td>
-                        <a th:href="@{|/book/delete/${book.Id}|}" class="btn btn-sm btn-danger">삭제</a>
-                    </td>
+<!--                    <td>-->
+<!--/*                        <a th:href="@{|/book/delete/${book.Id}|}" class="btn btn-sm btn-danger">삭제</a>*/-->
+<!--                    </td>-->
 
                 </tr>
                 </tbody>
