@@ -234,6 +234,9 @@ public class MemberController {
     public String profileMember(Model model, Principal principal) {
         Member member = this.memberService.findByUsername(principal.getName());
         model.addAttribute("member", member);
+
+        List<Orders> ordersList = this.orderService.findAllByBuyer(member);
+        model.addAttribute("ordersList", ordersList);
         return "/member/member_Profile";
     }
 
