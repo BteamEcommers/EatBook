@@ -92,6 +92,10 @@ public class ReviewController {
             // 작성자를 찾을 수 없는 경우에 대한 처리
             return "redirect:/book/list"; // 예시로 홈 페이지로 리다이렉트
         }
+        if (!review.getAuthor().getUsername().equals(principal.getName()) &&
+                !principal.getName().equals("admin")) {
+            return "book_detail";
+        }
 
         this.reviewService.delete(review);
 

@@ -175,6 +175,8 @@
                                         <button sec:authorize="isAuthenticated()" class="btn btn-sm btn-primary btn-edit" style="width: 100px; margin-right:10px;">수정</button>
                                         <!-- 삭제 버튼 -->
                                         <a th:href="@{|/review/delete/${review.id}|}" sec:authorize="isAuthenticated()" class="btn btn-sm btn-primary"
+                                           th:if="${review.author != null and (#authentication.getPrincipal().getUsername() == review.author.username
+                                or #authentication.getPrincipal().getUsername() == 'admin')}"
                                            style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
 
                                         <!-- 댓글 모달 버튼 -->
