@@ -62,6 +62,10 @@ public class OrdersController {
     public String ordersPayPost(Model model, @PathVariable("bookId") Integer bookId, Principal principal){
         Book book = this.bookService.getBookById(bookId);
         Member member = this.memberService.findByUsername(principal.getName());
+        if(member.getBookList().contains(book)){
+            return "/orders/orders_check";
+        }
+
         Orders orders = this.ordersService.createOrders(book, member);
         ArrayList<OrderItem> orderItemList = this.orderItemService.createOrderItem(orders, book);
         this.ordersService.addOrderItemList(orders, orderItemList);
@@ -90,5 +94,11 @@ public class OrdersController {
     public String ordersComplete(){
 
         return "/orders/ordersComplete";
+    }
+
+    @GetMapping("/check")
+    public String ordersCheck(){
+
+        return "/orders/orders_check";
     }
 }

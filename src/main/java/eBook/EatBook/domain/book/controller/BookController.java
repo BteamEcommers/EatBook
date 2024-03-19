@@ -85,6 +85,7 @@ public class BookController {
         }
         Page<Book> paging = this.bookService.getList(page);
         List<Category> categoryList = this.categoryService.getAllCategory();
+
         model.addAttribute("paging", paging);
         model.addAttribute("categoryList", categoryList);
 
