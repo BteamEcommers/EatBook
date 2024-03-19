@@ -28,7 +28,7 @@
                 <td th:text="${loop.count}"></td>
                 <td>
                     <a th:href="@{|/book/detail/${book.id}|}">
-                        <img th:src="@{|/file/${book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;">
+                        <img th:src="@{|/file/${book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;" class="border">
                     </a>
                 </td>
                 <td>
@@ -70,7 +70,7 @@
                             <a class="addWish btn btn-sm btn-primary" th:id="'addWish_' + ${book.id}" onclick="addWish(${book.id}); return false;" style="width:100%;">찜하기</a>
                         </div>
                         <li>
-                            <!--수정중-->
+                            <!--결제버튼-->
                             <form th:action="@{|/orders/pay/${book.id}|}" method="post">
                             <button  type="submit"  class="btn btn-sm btn-primary"
                                 style="width: 100%; margin-top:5px">결제</button>
