@@ -7,28 +7,32 @@
             </a>
             <div class="middle-wishContainer">
                 <table class="table table-hover">
-                    <thead>
+                    <thead style="vertical-align: middle; text-align:center;">
                     <tr>
-                        <th scope="col" style="text-align:center;">쿠폰 이름</th>
-                        <th scope="col" style="text-align:center;">쿠폰 내용</th>
-                        <th scope="col" style="text-align:center;">쿠폰 할인가</th>
-                    </tr>
+                        <th scope="col">쿠폰 이름</th>
+                        <th scope="col">쿠폰 내용</th>
+                        <th scope="col">쿠폰 할인가</th>
+                        <th scope="col">상세 내용 보기</th>
                     </thead>
-                    <tbody>
+                    <tbody style="vertical-align: middle;">
                     <tr th:each="coupon : ${couponList}">
                         <td>
-                            <div style="margin-bottom:10px;">
+                            <div>
                                 <a th:text="${coupon.title}"></a>
                             </div>
                         </td>
                         <td>
-                            <div style="margin-bottom:10px;">
+                            <div>
                                 <a th:text="${coupon.content}"></a>
                             </div>
                         </td>
-                        <td style="vertical-align: middle; text-align:center;">
+                        <td style="text-align:center;">
                             <div style="margin-left:10px;"
                                  th:text="${#numbers.formatInteger(coupon.discount_price, 0, 'COMMA')} + ' 원'"></div>
+                        </td>
+                        <td style="text-align:center;">
+                            <a class="btn btn-sm btn-outline-secondary" th:href="@{|/coupon/detail/${coupon.id}|}">상세
+                                내용</a>
                         </td>
                     </tr>
                     </tbody>

@@ -3,14 +3,14 @@ package eBook.EatBook.domain.coupon.Entity;
 
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.global.baseEntity.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,5 +27,8 @@ public class Coupon extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany(mappedBy = "coupon", cascade = CascadeType.ALL)
+    private List<GetCoupon> getCoupons;
 
 }

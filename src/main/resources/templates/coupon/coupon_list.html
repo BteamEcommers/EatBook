@@ -18,17 +18,18 @@
                                 <div class="card shadow-sm">
                                     <div class="card-body">
                                         <p class="card-text" th:text="${coupon.title}"></p>
-                                        <div class="card-text" style="margin-bottom:10px;" th:text="${coupon.content}"></div>
-                                        <div class="card-text" style="white-space: pre-line; margin-bottom:10px;" th:text="${#numbers.formatInteger(coupon.discount_price, 0, 'COMMA')} + ' 원'"></div>
+                                        <div class="card-text" th:text="${coupon.content}"></div>
+                                        <div class="card-text" th:text="${#numbers.formatInteger(coupon.discount_price, 0, 'COMMA')} + ' 원'"></div>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group" sec:authorize="hasRole('ADMIN')">
                                                 <a th:href="@{|/coupon/delete/${coupon.id}|}" type="button"
                                                    class="btn btn-sm btn-outline-secondary">삭제</a>
                                             </div>
                                             <div class="d-flex justify-content-end">
-                                                <a th:href="@{|/coupon/add/${coupon.id}|}" class="btn btn-sm btn-primary"
-                                                        id="couponBtn" type="button">
-                                                    쿠폰 발급 받기</a>
+                                                <a th:href="@{|/coupon/add/${coupon.id}|}" class="btn btn-sm btn-primary couponBtn"
+                                                        type="button" data-coupon-id="${coupon.id}">
+                                                    쿠폰 발급 받기
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -41,18 +42,15 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
-            $("#couponBtn").click(function () {
+        $().ready(function () {
+            $(".couponBtn").click(function () {
+                const couponId = $(this).data("coupon-id");
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'center-center',
                     showConfirmButton: false,
-                    timer: 2000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
+                    timer: 3000,
+                    timerProgressBar: true
                 })
 
                 Toast.fire({

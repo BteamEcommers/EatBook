@@ -6,7 +6,7 @@
                 <span class="fs-5 fw-semibold" th:text="${coupon.title}"></span>
             </a>
             <div class="card my-3">
-                <div style="width:100%; height:225px;">
+                <div style="width:50%; height:225px; align-self:center;">
                     <img th:src="@{|/file/${coupon.thumbnailImg}|}" alt="사진" style="width:100%; height:100%;">
                 </div>
             </div>
@@ -20,7 +20,7 @@
                     <div class="card-text" style="white-space: pre-line;" th:text="${#numbers.formatInteger(coupon.discount_price, 0, 'COMMA')} + ' 원'"></div>
                 </div>
             </div>
-            <a th:href="@{/coupon/list}" class="btn btn-sm btn-primary">돌아가기</a>
+            <a th:href="@{/coupon/CouponList}" class="btn btn-sm btn-primary">돌아가기</a>
         </div>
     </div>
 </div>

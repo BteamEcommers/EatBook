@@ -42,17 +42,17 @@
                         </div>
                     </div>
                 </div>
-                <div>
+                <div style="margin-top:60px;">
                     <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                          style="width: 100%; padding-left:10px;">
                         <h5>쿠폰</h5>
                         <div class="card my-3">
                             <div class="card-body">
                                 <p style="color:black;">홈페이지 오픈 기념 이벤트 중 입니다</p>
+                                <div>
+                                    <p>쿠폰 발급 받으세요</p>
+                                </div>
                                 <a class="btn btn-sm btn-primary" th:href="@{/coupon/list}">쿠폰 받기</a>
-                            </div>
-                            <div>
-                                <p>쿠폰 발급 받으세요</p>
                             </div>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                 <div id="review_info" class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                      style="width: 100%;"></div>
                 <h2>회원 리뷰</h2>
-                <div id="review_info" class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
+                <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                      style="width: 100%;"></div>
                 <div class="justify-content-end" style="margin-bottom:5px">
                     <!-- 리뷰 등록 폼 -->
@@ -183,7 +183,8 @@
                                            style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
 
                                         <!-- 댓글 모달 버튼 -->
-                                        <button sec:authorize="isAuthenticated()" type="button" class="btn btn-sm btn-outline-secondary reportReview"
+                                        <button sec:authorize="isAuthenticated()" type="button"
+                                                class="btn btn-sm btn-outline-secondary reportReview"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#reportReviewModal"
                                                 th:data-review-id="${review.id}"
@@ -231,14 +232,16 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="reportModalReview">신고내용</h1>
-                                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"
+                                            type="button"></button>
                                 </div>
                                 <form class="was-validated" method="post" th:action="@{|/review/report/${book.id}|}">
                                     <div class="modal-body">
                                         <input type="hidden" id="reviewId" name="reviewId">
                                         <div class="mb-3">
                                             <label class="col-form-label" for="validationTextareaComment">내용</label>
-                                            <textarea class="form-control" id="validationTextareaComment" name="reportContent"
+                                            <textarea class="form-control" id="validationTextareaComment"
+                                                      name="reportContent"
                                                       placeholder="내용을 입력해주세요." required></textarea>
                                         </div>
 
@@ -263,8 +266,11 @@
                                         </div>
 
                                         <div class="modal-footer">
-                                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
-                                            <button class="btn btn-primary" onclick="handleRadioSelection()" type="submit">신고 보내기
+                                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">
+                                                Close
+                                            </button>
+                                            <button class="btn btn-primary" onclick="handleRadioSelection()"
+                                                    type="submit">신고 보내기
                                             </button>
                                         </div>
                                     </div>

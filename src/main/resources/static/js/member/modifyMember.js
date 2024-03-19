@@ -1,9 +1,16 @@
-$(document).ready(function () {
-    $("#modifyBtn").click(function () {
-       Swal.fire({
-          icon: 'success',
-          title: '회원정보가',
-          text: '수정 되었습니다.',
-       });
+$().ready(function () {
+        $("#modifyBtn").click(function () {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'center-center',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: '회원정보를 수정하셨습니다.'
+            })
+        });
     });
-});

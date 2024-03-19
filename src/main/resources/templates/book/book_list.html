@@ -77,16 +77,16 @@
                 </td>
                 <td style="vertical-align: middle; text-align:center;">
                     <ul>
-                        <div style="margin-bottom:5px">
-                            <a class="addCartItem btn btn-sm btn-primary" th:id="'addCartItem_' + ${book.id}"
-                               onclick="addCartItem(${book.id}); return false;" style="width:100%;">장바구니
-                                담기</a>
-                        </div>
-                        <div>
-                            <a class="addWish btn btn-sm btn-primary" th:id="'addWish_' + ${book.id}"
-                               onclick="addWish(${book.id}); return false;" style="width:100%;">찜하기</a>
-                        </div>
                         <li>
+                            <div style="margin-bottom:5px">
+                                <a class="addCartItem btn btn-sm btn-primary" th:id="'addCartItem_' + ${book.id}"
+                                   onclick="addCartItem(${book.id}); return false;" style="width:100%;">장바구니
+                                    담기</a>
+                            </div>
+                            <div>
+                                <a class="addWish btn btn-sm btn-primary" th:id="'addWish_' + ${book.id}"
+                                   onclick="addWish(${book.id}); return false;" style="width:100%;">찜하기</a>
+                            </div>
                             <!--수정중-->
                             <form th:action="@{|/orders/pay/${book.id}|}" method="post">
                                 <button type="submit" class="btn btn-sm btn-primary"
