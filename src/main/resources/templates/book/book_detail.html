@@ -206,8 +206,6 @@
                                                 th:data-review-id="${review.id}"
                                                 id="reportReviewButton">신고
                                         </button>
-
-
                                     </div>
                                 </div>
                             </li>
@@ -268,8 +266,6 @@
                               var reviewId = $(this).attr('data-review-id');
                               $("input[name=reviewId]").val(reviewId)
                         })
-
-
                     </script>>
                     <!-- JavaScript 코드 -->
                     <script>
@@ -288,53 +284,49 @@
                         }
                     </script>
                     <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            const stars = document.querySelectorAll('.star');
+                        // 별점 등록 폼에서 클릭한 별의 값 설정
+document.querySelectorAll('.review_form .star').forEach(star => {
+    star.addEventListener('click', function() {
+        const value = this.getAttribute('data-value');
+        document.getElementById('rating-value').value = value;
+        highlightStars('.review_form .star', value);
+    });
+});
 
-                            stars.forEach(function (star) {
-                                star.addEventListener('click', function () {
-                                    const value = this.getAttribute('data-value');
-                                    const ratingInput = document.getElementById('rating-value');
-                                    const modifyRatingInput = document.getElementById('modify-rating-value');
+// 리뷰 수정 폼에서 클릭한 별의 값 설정
+document.querySelectorAll('.review-edit-form .star').forEach(star => {
+    star.addEventListener('click', function() {
+        const value = this.getAttribute('data-value');
+        const parentForm = this.closest('.review-edit-form');
+        parentForm.querySelector('#modify-rating-value').value = value;
+        highlightStars('.review-edit-form .star', value);
+    });
+});
 
-                                    if (ratingInput) {
-                                        ratingInput.value = value;
-                                    }
-                                    if (modifyRatingInput) {
-                                        modifyRatingInput.value = value;
-                                    }
 
-                                    // 클릭한 별점까지 강조하고 나머지 별점 초기화
-                                    resetStars();
-                                    highlightStars(value);
-                                });
-                            });
-
-                            function resetStars() {
-                                stars.forEach(function (star) {
-                                    star.classList.remove('filled');
-                                });
-                            }
-
-                            function highlightStars(value) {
-                                stars.forEach(function (star) {
-                                    if (star.getAttribute('data-value') <= value) {
-                                        star.classList.add('filled');
-                                    }
-                                });
-                            }
-                        });
+// 클릭한 별 점을 강조하는 함수
+function highlightStars(selector, value) {
+    document.querySelectorAll(selector).forEach(star => {
+        const starValue = star.getAttribute('data-value');
+        if (starValue <= value) {
+            star.style.color = 'orange';
+        } else {
+            star.style.color = 'gray';
+        }
+    });
+}
                     </script>
 
 
-                    <!-- CSS 코드 -->
-                    <style>
-                        /* 별점을 나타내는 별 아이콘에 마우스를 올렸을 때 색상 변경 */
-                        .star:hover,
-                        .star.filled {
-                            color: yellow;
-                        }
-                    </style>
+
+<!--                    &lt;!&ndash; CSS 코드 &ndash;&gt;-->
+<!--                    <style>-->
+<!--                        /* 별점을 나타내는 별 아이콘에 마우스를 올렸을 때 색상 변경 */-->
+<!--                        .star:hover,-->
+<!--                        .star.filled {-->
+<!--                            color: yellow;-->
+<!--                        }-->
+<!--                    </style>-->
 
 
                     <!-- 장바구니,찜 기능 -->
