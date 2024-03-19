@@ -60,6 +60,9 @@ public class OrdersController {
 
     @PostMapping("/pay/{bookId}")
     public String ordersPayPost(Model model, @PathVariable("bookId") Integer bookId, Principal principal){
+        if(principal == null){
+            return "/member/loginForm";
+        }
         Book book = this.bookService.getBookById(bookId);
         Member member = this.memberService.findByUsername(principal.getName());
         if(member.getBookList().contains(book)){
