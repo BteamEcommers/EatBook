@@ -73,7 +73,6 @@ public class Member extends BaseEntity {
     @Column
     private String accountHolderName;
 
-
     // 구매자가 가진 책 리스트
     @OneToMany
     private List<Book> bookList;

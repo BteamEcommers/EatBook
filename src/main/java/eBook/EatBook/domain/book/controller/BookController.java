@@ -117,6 +117,7 @@ public class BookController {
 //            return "redirect:/";
 //        }
         List<Book> bookList = this.bookService.findAllBySeller(member);
+        model.addAttribute("member", member);
         model.addAttribute("bookList", bookList);
         return "/book/sellerBookList";
     }
