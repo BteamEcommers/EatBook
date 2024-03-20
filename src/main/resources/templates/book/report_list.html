@@ -18,26 +18,27 @@
                         <th style="text-align: center;">신고 내용</th>
                         <th style="text-align: center;">신고 유형</th>
                         <th style="text-align: center;">바로가기</th>
+                        <th style="text-align: center;">삭제하기</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="report, loop : ${reportList}">
                     <td style="display: flex;justify-content: center;" th:text="${report.review.id}"></td>
-                    <td th:text="${#strings.replace(report.review.content, '<p>', '')}"
+                    <td style="text-align: center;" th:text="${#strings.replace(report.review.content, '<p>', '')}"
                         th:utext="${#strings.replace(#strings.replace(report.review.content, '<p>', ''), '</p>', '')}"></td>
                     <td style="display: flex;justify-content: center;"
                         th:text="${report.author.nickname}"></td>
-                    <td th:text="${report.content}"></td>
+                    <td style="text-align: center;" th:text="${report.content}"></td>
                     <td style="display: flex;justify-content: center;" th:text="${report.reportType}"></td>
                     <td>
                         <a style="display: flex;justify-content: center;"
                            th:href="@{|/book/detail/${report.review.book.id}|}">링크</a>
                     </td>
                             <!-- 삭제 버튼 -->
-                                <td>
+                                <td style="text-align: center;">
                                     <button class="deleteReport btn btn-sm btn-primary" sec:authorize="isAuthenticated()"
                                             th:id="'deleteReport_' + ${report.id}"
-                                            style="width: 100px; margin-right:10px; margin-top:20px;">삭제</button>
+                                            style="width: 100px; margin-right:10px; margin-bottom: 5px;">삭제</button>
                                 </td>
                     </tr>
                     </tbody>
@@ -90,6 +91,12 @@
             });
         });
     </script>
+    <style>
+        .table td {
+            height: 50px;
+            vertical-align: middle; /* 내용을 세로 중앙 정렬 */
+        }
+    </style>
 
 </div>
 </html>
