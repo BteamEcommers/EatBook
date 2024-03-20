@@ -14,11 +14,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -27,8 +26,7 @@ import java.security.Principal;
 public class EventController {
 
     private final EventService eventService;
-    private  final MemberService memberService;
-
+    private final MemberService memberService;
 
 
     @GetMapping("/list")
@@ -44,19 +42,26 @@ public class EventController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/create")
-    public String eventCreate (EventForm eventForm) {
+    public String eventCreate(EventForm eventForm) {
         return "/event/event_form";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
-    public String eventCreate(@Valid EventForm eventForm, BindingResult bindingResult, Principal principal) {
+    public String eventCreate(@Valid EventForm eventForm, BindingResult bindingResult, Principal principal,
+                              @RequestParam(value = "thumbnailImg", required = false) MultipartFile thumbnailImg) {
         Member member = this.memberService.getMember(principal.getName());
-        if(bindingResult.hasErrors()) {
-            return "/event/event_form";
+
+        try {
+            if (thumbnailImg == null) {
+                throw new IllegalArgumentException("이미지가 없습니다.");
+            }
+
+            this.eventService.create(eventForm, member, thumbnailImg);
+            return "redirect:/event/list";
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        this.eventService.create(eventForm, member);
-        return "redirect:/event/list";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -72,8 +77,7 @@ public class EventController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/modify/{id}")
     public String eventModify(@PathVariable("id") Integer id, Model model,
-                            @Valid EventForm eventForm, BindingResult bindingResult,
-                            Principal principal) {
+                              @Valid EventForm eventForm, BindingResult bindingResult, Principal principal) {
         Member member = this.memberService.getMember(principal.getName());
         if (bindingResult.hasErrors()) {
             model.addAttribute("member", member);
@@ -95,7 +99,7 @@ public class EventController {
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id) {
         Event event = this.eventService.getEvent(id);
-        model.addAttribute("event",event);
+        model.addAttribute("event", event);
         return "/event/event_detail";
     }
 

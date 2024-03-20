@@ -52,7 +52,6 @@ public class WishController {
         }
         Member member = this.memberService.findByUsername(principal.getName());
 
-        //이벤트 게시물로 임시 사용(변경필요)
         List<Book> bookList = this.wishService.findProductByWish(member.getWishList());
         model.addAttribute("bookList",bookList);
         return "/wish/wish_list";
