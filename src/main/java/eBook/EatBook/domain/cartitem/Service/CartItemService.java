@@ -16,9 +16,13 @@ import java.util.Optional;
 public class CartItemService {
     private final CartItemRepository cartItemRepository;
 
+
+
     public CartItem addCartItem(Member member, Book book) {
         CartItem cartItem = CartItem.builder()
                 .member(member)
+                .total_price(book.getPrice())
+                .total_discount(book.getDiscount())
                 .book(book)
                 .build();
 

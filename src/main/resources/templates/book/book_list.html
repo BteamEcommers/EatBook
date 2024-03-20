@@ -16,7 +16,7 @@
     <div class="main-container">
         <table class="table">
             <thead class="table-dark">
-            <tr>
+            <tr style="text-align:center;">
                 <th>번호</th>
                 <th>이미지</th>
                 <th>책 내용</th>
@@ -25,27 +25,42 @@
             </thead>
             <tbody>
             <tr th:each="book, loop : ${paging}">
-                <td th:text="${loop.count}"></td>
-                <td>
+                <td th:text="${loop.count}" style="vertical-align: middle; text-align:center;"></td>
+                <td style="vertical-align: middle; text-align:center;">
                     <a th:href="@{|/book/detail/${book.id}|}">
                         <img th:src="@{|/file/${book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;">
                     </a>
                 </td>
                 <td>
                     <table>
-                        <tbody>
+                        <tbody style="vertical-align: middle;">
                         <tr>
                             <td>
                                 <div class="book_content">
                                     <ul>
                                         <li>
-                                            <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.subject}"></a>
+                                            <div style="margin-bottom:10px;">
+                                                <a th:href="@{|/book/detail/${book.id}|}" th:text="${book.subject}"></a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <span th:text="${book.author}"></span>
+                                            <div style="margin-bottom:10px;">
+                                                <span th:text="${book.author}"></span>
+                                            </div>
                                         </li>
                                         <li>
-                                            <span th:text="${book.price}"></span><span>원</span>
+                                            <div class="d-flex">
+                                                <p style="font-size: 1.0em;">정가 </p>
+                                                <del style="margin-left:10px; color:var(--gray-color-500);"
+                                                     th:text="${#numbers.formatInteger(book.price, 0, 'COMMA')} + ' 원'"></del>
+                                            </div>
+                                            <div class="d-flex">
+                                                <p style="font-size: 1.0em; color:black;">할인가</p>
+                                                <div style="color:red;">
+                                                    <div style="margin-left:10px; margin-right:10px;"
+                                                         th:text="${#numbers.formatInteger(book.discountPrice, 0, 'COMMA')} + ' 원'"></div>
+                                                </div>
+                                            </div>
                                         </li>
                                         <li>
                                             <!---->
@@ -60,20 +75,23 @@
                         </tbody>
                     </table>
                 </td>
-                <td>
+                <td style="vertical-align: middle; text-align:center;">
                     <ul>
-                        <div style="margin-bottom:5px">
-                            <a class="addCartItem btn btn-sm btn-primary" th:id="'addCartItem_' + ${book.id}" onclick="addCartItem(${book.id}); return false;" style="width:100%;">장바구니
-                                담기</a>
-                        </div>
-                        <div>
-                            <a class="addWish btn btn-sm btn-primary" th:id="'addWish_' + ${book.id}" onclick="addWish(${book.id}); return false;" style="width:100%;">찜하기</a>
-                        </div>
                         <li>
+                            <div style="margin-bottom:5px">
+                                <a class="addCartItem btn btn-sm btn-primary" th:id="'addCartItem_' + ${book.id}"
+                                   onclick="addCartItem(${book.id}); return false;" style="width:100%;">장바구니
+                                    담기</a>
+                            </div>
+                            <div>
+                                <a class="addWish btn btn-sm btn-primary" th:id="'addWish_' + ${book.id}"
+                                   onclick="addWish(${book.id}); return false;" style="width:100%;">찜하기</a>
+                            </div>
                             <!--수정중-->
                             <form th:action="@{|/orders/pay/${book.id}|}" method="post">
-                            <button  type="submit"  class="btn btn-sm btn-primary"
-                                style="width: 100%; margin-top:5px">결제</button>
+                                <button type="submit" class="btn btn-sm btn-primary"
+                                        style="width: 100%; margin-top:5px">결제
+                                </button>
                             </form>
                         </li>
                     </ul>
