@@ -23,13 +23,13 @@
                     </thead>
                     <tbody>
                     <tr th:each="report, loop : ${reportList}">
-                    <td style="display: flex;justify-content: center;" th:text="${report.review.id}"></td>//
+                    <td style="display: flex;justify-content: center;" th:text="${report.review.id}"></td>
                     <td style="text-align: center;" th:text="${#strings.replace(report.review.content, '<p>', '')}"
                         th:utext="${#strings.replace(#strings.replace(report.review.content, '<p>', ''), '</p>', '')}"></td>
                     <td style="display: flex;justify-content: center;"
-                        th:text="${report.author.nickname}"></td>//
+                        th:text="${report.author.nickname}"></td>
                     <td style="text-align: center;" th:text="${report.content}"></td>
-                    <td style="display: flex;justify-content: center;" th:text="${report.reportType}"></td>//
+                    <td style="display: flex;justify-content: center;" th:text="${report.reportType}"></td>
                     <td>
                         <a style="display: flex;justify-content: center;"
                            th:href="@{|/book/detail/${report.review.book.id}|}">링크</a>
