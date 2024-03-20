@@ -942,16 +942,13 @@
                                     <a href="#">Home</a>
                                 </li>
                                 <li class="menu-item pb-2">
-                                    <a href="#">베스트셀러</a>
+                                    <a href="http://localhost:8010/book/list/베스트셀러">베스트셀러</a>
                                 </li>
                                 <li class="menu-item pb-2">
-                                    <a href="#">무료 eBook</a>
+                                    <a href="http://localhost:8010/book/list/무료%20Ebook">무료 eBook</a>
                                 </li>
                                 <li class="menu-item pb-2">
-                                    <a href="#">대여</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">새로나온 eBook</a>
+                                    <a href="http://localhost:8010/book/list/새로나온%20Ebook">새로나온 eBook</a>
                                 </li>
                             </ul>
                         </div>
@@ -964,13 +961,10 @@
                                     <a href="#">주문 내역 보기</a>
                                 </li>
                                 <li class="menu-item pb-2">
-                                    <a href="#">장바구니</a>
+                                    <a th:href="@{/cartitem/list}">장바구니</a>
                                 </li>
                                 <li class="menu-item pb-2">
-                                    <a href="#">나의 서재</a>
-                                </li>
-                                <li class="menu-item pb-2">
-                                    <a href="#">문의 하기</a>
+                                    <a th:href="@{/wish/list}">나의 서재(찜)</a>
                                 </li>
                                 <li class="menu-item pb-2">
                                     <a th:href="@{/faq/list}">자주 묻는 질문</a>
