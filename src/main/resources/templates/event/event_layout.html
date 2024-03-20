@@ -7,41 +7,31 @@
         <ul class="list-unstyled ps-0">
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                    상품
+                        data-bs-toggle="collapse" data-bs-target="#coupon-collapse" aria-expanded="true">
+                    쿠폰
                 </button>
-                <div class="collapse show" id="home-collapse">
+                <div class="collapse show" id="coupon-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">국내
-                            eBook</a>
-                        </li>
-                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">국외
-                            eBook</a>
+                        <li><a th:href="@{/coupon/list}"
+                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">쿠폰 목록</a>
                         </li>
                     </ul>
                 </div>
             </li>
-<!--            <li class="mb-1">-->
-<!--                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"-->
-<!--                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">-->
-<!--                    회원관련-->
-<!--                </button>-->
-<!--                <div class="collapse" id="dashboard-collapse">-->
-<!--                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">-->
-<!--                        <li><a href="#"-->
-<!--                               class="link-body-emphasis d-inline-flex text-decoration-none rounded">회원가입/탈퇴</a>-->
-<!--                        </li>-->
-<!--                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">ID/PW-->
-<!--                            찾기</a>-->
-<!--                        </li>-->
-<!--                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">회원정보변경</a>-->
-<!--                        </li>-->
-<!--                        <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">쿠폰-->
-<!--                            발급</a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </li>-->
+            <li class="mb-1">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
+                    이벤트
+                </button>
+                <div class="collapse" id="home-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a th:href="@{/event/list}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">
+                            이벤트 목록
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 <!--            <li class="mb-1">-->
 <!--                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"-->
 <!--                        data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">-->

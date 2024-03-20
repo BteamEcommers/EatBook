@@ -2,11 +2,10 @@ package eBook.EatBook.domain.member.service;
 
 import eBook.EatBook.domain.apply.entity.Apply;
 
-import eBook.EatBook.domain.category.entity.Category;
 
-//import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.cartitem.Entity.CartItem;
 
+import eBook.EatBook.domain.coupon.Entity.GetCoupon;
 import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
 import eBook.EatBook.domain.member.DTO.MemberModifyForm;
 import eBook.EatBook.domain.member.entity.Member;
@@ -104,11 +103,19 @@ public class MemberService {
         if (bindingResult.hasErrors()) {
             return bindingResult;
         }
+
+        if (memberModifyForm.getPassword1().length() < 4) {
+            bindingResult.rejectValue("password1", "passwordLength",
+                    "패스워드는 최소 4자 이상이어야 합니다.");
+            return bindingResult;
+        }
+
         if (!memberModifyForm.getPassword1().equals(memberModifyForm.getPassword2())) {
             bindingResult.rejectValue("password2", "passwordInCorrect",
                     "패스워드가 일치하지 않습니다.");
             return bindingResult;
         }
+
         return bindingResult;
     }
 
@@ -154,6 +161,16 @@ public class MemberService {
         this.memberRepository.save(member);
     }
 
+    // Coupon(쿠폰)addCoupon
+    public void addCoupon(Member loginedUser, GetCoupon getCoupon) {
+        List<GetCoupon> getCouponList = loginedUser.getGetCouponList();
+        getCouponList.add(getCoupon);
+        Member member = loginedUser.toBuilder()
+                .getCouponList(getCouponList)
+                .build();
+
+        this.memberRepository.save(member);
+    }
 
     public List<Member> findByIsSeller() {
         return this.memberRepository.findByIsSeller(true);

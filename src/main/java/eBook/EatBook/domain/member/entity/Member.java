@@ -5,6 +5,7 @@ import eBook.EatBook.domain.book.entity.Book;
 //import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.cartitem.Entity.CartItem;
 import eBook.EatBook.domain.coupon.Entity.Coupon;
+import eBook.EatBook.domain.coupon.Entity.GetCoupon;
 import eBook.EatBook.domain.wish.Entity.Wish;
 import eBook.EatBook.global.baseEntity.BaseEntity;
 import jakarta.persistence.CascadeType;
@@ -58,6 +59,10 @@ public class Member extends BaseEntity {
     // 쿠폰 (Coupon)
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Coupon> couponList;
+
+    // addCoupon(유저가 가지는 쿠폰)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GetCoupon> getCouponList;
 
 
     // 판매자, admin이 필요한 계좌번호, 금융기관명, 예금주 Column
