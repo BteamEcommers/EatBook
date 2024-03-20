@@ -244,6 +244,7 @@ public class MemberController {
         Member member = this.memberService.findByUsername(principal.getName());
         List<Orders> ordersList = this.orderService.findAllByBuyer(member);
 
+        model.addAttribute("member", member);
         model.addAttribute("ordersList", ordersList);
         return "/member/my_book";
     }
