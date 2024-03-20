@@ -1,6 +1,5 @@
-package eBook.EatBook.domain.cartitem.Entity;
+package eBook.EatBook.domain.coupon.Entity;
 
-import eBook.EatBook.domain.book.entity.Book;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.global.baseEntity.BaseEntity;
 import jakarta.persistence.Entity;
@@ -16,22 +15,12 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartItem extends BaseEntity {
-
-
-    private Integer total_price;
-
-    private Integer total_discount;
-
-    private Integer total_rate;
-
+public class GetCoupon extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
-    // 책 (상품)
     @ManyToOne
-    @JoinColumn(name = "book_id")
-    private Book book;
-
+    @JoinColumn(name = "coupon_id")
+    private Coupon coupon;
 }

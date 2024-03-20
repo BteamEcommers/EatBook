@@ -62,12 +62,13 @@ public class Book extends BaseEntity {
     @OneToMany(mappedBy = "book")
     private List<CartItem> cartItems;
 
-    //장바구니 (Cartitem)
+    // 쿠폰
+
+    // 장바구니 (Cartitem)
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> cartList;
 
     // 찜 (Wish)
-
     @ManyToOne
     @JoinColumn(name = "wish_id")
     private Wish wish;

@@ -41,19 +41,17 @@
                         </div>
                     </div>
                 </div>
-                <div>
+                <div style="margin-top:60px;">
                     <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                          style="width: 100%; padding-left:10px;">
-                        <h5>쿠폰 받기</h5>
+                        <h5>쿠폰</h5>
                         <div class="card my-3">
                             <div class="card-body">
-                                쿠폰 내용
-                                <div class="card-text" style="white-space: pre-line;">
-                                    홈페이지 오픈 기념 이벤트 중 입니다
+                                <p style="color:black;">홈페이지 오픈 기념 이벤트 중 입니다</p>
+                                <div>
+                                    <p>쿠폰 발급 받으세요</p>
                                 </div>
-                            </div>
-                            <div>
-                                <p>신간 책 이벤트 중입니다</p>
+                                <a class="btn btn-sm btn-primary" th:href="@{/coupon/list}">쿠폰 받기</a>
                             </div>
                         </div>
                     </div>
@@ -77,12 +75,12 @@
             </div>
         </div>
         <div class="book_middle-section">
-            <div id="header" class="book_navbar header-scrolled text-black bg-light">
+            <nav class="book_navbar header-scrolled text-black bg-light">
                 <div class="book_nav-container">
-                    <a href="#ebook_info" class="card-body btn btn-light" onclick="activateSection('ebook_info')">
+                    <a href="#ebook_info" class="card-body btn btn-light">
                         도서정보
                     </a>
-                    <a href="#review_info" class="card-body btn btn-light" onclick="activateSection('review_info')">
+                    <a href="#review_info" class="card-body btn btn-light">
                         리뷰
                     </a>
                     <div class="card-body" style="font-size:20px; color: red;">
@@ -95,7 +93,7 @@
                             담기</a>
                     </div>
                 </div>
-            </div>
+            </nav>
             <div id="ebook_info" class="book_info">
                 <div class="title_book" style="padding-top:5px;">
                     <h5>판매자</h5>
@@ -132,15 +130,15 @@
                 <div id="review_info" class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                      style="width: 100%;"></div>
                 <h2>회원 리뷰</h2>
-                <div id="review_info" class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
+                <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                      style="width: 100%;"></div>
                 <div class="justify-content-end" style="margin-bottom:5px">
                     <!-- 리뷰 등록 폼 -->
                     <div class="review_form mb-3">
                         <label for="content" class="form-label"></label>
                         <form th:action="@{|/review/create/${book.id}|}" method="post">
-        <textarea name="content" id="content" class="form-control" rows="3"
-                  placeholder="책에 대한 스포일러 및 심한 욕설은 제외됩니다"></textarea>
+                            <textarea name="content" id="content" class="form-control" rows="3"
+                             placeholder="책에 대한 스포일러 및 심한 욕설은 제외됩니다"></textarea>
                             <div class="rating">
                                 <input type="hidden" name="rating" id="rating-value" value="0">
                                 <span class="star" data-value="1">&#9733;</span>
@@ -158,6 +156,9 @@
                     <div class="a_comment_top">
                         <ul th:each="review : ${reviewList}">
                             <li>
+                                <div
+                                     class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
+                                     style="width: 100%;">
                                 <div id="review_info" class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;">
                                     <div class="review-box mb-2">
                                         <span>평점: <span th:utext="|&#9733;| + ${review.rating}" class="star"></span></span>
