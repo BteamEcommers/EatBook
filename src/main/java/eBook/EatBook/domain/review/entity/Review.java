@@ -61,4 +61,5 @@ public class Review extends BaseEntity {
     private String radioButtonValue;
     private String subject;
 
+
 }
