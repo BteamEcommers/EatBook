@@ -10,7 +10,7 @@
                 <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
                     <span class="fs-5 fw-semibold">이벤트 등록</span>
                 </a>
-                <form th:action="@{/event/create}" method="post">
+                <form th:action="@{/event/create}" method="post"  enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="title" class="form-label">제목</label>
                         <input type="text" name="title" id="title" class="form-control">
@@ -18,6 +18,12 @@
                     <div class="mb-3">
                         <label for="content" class="form-label">내용</label>
                         <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="thumbnailImg" class="form-label">이미지 업로드</label>
+                        <input type="file" name="thumbnailImg" id="thumbnailImg" accept="image/png, image/gif, image/jpeg">
+                        <!-- 이미지 미리보기 -->
+                        <img id="preview" src="#" alt="미리보기" style="max-width: 200px; max-height: 200px;">
                     </div>
                     <input type="submit" value="저장하기" class="btn btn-primary my-2">
                 </form>

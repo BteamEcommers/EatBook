@@ -23,7 +23,10 @@
 .book_right-nav {
     position: sticky;
     top: 0;
+}
 
+.coupon_container {
+    margin-top: 30%;
 }
 
 /*판매(책) 중간*/
