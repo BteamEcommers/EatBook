@@ -44,21 +44,10 @@ public class RebateController {
     public String sellerRebateList(Model model, Principal principal){
         // 현재 로그인한 판매자 Member
         Member member = this.memberService.findByUsername(principal.getName());
-        model.addAttribute("bookList", member.getBookList());
-//        Rebate rebate = this.rebateService.getRebate();
-//        model.addAttribute("rebate",rebate);
-        Integer totalPrice = 0;
-        Integer totalSellCount = 0;
-        double totalRebate;
 
-        for(Book book : member.getBookList()){
-            totalPrice += book.getPrice()* book.getSellCount();
-            totalSellCount += book.getSellCount();
-        }
-        totalRebate = (totalPrice * 0.97);
-        model.addAttribute("totalPrice", totalPrice);
-        model.addAttribute("totalSellCount", totalSellCount);
-        model.addAttribute("totalRebate", totalRebate);
+        model.addAttribute("member", member);
+
+        List<Rebate> rebateList = this.rebateService.findRebateListByMember(member);
 
 
         return "/rebate/rebate_seller";
