@@ -26,4 +26,15 @@
     <button id="modifyBtn" style="margin-bottom:10px;" type="submit" class="modify-button btn btn-primary w-100 py-2">정보수정</button>
     <a href="/" class="btn btn-secondary">홈으로</a>
 </form>
+<script>
+    $(document).ready(function () {
+           $("#modifyBtn").click(function () {
+               Swal.fire({
+                   icon: 'success',
+                   title: '회원정보',
+                   text: '수정이 완료되었습니다.',
+               });
+           });
+    });
+</script>
 </html>
