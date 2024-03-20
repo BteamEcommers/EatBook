@@ -159,7 +159,6 @@
                                 <div
                                      class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                                      style="width: 100%;">
-                                <div id="review_info" class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;">
                                     <div class="review-box mb-2">
                                         <span>평점: <span th:utext="|&#9733;| + ${review.rating}" class="star"></span></span>
                                         <div style="display:flex;" th:text="${review.author.username}"></div>
@@ -290,12 +289,51 @@
                         }
                     </script>
                     <script>
+
                         // 별점 등록 폼에서 클릭한 별의 값 설정
 document.querySelectorAll('.review_form .star').forEach(star => {
     star.addEventListener('click', function() {
         const value = this.getAttribute('data-value');
         document.getElementById('rating-value').value = value;
         highlightStars('.review_form .star', value);
+
+                        document.addEventListener('DOMContentLoaded', function () {
+                        const reviewStars = document.querySelectorAll('.review_form .star'); // 리뷰 작성 별점
+                        const modifyStars = document.querySelectorAll('.a_comment_top .star'); // 리뷰 수정 별점
+
+                         reviewStars.forEach(star => {
+                         star.addEventListener('mouseover', () => {
+                        const value = parseInt(star.getAttribute('data-value'));
+
+            // 선택된 별의 인덱스까지만 활성화
+            reviewStars.forEach((s, index) => {
+                if (index < value) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+        });
+
+        star.addEventListener('click', () => {
+            const value = parseInt(star.getAttribute('data-value'));
+
+            // 선택된 별의 값을 폼에 설정
+            const ratingInput = document.getElementById('rating-value');
+            if (ratingInput) {
+                ratingInput.value = value;
+            }
+
+            // 현재 선택된 별까지만 활성화
+            reviewStars.forEach((s, index) => {
+                if (index < value) {
+                    s.classList.add('selected');
+                } else {
+                    s.classList.remove('selected');
+                }
+            });
+        });
+
     });
 });
 
@@ -425,4 +463,8 @@ function highlightStars(selector, value) {
                     </script>
                 </div>
             </div>
+
 </html>
+
+
+
