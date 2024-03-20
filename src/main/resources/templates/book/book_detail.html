@@ -32,11 +32,11 @@
                     <div class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
                          style="width: 100%; padding-left:10px;">
                         <h6>정가</h6>
-                        <del th:text="${book.price  + ' 원'}"></del>
+                        <del th:text="${#numbers.formatInteger(book.price, 0, 'COMMA')} + ' 원'"></del>
                         <br>
                         <h6>할인가</h6>
                         <div class="d-flex" style="color:red;">
-                            <div style="margin-right:10px;" th:text="${book.discountPrice}  + ' 원'"></div>
+                            <div style="margin-right:10px;" th:text="${#numbers.formatInteger(book.discountPrice, 0, 'COMMA')} + ' 원'"></div>
                             <div th:text=" ' ( ' + ${book.discount} +'  % 할인' + ' ) ' "></div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                         리뷰
                     </a>
                     <div class="card-body" style="font-size:20px; color: red;">
-                        <div class="card-text" style="white-space: pre-line;" th:text="${book.discountPrice + ' 원'}"></div>
+                        <div class="card-text" style="white-space: pre-line;" th:text="${#numbers.formatInteger(book.discountPrice, 0, 'COMMA')} + ' 원'"></div>
                     </div>
                     <div style="margin-bottom:5px" class="justify-content-end">
                         <a class="btn btn-sm btn-primary" style="width: 100px; margin-right:10px;">바로구매</a>
@@ -201,7 +201,7 @@
                                             <a th:href="@{|/review/delete/${review.id}|}" sec:authorize="isAuthenticated()" class="btn btn-sm btn-primary"
                                                th:if="${review.author != null and (#authentication.getPrincipal().getUsername() == review.author.username
                                 or #authentication.getPrincipal().getUsername() == 'admin')}"
-                                               style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
+                                               style="width: 100px; margin-right:10px;">삭제</a>
 
                                             <!-- 댓글 모달 버튼 -->
                                             <button sec:authorize="isAuthenticated()" type="button" class="btn btn-sm btn-outline-secondary reportReview"
