@@ -1,0 +1,27 @@
+<html layout:decorate="~{layout}">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/apply/applyList.css">
+</head>
+<div layout:fragment="content" class="container">
+    <div class="main-container">
+        <div class="head-box">
+            <h2>❗</h2>
+        </div>
+        <br/>
+        <br/>
+        <div class="body-box d-flex flex-column align-items-center">
+            <h1>⚠ 확인해주세요 ⚠</h1>
+            <br/>
+            <h4>이전에 구매한 상품입니다.</h4>
+            <h4>전자책은 중복 구매가 불가능합니다.</h4>
+            <br/>
+        </div>
+        <div class="bottom-box border-dark d-flex justify-content-center">
+            <a th:href="@{/book/list}" class="btn btn-primary" style="width: 380px;">이전 페이지로 이동</a>
+        </div>
+        <div class="bottom-box border-dark d-flex justify-content-center mt-3">
+            <a th:href="@{/member/myBook}" class="btn btn-primary" style="width: 380px;">나의 책</a>
+        </div>
+    </div>
+</div>
+</html>

@@ -207,6 +207,9 @@
                                     <a th:href="@{/coupon/CouponList}" class="dropdown-item">쿠폰함</a>
                                 </li>
                                 <li>
+                                    <a th:href="@{/member/myBook}" class="dropdown-item">나의 책</a>
+                                </li>
+                                <li>
                                     <a th:if="${member != null and member.isSeller == true}"
                                        th:href="@{/rebate/seller/list}" class="dropdown-item">판매글 보기</a>
                                 </li>

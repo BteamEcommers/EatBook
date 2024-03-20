@@ -5,7 +5,9 @@
       <span class="fs-5 fw-semibold">마이 페이지</span>
     </a>
     <ul class="list-unstyled ps-0">
-      개인정보 띄우기
+      <li><span>아이디: </span> <span class="fw-bold">[[${member.username}]]</span></li>
+      <li><span>닉네임: </span> <span class="fw-bold">[[${member.nickname}]]</span></li>
+      <li><span>가입일: </span> <span class="fw-bold" th:text="${#temporals.format(member.createDate, 'yyyy-MM-dd')}"></span></li>
       <li class="border-top my-3"></li>
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
@@ -15,6 +17,8 @@
         <div class="collapse show" id="home-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li><a th:href="@{/member/modify}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">정보 수정</a>
+            </li>
+            <li><a th:href="@{/member/myBook}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">나의 책</a>
             </li>
             <li><a th:href="@{/apply/seller}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">판매자 신청</a>
             </li>

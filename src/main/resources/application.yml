@@ -2,12 +2,12 @@ spring:
   profiles:
     active: dev
     include: secret
+  batch:
+     jdbc:
+       initialize-schema: always
   thymeleaf:
     servlet:
       produce-partial-output-while-processing: false
-  batch:
-    jdbc:
-      initialize-schema: always
   jpa:
     properties:
       hibernate:

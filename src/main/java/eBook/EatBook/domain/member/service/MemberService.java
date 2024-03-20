@@ -175,4 +175,8 @@ public class MemberService {
     public List<Member> findByIsSeller() {
         return this.memberRepository.findByIsSeller(true);
     }
+
+    public void saveMember(Member member) {
+        this.memberRepository.save(member);
+    }
 }

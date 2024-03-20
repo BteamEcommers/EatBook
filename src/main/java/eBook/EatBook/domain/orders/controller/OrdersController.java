@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -59,13 +60,33 @@ public class OrdersController {
 
     @PostMapping("/pay/{bookId}")
     public String ordersPayPost(Model model, @PathVariable("bookId") Integer bookId, Principal principal){
+        if(principal == null){
+            return "/member/loginForm";
+        }
         Book book = this.bookService.getBookById(bookId);
         Member member = this.memberService.findByUsername(principal.getName());
+        if(member.getBookList().contains(book)){
+            return "/orders/orders_check";
+        }
+
         Orders orders = this.ordersService.createOrders(book, member);
-        this.orderItemService.createOrderItem(orders, book);
+        ArrayList<OrderItem> orderItemList = this.orderItemService.createOrderItem(orders, book);
+        this.ordersService.addOrderItemList(orders, orderItemList);
 
         return  String.format("redirect:/orders/pay/progress/%d", orders.getId());
     }
+
+    @PostMapping("/pay/cartItem/{memberId}")
+    public String orderCartItem(Model model, @PathVariable("memberId") Integer memberId, Principal principal){
+
+        Member member = this.memberService.findByUsername(principal.getName());
+        Orders orders = this.ordersService.createOrders(null, member);
+        ArrayList<OrderItem> orderItemList = this.orderItemService.createOrderItemByCartItem(orders, member);
+        this.ordersService.addOrderItemList(orders, orderItemList);
+
+        return String.format("redirect:/orders/pay/progress/%d", orders.getId());
+    }
+
     @GetMapping("/confirm")
     public String ordersConfirm(){
         
@@ -76,5 +97,11 @@ public class OrdersController {
     public String ordersComplete(){
 
         return "/orders/ordersComplete";
+    }
+
+    @GetMapping("/check")
+    public String ordersCheck(){
+
+        return "/orders/orders_check";
     }
 }

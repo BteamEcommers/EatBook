@@ -1,0 +1,43 @@
+<html layout:decorate="~{layout}">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/rebate/rebate_seller.css">
+    <link rel="stylesheet" type="text/css" href="/css/book/sellerBookList.css">
+</head>
+<div layout:fragment="content" class="container">
+    <div class="left-side">
+        <nav th:replace="~{/member/member_layout :: memberSide}"></nav>
+    </div>
+    <div class="main-container">
+        <div class="head-box">
+            <h2>나의 책</h2>
+        </div>
+        <div class="body-box">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col"> 책</th>
+                    <th>책 제목</th>
+                    <th>작가</th>
+                    <th>등록일</th>
+                </tr>
+                </thead>
+                <tbody th:each="orders : ${ordersList}">
+                <tr th:each="orderItem : ${orders.orderItemList}">
+                    <td>
+                        <a th:href="@{|/book/detail/${orderItem.book.id}|}" >
+                            <img th:src="@{|/file/${orderItem.book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;" class="border">
+                        </a>
+                    </td>
+                    <th scope="row">[[${orderItem.book.subject}]]</th>
+                    <td th:text="${orderItem.book.author}"> 원</td>
+                    <td th:text="${#temporals.format(orderItem.orders.paymentDate, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-success">읽기</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</html>

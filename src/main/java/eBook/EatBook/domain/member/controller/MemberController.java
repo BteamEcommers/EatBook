@@ -8,6 +8,8 @@ import eBook.EatBook.domain.member.DTO.MemberModifyForm;
 import eBook.EatBook.domain.member.DTO.MemberRegisterForm;
 import eBook.EatBook.domain.member.entity.Member;
 import eBook.EatBook.domain.member.service.MemberService;
+import eBook.EatBook.domain.orders.entity.Orders;
+import eBook.EatBook.domain.orders.service.OrdersService;
 import eBook.EatBook.global.email.entity.Email1;
 import eBook.EatBook.global.email.service.EmailService;
 import jakarta.validation.Valid;
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.security.Principal;
-
+import java.util.List;
 
 
 @Controller
@@ -32,6 +34,7 @@ import java.security.Principal;
 public class MemberController {
     private final MemberService memberService;
     private final EmailService emailService;
+    private final OrdersService orderService;
 
     @GetMapping("/modify")
     public String modifyMember(MemberModifyForm memberModifyForm, Model model, Principal principal) {
@@ -229,7 +232,23 @@ public class MemberController {
     public String profileMember(Model model, Principal principal) {
         Member member = this.memberService.findByUsername(principal.getName());
         model.addAttribute("member", member);
+
+        List<Orders> ordersList = this.orderService.findAllByBuyer(member);
+        model.addAttribute("ordersList", ordersList);
         return "/member/member_Profile";
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/myBook")
+    public String myBookList(Model model, Principal principal){
+        Member member = this.memberService.findByUsername(principal.getName());
+        List<Orders> ordersList = this.orderService.findAllByBuyer(member);
+
+        model.addAttribute("member", member);
+        model.addAttribute("ordersList", ordersList);
+        return "/member/my_book";
+    }
+
+
 
 }

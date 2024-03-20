@@ -8,8 +8,33 @@
             <a class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
                 <span class="fs-5 fw-semibold" th:text="${member.username + ' 님 오늘도 즐거운 하루 보내세요'}"></span>
             </a>
-            <div class="card my-3">
-              주문 내역 리스트
+            <div class="card my-3 px-3 py-3 shadow-sm">
+              <h2>주문 내역 리스트</h2>
+                <h4 th:if="${ordersList == null}"> 주문 내역이 없습니다</h4>
+                <table th:if="${ordersList !=null}" class="table border border-dark">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>주문번호</th>
+                            <th>주문</th>
+                            <th>대표 이미지</th>
+                            <th>금액</th>
+                            <th>결제일</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr th:each="orders : ${ordersList}" class="fw-bold">
+                            <td>[[${orders.randomStringOrderId}]]</td>
+                            <td>[[${orders.subject}]]</td>
+                            <td>
+                                <a th:href="@{/member/myBook}">
+                                    <img th:src="@{|/file/${orders.getOrderItemList().get(0).getBook().thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;" class="border">
+                                </a>
+                            </td>
+                            <td>[[${orders.totalPrice}]] <span>원</span></td>
+                            <td th:text="${#temporals.format(orders.paymentDate, 'yyyy-MM-dd HH:mm')}"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="card my-3">
                 <div class="card-body">

@@ -25,6 +25,9 @@ public class OrderItem extends BaseEntity {
     @Column
     private Integer bookPrice;
 
+    @Column
+    private boolean isRebated;
+
     @ManyToOne
     private Orders orders;
 

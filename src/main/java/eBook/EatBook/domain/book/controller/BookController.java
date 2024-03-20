@@ -63,8 +63,6 @@ public class BookController {
         }
 
         Category category = this.categoryService.getCategoryByCategoryName(categoryName);
-        // 이미지 업로드 로직 추가
-//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Member seller = this.memberService.findByUsername(principal.getName());
         try {
             Book book = bookService.createWithImage(bookForm, category, seller, thumbnail);
@@ -87,6 +85,7 @@ public class BookController {
         }
         Page<Book> paging = this.bookService.getList(page);
         List<Category> categoryList = this.categoryService.getAllCategory();
+
         model.addAttribute("paging", paging);
         model.addAttribute("categoryList", categoryList);
 
@@ -111,11 +110,70 @@ public class BookController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/list/seller")
     public String bookListSeller(Model model, Principal principal){
+
         Member member = this.memberService.findByUsername(principal.getName());
+        // 최종본에 추가(seller가 아니면 리다이렉트)
+//        if(!member.isSeller()){
+//            return "redirect:/";
+//        }
         List<Book> bookList = this.bookService.findAllBySeller(member);
+        model.addAttribute("member", member);
         model.addAttribute("bookList", bookList);
         return "/book/sellerBookList";
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{bookId}")
+    public String deleteBook(@PathVariable("bookId") Integer bookId, Principal principal){
+        Book book = this.bookService.getBookById(bookId);
+        Member member = this.memberService.findByUsername(principal.getName());
+        if(book.getSeller().getId() != member.getId()){
+            return "redirect:/";
+        }
+        this.bookService.deleteBook(book);
+        return "redirect:/book/list/seller";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify/{bookId}")
+    public String modifyBook(Model model, BookForm bookForm, @PathVariable("bookId") Integer bookId, Principal principal){
+        List<Category> categories = this.categoryService.getAllCategory();
+        model.addAttribute("categories", categories);
+
+        Book book = this.bookService.getBookById(bookId);
+        Member member = this.memberService.findByUsername(principal.getName());
+        if(book.getSeller().getId() != member.getId()){
+            return "redirect:/";
+        }
+        model.addAttribute("book",book);
+
+        bookForm.setSubject(book.getSubject());
+        bookForm.setAuthor(book.getAuthor());
+        bookForm.setContent(book.getContent());
+        bookForm.setPrice(book.getPrice());
+        bookForm.setPublisher(book.getPublisher());
+        bookForm.setBookIntroduce(book.getBookIntroduce());
+        bookForm.setDiscount(book.getDiscount());
+        return "book/book_modify_form";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify/{bookId}")
+    public String modifyBook(@Valid BookForm bookForm, BindingResult bindingResult, Model model,
+                             @PathVariable("bookId") Integer bookId, Principal principal, @RequestParam(value = "categoryName", defaultValue = "기본 카테고리") String categoryName,
+                              @RequestParam(value = "thumbnail",required = false) MultipartFile thumbnail){
+        if (bindingResult.hasErrors()) {
+            return "/book_modify_form";
+        }
+        Book book = this.bookService.getBookById(bookId);
+        Category category = this.categoryService.getCategoryByCategoryName(categoryName);
+
+        this.bookService.modifyBook(book, bookForm, category, thumbnail);
+
+        return "redirect:/book/list/seller";
+    }
+
+
 
 }
 

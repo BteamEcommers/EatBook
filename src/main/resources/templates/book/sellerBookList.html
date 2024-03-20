@@ -12,32 +12,34 @@
             <h2>판매 책 관리</h2>
         </div>
         <div class="body-box">
-            <table class="table">
+            <table class="table border">
                 <thead>
                 <tr>
                     <th scope="col">책</th>
                     <th>판매가</th>
-                    <th>할인</th>
+                    <th>할인율</th>
                     <th>등록일</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="book : ${bookList}">
-                    <th scope="row">[[${book.subject}]]</th>
-                    <td th:text="${book.price}"> 원</td>
-                    <td th:text="${book.discount * 100}">%</td>
+                    <th scope="row">
+                        <a th:href="@{|/book/detail/${book.id}|}">[[${book.subject}]]</a>
+                    </th>
+                    <td>[[${book.price}]] <span>원</span></td>
+                    <td>[[${book.discount}]]<span>%</span></td>
                     <td th:text="${#temporals.format(book.createDate, 'yyyy-MM-dd HH:mm')}"></td>
                     <td>
-                        <button class="btn btn-sm btn-success">수정버튼</button>
+                        <a th:href="@{|/book/modify/${book.Id}|}" class="btn btn-sm btn-success">수정</a>
                     </td>
-                    <td>
-                        <button class="btn btn-sm btn-danger">삭제버튼</button>
-                    </td>
+                        <!-- 주문, 유저가 보유하고 있는 책 삭제 시 오류 창-->
+                    <!--<td>-->
+<!--/*                        <a th:href="@{|/book/delete/${book.Id}|}" class="btn btn-sm btn-danger">삭제</a>*/-->
+                    <!--</td>-->
 
                 </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>

@@ -14,8 +14,8 @@
     </div>
 
     <div class="main-container">
-        <table class="table">
-            <thead class="table-dark">
+        <table class="table border border-secondary shadow">
+            <thead class="table-dark ">
             <tr style="text-align:center;">
                 <th>번호</th>
                 <th>이미지</th>
@@ -28,7 +28,7 @@
                 <td th:text="${loop.count}" style="vertical-align: middle; text-align:center;"></td>
                 <td style="vertical-align: middle; text-align:center;">
                     <a th:href="@{|/book/detail/${book.id}|}">
-                        <img th:src="@{|/file/${book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;">
+                        <img th:src="@{|/file/${book.thumbnailImg}|}" alt="사진" style="width: 150px; height: 220px;" class="border">
                     </a>
                 </td>
                 <td>
