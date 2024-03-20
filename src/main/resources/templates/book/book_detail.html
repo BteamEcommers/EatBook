@@ -138,7 +138,7 @@
                         <label for="content" class="form-label"></label>
                         <form th:action="@{|/review/create/${book.id}|}" method="post">
                             <textarea name="content" id="content" class="form-control" rows="3"
-                             placeholder="책에 대한 스포일러 및 심한 욕설은 제외됩니다"></textarea>
+                                      placeholder="책에 대한 스포일러 및 심한 욕설은 제외됩니다"></textarea>
                             <div class="rating">
                                 <input type="hidden" name="rating" id="rating-value" value="0">
                                 <span class="star" data-value="1">&#9733;</span>
@@ -156,60 +156,61 @@
                     <div class="a_comment_top">
                         <ul th:each="review : ${reviewList}">
                             <li>
-
-                                <div id="review_info" class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;">
-
                                 <div
-                                     class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
-                                     style="width: 100%;">
-
-                                    <div class="review-box mb-2">
-                                        <span>평점: <span th:utext="|&#9733;| + ${review.rating}" class="star"></span></span>
-                                        <div style="display:flex;" th:text="${review.author.username}"></div>
-                                        <div style="display:flex; justify-content:end; padding-right:10px;" th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd ')}"></div>
-                                        <div style="display:flex; justify-content:end; padding-right:10px;" th:text="${#temporals.format(review.modifiedDate, 'yyyy-MM-dd ')}"></div>
-                                        <div class="review-content">
-                                            <span th:text="${review.content}"></span>
-                                        </div>
-                                        <!-- 수정 버튼 -->
-                                        <button sec:authorize="isAuthenticated()" onclick="toggleEditForm(this)" class="btn btn-sm btn-primary btn-edit" style="width: 100px; margin-right:10px;">수정</button>
-                                        <!-- 리뷰 수정 폼 -->
-                                        <div class="review-edit-form" style="display: none;">
-                                            <h5 class="my-3 border-bottom pb-2">리뷰수정</h5>
-                                            <form th:action="@{|/review/modify/${review.id}|}" th:object="${reviewForm}" method="post">
-                                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                                                <div class="mb-3">
-                                                    <label for="content" class="form-label">내용</label>
-                                                    <textarea name="content" id="content" class="form-control" rows="10" th:text="${review.content}"></textarea>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="modify-rating" class="form-label">평점</label>
-                                                    <div class="rating" id="modify-rating">
-                                                        <!-- 수정 시에도 별점을 선택할 수 있는 별 아이콘 -->
-                                                        <input type="hidden" name="rating" id="modify-rating-value" value="0">
-                                                        <span class="star" data-value="1">&#9733;</span>
-                                                        <span class="star" data-value="2">&#9733;</span>
-                                                        <span class="star" data-value="3">&#9733;</span>
-                                                        <span class="star" data-value="4">&#9733;</span>
-                                                        <span class="star" data-value="5">&#9733;</span>
-                                                    </div>
-                                                </div>
-                                                <input type="submit" value="저장하기" class="btn btn-primary my-2">
-                                            </form>
-                                        </div>
-                                        <!-- 삭제 버튼 -->
-                                        <a th:href="@{|/review/delete/${review.id}|}" sec:authorize="isAuthenticated()" class="btn btn-sm btn-primary"
-                                           th:if="${review.author != null and (#authentication.getPrincipal().getUsername() == review.author.username
+                                        class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom"
+                                        style="width: 100%;">
+                                    <div id="review_info" class="pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom" style="width: 100%;">
+                                        <div class="review-box mb-2">
+                                            <span>평점: <span th:utext="|&#9733;| + ${review.rating}" class="star"></span></span>
+                                            <div style="display:flex;" th:text="${review.author.username}"></div>
+                                            <div style="display:flex; justify-content:end; padding-right:10px;" th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd ')}"></div>
+                                            <div style="display:flex; justify-content:end; padding-right:10px;" th:text="${#temporals.format(review.modifiedDate, 'yyyy-MM-dd ')}"></div>
+                                            <div class="review-content">
+                                                <span th:text="${review.content}"></span>
+                                            </div>
+                                            <!-- 수정 버튼 -->
+                                            <button sec:authorize="isAuthenticated()" onclick="toggleEditForm(this)"
+                                                    th:if="${review.author != null and (#authentication.getPrincipal().getUsername() == review.author.username
                                 or #authentication.getPrincipal().getUsername() == 'admin')}"
-                                           style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
+                                                    class="btn btn-sm btn-primary btn-edit" style="width: 100px; margin-right:10px;">수정</button>
+                                            <!-- 리뷰 수정 폼 -->
+                                            <div class="review-edit-form" style="display: none;">
+                                                <h5 class="my-3 border-bottom pb-2">리뷰수정</h5>
+                                                <form th:action="@{|/review/modify/${review.id}|}" th:object="${reviewForm}" method="post">
+                                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                                    <div class="mb-3">
+                                                        <label for="content" class="form-label">내용</label>
+                                                        <textarea name="content" id="content" class="form-control" rows="10" th:text="${review.content}"></textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="modify-rating" class="form-label">평점</label>
+                                                        <div class="rating" id="modify-rating">
+                                                            <!-- 수정 시에도 별점을 선택할 수 있는 별 아이콘 -->
+                                                            <input type="hidden" name="rating" id="modify-rating-value" value="0">
+                                                            <span class="star" data-value="1">&#9733;</span>
+                                                            <span class="star" data-value="2">&#9733;</span>
+                                                            <span class="star" data-value="3">&#9733;</span>
+                                                            <span class="star" data-value="4">&#9733;</span>
+                                                            <span class="star" data-value="5">&#9733;</span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="submit" value="저장하기" class="btn btn-primary my-2">
+                                                </form>
+                                            </div>
+                                            <!-- 삭제 버튼 -->
+                                            <a th:href="@{|/review/delete/${review.id}|}" sec:authorize="isAuthenticated()" class="btn btn-sm btn-primary"
+                                               th:if="${review.author != null and (#authentication.getPrincipal().getUsername() == review.author.username
+                                or #authentication.getPrincipal().getUsername() == 'admin')}"
+                                               style="width: 100px; margin-right:10px; margin-top:20px;">삭제</a>
 
-                                        <!-- 댓글 모달 버튼 -->
-                                        <button sec:authorize="isAuthenticated()" type="button" class="btn btn-sm btn-outline-secondary reportReview"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#reportReviewModal"
-                                                th:data-review-id="${review.id}"
-                                                id="reportReviewButton">신고
-                                        </button>
+                                            <!-- 댓글 모달 버튼 -->
+                                            <button sec:authorize="isAuthenticated()" type="button" class="btn btn-sm btn-outline-secondary reportReview"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#reportReviewModal"
+                                                    th:data-review-id="${review.id}"
+                                                    id="reportReviewButton">신고
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -270,11 +271,6 @@
                               var reviewId = $(this).attr('data-review-id');
                               $("input[name=reviewId]").val(reviewId)
                         })
-
-
-
-
-
                     </script>>
                     <!-- JavaScript 코드 -->
                     <script>
@@ -293,51 +289,12 @@
                         }
                     </script>
                     <script>
-
                         // 별점 등록 폼에서 클릭한 별의 값 설정
 document.querySelectorAll('.review_form .star').forEach(star => {
     star.addEventListener('click', function() {
         const value = this.getAttribute('data-value');
         document.getElementById('rating-value').value = value;
         highlightStars('.review_form .star', value);
-
-                        document.addEventListener('DOMContentLoaded', function () {
-                        const reviewStars = document.querySelectorAll('.review_form .star'); // 리뷰 작성 별점
-                        const modifyStars = document.querySelectorAll('.a_comment_top .star'); // 리뷰 수정 별점
-
-                         reviewStars.forEach(star => {
-                         star.addEventListener('mouseover', () => {
-                        const value = parseInt(star.getAttribute('data-value'));
-
-            // 선택된 별의 인덱스까지만 활성화
-            reviewStars.forEach((s, index) => {
-                if (index < value) {
-                    s.classList.add('active');
-                } else {
-                    s.classList.remove('active');
-                }
-            });
-        });
-
-        star.addEventListener('click', () => {
-            const value = parseInt(star.getAttribute('data-value'));
-
-            // 선택된 별의 값을 폼에 설정
-            const ratingInput = document.getElementById('rating-value');
-            if (ratingInput) {
-                ratingInput.value = value;
-            }
-
-            // 현재 선택된 별까지만 활성화
-            reviewStars.forEach((s, index) => {
-                if (index < value) {
-                    s.classList.add('selected');
-                } else {
-                    s.classList.remove('selected');
-                }
-            });
-        });
-
     });
 });
 
@@ -364,18 +321,6 @@ function highlightStars(selector, value) {
     });
 }
                     </script>
-
-
-
-<!--                    &lt;!&ndash; CSS 코드 &ndash;&gt;-->
-<!--                    <style>-->
-<!--                        /* 별점을 나타내는 별 아이콘에 마우스를 올렸을 때 색상 변경 */-->
-<!--                        .star:hover,-->
-<!--                        .star.filled {-->
-<!--                            color: yellow;-->
-<!--                        }-->
-<!--                    </style>-->
-
 
                     <!-- 장바구니,찜 기능 -->
                     <script>
@@ -467,8 +412,7 @@ function highlightStars(selector, value) {
                     </script>
                 </div>
             </div>
-
+        </div>
+    </div>
+</div>
 </html>
-
-
-
