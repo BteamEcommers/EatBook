@@ -39,7 +39,6 @@ public class ReviewService {
                 .content(content)
                 .rating(rating)
                 .createDate(LocalDateTime.now())
-                .modifiedDate(LocalDateTime.now())
                 .author(author)
                 .build();
         reviewRepository.save(review);

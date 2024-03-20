@@ -73,10 +73,10 @@ public class ReviewController {
             return "book_detail";
         }
         Member author = review.getAuthor();
-        // 현재 로그인한 사용자가 해당 리뷰의 작성자인지 확인
+//         현재 로그인한 사용자가 해당 리뷰의 작성자인지 확인
         if (!principal.getName().equals(author.getUsername())) {
             // 작성자와 다른 사용자가 수정을 시도한 경우에 대한 처리
-            return "redirect:/books/list"; // 예시로 책 목록 페이지로 리다이렉트
+            return "redirect:/book/list"; // 예시로 책 목록 페이지로 리다이렉트
         }
         review.setContent(reviewForm.getContent());
         this.reviewService.modify(review, reviewForm.getContent(),rating);
@@ -91,6 +91,10 @@ public class ReviewController {
         if (member == null) {
             // 작성자를 찾을 수 없는 경우에 대한 처리
             return "redirect:/book/list"; // 예시로 홈 페이지로 리다이렉트
+        }
+        if (!review.getAuthor().getUsername().equals(principal.getName()) &&
+                !principal.getName().equals("admin")) {
+            return "book_detail";
         }
 
         this.reviewService.delete(review);
